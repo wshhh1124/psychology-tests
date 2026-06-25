@@ -68,7 +68,7 @@ def generate(config_path, output_path=None):
     # Determine output path
     if output_path is None:
         base = os.path.splitext(os.path.basename(config_path))[0]
-        output_path = os.path.join(os.path.dirname(__file__), 'output', f'{base}.html')
+        output_path = os.path.join(os.path.dirname(__file__), 'docs', f'{base}.html')
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
@@ -81,7 +81,7 @@ def generate(config_path, output_path=None):
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print('用法: python3 generate.py <config.json> [output.html]')
-        print('示例: python3 generate.py tests/love-style.json output/love-style.html')
+        print('示例: python3 generate.py tests/love-style.json docs/love-style.html')
         sys.exit(1)
 
     config_file = sys.argv[1]

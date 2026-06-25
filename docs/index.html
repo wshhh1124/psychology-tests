@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>心理测试合集</title>
+<style>
+:root {
+  --primary: #6C5CE7;
+  --bg: #F8F9FE;
+  --card: #FFFFFF;
+  --text: #2D3436;
+  --text-light: #636E72;
+  --shadow: 0 4px 24px rgba(108,92,231,0.08);
+  --radius: 20px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  padding: 32px 16px;
+}
+.container { max-width: 420px; margin: 0 auto; }
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-light);
+  margin-bottom: 32px;
+}
+.test-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.test-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: var(--text);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+.test-card:active { transform: scale(0.98); }
+.test-icon {
+  width: 56px; height: 56px;
+  background: linear-gradient(135deg, var(--primary), #A29BFE);
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+  color: #fff;
+}
+.test-info h3 { font-size: 17px; margin-bottom: 4px; }
+.test-info p { font-size: 13px; color: var(--text-light); }
+.test-arrow { margin-left: auto; color: #ccc; font-size: 20px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🔮 心理测试合集</h1>
+  <p class="subtitle">选一个测试，探索你的内心世界</p>
+  <div class="test-list">
+    <a class="test-card" href="love-style.html">
+      <div class="test-icon">💕</div>
+      <div class="test-info">
+        <h3>你的恋爱风格是什么类型？</h3>
+        <p>10道题 · 测出你的恋爱人格</p>
+      </div>
+      <span class="test-arrow">›</span>
+    </a>
+  </div>
+</div>
+</body>
+</html>
