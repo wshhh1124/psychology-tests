@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>笔记预览 - 你的恋爱风格是什么类型？</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #f5f5f5;
+    padding: 24px 16px;
+  }
+  .wrapper {
+    max-width: 420px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .section-title {
+    font-size: 13px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+  }
+  .cover-preview {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  }
+  .cover-preview img {
+    width: 100%;
+    display: block;
+  }
+  .note-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .note-card h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .note-card .body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #2D3436;
+    white-space: pre-wrap;
+  }
+  .note-card .hashtags {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #f0f0f0;
+    font-size: 14px;
+    color: #6C5CE7;
+    line-height: 1.8;
+  }
+  .btn-row {
+    display: flex;
+    gap: 10px;
+  }
+  .btn {
+    flex: 1;
+    padding: 14px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    background: linear-gradient(135deg, #6C5CE7, #A29BFE);
+  }
+  .btn-outline {
+    background: #fff;
+    color: #6C5CE7;
+    border: 2px solid #EDE8FD;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="section-title">📱 笔记封面图</div>
+  <div class="cover-preview">
+    <img src="cover.png" alt="封面图">
+  </div>
+  <div class="btn-row">
+    <a class="btn" href="cover.png" download>📥 下载封面图</a>
+    <button class="btn btn-outline" onclick="copyText()">📋 复制文案</button>
+  </div>
+
+  <div class="section-title">📝 笔记文案</div>
+  <div class="note-card" id="noteText">
+    <h2>恋爱风格是什么类型？？你的是什么？点进来测！</h2>
+    <div class="body">⚠️ 警告：这可能是你今天点进来最正确的一个链接！
+
+你的恋爱风格是什么类型？——我设计这个测试的原因很简单：帮你看清自己在感情中真正的样子。
+
+一共10道选择题，每道题都经过了精心设计👇
+
+不剧透太多了，做完你就知道。反正我测完发给朋友，大家都说准到起鸡皮疙瘩...
+
+🔗 链接在下方，两分钟的事，试一下不亏～</div>
+    <div class="hashtags">#心理测试 #测测你 #情感心理 #自我探索 #性格测试 #今日分享 #走心推荐</div>
+  </div>
+</div>
+
+<script>
+function copyText() {
+  const text = document.getElementById('noteText').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('文案已复制到剪贴板！');
+  });
+}
+</script>
+</body>
+</html>
