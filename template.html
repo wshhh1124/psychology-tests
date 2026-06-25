@@ -865,10 +865,31 @@ function showResults() {
   }, 1500);
 }
 
+function getTier(dim, yesCount) {
+  // Use book-defined thresholds: [healthyMax, warningMax]
+  const t = dim.thresholds || [Math.round(dim.questions.length*0.33), Math.round(dim.questions.length*0.6)];
+  if (yesCount < t[0]) return 'healthy';
+  if (yesCount < t[1]) return 'warning';
+  return 'alert';
+}
+
+function getTierLabel(tier) {
+  if (tier === 'healthy') return '健康';
+  if (tier === 'warning') return '关注';
+  return '警觉';
+}
+
+function getTierColor(tier) {
+  if (tier === 'healthy') return '#00B894';
+  if (tier === 'warning') return '#FDCB6E';
+  return '#FF7675';
+}
+
 function showMultiResults(cfg) {
   // Calculate per-dimension scores
   const dimScores = {};
   const dimPercents = {};
+  const dimTiers = {};
   for (const dim of cfg.scoring.dimensions) {
     const total = dim.questions.length;
     let yesCount = 0;
@@ -877,50 +898,53 @@ function showMultiResults(cfg) {
     }
     dimScores[dim.key] = yesCount;
     dimPercents[dim.key] = Math.round((yesCount / total) * 100);
+    dimTiers[dim.key] = getTier(dim, yesCount);
   }
 
-  // Sort dimensions by score (highest first = most attention needed)
-  const sorted = [...cfg.scoring.dimensions].sort((a,b) => dimPercents[b.key] - dimPercents[a.key]);
-  const topCenter = sorted[0];
-  const topDetail = cfg.scoring.centerDetails[topCenter.key];
+  // Sort by yesCount descending
+  const sorted = [...cfg.scoring.dimensions].sort((a,b) => dimScores[b.key] - dimScores[a.key]);
+  const top3 = sorted.slice(0, 3);
 
-  // Overall status
-  const maxPct = dimPercents[topCenter.key];
+  // Overall status based on worst tier among all centers
+  const worstTier = sorted.reduce((worst, dim) => {
+    const t = dimTiers[dim.key];
+    if (t === 'alert') return 'alert';
+    if (t === 'warning' && worst !== 'alert') return 'warning';
+    return worst;
+  }, 'healthy');
+
   let overallLabel, overallColor;
-  if (maxPct <= 30) { overallLabel = '你的身心状态总体良好'; overallColor = '#00B894'; }
-  else if (maxPct <= 55) { overallLabel = '部分情绪中心需要关注'; overallColor = '#FDCB6E'; }
-  else { overallLabel = '你的身心正在呼求你的关注'; overallColor = '#FF7675'; }
+  if (worstTier === 'alert') { overallLabel = '你的身心正在呼求你的关注'; overallColor = '#FF7675'; }
+  else if (worstTier === 'warning') { overallLabel = '部分情绪中心需要关注'; overallColor = '#FDCB6E'; }
+  else { overallLabel = '你的身心状态总体良好 ✨'; overallColor = '#00B894'; }
+
+  // Top center detail
+  const topDetail = cfg.scoring.centerDetails[top3[0].key];
 
   // Render
   document.getElementById('resultType').textContent = overallLabel;
   document.getElementById('resultType').style.background = overallColor + '22';
   document.getElementById('resultType').style.color = overallColor;
-  document.getElementById('resultTitle').textContent = `你最需要关注的是：${topDetail.name}`;
+  document.getElementById('resultTitle').textContent = `你最需要关注：${topDetail.name}`;
 
-  // Traits = body parts affected
   document.getElementById('resultTraits').innerHTML =
-    `<span class="trait-tag" style="background:#FFF5F5;color:#FF7675">⚠ 核心需求：${topDetail.coreNeed}</span>` +
-    `<span class="trait-tag">身体信号：${topDetail.bodyParts}</span>`;
+    `<span class="trait-tag" style="background:#FFF5F5">身体信号：${topDetail.bodyParts}</span>` +
+    (top3[1] ? `<span class="trait-tag">其次：${cfg.scoring.centerDetails[top3[1].key].name}</span>` : '') +
+    (top3[2] ? `<span class="trait-tag">第三：${cfg.scoring.centerDetails[top3[2].key].name}</span>` : '');
 
-  // Dimension bars - all 7
+  // 7-dimension bars
   const barsHTML = cfg.scoring.dimensions.map(dim => {
     const pct = dimPercents[dim.key];
-    let tierColor = '#00B894';
-    if (pct > 55) tierColor = '#FF7675';
-    else if (pct > 30) tierColor = '#FDCB6E';
-
-    let tierLabel = '健康';
-    if (pct > 55) tierLabel = '警觉';
-    else if (pct > 30) tierLabel = '关注';
-
+    const tier = dimTiers[dim.key];
+    const color = getTierColor(tier);
     return `
       <div class="score-dim" style="margin-bottom:8px">
         <span class="dim-label" style="width:100px;font-size:11px">${dim.icon||''} ${dim.label}</span>
         <div class="dim-bar" style="flex:1">
-          <div class="dim-fill" style="width:${pct}%;background:${tierColor}"></div>
+          <div class="dim-fill" style="width:${pct}%;background:${color}"></div>
         </div>
         <span style="font-size:11px;color:#636E72;width:40px;text-align:right">${pct}%</span>
-        <span style="font-size:10px;color:${tierColor};width:28px;text-align:right">${tierLabel}</span>
+        <span style="font-size:10px;color:${color};width:28px;text-align:right">${getTierLabel(tier)}</span>
       </div>
     `;
   }).join('');
@@ -935,33 +959,39 @@ function showMultiResults(cfg) {
     </div>
   `;
 
-  // Top center detailed report
-  const detail = topDetail;
-  let descText = '';
-  if (dimPercents[topCenter.key] <= 30) descText = detail.healthyDesc;
-  else if (dimPercents[topCenter.key] <= 55) descText = detail.warningDesc;
-  else descText = detail.alertDesc;
+  // Top 3 detailed reports
+  const tierEmoji = {healthy:'🟢', warning:'🟡', alert:'🔴'};
+  const reportsHTML = top3.map((dim, idx) => {
+    const detail = cfg.scoring.centerDetails[dim.key];
+    const tier = dimTiers[dim.key];
+    let descText = detail[tier + 'Desc'] || detail.warningDesc;
+
+    return `
+      <div style="margin-bottom:24px;padding:20px;background:#fafafa;border-radius:16px;border-left:4px solid ${getTierColor(tier)}">
+        <p style="font-weight:700;font-size:15px;margin-bottom:8px">
+          ${idx === 0 ? '🔍' : idx === 1 ? '👉' : '👀'} ${detail.name}
+          <span style="font-size:12px;color:${getTierColor(tier)};margin-left:8px">${tierEmoji[tier]} ${getTierLabel(tier)}区</span>
+          <span style="font-size:11px;color:#999;margin-left:4px">(${dimScores[dim.key]}/${dim.questions.length}题答"是")</span>
+        </p>
+        <p style="margin-bottom:6px"><strong>关联身体：</strong>${detail.bodyParts}</p>
+        <p style="line-height:1.8;margin-bottom:12px">${descText}</p>
+        <div style="background:#FFF9F0;border-radius:10px;padding:12px">
+          <p style="font-weight:600;font-size:13px;margin-bottom:4px">💬 疗愈肯定语</p>
+          <p style="font-style:italic;line-height:1.6;font-size:13px">${detail.healing}</p>
+        </div>
+      </div>
+    `;
+  }).join('');
 
   document.getElementById('resultReport').innerHTML = `
     <div style="margin-bottom:20px">
-      <p style="font-weight:700;font-size:16px;margin-bottom:8px">🔍 ${detail.name} 深度解读</p>
-      <p style="margin-bottom:8px"><strong>关联身体部位：</strong>${detail.bodyParts}</p>
-      <p style="line-height:1.8">${descText}</p>
-    </div>
-    <div style="background:#FFF9F0;border-radius:14px;padding:16px;margin-bottom:16px;border-left:3px solid #FF7675">
-      <p style="font-weight:700;font-size:14px;margin-bottom:6px">💬 疗愈肯定语</p>
-      <p style="font-style:italic;line-height:1.7">${detail.healing}</p>
-    </div>
-    <div>
-      <p style="font-weight:700;font-size:14px;margin-bottom:8px">✨ 行动建议</p>
-      <ul style="padding-left:18px;line-height:2;font-size:13px">
-        ${detail.tips.map(t => `<li>${t}</li>`).join('')}
-      </ul>
+      <p style="font-weight:700;font-size:16px;margin-bottom:16px">📋 重点关注：前三名情绪中心详解</p>
+      ${reportsHTML}
     </div>
     <div style="margin-top:20px;padding-top:16px;border-top:1px solid #f0f0f0">
-      <p style="font-size:12px;color:#999;text-align:center">
-        以上分析基于露易丝·海《一切都会好的》七情绪中心理论<br>
-        所有7个中心的完整报告请查看下方
+      <p style="font-size:12px;color:#999;text-align:center;line-height:1.8">
+        以上分析基于露易丝·海 & 蒙娜·丽莎·舒尔茨《一切都会好的》<br>
+        七情绪中心理论（第3-9章）。如需深入了解请阅读原书。
       </p>
     </div>
   `;
