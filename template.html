@@ -86,18 +86,40 @@ body {
   font-family: var(--font-heading);
   font-size: 28px;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
   color: var(--color-foreground);
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
 }
 
 .cover .lede {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-style: normal;
+  line-height: 2.0;
+  letter-spacing: 0.02em;
+  color: var(--color-foreground);
+  margin-bottom: var(--space-md);
+  opacity: 0.85;
+}
+.cover .lede em {
   font-family: var(--font-heading);
-  font-size: 15px;
   font-style: italic;
-  line-height: 1.75;
-  color: var(--color-muted-fg);
-  margin-bottom: var(--space-lg);
+  color: var(--color-primary);
+  font-weight: 600;
+  opacity: 1;
+  letter-spacing: 0.01em;
+}
+.cover .lede strong {
+  font-weight: 600;
+  color: var(--color-foreground);
+  opacity: 1;
+}
+
+.cover .lede .highlight {
+  display: inline-block;
+  background: linear-gradient(180deg, transparent 60%, rgba(37,99,235,0.12) 60%);
+  padding: 0 2px;
 }
 
 .cover .stats {
@@ -569,10 +591,16 @@ body {
     <p class="eyebrow">Louise Hay & Mona Lisa Schulz</p>
     <h1 data-cover-title>你的身心情绪中心健康吗？</h1>
     <p class="lede" data-cover-desc>
-      露易丝和我与很多人合作过，这项工作中最重要的部分之一是我们的初始访谈——我们暂且称之为"了解你的过程"吧。这个过程可以让我们评估你现在的身体和情绪状况，并提示我们找到最佳方式来帮助你。
+      露易丝和我与很多人合作过，这项工作中<strong>最重要的部分之一</strong>是我们的初始访谈——我们暂且称之为<em>"了解你的过程"</em>吧。这个过程可以让我们<span class="highlight">评估你现在的身体和情绪状况</span>，并提示我们找到最佳方式来帮助你。
     </p>
-    <p class="lede" style="font-size:13px;margin-top:-8px">
-      该评估共有七个部分，涵盖了身体健康和生活方式的问题，请用"是"或"否"来回答。完成后，你可以了解自己当前的身心状况。也可以找一位密友以你的身份做这套测验，比较你们的分数——从外界的角度看问题对我们很有帮助，因为有时我们无法清楚地认识自己的生活。
+    <p class="lede">
+      该评估共有<strong>七个部分</strong>，每个部分涵盖了<strong>身体健康</strong>和<strong>生活方式</strong>的问题。
+    </p>
+    <p class="lede">
+      请用<em>"是"</em>或<em>"否"</em>来回答每个问题。完成后，你可以了解自己当前的身心状况。
+    </p>
+    <p class="lede" style="margin-bottom:var(--space-xl)">
+      建议找一位密友<strong>以你的身份</strong>也做这套测验，然后比较你们的分数。从外界的角度看问题对我们很有帮助——<em>因为有时我们无法清楚地认识自己的生活。</em>
     </p>
     <div class="stats">
       <div class="stat">
