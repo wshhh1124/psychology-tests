@@ -2,16 +2,12 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title data-title>身心评估</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    Design System: UI/UX Pro Max
-   Style: Vibrant & Block-based | Colors: Quiz Blue + Gold
-   Typography: Lora (headings) + Raleway (body)
+   Colors: Quiz Blue + Gold | Typography: System Native
    ============================================================ */
 :root {
   --color-primary: #2563EB;
@@ -27,8 +23,8 @@
   --color-success: #059669;
   --color-warning: #D97706;
 
-  --font-heading: "Lora", "Noto Serif SC", "Songti SC", Georgia, serif;
-  --font-body: "Raleway", "Noto Sans SC", "PingFang SC", -apple-system, sans-serif;
+  --font-heading: Georgia, "Noto Serif SC", "Songti SC", "PingFang SC", serif;
+  --font-body: -apple-system, "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
 
   --space-xs: 4px; --space-sm: 8px; --space-md: 16px;
   --space-lg: 24px; --space-xl: 32px; --space-2xl: 48px; --space-3xl: 64px;
@@ -309,17 +305,21 @@ body {
 
 .q-opt {
   flex: 1;
-  padding: 14px;
+  min-height: 52px;
+  padding: 16px 14px;
   background: var(--color-muted);
   border: 2px solid transparent;
   border-radius: var(--radius-sm);
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   color: var(--color-foreground);
   cursor: pointer;
   transition: all 150ms ease;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .q-opt:hover { background: #E4ECFC; }
 .q-opt:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 2px; }
@@ -628,6 +628,21 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Tablet & Desktop: comfortable reading width */
+@media (min-width: 768px) {
+  .container { max-width: 520px; }
+  .cover { padding: 56px 40px 40px; }
+  .cover h1 { font-size: 30px; }
+  .cover .lede { font-size: 15px; line-height: 2.1; }
+  .question-card { padding: 36px 32px; }
+  .result-main { padding: 40px 36px; }
+}
+
+@media (min-width: 1024px) {
+  .container { max-width: 560px; }
+  body { padding: 40px 24px 60px; }
+}
 </style>
 </head>
 <body>
@@ -668,6 +683,9 @@ body {
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       开始评估
     </button>
+    <button class="btn-outline" id="btnResume" onclick="resumeQuiz()" style="display:none;margin-top:12px">
+      继续上次答题
+    </button>
   </div>
 
   <!-- ========== GENDER SELECT ========== -->
@@ -676,13 +694,13 @@ body {
       <h3>开始前，请选择你的性别</h3>
       <p class="gender-sub">评估的第二部分包含性别相关的健康问题，<br>我们将根据你的选择展示对应的题目。</p>
       <div class="gender-options">
-        <button class="gender-opt" onclick="setGender('female')">
-          <span class="gender-icon">♀️</span>
+        <button class="gender-opt" onclick="setGender('female')" aria-label="选择女性性别">
+          <span class="gender-icon" aria-hidden="true">♀</span>
           <span class="gender-label">女性</span>
           <span class="gender-hint">回答女性相关题目</span>
         </button>
-        <button class="gender-opt" onclick="setGender('male')">
-          <span class="gender-icon">♂️</span>
+        <button class="gender-opt" onclick="setGender('male')" aria-label="选择男性性别">
+          <span class="gender-icon" aria-hidden="true">♂</span>
           <span class="gender-label">男性</span>
           <span class="gender-hint">回答男性相关题目</span>
         </button>
@@ -1444,6 +1462,12 @@ function initApp(){
   const mins=Math.max(1,Math.round(c.questions.length*(isMultiMode?5:12)/60));
   document.getElementById('coverTime').textContent=mins+'min';
   document.title=c.title;
+  // Check for saved progress
+  const saved=checkSavedProgress();
+  if(saved){
+    document.getElementById('btnResume').style.display='flex';
+    document.getElementById('btnResume').textContent=`继续上次答题（已完成 ${Object.keys(saved.answers).length} 题）`;
+  }
   showPage('coverPage');
 }
 
@@ -1493,8 +1517,8 @@ function renderQuestion(){
   const wrap=document.getElementById('optionsWrap');
   if(isMultiMode){
     wrap.innerHTML=`
-      <button class="q-opt" data-index="0" onclick="selectOpt(0,this)">是</button>
-      <button class="q-opt" data-index="1" onclick="selectOpt(1,this)">否</button>`;
+      <button class="q-opt" data-index="0" onclick="selectOpt(0,this)" aria-label="是">是</button>
+      <button class="q-opt" data-index="1" onclick="selectOpt(1,this)" aria-label="否">否</button>`;
     if(answers[q.id]!==undefined){
       const idx=answers[q.id]===1?0:1;
       const btn=wrap.querySelector(`[data-index="${idx}"]`);
@@ -1509,12 +1533,32 @@ function renderQuestion(){
   }
 }
 
+function saveProgress(){
+  try{
+    const state={question:currentQuestion,answers:answers,gender:userGender};
+    localStorage.setItem('seven-centers-progress',JSON.stringify(state));
+  }catch(e){}
+}
+
 function selectOpt(i,btn){
   document.querySelectorAll('.q-opt').forEach(b=>b.classList.remove('selected'));
   btn.classList.add('selected');
   selectedOption=i;
   // Auto-advance after brief visual feedback
   setTimeout(()=>nextQuestion(), 250);
+}
+
+// Check for saved progress on load
+function checkSavedProgress(){
+  try{
+    const saved=localStorage.getItem('seven-centers-progress');
+    if(!saved)return;
+    const state=JSON.parse(saved);
+    if(state.question>0&&state.answers&&Object.keys(state.answers).length>0){
+      return state;
+    }
+  }catch(e){}
+  return null;
 }
 
 function goBack(){
@@ -1525,8 +1569,9 @@ function nextQuestion(){
   if(selectedOption===null)return;
   const q=filteredQuestions[currentQuestion];
   answers[q.id]=isMultiMode?(selectedOption===0?1:0):q.options[selectedOption].score;
+  saveProgress();
   if(currentQuestion<filteredQuestions.length-1){currentQuestion++;renderQuestion();}
-  else showResults();
+  else{localStorage.removeItem('seven-centers-progress');showResults();}
 }
 
 function showResults(){
@@ -1626,7 +1671,23 @@ function showSimple(c){
   document.getElementById('resultReport').innerHTML=r.report.replace(/\n/g,'<br>');
 }
 
-function restartQuiz(){startQuiz();}
+function resumeQuiz(){
+  const saved=checkSavedProgress();
+  if(!saved)return;
+  userGender=saved.gender;
+  const skipIds=userGender==='female'?[21,22]:[19,20];
+  filteredQuestions=TEST_CONFIG.questions.filter(q=>!skipIds.includes(q.id));
+  currentQuestion=saved.question;
+  answers=saved.answers;
+  document.querySelector('[data-question-count]').textContent=filteredQuestions.length;
+  showPage('quizPage');
+  renderQuestion();
+}
+
+function restartQuiz(){
+  localStorage.removeItem('seven-centers-progress');
+  startQuiz();
+}
 function showShare(){document.getElementById('shareUrl').textContent=window.location.href;document.getElementById('shareOverlay').classList.add('show');}
 function hideShare(e){if(e.target===document.getElementById('shareOverlay'))document.getElementById('shareOverlay').classList.remove('show');}
 function copyUrl(){navigator.clipboard.writeText(window.location.href).then(()=>{const b=document.querySelector('.btn-copy');b.textContent='已复制';setTimeout(()=>b.textContent='复制链接',2000);});}
