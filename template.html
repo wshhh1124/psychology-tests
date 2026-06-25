@@ -4,221 +4,235 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title data-title>身心评估</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* ============================================================
+   Design System: UI/UX Pro Max
+   Style: Vibrant & Block-based | Colors: Quiz Blue + Gold
+   Typography: Lora (headings) + Raleway (body)
+   ============================================================ */
 :root {
-  --bg: #FBF7F0;
-  --card: #FFFFFF;
-  --text: #3D3226;
-  --text-light: #8B7E74;
-  --text-muted: #B8A99A;
-  --accent: #7C9082;
-  --accent-soft: #E8E4DB;
-  --accent-warm: #D4A574;
-  --danger: #C0604C;
-  --warning: #D4A04A;
-  --good: #6B9080;
-  --radius: 16px;
-  --radius-sm: 10px;
-  --shadow: 0 2px 16px rgba(61,50,38,0.06);
+  --color-primary: #2563EB;
+  --color-on-primary: #FFFFFF;
+  --color-secondary: #7C3AED;
+  --color-accent: #F59E0B;
+  --color-background: #EFF6FF;
+  --color-foreground: #0F172A;
+  --color-muted: #F1F5FD;
+  --color-muted-fg: #64748B;
+  --color-border: #E4ECFC;
+  --color-destructive: #DC2626;
+  --color-success: #059669;
+  --color-warning: #D97706;
+
+  --font-heading: "Lora", "Noto Serif SC", "Songti SC", Georgia, serif;
+  --font-body: "Raleway", "Noto Sans SC", "PingFang SC", -apple-system, sans-serif;
+
+  --space-xs: 4px; --space-sm: 8px; --space-md: 16px;
+  --space-lg: 24px; --space-xl: 32px; --space-2xl: 48px; --space-3xl: 64px;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 16px rgba(37,99,235,0.08);
+  --shadow-lg: 0 12px 32px rgba(37,99,235,0.10);
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
 body {
-  font-family: "Noto Serif SC", "Songti SC", Georgia, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", serif;
-  background: var(--bg);
-  color: var(--text);
+  font-family: var(--font-body);
+  background: var(--color-background);
+  color: var(--color-foreground);
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  padding: 20px 16px 40px;
+  padding: var(--space-lg) var(--space-md) var(--space-3xl);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
   width: 100%;
-  max-width: 440px;
+  max-width: 448px;
   position: relative;
 }
 
-/* ====== COVER — book-like editorial ====== */
+/* ====== COVER ====== */
 .cover {
-  background: var(--card);
-  border-radius: 20px;
-  padding: 48px 28px 36px;
-  box-shadow: var(--shadow);
-  animation: fadeIn 0.6s ease;
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-xl) var(--space-xl);
+  box-shadow: var(--shadow-md);
+  animation: fadeUp 0.5s ease;
 }
 
-.cover .book-label {
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+.cover .eyebrow {
+  font-family: var(--font-body);
   font-size: 11px;
-  letter-spacing: .2em;
+  font-weight: 600;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.cover .book-label::before {
-  content: '';
-  width: 24px;
-  height: 1px;
-  background: var(--accent-warm);
+  color: var(--color-secondary);
+  margin-bottom: var(--space-md);
 }
 
 .cover h1 {
-  font-family: "Noto Serif SC", "Songti SC", serif;
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-foreground);
+  margin-bottom: var(--space-md);
+}
+
+.cover .lede {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.75;
+  color: var(--color-muted-fg);
+  margin-bottom: var(--space-lg);
+}
+
+.cover .stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+  padding: var(--space-lg) 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cover .stat {
+  text-align: center;
+}
+.cover .stat .stat-num {
+  font-family: var(--font-heading);
   font-size: 26px;
   font-weight: 700;
-  line-height: 1.35;
-  margin-bottom: 16px;
-  color: var(--text);
+  color: var(--color-primary);
+  line-height: 1;
 }
-
-.cover .intro {
-  font-family: "Noto Serif SC", Georgia, serif;
-  font-size: 14px;
-  line-height: 1.9;
-  color: var(--text-light);
-  margin-bottom: 24px;
-}
-
-.cover .meta-row {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 28px;
-  padding: 16px 0;
-  border-top: 1px solid #F0EBE3;
-  border-bottom: 1px solid #F0EBE3;
-}
-
-.cover .meta-item {
-  text-align: center;
-  flex: 1;
-}
-.cover .meta-item .num {
-  font-family: "Noto Serif SC", Georgia, serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--accent-warm);
-}
-.cover .meta-item .label {
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+.cover .stat .stat-label {
+  font-family: var(--font-body);
   font-size: 11px;
-  color: var(--text-muted);
-  margin-top: 2px;
+  font-weight: 500;
+  color: var(--color-muted-fg);
+  margin-top: 4px;
 }
 
-.btn-start {
+.btn-primary {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: var(--space-sm);
   width: 100%;
-  padding: 16px;
-  background: var(--text);
-  color: #fff;
+  padding: 16px 24px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
   border: none;
   border-radius: var(--radius-sm);
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
-  font-weight: 500;
-  letter-spacing: .04em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 200ms ease;
+  box-shadow: 0 4px 12px rgba(37,99,235,0.25);
 }
-.btn-start:active { transform: scale(0.98); opacity: .9; }
+.btn-primary:hover { opacity: 0.92; transform: translateY(-1px); }
+.btn-primary:active { transform: scale(0.98); }
+.btn-primary:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 2px; }
 
 /* ====== QUIZ ====== */
-.quiz {
-  display: none;
-  animation: fadeIn 0.4s ease;
-}
+.quiz { display: none; animation: fadeUp 0.4s ease; }
 .quiz.active { display: block; }
 
-.progress-wrap {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 16px 20px;
-  margin-bottom: 14px;
-  box-shadow: var(--shadow);
+.quiz-progress {
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-md);
+  box-shadow: var(--shadow-sm);
 }
-.progress-text {
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+.quiz-progress .prog-text {
+  font-family: var(--font-body);
   font-size: 12px;
-  color: var(--text-muted);
-  margin-bottom: 10px;
+  font-weight: 500;
+  color: var(--color-muted-fg);
+  margin-bottom: var(--space-sm);
   display: flex;
   justify-content: space-between;
 }
-.progress-bar {
-  height: 3px;
-  background: #F0EBE3;
+.quiz-progress .prog-bar {
+  height: 4px;
+  background: var(--color-border);
   border-radius: 2px;
   overflow: hidden;
 }
-.progress-fill {
+.quiz-progress .prog-fill {
   height: 100%;
-  background: var(--accent-warm);
+  background: var(--color-primary);
   border-radius: 2px;
   transition: width 0.4s ease;
 }
 
 .question-card {
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 28px 22px 22px;
-  box-shadow: var(--shadow);
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  padding: var(--space-xl) var(--space-lg);
+  box-shadow: var(--shadow-sm);
 }
 
-.question-num {
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+.question-card .q-section {
+  font-family: var(--font-body);
   font-size: 11px;
-  color: var(--accent);
-  font-weight: 500;
-  letter-spacing: .08em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 14px;
+  color: var(--color-secondary);
+  margin-bottom: var(--space-md);
 }
 
-.question-text {
-  font-family: "Noto Serif SC", Georgia, serif;
-  font-size: 17px;
-  font-weight: 500;
-  line-height: 1.6;
-  margin-bottom: 22px;
-  color: var(--text);
+.question-card .q-text {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-foreground);
+  margin-bottom: var(--space-xl);
 }
 
-.options {
-  display: flex;
-  gap: 10px;
-}
+.q-options { display: flex; gap: var(--space-sm); }
 
-.option-btn {
+.q-opt {
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
   padding: 14px;
-  background: #FAF8F5;
-  border: 1.5px solid #EDE8E0;
+  background: var(--color-muted);
+  border: 2px solid transparent;
   border-radius: var(--radius-sm);
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+  font-family: var(--font-body);
   font-size: 15px;
-  color: var(--text);
+  font-weight: 500;
+  color: var(--color-foreground);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 150ms ease;
+  text-align: center;
 }
-
-.option-btn:active { transform: scale(0.97); }
-
-.option-btn.selected {
-  border-color: var(--text);
-  background: var(--text);
-  color: #fff;
+.q-opt:hover { background: #E4ECFC; }
+.q-opt:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 2px; }
+.q-opt.selected {
+  border-color: var(--color-primary);
+  background: #DBEAFE;
+  color: var(--color-primary);
+  font-weight: 600;
 }
 
 .btn-next {
@@ -227,204 +241,209 @@ body {
   justify-content: center;
   width: 100%;
   padding: 16px;
-  margin-top: 14px;
-  background: #E8E4DB;
-  color: var(--text-muted);
+  margin-top: var(--space-md);
+  background: var(--color-border);
+  color: var(--color-muted-fg);
   border: none;
   border-radius: var(--radius-sm);
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 200ms ease;
 }
 .btn-next.ready {
-  background: var(--text);
-  color: #fff;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  box-shadow: 0 4px 12px rgba(37,99,235,0.25);
 }
+.btn-next.ready:hover { opacity: 0.92; }
 .btn-next:active { transform: scale(0.98); }
+.btn-next:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 2px; }
 
 /* ====== LOADING ====== */
-.loading {
-  display: none;
-  text-align: center;
-  padding: 80px 24px;
-  animation: fadeIn 0.4s ease;
-}
+.loading { display: none; text-align: center; padding: 100px var(--space-xl); animation: fadeUp 0.4s ease; }
 .loading.active { display: block; }
-
-.loading .spinner-ring {
-  width: 40px;
-  height: 40px;
-  border: 3px solid #EDE8E0;
-  border-top-color: var(--accent-warm);
+.spinner-ring {
+  width: 44px; height: 44px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
   border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 0 auto 24px;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto var(--space-xl);
 }
-.loading-text {
-  font-family: "Noto Serif SC", Georgia, serif;
+.loading p {
+  font-family: var(--font-heading);
+  font-style: italic;
   font-size: 15px;
-  color: var(--text-light);
+  color: var(--color-muted-fg);
 }
 
 @keyframes spin { to { transform: rotate(360deg); } }
-@keyframes fadeIn {
-  from { opacity:0; transform:translateY(10px); }
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(12px); }
   to { opacity:1; transform:translateY(0); }
 }
 
 /* ====== RESULT ====== */
-.result {
-  display: none;
-  animation: fadeIn 0.6s ease;
-}
+.result { display: none; animation: fadeUp 0.5s ease; }
 .result.active { display: block; }
 
-.result-card {
-  background: var(--card);
-  border-radius: 20px;
-  padding: 36px 24px 28px;
-  box-shadow: var(--shadow);
+.result-main {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-xl) var(--space-xl);
+  box-shadow: var(--shadow-md);
 }
 
 .result-badge {
-  display: inline-block;
-  padding: 6px 18px;
-  border-radius: 20px;
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
   font-size: 12px;
-  font-weight: 500;
-  letter-spacing: .06em;
-  margin-bottom: 20px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--space-lg);
 }
 
-.result h2 {
-  font-family: "Noto Serif SC", Georgia, serif;
-  font-size: 20px;
+.result-main h2 {
+  font-family: var(--font-heading);
+  font-size: 22px;
   font-weight: 700;
-  margin-bottom: 14px;
-  line-height: 1.4;
+  line-height: 1.35;
+  margin-bottom: var(--space-md);
+  color: var(--color-foreground);
 }
 
-.result .focus-tags {
+.result-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 24px;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
 }
-.focus-tag {
+.result-tag {
   padding: 6px 14px;
-  border-radius: 20px;
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
   font-size: 12px;
-  background: #FAF8F5;
-  color: var(--text-light);
+  font-weight: 500;
 }
 
 /* Dimension bars */
-.dim-section {
-  margin-bottom: 24px;
+.dim-section { margin-bottom: var(--space-xl); }
+.dim-section .dim-header {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted-fg);
+  margin-bottom: var(--space-md);
 }
-.dim-section .dim-title {
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-bottom: 12px;
-  letter-spacing: .06em;
-}
-.score-dim {
+.dim-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-sm);
   margin-bottom: 10px;
 }
-.score-dim .dim-label {
-  width: 110px;
+.dim-row .dim-name {
+  width: 120px;
+  font-family: var(--font-body);
   font-size: 11px;
-  color: var(--text-light);
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+  font-weight: 500;
+  color: var(--color-foreground);
   flex-shrink: 0;
 }
-.score-dim .dim-bar {
+.dim-row .dim-track {
   flex: 1;
   height: 6px;
-  background: #F0EBE3;
+  background: var(--color-border);
   border-radius: 3px;
   overflow: hidden;
 }
-.score-dim .dim-fill {
+.dim-row .dim-track-fill {
   height: 100%;
   border-radius: 3px;
-  transition: width 1s ease;
+  transition: width 1.2s ease;
 }
-.score-dim .dim-val {
+.dim-row .dim-pct {
+  width: 34px;
+  font-family: var(--font-body);
   font-size: 11px;
-  color: var(--text-muted);
-  width: 36px;
+  font-weight: 600;
+  color: var(--color-muted-fg);
   text-align: right;
 }
-.score-dim .dim-tier {
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+.dim-row .dim-tier {
+  width: 28px;
+  font-family: var(--font-body);
   font-size: 10px;
-  width: 24px;
+  font-weight: 600;
   text-align: right;
 }
 
-.dim-legend {
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+.dim-footnote {
+  font-family: var(--font-body);
   font-size: 10px;
-  color: var(--text-muted);
+  color: var(--color-muted-fg);
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: var(--space-xl);
 }
 
 /* Center detail cards */
-.center-detail {
-  margin-bottom: 18px;
-  padding: 20px 18px;
-  background: #FAF8F5;
-  border-radius: var(--radius);
-  border-left: 3px solid transparent;
+.ctr-card {
+  background: var(--color-muted);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-md);
+  border-left: 4px solid var(--color-primary);
 }
-.center-detail .cd-header {
+.ctr-card .ctr-head {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
 }
-.center-detail .cd-name {
-  font-family: "Noto Serif SC", Georgia, serif;
+.ctr-card .ctr-name {
+  font-family: var(--font-heading);
   font-weight: 600;
-  font-size: 15px;
+  font-size: 16px;
   flex: 1;
 }
-.center-detail .cd-badge {
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+.ctr-card .ctr-tier-badge {
+  padding: 3px 12px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
   font-size: 10px;
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-weight: 500;
+  font-weight: 600;
+  white-space: nowrap;
 }
-.center-detail .cd-body {
-  font-size: 13px;
-  color: var(--text-light);
-}
-.center-detail .cd-meta {
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+.ctr-card .ctr-body-parts {
+  font-family: var(--font-body);
   font-size: 11px;
-  color: var(--text-muted);
-  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--color-muted-fg);
+  margin-bottom: var(--space-sm);
 }
-.center-detail .cd-healing {
-  margin-top: 12px;
-  padding: 12px 14px;
-  background: #FFFBF5;
-  border-radius: var(--radius-sm);
+.ctr-card .ctr-desc {
   font-size: 13px;
+  line-height: 1.7;
+  color: var(--color-foreground);
+  margin-bottom: var(--space-md);
+}
+.ctr-card .ctr-affirmation {
+  padding: var(--space-md);
+  background: #FFFFFF;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-heading);
   font-style: italic;
+  font-size: 14px;
   line-height: 1.6;
-  color: var(--text-light);
+  color: var(--color-muted-fg);
 }
 
 /* Buttons */
@@ -434,101 +453,110 @@ body {
   justify-content: center;
   width: 100%;
   padding: 16px;
-  margin-bottom: 10px;
-  background: var(--text);
-  color: #fff;
+  margin-bottom: var(--space-sm);
+  background: var(--color-accent);
+  color: var(--color-foreground);
   border: none;
   border-radius: var(--radius-sm);
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 200ms ease;
+  box-shadow: 0 4px 12px rgba(245,158,11,0.25);
 }
-.btn-retry {
+.btn-share:hover { opacity: 0.92; }
+.btn-share:active { transform: scale(0.98); }
+.btn-share:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; }
+
+.btn-outline {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   padding: 16px;
   background: transparent;
-  color: var(--text-light);
-  border: 1.5px solid #E8E4DB;
+  color: var(--color-muted-fg);
+  border: 2px solid var(--color-border);
   border-radius: var(--radius-sm);
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+  font-family: var(--font-body);
   font-size: 15px;
+  font-weight: 500;
   cursor: pointer;
+  transition: all 200ms ease;
 }
-.btn-retry:active, .btn-share:active { transform: scale(0.98); }
+.btn-outline:hover { border-color: var(--color-primary); color: var(--color-primary); }
+.btn-outline:active { transform: scale(0.98); }
+.btn-outline:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 2px; }
 
 /* Share modal */
 .share-overlay {
   display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(61,50,38,0.5);
+  position: fixed; inset: 0;
+  background: rgba(15,23,42,0.5);
   z-index: 999;
-  justify-content: center;
-  align-items: center;
-  padding: 24px;
+  justify-content: center; align-items: center;
+  padding: var(--space-lg);
 }
 .share-overlay.show { display: flex; }
 .share-modal {
-  background: #fff;
-  border-radius: var(--radius);
-  padding: 28px 24px;
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  padding: var(--space-xl) var(--space-lg);
   text-align: center;
   width: 100%;
   max-width: 320px;
-  animation: fadeIn 0.3s ease;
+  animation: fadeUp 0.3s ease;
 }
-.share-modal h3 {
-  font-family: "Noto Serif SC", Georgia, serif;
-  font-size: 18px;
-  margin-bottom: 8px;
-}
+.share-modal h3 { font-family: var(--font-heading); font-size: 18px; margin-bottom: var(--space-sm); }
 .share-modal .share-url {
-  background: #FAF8F5;
-  padding: 12px;
+  background: var(--color-muted);
+  padding: var(--space-md);
   border-radius: var(--radius-sm);
   font-size: 11px;
-  color: var(--text-light);
+  color: var(--color-muted-fg);
   word-break: break-all;
-  margin: 16px 0;
+  margin: var(--space-md) 0;
   font-family: monospace;
 }
 .btn-copy {
   padding: 12px 32px;
-  background: var(--text);
-  color: #fff;
+  background: var(--color-primary);
+  color: #FFFFFF;
   border: none;
   border-radius: var(--radius-sm);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
 }
-.btn-close {
+.btn-modal-close {
   display: block;
-  margin: 10px auto 0;
+  margin: var(--space-sm) auto 0;
   padding: 8px 16px;
-  background: none;
-  border: none;
-  color: var(--text-muted);
+  background: none; border: none;
+  color: var(--color-muted-fg);
   font-size: 13px;
   cursor: pointer;
 }
 
 /* Result footer */
 .result-footer {
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid #F0EBE3;
-}
-.result-footer p {
-  font-family: "Noto Sans SC", "PingFang SC", sans-serif;
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-body);
   font-size: 11px;
-  color: var(--text-muted);
+  color: var(--color-muted-fg);
   text-align: center;
   line-height: 1.8;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 </style>
 </head>
@@ -538,45 +566,48 @@ body {
 
   <!-- ========== COVER ========== -->
   <div class="cover" id="coverPage">
-    <div class="book-label">露易丝·海 & 蒙娜·丽莎·舒尔茨</div>
+    <p class="eyebrow">Louise Hay & Mona Lisa Schulz</p>
     <h1 data-cover-title>你的身心情绪中心健康吗？</h1>
-    <p class="intro" data-cover-desc>
+    <p class="lede" data-cover-desc>
       露易丝和我与很多人合作过，这项工作中最重要的部分之一是我们的初始访谈——我们暂且称之为"了解你的过程"吧。这个过程可以让我们评估你现在的身体和情绪状况，并提示我们找到最佳方式来帮助你。
     </p>
-    <p class="intro" style="font-size:13px;margin-top:-8px">
-      该评估共有七个部分，每个部分涵盖了身体健康和生活方式的问题，请用"是"或"否"来回答。完成后，你可以了解自己当前的身心状况。也可以找一位密友以你的身份做这套测验，比较你们的分数——从外界的角度看问题对我们很有帮助，因为有时我们无法清楚地认识自己的生活。
+    <p class="lede" style="font-size:13px;margin-top:-8px">
+      该评估共有七个部分，涵盖了身体健康和生活方式的问题，请用"是"或"否"来回答。完成后，你可以了解自己当前的身心状况。也可以找一位密友以你的身份做这套测验，比较你们的分数——从外界的角度看问题对我们很有帮助，因为有时我们无法清楚地认识自己的生活。
     </p>
-    <div class="meta-row">
-      <div class="meta-item">
-        <div class="num" data-question-count>85</div>
-        <div class="label">道题目</div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num" data-question-count>85</div>
+        <div class="stat-label">道题目</div>
       </div>
-      <div class="meta-item">
-        <div class="num">7</div>
-        <div class="label">情绪中心</div>
+      <div class="stat">
+        <div class="stat-num">7</div>
+        <div class="stat-label">情绪中心</div>
       </div>
-      <div class="meta-item">
-        <div class="num" id="coverTime">~8min</div>
-        <div class="label">预计时间</div>
+      <div class="stat">
+        <div class="stat-num" id="coverTime">8min</div>
+        <div class="stat-label">预计时间</div>
       </div>
     </div>
-    <button class="btn-start" onclick="startQuiz()">开始评估</button>
+    <button class="btn-primary" onclick="startQuiz()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      开始评估
+    </button>
   </div>
 
   <!-- ========== QUIZ ========== -->
   <div class="quiz" id="quizPage">
-    <div class="progress-wrap">
-      <div class="progress-text">
-        <span id="progressLabel">1/85</span>
+    <div class="quiz-progress">
+      <div class="prog-text">
+        <span id="progressLabel">1 / 85</span>
       </div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      <div class="prog-bar">
+        <div class="prog-fill" id="progressFill" style="width:0%"></div>
       </div>
     </div>
     <div class="question-card">
-      <div class="question-num" id="questionNum">第 1 题</div>
-      <div class="question-text" id="questionText"></div>
-      <div class="options" id="optionsWrap"></div>
+      <div class="q-section" id="questionNum">第 1 题</div>
+      <div class="q-text" id="questionText"></div>
+      <div class="q-options" id="optionsWrap"></div>
     </div>
     <button class="btn-next" id="btnNext" onclick="nextQuestion()" disabled>下一题</button>
   </div>
@@ -584,31 +615,34 @@ body {
   <!-- ========== LOADING ========== -->
   <div class="loading" id="loadingPage">
     <div class="spinner-ring"></div>
-    <p class="loading-text">正在生成你的身心评估报告...</p>
+    <p>正在生成你的身心评估报告&hellip;</p>
   </div>
 
   <!-- ========== RESULT ========== -->
   <div class="result" id="resultPage">
-    <div class="result-card">
+    <div class="result-main">
       <div class="result-badge" id="resultType"></div>
       <h2 id="resultTitle"></h2>
-      <div class="focus-tags" id="resultTraits"></div>
+      <div class="result-tags" id="resultTraits"></div>
       <div class="dim-section" id="resultDimensions"></div>
-      <div class="dim-legend">⬆ Yes 占比越高 = 该中心越需要关注</div>
+      <p class="dim-footnote">Yes 占比越高 = 该情绪中心越需要你的关注</p>
       <div id="resultReport"></div>
-      <button class="btn-share" onclick="showShare()">分享给朋友</button>
-      <button class="btn-retry" onclick="restartQuiz()">重新评估</button>
+      <button class="btn-share" onclick="showShare()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        分享给朋友
+      </button>
+      <button class="btn-outline" onclick="restartQuiz()">重新评估</button>
     </div>
   </div>
 
   <!-- ========== SHARE MODAL ========== -->
   <div class="share-overlay" id="shareOverlay" onclick="hideShare(event)">
     <div class="share-modal" onclick="event.stopPropagation()">
-      <h3>分享这个评估</h3>
-      <p style="font-size:13px;color:#8B7E74">复制链接发给朋友，一起探索身心奥秘</p>
+      <h3>分享评估</h3>
+      <p style="font-size:13px;color:#64748B">复制链接发给朋友，一起探索身心奥秘</p>
       <div class="share-url" id="shareUrl"></div>
       <button class="btn-copy" onclick="copyUrl()">复制链接</button>
-      <button class="btn-close" onclick="document.getElementById('shareOverlay').classList.remove('show')">关闭</button>
+      <button class="btn-modal-close" onclick="document.getElementById('shareOverlay').classList.remove('show')">关闭</button>
     </div>
   </div>
 
@@ -616,323 +650,195 @@ body {
 
 <script>
 // ============================================================
-// CONFIG PLACEHOLDER — replaced during generation
+// CONFIG PLACEHOLDER
 // ============================================================
 const TEST_CONFIG = {
   "title": "你的身心情绪中心健康吗？",
-  "icon": "🧘",
-  "description": "基于露易丝·海《一切都会好的》七情绪中心理论，85道题深度评估你的身心状态。每个身体信号背后，都有一个情绪在说话。",
-  "questions": [
-    {"id": 1, "text": "示例问题？", "center": "c1", "options": [
-      {"letter": "A", "text": "选项A", "score": 4},
-      {"letter": "B", "text": "选项B", "score": 2}
-    ]}
-  ],
-  "scoring": {"type": "simple"}
+  "icon": "",
+  "description": "基于露易丝·海《一切都会好的》七情绪中心理论",
+  "questions": [{"id":1,"text":"示例","center":"c1"}],
+  "scoring":{"type":"simple"}
 };
 
 // ============================================================
 // APP LOGIC
 // ============================================================
-let currentQuestion = 0;
-let answers = {};
-let selectedOption = null;
-const isMultiMode = TEST_CONFIG.scoring.type === 'multi';
+let currentQuestion=0, answers={}, selectedOption=null;
+const isMultiMode=TEST_CONFIG.scoring.type==='multi';
 
-function initApp() {
-  const cfg = TEST_CONFIG;
-  document.querySelector('[data-cover-title]').textContent = cfg.title;
-  document.querySelector('[data-cover-desc]').textContent =
-    cfg.description || document.querySelector('[data-cover-desc]').textContent;
-  document.querySelector('[data-question-count]').textContent = cfg.questions.length;
-  const n = cfg.questions.length;
-  const mins = Math.max(1, Math.round(n * (isMultiMode ? 5 : 12) / 60));
-  document.getElementById('coverTime').textContent = '~' + mins + 'min';
-  document.title = cfg.title;
+function initApp(){
+  const c=TEST_CONFIG;
+  document.querySelector('[data-cover-title]').textContent=c.title;
+  document.querySelector('[data-cover-desc]').textContent=c.description ||
+    document.querySelector('[data-cover-desc]').textContent;
+  document.querySelector('[data-question-count]').textContent=c.questions.length;
+  const n=c.questions.length, mins=Math.max(1,Math.round(n*(isMultiMode?5:12)/60));
+  document.getElementById('coverTime').textContent=mins+'min';
+  document.title=c.title;
   showPage('coverPage');
 }
 
-function showPage(pageId) {
-  ['coverPage','quizPage','loadingPage','resultPage'].forEach(id => {
-    const el = document.getElementById(id);
-    if (id === 'coverPage' || id === 'resultPage') {
-      el.style.display = id === pageId ? 'block' : 'none';
-    } else {
-      el.classList.toggle('active', id === pageId);
-    }
-    if (id === 'loadingPage') {
-      el.classList.toggle('active', id === pageId);
-    }
+function showPage(id){
+  ['coverPage','quizPage','loadingPage','resultPage'].forEach(x=>{
+    const el=document.getElementById(x);
+    if(x==='coverPage'||x==='resultPage') el.style.display=x===id?'block':'none';
+    else el.classList.toggle('active',x===id);
+    if(x==='loadingPage') el.classList.toggle('active',x===id);
   });
 }
 
-function startQuiz() {
-  currentQuestion = 0;
-  answers = {};
-  showPage('quizPage');
-  renderQuestion();
-}
+function startQuiz(){currentQuestion=0;answers={};showPage('quizPage');renderQuestion();}
 
-function renderQuestion() {
-  const cfg = TEST_CONFIG;
-  const q = cfg.questions[currentQuestion];
-  selectedOption = null;
+function renderQuestion(){
+  const c=TEST_CONFIG, q=c.questions[currentQuestion];
+  selectedOption=null;
+  document.getElementById('progressLabel').textContent=`${currentQuestion+1} / ${c.questions.length}`;
+  document.getElementById('progressFill').style.width=`${(currentQuestion/c.questions.length)*100}%`;
 
-  document.getElementById('progressLabel').textContent = `${currentQuestion + 1}/${cfg.questions.length}`;
-  document.getElementById('progressFill').style.width = `${(currentQuestion / cfg.questions.length) * 100}%`;
-
-  if (isMultiMode && q.center) {
-    const dim = cfg.scoring.dimensions.find(d => d.key === 'c' + q.center);
-    const dimLabel = dim ? dim.label : '';
-    document.getElementById('questionNum').textContent = `${dimLabel} · 第 ${currentQuestion + 1} 题`;
-  } else {
-    document.getElementById('questionNum').textContent = `第 ${currentQuestion + 1} 题`;
+  if(isMultiMode&&q.center){
+    const dim=c.scoring.dimensions.find(d=>d.key==='c'+q.center);
+    document.getElementById('questionNum').textContent=dim?`${dim.icon||''} ${dim.label}`:`第 ${currentQuestion+1} 题`;
+  }else{
+    document.getElementById('questionNum').textContent=`第 ${currentQuestion+1} 题`;
   }
+  document.getElementById('questionText').textContent=q.text;
 
-  document.getElementById('questionText').textContent = q.text;
-
-  const wrap = document.getElementById('optionsWrap');
-
-  if (isMultiMode) {
-    // Multi mode: Yes/No options
-    wrap.innerHTML = `
-      <button class="option-btn" data-index="0" onclick="selectOption(0, this)">是</button>
-      <button class="option-btn" data-index="1" onclick="selectOption(1, this)">否</button>
-    `;
-    if (answers[q.id] !== undefined) {
-      const prevIdx = answers[q.id] === 1 ? 0 : 1;
-      const btn = wrap.querySelector(`[data-index="${prevIdx}"]`);
-      if (btn) { btn.classList.add('selected'); selectedOption = prevIdx; }
+  const wrap=document.getElementById('optionsWrap');
+  if(isMultiMode){
+    wrap.innerHTML=`
+      <button class="q-opt" data-index="0" onclick="selectOpt(0,this)">是</button>
+      <button class="q-opt" data-index="1" onclick="selectOpt(1,this)">否</button>`;
+    if(answers[q.id]!==undefined){
+      const idx=answers[q.id]===1?0:1;
+      const btn=wrap.querySelector(`[data-index="${idx}"]`);
+      if(btn){btn.classList.add('selected');selectedOption=idx;}
     }
-  } else {
-    wrap.innerHTML = q.options.map((opt, i) => `
-      <button class="option-btn" data-index="${i}" onclick="selectOption(${i}, this)">
-        <span>${opt.letter}. ${opt.text}</span>
-      </button>
-    `).join('');
-
-    if (answers[q.id] !== undefined) {
-      const prevIdx = q.options.findIndex(o => o.score === answers[q.id]);
-      if (prevIdx >= 0) {
-        const btn = wrap.querySelector(`[data-index="${prevIdx}"]`);
-        btn.classList.add('selected');
-        selectedOption = prevIdx;
-      }
+  }else{
+    wrap.innerHTML=q.options.map((o,i)=>`<button class="q-opt" data-index="${i}" onclick="selectOpt(${i},this)">${o.letter}. ${o.text}</button>`).join('');
+    if(answers[q.id]!==undefined){
+      const idx=q.options.findIndex(o=>o.score===answers[q.id]);
+      if(idx>=0){const btn=wrap.querySelector(`[data-index="${idx}"]`);btn.classList.add('selected');selectedOption=idx;}
     }
   }
-
-  updateNextButton();
+  updateNext();
 }
 
-function selectOption(index, btn) {
-  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  selectedOption = index;
-  updateNextButton();
+function selectOpt(i,btn){
+  document.querySelectorAll('.q-opt').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');selectedOption=i;updateNext();
 }
 
-function updateNextButton() {
-  const btn = document.getElementById('btnNext');
-  if (selectedOption !== null) {
-    btn.classList.add('ready');
-    btn.disabled = false;
-    btn.textContent = currentQuestion === TEST_CONFIG.questions.length - 1 ? '查看报告' : '下一题';
-  } else {
-    btn.classList.remove('ready');
-    btn.disabled = true;
-  }
+function updateNext(){
+  const btn=document.getElementById('btnNext');
+  if(selectedOption!==null){
+    btn.classList.add('ready');btn.disabled=false;
+    btn.textContent=currentQuestion===TEST_CONFIG.questions.length-1?'查看报告':'下一题';
+  }else{btn.classList.remove('ready');btn.disabled=true;}
 }
 
-function nextQuestion() {
-  if (selectedOption === null) return;
-  const q = TEST_CONFIG.questions[currentQuestion];
-
-  if (isMultiMode) {
-    answers[q.id] = selectedOption === 0 ? 1 : 0;
-  } else {
-    answers[q.id] = q.options[selectedOption].score;
-  }
-
-  if (currentQuestion < TEST_CONFIG.questions.length - 1) {
-    currentQuestion++;
-    renderQuestion();
-  } else {
-    showResults();
-  }
+function nextQuestion(){
+  if(selectedOption===null)return;
+  const q=TEST_CONFIG.questions[currentQuestion];
+  answers[q.id]=isMultiMode?(selectedOption===0?1:0):q.options[selectedOption].score;
+  if(currentQuestion<TEST_CONFIG.questions.length-1){currentQuestion++;renderQuestion();}
+  else showResults();
 }
 
-function showResults() {
+function showResults(){
   showPage('loadingPage');
-
-  setTimeout(() => {
-    const cfg = TEST_CONFIG;
-    if (isMultiMode) {
-      showMultiResults(cfg);
-    } else {
-      showSimpleResults(cfg);
-    }
-    document.getElementById('progressFill').style.width = '100%';
-    document.getElementById('progressLabel').textContent = `${cfg.questions.length}/${cfg.questions.length}`;
+  setTimeout(()=>{
+    const c=TEST_CONFIG;
+    if(isMultiMode)showMulti(c);else showSimple(c);
+    document.getElementById('progressFill').style.width='100%';
+    document.getElementById('progressLabel').textContent=`${c.questions.length} / ${c.questions.length}`;
     showPage('resultPage');
-  }, 1500);
+  },1500);
 }
 
-// ----- Multi-mode helpers -----
-function getTier(dim, yesCount) {
-  const t = dim.thresholds || [Math.round(dim.questions.length*0.33), Math.round(dim.questions.length*0.6)];
-  if (yesCount < t[0]) return 'healthy';
-  if (yesCount < t[1]) return 'warning';
-  return 'alert';
+// Multi-mode helpers
+function getTier(dim,yes){
+  const t=dim.thresholds||[Math.round(dim.questions.length*.33),Math.round(dim.questions.length*.6)];
+  if(yes<t[0])return'healthy';if(yes<t[1])return'warning';return'alert';
 }
-function getTierLabel(tier) {
-  if (tier === 'healthy') return '良好';
-  if (tier === 'warning') return '关注';
-  return '警觉';
-}
-function getTierColor(tier) {
-  if (tier === 'healthy') return '#6B9080';
-  if (tier === 'warning') return '#D4A04A';
-  return '#C0604C';
-}
-function getTierBg(tier) {
-  if (tier === 'healthy') return '#EDF5F1';
-  if (tier === 'warning') return '#FFF8ED';
-  return '#FDF3F1';
-}
+function tierLabel(t){return t==='healthy'?'良好':t==='warning'?'关注':'警觉';}
+function tierColor(t){return t==='healthy'?'#059669':t==='warning'?'#D97706':'#DC2626';}
+function tierBg(t){return t==='healthy'?'#ECFDF5':t==='warning'?'#FFFBEB':'#FEF2F2';}
 
-function showMultiResults(cfg) {
-  const dimScores = {}, dimPercents = {}, dimTiers = {};
-  for (const dim of cfg.scoring.dimensions) {
-    const total = dim.questions.length;
-    let yesCount = 0;
-    for (const qid of dim.questions) { if (answers[qid] === 1) yesCount++; }
-    dimScores[dim.key] = yesCount;
-    dimPercents[dim.key] = Math.round((yesCount / total) * 100);
-    dimTiers[dim.key] = getTier(dim, yesCount);
+function showMulti(c){
+  const scores={},pcts={},tiers={};
+  for(const d of c.scoring.dimensions){
+    let y=0;for(const qid of d.questions)if(answers[qid]===1)y++;
+    scores[d.key]=y;pcts[d.key]=Math.round(y/d.questions.length*100);tiers[d.key]=getTier(d,y);
   }
+  const sorted=[...c.scoring.dimensions].sort((a,b)=>scores[b.key]-scores[a.key]);
+  const top3=sorted.slice(0,3),td=c.scoring.centerDetails[top3[0].key];
+  const worst=sorted.reduce((w,d)=>{const t=tiers[d.key];return t==='alert'?'alert':t==='warning'&&w!=='alert'?'warning':w;},'healthy');
 
-  const sorted = [...cfg.scoring.dimensions].sort((a,b) => dimScores[b.key] - dimScores[a.key]);
-  const top3 = sorted.slice(0, 3);
-  const topDetail = cfg.scoring.centerDetails[top3[0].key];
+  let label,color;
+  if(worst==='alert'){label='身心正在呼求关注';color='#DC2626';}
+  else if(worst==='warning'){label='部分中心需要关注';color='#D97706';}
+  else{label='身心状态总体良好';color='#059669';}
 
-  const worstTier = sorted.reduce((w, dim) => {
-    const t = dimTiers[dim.key];
-    if (t === 'alert') return 'alert';
-    if (t === 'warning' && w !== 'alert') return 'warning';
-    return w;
-  }, 'healthy');
+  const badge=document.getElementById('resultType');
+  badge.textContent=label;badge.style.background=tierBg(worst);badge.style.color=color;
+  document.getElementById('resultTitle').textContent=`你最需要关注：${td.name}`;
+  document.getElementById('resultTraits').innerHTML=
+    `<span class="result-tag" style="background:${tierBg(tiers[top3[0].key])};color:${tierColor(tiers[top3[0].key])}">${td.bodyParts}</span>`+
+    (top3[1]?`<span class="result-tag" style="background:#F8FAFC;color:#64748B">次关注：${c.scoring.centerDetails[top3[1].key].name}</span>`:'')+
+    (top3[2]?`<span class="result-tag" style="background:#F8FAFC;color:#64748B">第三：${c.scoring.centerDetails[top3[2].key].name}</span>`:'');
 
-  let overallLabel, overallColor;
-  if (worstTier === 'alert') { overallLabel = '身心正在呼求关注'; overallColor = '#C0604C'; }
-  else if (worstTier === 'warning') { overallLabel = '部分中心需要关注'; overallColor = '#D4A04A'; }
-  else { overallLabel = '身心状态总体良好'; overallColor = '#6B9080'; }
-
-  // Badge + title
-  const badge = document.getElementById('resultType');
-  badge.textContent = overallLabel;
-  badge.style.background = getTierBg(worstTier);
-  badge.style.color = overallColor;
-  document.getElementById('resultTitle').textContent = `你最需要关注：${topDetail.name}`;
-
-  // Tags
-  document.getElementById('resultTraits').innerHTML =
-    `<span class="focus-tag" style="background:${getTierBg(dimTiers[top3[0].key])};color:${getTierColor(dimTiers[top3[0].key])}">${topDetail.bodyParts}</span>` +
-    (top3[1] ? `<span class="focus-tag">次关注：${cfg.scoring.centerDetails[top3[1].key].name}</span>` : '') +
-    (top3[2] ? `<span class="focus-tag">第三：${cfg.scoring.centerDetails[top3[2].key].name}</span>` : '');
-
-  // 7 bars
-  const barsHTML = cfg.scoring.dimensions.map(dim => {
-    const pct = dimPercents[dim.key];
-    const tier = dimTiers[dim.key];
-    const color = getTierColor(tier);
-    return `
-      <div class="score-dim">
-        <span class="dim-label">${dim.icon||''} ${dim.label}</span>
-        <div class="dim-bar"><div class="dim-fill" style="width:${pct}%;background:${color}"></div></div>
-        <span class="dim-val">${pct}%</span>
-        <span class="dim-tier" style="color:${color}">${getTierLabel(tier)}</span>
-      </div>
-    `;
+  const bars=c.scoring.dimensions.map(d=>{
+    const p=pcts[d.key],t=tiers[d.key],cl=tierColor(t);
+    return`<div class="dim-row"><span class="dim-name">${d.icon||''} ${d.label}</span><div class="dim-track"><div class="dim-track-fill" style="width:${p}%;background:${cl}"></div></div><span class="dim-pct">${p}%</span><span class="dim-tier" style="color:${cl}">${tierLabel(t)}</span></div>`;
   }).join('');
 
-  document.getElementById('resultDimensions').innerHTML = `
-    <p class="dim-title">七情绪中心评估总览</p>
-    <div style="margin-bottom:4px">${barsHTML}</div>
-  `;
+  document.getElementById('resultDimensions').innerHTML=
+    `<p class="dim-header">七情绪中心评估总览</p>${bars}`;
 
-  // Top 3 center details
-  const reportsHTML = top3.map((dim, idx) => {
-    const detail = cfg.scoring.centerDetails[dim.key];
-    const tier = dimTiers[dim.key];
-    const descText = detail[tier + 'Desc'] || detail.warningDesc;
-    return `
-      <div class="center-detail" style="border-left-color:${getTierColor(tier)};background:${getTierBg(tier)}">
-        <div class="cd-header">
-          <span class="cd-name">${idx===0?'🔍':idx===1?'👉':'👀'} ${detail.name}</span>
-          <span class="cd-badge" style="background:${getTierColor(tier)}22;color:${getTierColor(tier)}">${getTierLabel(tier)} · ${dimScores[dim.key]}/${dim.questions.length}项</span>
-        </div>
-        <p class="cd-meta">关联身体部位：${detail.bodyParts}</p>
-        <p class="cd-body">${descText}</p>
-        <div class="cd-healing">💬 <strong>疗愈肯定语</strong><br>${detail.healing}</div>
+  const reports=top3.map((d,i)=>{
+    const dt=c.scoring.centerDetails[d.key],t=tiers[d.key],cl=tierColor(t);
+    return`<div class="ctr-card" style="border-left-color:${cl};background:${tierBg(t)}">
+      <div class="ctr-head">
+        <span class="ctr-name">${dt.name}</span>
+        <span class="ctr-tier-badge" style="background:${cl}18;color:${cl}">${tierLabel(t)} · ${scores[d.key]}/${d.questions.length}项</span>
       </div>
-    `;
+      <p class="ctr-body-parts">关联身体部位：${dt.bodyParts}</p>
+      <p class="ctr-desc">${dt[t+'Desc']||dt.warningDesc}</p>
+      <div class="ctr-affirmation">${dt.healing}</div>
+    </div>`;
   }).join('');
 
-  document.getElementById('resultReport').innerHTML = reportsHTML + `
+  document.getElementById('resultReport').innerHTML=reports+`
     <div class="result-footer">
-      <p>基于露易丝·海 & 蒙娜·丽莎·舒尔茨<br>《一切都会好的》七情绪中心理论（第3-9章）</p>
-    </div>
-  `;
+      基于露易丝·海 & 蒙娜·丽莎·舒尔茨<br>《一切都会好的》七情绪中心理论
+    </div>`;
 }
 
-// ----- Simple-mode results -----
-function showSimpleResults(cfg) {
-  const totalScore = Object.values(answers).reduce((a,b) => a + b, 0);
-  let resultType = null;
-  for (const range of cfg.scoring.resultRanges) {
-    if (totalScore >= range.min && totalScore <= range.max) {
-      resultType = range.type; break;
-    }
+function showSimple(c){
+  const total=Object.values(answers).reduce((a,b)=>a+b,0);
+  let rt=null;
+  for(const r of c.scoring.resultRanges){if(total>=r.min&&total<=r.max){rt=r.type;break;}}
+  if(!rt)rt=c.scoring.resultRanges[0].type;
+  const r=c.scoring.results[rt],ds={};
+  for(const d of c.scoring.dimensions){
+    const ra=d.questions.filter(q=>answers[q]!==undefined);
+    ds[d.key]=Math.round(ra.reduce((s,q)=>s+answers[q],0)/(ra.length*4)*100);
   }
-  if (!resultType) resultType = cfg.scoring.resultRanges[0].type;
-  const result = cfg.scoring.results[resultType];
-
-  const dimScores = {};
-  for (const dim of cfg.scoring.dimensions) {
-    const ra = dim.questions.filter(qid => answers[qid] !== undefined);
-    const dimTotal = ra.reduce((s, qid) => s + answers[qid], 0);
-    dimScores[dim.key] = Math.round((dimTotal / (ra.length * 4)) * 100);
-  }
-
-  document.getElementById('resultType').textContent = resultType;
-  document.getElementById('resultType').style.background = '#EDE8FD';
-  document.getElementById('resultTitle').textContent = result.title;
-  document.getElementById('resultTraits').innerHTML = result.traits.map(t => `<span class="focus-tag">${t}</span>`).join('');
-  document.getElementById('resultDimensions').innerHTML = cfg.scoring.dimensions.map(dim => {
-    const score = dimScores[dim.key] || 50;
-    return `<div class="score-dim"><span class="dim-label">${dim.label}</span><div class="dim-bar"><div class="dim-fill" style="width:${score}%;background:${score>=75?'#6B9080':score>=45?'#D4A04A':'#C0604C'}"></div></div><span class="dim-val">${score}%</span></div>`;
+  document.getElementById('resultType').textContent=rt;
+  document.getElementById('resultType').style.background='#DBEAFE';
+  document.getElementById('resultTitle').textContent=r.title;
+  document.getElementById('resultTraits').innerHTML=r.traits.map(t=>`<span class="result-tag" style="background:#F8FAFC">${t}</span>`).join('');
+  document.getElementById('resultDimensions').innerHTML=c.scoring.dimensions.map(d=>{
+    const sc=ds[d.key]||50,cl=sc>=75?'#059669':sc>=45?'#D97706':'#DC2626';
+    return`<div class="dim-row"><span class="dim-name">${d.label}</span><div class="dim-track"><div class="dim-track-fill" style="width:${sc}%;background:${cl}"></div></div><span class="dim-pct">${sc}%</span></div>`;
   }).join('');
-  document.getElementById('resultReport').innerHTML = result.report.replace(/\n/g, '<br>');
+  document.getElementById('resultReport').innerHTML=r.report.replace(/\n/g,'<br>');
 }
 
-function restartQuiz() { startQuiz(); }
-
-function showShare() {
-  document.getElementById('shareUrl').textContent = window.location.href;
-  document.getElementById('shareOverlay').classList.add('show');
-}
-function hideShare(e) {
-  if (e.target === document.getElementById('shareOverlay')) {
-    document.getElementById('shareOverlay').classList.remove('show');
-  }
-}
-function copyUrl() {
-  navigator.clipboard.writeText(window.location.href).then(() => {
-    const btn = document.querySelector('.btn-copy');
-    btn.textContent = '已复制';
-    setTimeout(() => { btn.textContent = '复制链接'; }, 2000);
-  });
-}
+function restartQuiz(){startQuiz();}
+function showShare(){document.getElementById('shareUrl').textContent=window.location.href;document.getElementById('shareOverlay').classList.add('show');}
+function hideShare(e){if(e.target===document.getElementById('shareOverlay'))document.getElementById('shareOverlay').classList.remove('show');}
+function copyUrl(){navigator.clipboard.writeText(window.location.href).then(()=>{const b=document.querySelector('.btn-copy');b.textContent='已复制';setTimeout(()=>b.textContent='复制链接',2000);});}
 
 initApp();
 </script>
