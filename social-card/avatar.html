@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><style>
+body{margin:0;background:#1a1a1a;display:flex;justify-content:center;align-items:center;min-height:100vh}
+.canvas{width:800px;height:800px;position:relative;overflow:hidden}
+/* Variant 1: Minimal geometric mirror */
+.v1{background:linear-gradient(135deg,#2D3436 0%,#3D3226 100%)}
+.v1 .mirror-frame{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:360px;height:420px;border-radius:50% 50% 50% 50% / 30% 30% 30% 30%;border:8px solid rgba(255,255,255,.25);background:linear-gradient(180deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.03) 100%)}
+.v1 .mirror-shine{position:absolute;top:28%;left:32%;width:120px;height:60px;background:rgba(255,255,255,.06);border-radius:50%;transform:rotate(-15deg)}
+.v1 .question-mark{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);font-family:Georgia,serif;font-size:140px;color:rgba(255,255,255,.35);font-style:italic}
+.v1 .brand-name{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);font-family:"PingFang SC","Noto Sans SC",sans-serif;font-size:48px;font-weight:300;color:rgba(255,255,255,.7);letter-spacing:.12em}
+
+/* Variant 2: Ink/editorial style */
+.v2{background:#f3f0e8}
+.v2 .ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:440px;height:440px;border-radius:50%;border:3px solid rgba(10,10,11,.15)}
+.v2 .ring-inner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:340px;height:340px;border-radius:50%;border:1px solid rgba(10,10,11,.08)}
+.v2 .eye-left{position:absolute;top:42%;left:38%;width:32px;height:32px;border-radius:50%;background:rgba(10,10,11,.6)}
+.v2 .eye-right{position:absolute;top:42%;right:38%;width:32px;height:32px;border-radius:50%;background:rgba(10,10,11,.6)}
+.v2 .mouth{position:absolute;top:56%;left:50%;transform:translateX(-50%);width:60px;height:2px;background:rgba(10,10,11,.3);border-radius:1px}
+.v2 .brand-name-dark{position:absolute;bottom:100px;left:50%;transform:translateX(-50%);font-family:"Noto Serif SC","Songti SC",serif;font-size:42px;font-weight:500;color:#2D3436;letter-spacing:.10em}
+
+/* Variant 3: Clean modern */
+.v3{background:#FBF7F0}
+.v3 .mirror-icon{position:absolute;top:45%;left:50%;transform:translate(-50%,-50%)}
+.v3 .outer-circle{width:300px;height:300px;border-radius:50%;border:4px solid #3D3226;position:relative;margin:0 auto}
+.v3 .inner-arc{position:absolute;top:30px;left:30px;width:180px;height:180px;border-radius:50%;border:2.5px solid #8B7E74;border-bottom-color:transparent;border-left-color:transparent;transform:rotate(45deg)}
+.v3 .dot{position:absolute;width:10px;height:10px;border-radius:50%;background:#3D3226;top:70px;right:60px}
+.v3 .brand-name-modern{text-align:center;font-family:"Noto Serif SC","Songti SC",serif;font-size:44px;font-weight:600;color:#3D3226;letter-spacing:.08em;margin-top:220px}
+.v3 .tagline{text-align:center;font-family:"PingFang SC",sans-serif;font-size:20px;color:#8B7E74;letter-spacing:.16em;margin-top:8px}
+
+/* Variant 4: Playful mirror with face silhouette */
+.v4{background:#EFF6FF}
+.v4 .mirror-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:380px;height:480px;border-radius:190px 190px 40px 40px;background:linear-gradient(180deg,rgba(37,99,235,.06),rgba(37,99,235,.12));border:4px solid rgba(37,99,235,.2)}
+.v4 .face-outline{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.v4 .face-outline .f-dot{width:10px;height:10px;border-radius:50%;background:#2563EB;position:absolute}
+.v4 .brand-name-blue{position:absolute;bottom:100px;left:50%;transform:translateX(-50%);font-family:"PingFang SC",sans-serif;font-size:44px;font-weight:400;color:#1E40AF;letter-spacing:.10em}
+</style></head>
+<body>
+
+<div class="canvas v3">
+  <div class="mirror-icon">
+    <div class="outer-circle">
+      <div class="inner-arc"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+  <div class="brand-name-modern">镜子测试局</div>
+  <div class="tagline">MIRROR · TEST · DISCOVER</div>
+</div>
+
+</body></html>
