@@ -233,6 +233,23 @@ body {
 .quiz { display: none; animation: fadeUp 0.4s ease; }
 .quiz.active { display: block; }
 
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 0;
+  margin-bottom: var(--space-sm);
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-muted-fg);
+  cursor: pointer;
+  transition: color 150ms ease;
+}
+.back-link:hover { color: var(--color-primary); }
+
 .quiz-progress {
   background: #FFFFFF;
   border-radius: var(--radius-md);
@@ -683,6 +700,10 @@ body {
         <div class="prog-fill" id="progressFill" style="width:0%"></div>
       </div>
     </div>
+    <button class="back-link" id="btnBack" onclick="goBack()" style="display:none">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      上一题
+    </button>
     <div class="question-card">
       <div class="q-section" id="questionNum">第 1 题</div>
       <div class="q-text" id="questionText"></div>
@@ -1458,6 +1479,8 @@ function renderQuestion(){
   const total=filteredQuestions.length;
   document.getElementById('progressLabel').textContent=`${currentQuestion+1} / ${total}`;
   document.getElementById('progressFill').style.width=`${(currentQuestion/total)*100}%`;
+  // Show/hide back button
+  document.getElementById('btnBack').style.display = currentQuestion>0 ? 'inline-flex' : 'none';
 
   if(isMultiMode&&q.center){
     const dim=TEST_CONFIG.scoring.dimensions.find(d=>d.key==='c'+q.center);
@@ -1494,6 +1517,10 @@ function selectOpt(i,btn){
   setTimeout(()=>nextQuestion(), 250);
 }
 
+function goBack(){
+  if(currentQuestion>0){currentQuestion--;renderQuestion();}
+}
+
 function nextQuestion(){
   if(selectedOption===null)return;
   const q=filteredQuestions[currentQuestion];
@@ -1514,8 +1541,9 @@ function showResults(){
 }
 
 // Multi-mode helpers
-function getTier(dim,yes){
-  const t=dim.thresholds||[Math.round(dim.questions.length*.33),Math.round(dim.questions.length*.6)];
+function getTier(dim,yes,total){
+  const n=total||dim.questions.length;
+  const t=dim.thresholds||[Math.round(n*.33),Math.round(n*.6)];
   if(yes<t[0])return'healthy';if(yes<t[1])return'warning';return'alert';
 }
 function tierLabel(t){return t==='healthy'?'良好':t==='warning'?'关注':'警觉';}
@@ -1523,10 +1551,15 @@ function tierColor(t){return t==='healthy'?'#059669':t==='warning'?'#D97706':'#D
 function tierBg(t){return t==='healthy'?'#ECFDF5':t==='warning'?'#FFFBEB':'#FEF2F2';}
 
 function showMulti(c){
-  const scores={},pcts={},tiers={};
+  const scores={},pcts={},tiers={},actualTotals={};
   for(const d of c.scoring.dimensions){
-    let y=0;for(const qid of d.questions)if(answers[qid]===1)y++;
-    scores[d.key]=y;pcts[d.key]=Math.round(y/d.questions.length*100);tiers[d.key]=getTier(d,y);
+    let y=0, total=0;
+    for(const qid of d.questions){
+      if(answers[qid]!==undefined){total++;if(answers[qid]===1)y++;}
+    }
+    scores[d.key]=y;actualTotals[d.key]=total;
+    pcts[d.key]=Math.round(y/Math.max(1,total)*100);
+    tiers[d.key]=getTier(d,y,total);
   }
   const sorted=[...c.scoring.dimensions].sort((a,b)=>scores[b.key]-scores[a.key]);
   const top3=sorted.slice(0,3),td=c.scoring.centerDetails[top3[0].key];
@@ -1558,7 +1591,7 @@ function showMulti(c){
     return`<div class="ctr-card" style="border-left-color:${cl};background:${tierBg(t)}">
       <div class="ctr-head">
         <span class="ctr-name">${dt.name}</span>
-        <span class="ctr-tier-badge" style="background:${cl}18;color:${cl}">${tierLabel(t)} · ${scores[d.key]}/${d.questions.length}项</span>
+        <span class="ctr-tier-badge" style="background:${cl}18;color:${cl}">${tierLabel(t)} · ${scores[d.key]}/${actualTotals[d.key]}项</span>
       </div>
       <p class="ctr-body-parts">关联身体部位：${dt.bodyParts}</p>
       <p class="ctr-desc">${dt[t+'Desc']||dt.warningDesc}</p>

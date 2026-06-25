@@ -86,18 +86,40 @@ body {
   font-family: var(--font-heading);
   font-size: 28px;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
   color: var(--color-foreground);
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
 }
 
 .cover .lede {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-style: normal;
+  line-height: 2.0;
+  letter-spacing: 0.02em;
+  color: var(--color-foreground);
+  margin-bottom: var(--space-md);
+  opacity: 0.85;
+}
+.cover .lede em {
   font-family: var(--font-heading);
-  font-size: 15px;
   font-style: italic;
-  line-height: 1.75;
-  color: var(--color-muted-fg);
-  margin-bottom: var(--space-lg);
+  color: var(--color-primary);
+  font-weight: 600;
+  opacity: 1;
+  letter-spacing: 0.01em;
+}
+.cover .lede strong {
+  font-weight: 600;
+  color: var(--color-foreground);
+  opacity: 1;
+}
+
+.cover .lede .highlight {
+  display: inline-block;
+  background: linear-gradient(180deg, transparent 60%, rgba(37,99,235,0.12) 60%);
+  padding: 0 2px;
 }
 
 .cover .stats {
@@ -151,9 +173,82 @@ body {
 .btn-primary:active { transform: scale(0.98); }
 .btn-primary:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 2px; }
 
+/* ====== GENDER SELECT ====== */
+.gender-select { display: none; animation: fadeUp 0.4s ease; }
+.gender-select.active { display: block; }
+
+.gender-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-xl);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+.gender-card h3 {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+  color: var(--color-foreground);
+}
+.gender-card .gender-sub {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-muted-fg);
+  margin-bottom: var(--space-xl);
+  line-height: 1.6;
+}
+.gender-options { display: flex; gap: var(--space-md); }
+.gender-opt {
+  flex: 1;
+  padding: 24px 16px;
+  background: var(--color-muted);
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 200ms ease;
+  text-align: center;
+}
+.gender-opt:hover { background: #E4ECFC; border-color: var(--color-border); }
+.gender-opt:active { transform: scale(0.97); }
+.gender-opt .gender-icon {
+  font-size: 36px;
+  margin-bottom: var(--space-sm);
+  display: block;
+}
+.gender-opt .gender-label {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-foreground);
+}
+.gender-opt .gender-hint {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--color-muted-fg);
+  margin-top: 4px;
+}
+
 /* ====== QUIZ ====== */
 .quiz { display: none; animation: fadeUp 0.4s ease; }
 .quiz.active { display: block; }
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 0;
+  margin-bottom: var(--space-sm);
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-muted-fg);
+  cursor: pointer;
+  transition: color 150ms ease;
+}
+.back-link:hover { color: var(--color-primary); }
 
 .quiz-progress {
   background: #FFFFFF;
@@ -235,31 +330,6 @@ body {
   font-weight: 600;
 }
 
-.btn-next {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 16px;
-  margin-top: var(--space-md);
-  background: var(--color-border);
-  color: var(--color-muted-fg);
-  border: none;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 200ms ease;
-}
-.btn-next.ready {
-  background: var(--color-primary);
-  color: var(--color-on-primary);
-  box-shadow: 0 4px 12px rgba(37,99,235,0.25);
-}
-.btn-next.ready:hover { opacity: 0.92; }
-.btn-next:active { transform: scale(0.98); }
-.btn-next:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 2px; }
 
 /* ====== LOADING ====== */
 .loading { display: none; text-align: center; padding: 100px var(--space-xl); animation: fadeUp 0.4s ease; }
@@ -569,10 +639,16 @@ body {
     <p class="eyebrow">Louise Hay & Mona Lisa Schulz</p>
     <h1 data-cover-title>你的身心情绪中心健康吗？</h1>
     <p class="lede" data-cover-desc>
-      露易丝和我与很多人合作过，这项工作中最重要的部分之一是我们的初始访谈——我们暂且称之为"了解你的过程"吧。这个过程可以让我们评估你现在的身体和情绪状况，并提示我们找到最佳方式来帮助你。
+      露易丝和我与很多人合作过，这项工作中<strong>最重要的部分之一</strong>是我们的初始访谈——我们暂且称之为<em>"了解你的过程"</em>吧。这个过程可以让我们<span class="highlight">评估你现在的身体和情绪状况</span>，并提示我们找到最佳方式来帮助你。
     </p>
-    <p class="lede" style="font-size:13px;margin-top:-8px">
-      该评估共有七个部分，涵盖了身体健康和生活方式的问题，请用"是"或"否"来回答。完成后，你可以了解自己当前的身心状况。也可以找一位密友以你的身份做这套测验，比较你们的分数——从外界的角度看问题对我们很有帮助，因为有时我们无法清楚地认识自己的生活。
+    <p class="lede">
+      该评估共有<strong>七个部分</strong>，每个部分涵盖了<strong>身体健康</strong>和<strong>生活方式</strong>的问题。
+    </p>
+    <p class="lede">
+      请用<em>"是"</em>或<em>"否"</em>来回答每个问题。完成后，你可以了解自己当前的身心状况。
+    </p>
+    <p class="lede" style="margin-bottom:var(--space-xl)">
+      建议找一位密友<strong>以你的身份</strong>也做这套测验，然后比较你们的分数。从外界的角度看问题对我们很有帮助——<em>因为有时我们无法清楚地认识自己的生活。</em>
     </p>
     <div class="stats">
       <div class="stat">
@@ -594,6 +670,26 @@ body {
     </button>
   </div>
 
+  <!-- ========== GENDER SELECT ========== -->
+  <div class="gender-select" id="genderPage">
+    <div class="gender-card">
+      <h3>开始前，请选择你的性别</h3>
+      <p class="gender-sub">评估的第二部分包含性别相关的健康问题，<br>我们将根据你的选择展示对应的题目。</p>
+      <div class="gender-options">
+        <button class="gender-opt" onclick="setGender('female')">
+          <span class="gender-icon">♀️</span>
+          <span class="gender-label">女性</span>
+          <span class="gender-hint">回答女性相关题目</span>
+        </button>
+        <button class="gender-opt" onclick="setGender('male')">
+          <span class="gender-icon">♂️</span>
+          <span class="gender-label">男性</span>
+          <span class="gender-hint">回答男性相关题目</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- ========== QUIZ ========== -->
   <div class="quiz" id="quizPage">
     <div class="quiz-progress">
@@ -604,12 +700,15 @@ body {
         <div class="prog-fill" id="progressFill" style="width:0%"></div>
       </div>
     </div>
+    <button class="back-link" id="btnBack" onclick="goBack()" style="display:none">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      上一题
+    </button>
     <div class="question-card">
       <div class="q-section" id="questionNum">第 1 题</div>
       <div class="q-text" id="questionText"></div>
       <div class="q-options" id="optionsWrap"></div>
     </div>
-    <button class="btn-next" id="btnNext" onclick="nextQuestion()" disabled>下一题</button>
   </div>
 
   <!-- ========== LOADING ========== -->
@@ -1040,7 +1139,7 @@ const TEST_CONFIG = {
 // ============================================================
 // APP LOGIC
 // ============================================================
-let currentQuestion=0, answers={}, selectedOption=null;
+let currentQuestion=0, answers={}, selectedOption=null, userGender=null, filteredQuestions=[];
 const isMultiMode=TEST_CONFIG.scoring.type==='multi';
 
 function initApp(){
@@ -1048,15 +1147,14 @@ function initApp(){
   document.querySelector('[data-cover-title]').textContent=c.title;
   document.querySelector('[data-cover-desc]').textContent=c.description ||
     document.querySelector('[data-cover-desc]').textContent;
-  document.querySelector('[data-question-count]').textContent=c.questions.length;
-  const n=c.questions.length, mins=Math.max(1,Math.round(n*(isMultiMode?5:12)/60));
+  const mins=Math.max(1,Math.round(c.questions.length*(isMultiMode?5:12)/60));
   document.getElementById('coverTime').textContent=mins+'min';
   document.title=c.title;
   showPage('coverPage');
 }
 
 function showPage(id){
-  ['coverPage','quizPage','loadingPage','resultPage'].forEach(x=>{
+  ['coverPage','genderPage','quizPage','loadingPage','resultPage'].forEach(x=>{
     const el=document.getElementById(x);
     if(x==='coverPage'||x==='resultPage') el.style.display=x===id?'block':'none';
     else el.classList.toggle('active',x===id);
@@ -1064,16 +1162,34 @@ function showPage(id){
   });
 }
 
-function startQuiz(){currentQuestion=0;answers={};showPage('quizPage');renderQuestion();}
+function setGender(g){
+  userGender=g;
+  // Filter questions based on gender
+  // Female: skip male questions (id 21, 22). Male: skip female questions (id 19, 20)
+  const skipIds = g==='female' ? [21,22] : [19,20];
+  filteredQuestions = TEST_CONFIG.questions.filter(q => !skipIds.includes(q.id));
+  document.querySelector('[data-question-count]').textContent = filteredQuestions.length;
+  const mins=Math.max(1,Math.round(filteredQuestions.length*(isMultiMode?5:12)/60));
+  document.getElementById('coverTime').textContent=mins+'min';
+  // Go
+  currentQuestion=0; answers={}; showPage('quizPage'); renderQuestion();
+}
+
+function startQuiz(){
+  showPage('genderPage');
+}
 
 function renderQuestion(){
-  const c=TEST_CONFIG, q=c.questions[currentQuestion];
+  const q=filteredQuestions[currentQuestion];
   selectedOption=null;
-  document.getElementById('progressLabel').textContent=`${currentQuestion+1} / ${c.questions.length}`;
-  document.getElementById('progressFill').style.width=`${(currentQuestion/c.questions.length)*100}%`;
+  const total=filteredQuestions.length;
+  document.getElementById('progressLabel').textContent=`${currentQuestion+1} / ${total}`;
+  document.getElementById('progressFill').style.width=`${(currentQuestion/total)*100}%`;
+  // Show/hide back button
+  document.getElementById('btnBack').style.display = currentQuestion>0 ? 'inline-flex' : 'none';
 
   if(isMultiMode&&q.center){
-    const dim=c.scoring.dimensions.find(d=>d.key==='c'+q.center);
+    const dim=TEST_CONFIG.scoring.dimensions.find(d=>d.key==='c'+q.center);
     document.getElementById('questionNum').textContent=dim?`${dim.icon||''} ${dim.label}`:`第 ${currentQuestion+1} 题`;
   }else{
     document.getElementById('questionNum').textContent=`第 ${currentQuestion+1} 题`;
@@ -1097,27 +1213,25 @@ function renderQuestion(){
       if(idx>=0){const btn=wrap.querySelector(`[data-index="${idx}"]`);btn.classList.add('selected');selectedOption=idx;}
     }
   }
-  updateNext();
 }
 
 function selectOpt(i,btn){
   document.querySelectorAll('.q-opt').forEach(b=>b.classList.remove('selected'));
-  btn.classList.add('selected');selectedOption=i;updateNext();
+  btn.classList.add('selected');
+  selectedOption=i;
+  // Auto-advance after brief visual feedback
+  setTimeout(()=>nextQuestion(), 250);
 }
 
-function updateNext(){
-  const btn=document.getElementById('btnNext');
-  if(selectedOption!==null){
-    btn.classList.add('ready');btn.disabled=false;
-    btn.textContent=currentQuestion===TEST_CONFIG.questions.length-1?'查看报告':'下一题';
-  }else{btn.classList.remove('ready');btn.disabled=true;}
+function goBack(){
+  if(currentQuestion>0){currentQuestion--;renderQuestion();}
 }
 
 function nextQuestion(){
   if(selectedOption===null)return;
-  const q=TEST_CONFIG.questions[currentQuestion];
+  const q=filteredQuestions[currentQuestion];
   answers[q.id]=isMultiMode?(selectedOption===0?1:0):q.options[selectedOption].score;
-  if(currentQuestion<TEST_CONFIG.questions.length-1){currentQuestion++;renderQuestion();}
+  if(currentQuestion<filteredQuestions.length-1){currentQuestion++;renderQuestion();}
   else showResults();
 }
 
@@ -1127,14 +1241,15 @@ function showResults(){
     const c=TEST_CONFIG;
     if(isMultiMode)showMulti(c);else showSimple(c);
     document.getElementById('progressFill').style.width='100%';
-    document.getElementById('progressLabel').textContent=`${c.questions.length} / ${c.questions.length}`;
+    document.getElementById('progressLabel').textContent=`${filteredQuestions.length} / ${filteredQuestions.length}`;
     showPage('resultPage');
   },1500);
 }
 
 // Multi-mode helpers
-function getTier(dim,yes){
-  const t=dim.thresholds||[Math.round(dim.questions.length*.33),Math.round(dim.questions.length*.6)];
+function getTier(dim,yes,total){
+  const n=total||dim.questions.length;
+  const t=dim.thresholds||[Math.round(n*.33),Math.round(n*.6)];
   if(yes<t[0])return'healthy';if(yes<t[1])return'warning';return'alert';
 }
 function tierLabel(t){return t==='healthy'?'良好':t==='warning'?'关注':'警觉';}
@@ -1142,10 +1257,15 @@ function tierColor(t){return t==='healthy'?'#059669':t==='warning'?'#D97706':'#D
 function tierBg(t){return t==='healthy'?'#ECFDF5':t==='warning'?'#FFFBEB':'#FEF2F2';}
 
 function showMulti(c){
-  const scores={},pcts={},tiers={};
+  const scores={},pcts={},tiers={},actualTotals={};
   for(const d of c.scoring.dimensions){
-    let y=0;for(const qid of d.questions)if(answers[qid]===1)y++;
-    scores[d.key]=y;pcts[d.key]=Math.round(y/d.questions.length*100);tiers[d.key]=getTier(d,y);
+    let y=0, total=0;
+    for(const qid of d.questions){
+      if(answers[qid]!==undefined){total++;if(answers[qid]===1)y++;}
+    }
+    scores[d.key]=y;actualTotals[d.key]=total;
+    pcts[d.key]=Math.round(y/Math.max(1,total)*100);
+    tiers[d.key]=getTier(d,y,total);
   }
   const sorted=[...c.scoring.dimensions].sort((a,b)=>scores[b.key]-scores[a.key]);
   const top3=sorted.slice(0,3),td=c.scoring.centerDetails[top3[0].key];
@@ -1177,7 +1297,7 @@ function showMulti(c){
     return`<div class="ctr-card" style="border-left-color:${cl};background:${tierBg(t)}">
       <div class="ctr-head">
         <span class="ctr-name">${dt.name}</span>
-        <span class="ctr-tier-badge" style="background:${cl}18;color:${cl}">${tierLabel(t)} · ${scores[d.key]}/${d.questions.length}项</span>
+        <span class="ctr-tier-badge" style="background:${cl}18;color:${cl}">${tierLabel(t)} · ${scores[d.key]}/${actualTotals[d.key]}项</span>
       </div>
       <p class="ctr-body-parts">关联身体部位：${dt.bodyParts}</p>
       <p class="ctr-desc">${dt[t+'Desc']||dt.warningDesc}</p>
