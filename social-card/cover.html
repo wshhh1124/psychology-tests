@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="kraft-paper">
+<head>
+  <meta charset="utf-8">
+  <title>你的恋爱风格是什么类型？ · 心理测试</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    *,*::before,*::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: #1a1a1a;
+      font-family: "Noto Sans SC", -apple-system, "PingFang SC", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      padding: 64px 32px;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Kraft Paper theme */
+    :root {
+      --paper:     #eedfc7;
+      --paper-2:   #dfc9a8;
+      --ink:       #2a1e13;
+      --muted:     #755f49;
+      --line:      rgba(42,30,19,.24);
+      --accent:    #9b5a2e;
+      --accent-soft: #d5b58f;
+      --ink-rgb: 42,30,19;
+      --paper-rgb: 238,223,199;
+      --accent-rgb: 155,90,46;
+
+      --serif-zh: "Noto Serif SC", "Songti SC", "STSong", serif;
+      --serif-en: "Playfair Display", "Noto Serif SC", serif;
+      --sans-zh: "Noto Sans SC", -apple-system, "PingFang SC", sans-serif;
+      --mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace;
+    }
+
+    .poster {
+      position: relative;
+      width: 1080px;
+      height: 1440px;
+      background: var(--paper);
+      color: var(--ink);
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .poster figure { margin: 0; }
+
+    .content { position: relative; width: 100%; height: 100%; z-index: 2; padding: 96px 88px; }
+
+    /* Background layers */
+    .mag-bg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      z-index: 0; pointer-events: none;
+    }
+    .grain {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      opacity: .35; mix-blend-mode: multiply;
+      background-image: radial-gradient(rgba(0,0,0,.045) 1px, transparent 1px);
+      background-size: 3px 3px;
+    }
+    .paper-wash {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(180deg, rgba(var(--ink-rgb),.02), rgba(var(--ink-rgb),.05) 60%, rgba(var(--ink-rgb),.08));
+    }
+
+    /* Typography */
+    .kicker {
+      font-family: var(--mono);
+      font-size: 21px; letter-spacing: .22em; text-transform: uppercase;
+      color: rgba(var(--ink-rgb), .55); margin: 0 0 18px;
+    }
+    .h-display {
+      font-family: var(--serif-zh); font-weight: 500;
+      font-size: 124px; line-height: 1.06; letter-spacing: .04em;
+      margin: 0 0 24px; color: var(--ink);
+    }
+    .h-xl {
+      font-family: var(--serif-zh); font-weight: 500;
+      font-size: 88px; line-height: 1.10; letter-spacing: .03em;
+      margin: 0 0 24px; color: var(--ink);
+    }
+    .h-md {
+      font-family: var(--serif-zh); font-weight: 500;
+      font-size: 56px; line-height: 1.18; letter-spacing: .02em;
+      margin: 0 0 18px; color: var(--ink);
+    }
+    .h-sub {
+      font-family: var(--serif-en); font-style: italic; font-weight: 400;
+      font-size: 36px; color: var(--muted); margin: 0 0 24px;
+    }
+    .lead {
+      font-family: var(--serif-zh); font-weight: 400;
+      font-size: 28px; line-height: 1.55;
+      color: rgba(var(--ink-rgb), .82); margin: 0 0 24px;
+    }
+    .body {
+      font-family: var(--serif-zh); font-weight: 400;
+      font-size: 24px; line-height: 1.65;
+      color: rgba(var(--ink-rgb), .80); margin: 0 0 18px;
+    }
+    .meta {
+      font-family: var(--mono); font-size: 18px; letter-spacing: .20em;
+      text-transform: uppercase; color: rgba(var(--ink-rgb), .55);
+    }
+
+    .stack { display: flex; flex-direction: column; }
+    .gap-2 { gap: 24px; }
+    .gap-3 { gap: 36px; }
+    .gap-4 { gap: 48px; }
+    .grow { flex: 1; }
+    .center { text-align: center; }
+    .rule { height: 1px; background: var(--line); border: 0; margin: 24px 0; }
+    .rule-accent { height: 2px; background: var(--accent); border: 0; margin: 24px 0; width: 96px; }
+
+    .issue-row {
+      display: flex; align-items: center; gap: 16px;
+      font-family: var(--mono); font-size: 20px; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .issue-row .dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+    }
+
+    .issue-strip {
+      position: absolute; left: 88px; right: 88px; bottom: 56px;
+      display: flex; justify-content: space-between; align-items: center; gap: 32px;
+      font-family: var(--mono); font-size: 18px; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+      border-top: 1px solid var(--line); padding-top: 18px;
+    }
+    .issue-strip span { white-space: nowrap; }
+
+    /* Decorative love symbol - editorial minimal */
+    .hero-emblem {
+      margin: 32px 0;
+      display: flex; align-items: center; gap: 24px;
+    }
+    .hero-emblem .em-line {
+      flex: 1; height: 1px; background: var(--line);
+    }
+    .hero-emblem .em-symbol {
+      font-family: var(--serif-en);
+      font-size: 72px; color: var(--accent);
+      font-style: italic;
+      line-height: 1;
+    }
+
+    /* Tag pills for result types */
+    .tag-row {
+      display: flex; gap: 16px; flex-wrap: wrap;
+    }
+    .tag {
+      font-family: var(--serif-zh); font-size: 22px;
+      padding: 10px 22px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      background: transparent;
+    }
+    .tag.accent {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(var(--accent-rgb), .06);
+    }
+  </style>
+</head>
+<body>
+
+<section class="poster" id="xhs-cover">
+  <div class="grain"></div>
+  <div class="paper-wash"></div>
+
+  <div class="content stack gap-4">
+    <!-- Issue row -->
+    <div class="issue-row">
+      <span>心理测试</span><span class="dot"></span><span>恋爱篇</span><span class="dot"></span><span>Vol. 01</span>
+    </div>
+
+    <!-- Title block -->
+    <div class="stack gap-2">
+      <p class="kicker">Discover Your Hidden Self</p>
+      <h1 class="h-display" style="font-size:106px; line-height:1.12;">
+        你的恋爱风格<br>是什么类型？
+      </h1>
+      <p class="h-sub">What's Your Love Language?</p>
+    </div>
+
+    <!-- Hero emblem (replaces photo well — typographic decoration) -->
+    <div class="hero-emblem">
+      <span class="em-line"></span>
+      <span class="em-symbol">love</span>
+      <span class="em-line"></span>
+    </div>
+
+    <!-- Hook text -->
+    <p class="lead" style="font-size:32px; text-align:center;">
+      10 道精心设计的题目<br>揭开你内心深处的情感密码
+    </p>
+
+    <!-- 4 result types as visual anchor -->
+    <div class="tag-row" style="justify-content:center; margin-top:12px;">
+      <span class="tag">理性指挥官</span>
+      <span class="tag accent">温柔守护者</span>
+      <span class="tag">浪漫冒险家</span>
+      <span class="tag">自由独行者</span>
+    </div>
+
+    <!-- CTA -->
+    <p class="meta" style="text-align:center; margin-top:24px; font-size:22px; letter-spacing:.14em;">
+      点击下方链接 · 立即测试
+    </p>
+  </div>
+
+  <!-- Bottom strip -->
+  <div class="issue-strip">
+    <span>10 Questions</span>
+    <span>—</span>
+    <span>~2 Min</span>
+    <span>—</span>
+    <span>Find Your Type</span>
+  </div>
+</section>
+
+</body>
+</html>
