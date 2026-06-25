@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="ink-classic">
+<head>
+<meta charset="utf-8">
+<title>朋友越多越不容易感冒 · 第一情绪中心</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:#1a1a1a;font-family:"Noto Sans SC",-apple-system,"PingFang SC",sans-serif;-webkit-font-smoothing:antialiased;padding:48px 24px}
+.sheet{display:flex;flex-direction:column;align-items:center;gap:48px}
+
+:root,[data-theme="ink-classic"]{
+  --paper:#f3f0e8;--paper-2:#ebe6da;--ink:#0a0a0b;--muted:#68625a;
+  --line:rgba(10,10,11,.22);--accent:#111111;--accent-soft:#d8d2c6;
+  --ink-rgb:10,10,11;--paper-rgb:243,240,232;--accent-rgb:17,17,17;
+  --serif-zh:"Noto Serif SC","Songti SC",serif;
+  --serif-en:"Playfair Display",serif;
+  --sans:"Noto Sans SC","PingFang SC",sans-serif;
+  --mono:"IBM Plex Mono",monospace;
+}
+
+.poster{position:relative;background:var(--paper);color:var(--ink);overflow:hidden;isolation:isolate}
+.poster.xhs{width:1080px;height:1440px}
+.poster figure{margin:0}
+.poster.xhs .content{padding:96px 88px;position:relative;width:100%;height:100%;z-index:2;display:flex;flex-direction:column}
+
+.grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.35;mix-blend-mode:multiply;background-image:radial-gradient(rgba(0,0,0,.045) 1px,transparent 1px);background-size:3px 3px}
+.paper-wash{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(var(--ink-rgb),.02),rgba(var(--ink-rgb),.05) 60%,rgba(var(--ink-rgb),.08))}
+
+/* Typography */
+.kicker{font-family:var(--mono);font-size:20px;letter-spacing:.22em;text-transform:uppercase;color:rgba(10,10,11,.50);margin:0 0 16px}
+.h-hero{font-family:var(--serif-zh);font-weight:500;font-size:130px;line-height:1.05;letter-spacing:.03em;color:var(--ink)}
+.h-display{font-family:var(--serif-zh);font-weight:500;font-size:106px;line-height:1.08;letter-spacing:.03em;color:var(--ink)}
+.h-xl{font-family:var(--serif-zh);font-weight:500;font-size:82px;line-height:1.10;letter-spacing:.02em;color:var(--ink)}
+.h-md{font-family:var(--serif-zh);font-weight:500;font-size:54px;line-height:1.16;letter-spacing:.02em;color:var(--ink)}
+.h-sub{font-family:var(--serif-en);font-style:italic;font-weight:400;font-size:36px;color:var(--muted);margin:0}
+.lead{font-family:var(--serif-zh);font-weight:400;font-size:28px;line-height:1.55;color:rgba(10,10,11,.82);margin:0}
+.body-text{font-family:var(--serif-zh);font-weight:400;font-size:26px;line-height:1.7;color:rgba(10,10,11,.80);margin:0}
+.meta{font-family:var(--mono);font-size:18px;letter-spacing:.16em;text-transform:uppercase;color:rgba(10,10,11,.50);margin:0}
+
+/* Pull quote - THE key emphasis element */
+.pull-quote{
+  font-family:var(--serif-zh);font-weight:700;font-size:68px;line-height:1.22;
+  color:var(--ink);margin:0;position:relative;padding-left:48px;
+  border-left:6px solid var(--accent);
+}
+
+/* Big stat number */
+.stat-big{font-family:var(--serif-en);font-size:160px;font-weight:700;line-height:1;color:var(--accent);opacity:.06;position:absolute;right:60px;top:60px;pointer-events:none;z-index:0}
+
+/* Abstract illustration shapes */
+.illus{position:absolute;z-index:0;pointer-events:none}
+.illus-circle{position:absolute;border-radius:50%;opacity:.15}
+.illus-line{position:absolute;background:var(--line)}
+.illus-dot-grid{position:absolute;background-image:radial-gradient(circle,var(--line) 1.5px,transparent 1.5px);background-size:24px 24px}
+
+.stack{display:flex;flex-direction:column}.gap-2{gap:24px}.gap-3{gap:36px}.gap-4{gap:48px}.gap-5{gap:64px}
+.row{display:flex;flex-direction:row}.grow{flex:1}.center{text-align:center}
+.rule{height:1px;background:var(--line);border:0;margin:24px 0}
+.rule-accent{height:3px;background:var(--accent);border:0;margin:28px 0;width:120px}
+.w-60{width:60px}
+
+.issue-row{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.issue-row .dot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.issue-strip{position:absolute;left:88px;right:88px;bottom:56px;display:flex;justify-content:space-between;align-items:center;gap:24px;font-family:var(--mono);font-size:17px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;z-index:2}
+.issue-strip span{white-space:nowrap}
+
+.tag{font-family:var(--mono);font-size:19px;letter-spacing:.10em;padding:12px 22px;border:1.5px solid var(--line);color:var(--muted)}
+.tag.dark{border-color:var(--accent);color:var(--ink);font-weight:500}
+.col-2{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+
+/* Card */
+.info-card{background:var(--paper-2);padding:28px 32px}
+.info-card .card-label{font-family:var(--mono);font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.info-card .card-title{font-family:var(--serif-zh);font-weight:500;font-size:32px;line-height:1.3;margin-bottom:8px}
+.info-card .card-desc{font-family:var(--serif-zh);font-size:22px;line-height:1.5;color:var(--muted)}
+</style>
+</head>
+<body>
+<main class="sheet">
+
+<!-- ====== PAGE 1: COVER — BIG HOOK ====== -->
+<section class="poster xhs" id="p01">
+  <div class="grain"></div><div class="paper-wash"></div>
+  <!-- Abstract illustration: organic circles suggesting social connection -->
+  <div class="illus" style="top:-80px;right:-120px">
+    <div class="illus-circle" style="width:500px;height:500px;background:var(--accent);top:0;left:0"></div>
+    <div class="illus-circle" style="width:320px;height:320px;background:var(--accent-soft);top:200px;left:-80px"></div>
+    <div class="illus-circle" style="width:180px;height:180px;background:var(--line);top:60px;left:280px"></div>
+  </div>
+  <div class="illus-dot-grid" style="left:60px;bottom:200px;width:240px;height:240px;opacity:.3"></div>
+  <div class="content stack" style="justify-content:space-between">
+    <div class="issue-row"><span>身心科普</span><span class="dot"></span><span>第一情绪中心</span></div>
+    <div class="stack gap-3 grow" style="justify-content:center">
+      <h1 class="h-hero" style="font-size:138px;line-height:1.06">6个以上<br>朋友的人</h1>
+      <h1 class="h-xl" style="font-size:76px;color:var(--muted)">更不容易感冒</h1>
+      <div class="rule-accent w-60"></div>
+      <p class="h-sub" style="font-size:30px">科学研究推翻你的直觉</p>
+    </div>
+    <div class="issue-strip"><span>露易丝·海 × 蒙娜·丽莎·舒尔茨</span><span>—</span><span>《一切都会好的》</span></div>
+  </div>
+</section>
+
+<!-- ====== PAGE 2: CREDIBILITY ====== -->
+<section class="poster xhs" id="p02">
+  <div class="grain"></div><div class="paper-wash"></div>
+  <!-- Abstract: structured grid suggesting authority/structure -->
+  <div class="illus" style="top:120px;right:80px">
+    <div style="width:200px;height:200px;border:2px solid var(--line);position:absolute;top:0;left:0"></div>
+    <div style="width:200px;height:200px;border:2px solid var(--line);position:absolute;top:40px;left:40px"></div>
+    <div style="width:200px;height:200px;background:var(--accent-soft);position:absolute;top:80px;left:80px;opacity:.4"></div>
+  </div>
+  <div class="content stack gap-4" style="justify-content:center">
+    <div class="issue-row"><span>关于作者与本书</span></div>
+    <div class="stack gap-3">
+      <div class="info-card">
+        <p class="card-label">Author</p>
+        <p class="card-title">露易丝·海</p>
+        <p class="card-desc">国际心理治疗专家，自我肯定理论开创者。《生命的重建》全球销量超 5000 万册，被誉为"身心疗愈之母"。</p>
+      </div>
+      <div class="info-card">
+        <p class="card-label">Co-Author</p>
+        <p class="card-title">蒙娜·丽莎·舒尔茨 博士</p>
+        <p class="card-desc">神经精神病学家，30 年临床经验。从脑科学和免疫学角度为身心连接提供了坚实的科学证据。</p>
+      </div>
+      <div class="info-card">
+        <p class="card-label">The Book · 2025 中信出版社</p>
+        <p class="card-title">《一切都会好的》</p>
+        <p class="card-desc">7 情绪中心理论 · 85 道身心评估 · 200+ 症状对照表 · 医学+营养+正念+直觉引导综合疗法</p>
+      </div>
+    </div>
+    <div class="issue-strip"><span>New York Times Bestselling Author</span><span>—</span><span>Heal Your Life</span></div>
+  </div>
+</section>
+
+<!-- ====== PAGE 3: THE BOMBSHELL ====== -->
+<section class="poster xhs" id="p03">
+  <div class="grain"></div><div class="paper-wash"></div>
+  <!-- Abstract: explosive/burst pattern -->
+  <div class="illus" style="top:50%;left:50%;transform:translate(-50%,-50%)">
+    <div class="illus-circle" style="width:600px;height:600px;background:var(--accent);opacity:.04;top:-300px;left:-300px"></div>
+    <div class="illus-circle" style="width:400px;height:400px;background:var(--accent-soft);opacity:.08;top:-200px;left:-200px"></div>
+    <div class="illus-circle" style="width:200px;height:200px;background:var(--accent);opacity:.12;top:-100px;left:-100px"></div>
+  </div>
+  <div class="illus-dot-grid" style="right:40px;top:100px;width:200px;height:300px;opacity:.25"></div>
+  <div class="content stack gap-4" style="justify-content:center">
+    <div class="issue-row"><span>颠覆认知的研究</span><span class="dot"></span><span>Counterintuitive</span></div>
+    <div class="pull-quote" style="font-size:72px;line-height:1.2">
+      "朋友越少的人，<br>面临的健康风险<br><span style="background:linear-gradient(180deg,transparent 55%,rgba(10,10,11,.12) 55%)">比吸烟者和肥胖者</span><br>更大。"
+    </div>
+    <div class="rule-accent w-60"></div>
+    <p class="lead" style="font-size:30px">你以为是：朋友多 = 病菌多 = 容易感冒。<br>真相是：<strong>孤独长期抑制免疫系统，皮质醇水平更高。</strong></p>
+    <div class="issue-strip"><span>Source: 《一切都会好的》第三章</span><span>—</span><span>Peer-reviewed Studies</span></div>
+  </div>
+</section>
+
+<!-- ====== PAGE 4: YOUR BODY IS TALKING ====== -->
+<section class="poster xhs" id="p04">
+  <div class="grain"></div><div class="paper-wash"></div>
+  <!-- Abstract: body silhouette suggestion via organic shapes -->
+  <div class="illus" style="bottom:-60px;right:-40px">
+    <div class="illus-circle" style="width:360px;height:360px;background:var(--accent-soft);opacity:.30;top:0;left:0"></div>
+    <div class="illus-circle" style="width:220px;height:220px;background:var(--accent);opacity:.12;top:100px;left:100px"></div>
+    <div class="illus-circle" style="width:100px;height:100px;background:var(--line);opacity:.4;top:40px;left:220px"></div>
+  </div>
+  <div class="illus-dot-grid" style="left:60px;top:100px;width:160px;height:160px;opacity:.3"></div>
+  <div class="content stack gap-4" style="justify-content:center">
+    <div class="issue-row"><span>身体在替情绪说话</span><span class="dot"></span><span>骨骼·关节·免疫·皮肤</span></div>
+    <h2 class="h-md" style="font-size:58px">你的第一情绪中心<br>正在呼救吗？</h2>
+    <div class="rule-accent w-60"></div>
+    <div class="stack gap-2">
+      <p class="body-text" style="font-size:28px">→ 反复感冒、病毒感染、慢性疲劳</p>
+      <p class="body-text" style="font-size:28px">→ 关节疼痛、骨质疏松、背痛</p>
+      <p class="body-text" style="font-size:28px">→ 湿疹、银屑病、反复痤疮</p>
+      <p class="body-text" style="font-size:28px">→ 脱发、免疫系统功能紊乱</p>
+    </div>
+    <div class="rule-accent w-60"></div>
+    <p class="lead" style="font-size:32px">这些不是巧合。<br><strong>它们在替你的"归属感"求救。</strong></p>
+    <p class="body-text" style="font-size:22px;color:var(--muted)">"长期绝望会导致免疫系统释放炎性细胞因子，引发关节疼痛、疲劳、骨质疏松。" — 第三章</p>
+    <div class="issue-strip"><span>Listen to your body</span><span>—</span><span>1st Emotional Center</span></div>
+  </div>
+</section>
+
+<!-- ====== PAGE 5: CTA ====== -->
+<section class="poster xhs" id="p05">
+  <div class="grain"></div><div class="paper-wash"></div>
+  <div class="illus" style="top:50%;left:50%;transform:translate(-50%,-50%)">
+    <div class="illus-circle" style="width:500px;height:500px;background:var(--accent);opacity:.03;top:-250px;left:-250px"></div>
+  </div>
+  <div class="content stack center" style="justify-content:center;align-items:center;text-align:center">
+    <p class="kicker" style="text-align:center">85 Questions · 7 Dimensions</p>
+    <h2 class="h-xl" style="font-size:76px;text-align:center">你的七情绪中心<br>哪个在呼救？</h2>
+    <div class="rule-accent w-60" style="margin:28px auto"></div>
+    <div class="stack gap-2 center">
+      <p class="lead" style="text-align:center;font-size:28px">归属感 · 金钱与爱 · 自我价值<br>情绪表达 · 沟通 · 认知 · 生命意义</p>
+    </div>
+    <div style="margin:36px 0">
+      <div style="display:inline-block;padding:24px 48px;border:3px solid var(--accent)">
+        <p class="kicker" style="font-size:18px;text-align:center;margin:0 0 8px">基于露易丝·海《一切都会好的》</p>
+        <p class="meta" style="font-size:17px;text-align:center;color:var(--ink)">点击下方商品链接 · 获取完整评估</p>
+      </div>
+    </div>
+    <div class="rule-accent w-60" style="margin:28px auto"></div>
+    <div class="stack gap-1 center">
+      <p class="body-text" style="text-align:center;font-size:24px;color:var(--muted);font-style:italic">每天对自己说：</p>
+      <p class="lead" style="text-align:center;font-size:32px;font-weight:500">"我是安全的，我是被爱的。<br>一切都会好的。"</p>
+      <p class="meta" style="font-size:14px;text-align:center;margin-top:12px">— 露易丝·海</p>
+    </div>
+  </div>
+  <div class="issue-strip"><span>Louise Hay</span><span>—</span><span>All Is Well</span><span>—</span><span>Begin Your Journey</span></div>
+</section>
+
+</main>
+</body>
+</html>
