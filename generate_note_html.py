@@ -67,6 +67,8 @@ body{{background:#1a1a1a;font-family:Georgia,"Noto Serif SC","Songti SC","PingFa
 
 {page5}
 
+{casePage}
+
 </main></body></html>'''
 
 def page_cover(cfg):
@@ -187,6 +189,31 @@ def page_cta(cfg):
   <div class="issue-strip"><span>Louise Hay</span><span>—</span><span>All Is Well</span><span>—</span><span>Begin Your Journey</span></div>
 </section>'''
 
+def page_case_study(cfg):
+    cs = cfg.get('caseStudy')
+    if not cs:
+        return ''
+    items = cs.get('items', [])
+    items_html = ''.join(f'<p class="body-text" style="font-size:26px;margin-bottom:16px">{item}</p>' for item in items)
+    note_html = f'<p class="body-text" style="font-size:21px;color:var(--muted);margin-top:24px">{cs["note"]}</p>' if cs.get('note') else ''
+    return f'''<section class="poster xhs">
+  <div class="grain"></div><div class="paper-wash"></div>
+  <div class="illus" style="top:50%;left:50%;transform:translate(-50%,-50%)">
+    <div class="illus-circle" style="width:500px;height:500px;background:var(--accent);opacity:.03;top:-250px;left:-250px"></div>
+    <div class="illus-circle" style="width:300px;height:300px;background:var(--accent-soft);opacity:.06;top:-150px;left:-150px"></div>
+  </div>
+  <div class="content stack gap-4" style="justify-content:center">
+    <div class="issue-row"><span>{cs.get('label','案例')}</span><span class="dot"></span><span>真实故事</span></div>
+    <h2 class="h-md" style="font-size:52px">{cs['title']}</h2>
+    <div class="rule-accent w-60"></div>
+    <div class="stack gap-2">
+      {items_html}
+    </div>
+    {note_html}
+    <div class="issue-strip"><span>{cs.get('source','')}</span><span>—</span><span>《一切都会好的》</span></div>
+  </div>
+</section>'''
+
 def generate(config_path):
     with open(config_path, 'r', encoding='utf-8') as f:
         cfg = json.load(f)
@@ -197,7 +224,8 @@ def generate(config_path):
         page2=page_credibility(cfg),
         page3=page_bombshell(cfg),
         page4=page_body_signals(cfg),
-        page5=page_cta(cfg)
+        page5=page_cta(cfg),
+        casePage=page_case_study(cfg)
     )
 
     out_dir = os.path.join(OUTPUT, cfg['id'])

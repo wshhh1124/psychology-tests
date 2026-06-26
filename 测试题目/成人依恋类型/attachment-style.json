@@ -1,0 +1,89 @@
+{
+  "title": "你是哪种依恋类型？",
+  "icon": "💞",
+  "description": "基于Bowlby依恋理论，12道题测出你在亲密关系中的真实模样。了解你的依恋风格，是理解一切关系的第一步。",
+  "theory": {
+    "name": "成人依恋理论 (Adult Attachment Theory)",
+    "founders": "John Bowlby, Mary Ainsworth",
+    "extendedBy": "Hazan & Shaver (1987), Bartholomew & Horowitz (1991), Brennan, Clark & Shaver (1998)",
+    "dimensions": [
+      {
+        "key": "anxiety",
+        "label": "依恋焦虑",
+        "description": "你有多害怕被抛弃、被拒绝、被冷落"
+      },
+      {
+        "key": "avoidance",
+        "label": "依恋回避",
+        "description": "你对亲密和依赖有多不自在、多抗拒"
+      }
+    ]
+  },
+  "questions": [
+    {"id": 1, "text": "我担心恋人不会像我关心TA那样关心我", "dimension": "anxiety", "reverse": false},
+    {"id": 2, "text": "当恋人跟我太亲近时，我会不自觉地想拉开距离", "dimension": "avoidance", "reverse": false},
+    {"id": 3, "text": "如果发现联系不到对方，我会感到非常焦虑", "dimension": "anxiety", "reverse": false},
+    {"id": 4, "text": "我不太习惯向对方袒露内心深处的感受", "dimension": "avoidance", "reverse": false},
+    {"id": 5, "text": "我经常担心对方不是真的爱我", "dimension": "anxiety", "reverse": false},
+    {"id": 6, "text": "保持独立比拥有一段亲密关系更重要", "dimension": "avoidance", "reverse": false},
+    {"id": 7, "text": "当对方不回复消息时，我会反复想是不是自己说错了什么", "dimension": "anxiety", "reverse": false},
+    {"id": 8, "text": "对方想了解我的全部时，我会感到压力", "dimension": "avoidance", "reverse": false},
+    {"id": 9, "text": "在亲密关系中，我总觉得自己付出得更多", "dimension": "anxiety", "reverse": false},
+    {"id": 10, "text": "分手后我通常很快就能调整过来，几乎不受影响", "dimension": "avoidance", "reverse": false},
+    {"id": 11, "text": "我需要对方反复确认对我的感情，才能感到安心", "dimension": "anxiety", "reverse": false},
+    {"id": 12, "text": "即使在一段关系中，我也需要保留属于自己的空间", "dimension": "avoidance", "reverse": false}
+  ],
+  "scoring": {
+    "type": "attachment",
+    "dimensions": [
+      {
+        "key": "anxiety",
+        "label": "依恋焦虑",
+        "questions": [1, 3, 5, 7, 9, 11],
+        "highThreshold": 18,
+        "maxScore": 30
+      },
+      {
+        "key": "avoidance",
+        "label": "依恋回避",
+        "questions": [2, 4, 6, 8, 10, 12],
+        "highThreshold": 18,
+        "maxScore": 30
+      }
+    ],
+    "resultMatrix": {
+      "secure": {
+        "condition": "lowAnxiety_lowAvoidance",
+        "type": "安全型",
+        "emoji": "💚",
+        "traits": ["信任他人", "舒服地依赖", "不会过度担心被抛弃", "亲密与独立平衡"],
+        "report": "你是人群中的「安全基地」。在亲密关系中，你既能享受亲密，也能保持独立。你不会因为对方几个小时没回消息就惶恐不安，也不会在关系变得认真时想要逃跑。\n\n你相信自己是值得被爱的，也相信对方不会无缘无故离开。这份笃定让你在感情中情绪稳定、沟通坦诚。\n\n💡 即使你是安全型，也要留意对方的依恋风格——焦虑型需要你多一些确认，回避型需要你多一些空间。理解差异，关系会更顺畅。",
+        "percentage": "约50-55%的人群"
+      },
+      "anxious": {
+        "condition": "highAnxiety_lowAvoidance",
+        "type": "焦虑型",
+        "emoji": "💛",
+        "traits": ["渴望亲密", "害怕被抛弃", "对关系高度敏感", "需要反复确认对方的爱"],
+        "report": "你是爱情里最投入的那个人。你能爱得很深，但也常常让自己在关系里受伤。你的大脑里有一部精密的「被抛弃探测器」——对方语气冷淡了一点、回复慢了一点，你的内心就开始上演灾难片。\n\n这种高度敏感有时候不是坏事：你比安全型的人更早察觉到关系的裂痕。但问题在于，你会把很多不是裂痕的东西也当成裂痕。\n\n💡 你需要的不只是对方的确认——你需要学会自己确认自己。你的价值不取决于对方回消息的速度。",
+        "percentage": "约20%的人群"
+      },
+      "avoidant": {
+        "condition": "lowAnxiety_highAvoidance",
+        "type": "疏离型",
+        "emoji": "🩶",
+        "traits": ["重视独立", "不轻易依赖他人", "对亲密保持距离", "理性大于感性"],
+        "report": "你是那个看起来很酷的人。分手不哭不闹，一个人过得有声有色，对甜言蜜语有一定的免疫力。在别人眼里你从容淡定，但只有你自己知道——你不是不需要亲密，你是害怕亲密之后失去对自己生活的掌控权。\n\n你太擅长把所有事自己扛，以至于忘了依赖别人也是一种能力。不是每一次靠近都会受伤，也不是每一次脆弱都会被利用。\n\n💡 试着让一个人真正走进你的生活，不是放弃独立，而是让独立有了安全感。",
+        "percentage": "约20-25%的人群"
+      },
+      "fearful": {
+        "condition": "highAnxiety_highAvoidance",
+        "type": "恐惧型",
+        "emoji": "🖤",
+        "traits": ["既渴望亲密又害怕受伤", "对自己和他人都不够信任", "情绪在靠近与远离之间反复", "内心矛盾最深"],
+        "report": "你是四种类型中最复杂的一种。你渴望亲密，但当对方真的靠近时，你又本能地推开。就像站在岸上看水里的鱼——你也想下水，但每次脚碰到水面就缩回来。\n\n这种矛盾让你在感情中特别疲惫。你既不像焦虑型那样能痛快地表达需求，也不像疏离型那样能彻底地放弃期待。你卡在中间，进也不是，退也不是。\n\n💡 你的矛盾不是缺陷——是你曾经在依靠别人的时候受过伤。现在你需要重新学习一件事：相信一个人，不等于把伤害自己的刀递给TA。",
+        "percentage": "约5-10%的人群"
+      }
+    }
+  }
+}

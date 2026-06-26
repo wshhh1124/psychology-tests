@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>肯定语 · 第一情绪中心：归属感</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff;display:flex;justify-content:center;padding:48px}
+.card{
+  position:relative;width:1080px;height:1440px;overflow:hidden;
+  background:linear-gradient(165deg, #e8f4f8 0%, #dceef5 25%, #d4eaf3 50%, #e0f0f7 75%, #ecf6fa 100%);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,sans-serif;
+  color:#1a3a4a;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:120px 100px;
+}
+.card::before{
+  content:'';position:absolute;top:-180px;right:-180px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(120,170,200,.15) 0%,transparent 70%);
+}
+.card::after{
+  content:'';position:absolute;bottom:-120px;left:-100px;
+  width:380px;height:380px;border-radius:50%;
+  background:radial-gradient(circle,rgba(100,155,190,.10) 0%,transparent 70%);
+}
+.accent-dot{
+  width:8px;height:8px;border-radius:50%;background:#5b9bb5;
+  margin-bottom:60px;position:relative;z-index:1;
+}
+.center-label{
+  font-family:"PingFang SC","Hiragino Sans GB",sans-serif;
+  font-size:18px;letter-spacing:.18em;
+  color:rgba(26,58,74,.40);margin-bottom:48px;position:relative;z-index:1;
+}
+.affirmation{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,sans-serif;
+  font-size:58px;font-weight:700;line-height:1.7;
+  text-align:center;max-width:750px;
+  color:#1a3a4a;position:relative;z-index:1;
+  letter-spacing:.03em;
+}
+.divider{
+  width:80px;height:2px;background:linear-gradient(90deg,transparent,#5b9bb5,transparent);
+  margin:56px 0;position:relative;z-index:1;
+}
+.body-tag{
+  font-family:"PingFang SC","Hiragino Sans GB",sans-serif;
+  font-size:15px;letter-spacing:.08em;
+  color:rgba(26,58,74,.45);
+  border:1px solid rgba(26,58,74,.15);
+  border-radius:40px;padding:12px 28px;
+  position:relative;z-index:1;
+}
+.bottom-info{
+  position:absolute;bottom:80px;left:0;right:0;
+  display:flex;justify-content:center;gap:32px;
+  font-family:"PingFang SC","Hiragino Sans GB",sans-serif;
+  font-size:13px;letter-spacing:.08em;
+  color:rgba(26,58,74,.30);
+}
+.bottom-info span:first-child{color:rgba(26,58,74,.50);font-weight:500;}
+.grain{
+  position:absolute;inset:0;pointer-events:none;opacity:.30;
+  background-image:radial-gradient(rgba(80,130,160,.04) 1px,transparent 1px);
+  background-size:3px 3px;
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="grain"></div>
+  <div class="accent-dot"></div>
+  <div class="center-label">第一情绪中心：归属感</div>
+  <p class="affirmation">我是安全的。家在我的心中。我属于这个世界，世界也接纳我。我不需要拯救任何人，我只需要做我自己。</p>
+  <div class="divider"></div>
+  <div class="body-tag">骨骼、关节、血液、免疫系统、皮肤</div>
+  <div class="bottom-info">
+    <span>镜子测试局</span>
+    <span>—</span>
+    <span>All Is Well</span>
+    <span>—</span>
+    <span>Louise Hay</span>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>你是哪种依恋类型？</title>
+<style>
+:root {
+  --color-primary: #7C3AED;
+  --color-on-primary: #FFFFFF;
+  --color-accent: #F59E0B;
+  --color-background: #FAF5FF;
+  --color-foreground: #1E1B4B;
+  --color-muted: #F5F3FF;
+  --color-muted-fg: #6B7280;
+  --color-border: #EDE9FE;
+  --color-success: #059669;
+  --color-warning: #D97706;
+  --color-destructive: #DC2626;
+  --font-heading: Georgia,"Noto Serif SC","Songti SC","PingFang SC",serif;
+  --font-body: -apple-system,"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;
+  --space-xs:4px;--space-sm:8px;--space-md:16px;--space-lg:24px;--space-xl:32px;--space-2xl:48px;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.05);--shadow-md:0 4px 16px rgba(124,58,237,.08);--shadow-lg:0 12px 32px rgba(124,58,237,.10);
+  --radius-sm:8px;--radius-md:16px;--radius-lg:24px;--radius-full:9999px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);background:var(--color-background);color:var(--color-foreground);min-height:100vh;display:flex;justify-content:center;padding:var(--space-lg) var(--space-md) var(--space-3xl);-webkit-font-smoothing:antialiased}
+.container{width:100%;max-width:448px;position:relative}
+.cover{background:#FFF;border-radius:var(--radius-lg);padding:var(--space-2xl) var(--space-xl) var(--space-xl);box-shadow:var(--shadow-md);animation:fadeUp .5s ease}
+.cover .eyebrow{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--color-primary);margin-bottom:var(--space-md)}
+.cover h1{font-family:var(--font-heading);font-size:28px;font-weight:700;line-height:1.4;color:var(--color-foreground);margin-bottom:var(--space-lg)}
+.cover .lede{font-size:14px;line-height:2;color:var(--color-foreground);opacity:.85;margin-bottom:var(--space-md)}
+.cover .highlight{display:inline-block;background:linear-gradient(180deg,transparent 60%,rgba(124,58,237,.12) 60%);padding:0 2px}
+.cover .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);margin-bottom:var(--space-xl);padding:var(--space-lg) 0;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border)}
+.cover .stat{text-align:center}
+.cover .stat .stat-num{font-family:var(--font-heading);font-size:26px;font-weight:700;color:var(--color-primary);line-height:1}
+.cover .stat .stat-label{font-size:11px;font-weight:500;color:var(--color-muted-fg);margin-top:4px}
+.btn-primary{display:flex;align-items:center;justify-content:center;gap:var(--space-sm);width:100%;padding:16px;background:var(--color-primary);color:var(--color-on-primary);border:none;border-radius:var(--radius-sm);font-size:16px;font-weight:600;cursor:pointer;transition:all .2s;box-shadow:0 4px 12px rgba(124,58,237,.25)}
+.btn-primary:hover{opacity:.92;transform:translateY(-1px)}
+.btn-primary:active{transform:scale(.98)}
+.quiz{display:none;animation:fadeUp .4s ease}
+.quiz.active{display:block}
+.quiz-progress{background:#FFF;border-radius:var(--radius-md);padding:var(--space-md) var(--space-lg);margin-bottom:var(--space-md);box-shadow:var(--shadow-sm)}
+.quiz-progress .prog-text{font-size:12px;font-weight:500;color:var(--color-muted-fg);margin-bottom:var(--space-sm);display:flex;justify-content:space-between}
+.quiz-progress .prog-bar{height:4px;background:var(--color-border);border-radius:2px;overflow:hidden}
+.quiz-progress .prog-fill{height:100%;background:var(--color-primary);border-radius:2px;transition:width .4s ease}
+.question-card{background:#FFF;border-radius:var(--radius-md);padding:var(--space-xl) var(--space-lg);box-shadow:var(--shadow-sm)}
+.question-card .q-num{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-primary);margin-bottom:var(--space-md)}
+.question-card .q-text{font-family:var(--font-heading);font-size:18px;font-weight:600;line-height:1.5;color:var(--color-foreground);margin-bottom:var(--space-xl)}
+.q-options{display:flex;flex-direction:column;gap:10px}
+.q-opt{padding:15px 20px;background:var(--color-muted);border:2px solid transparent;border-radius:var(--radius-sm);font-size:15px;font-weight:500;color:var(--color-foreground);cursor:pointer;transition:all .15s;text-align:center}
+.q-opt:hover{background:#EDE9FE}
+.q-opt.selected{border-color:var(--color-primary);background:#EDE9FE;color:var(--color-primary);font-weight:600}
+.loading{display:none;text-align:center;padding:100px var(--space-xl);animation:fadeUp .4s ease}
+.loading.active{display:block}
+.spinner-ring{width:44px;height:44px;border:3px solid var(--color-border);border-top-color:var(--color-primary);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto var(--space-xl)}
+.loading p{font-family:var(--font-heading);font-style:italic;font-size:15px;color:var(--color-muted-fg)}
+.result{display:none;animation:fadeUp .5s ease}
+.result.active{display:block}
+.result-main{background:#FFF;border-radius:var(--radius-lg);padding:var(--space-2xl) var(--space-xl) var(--space-xl);box-shadow:var(--shadow-md)}
+.result-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:var(--radius-full);font-size:12px;font-weight:600;margin-bottom:var(--space-lg)}
+.result-main h2{font-family:var(--font-heading);font-size:22px;font-weight:700;line-height:1.35;margin-bottom:var(--space-md)}
+.result-tags{display:flex;flex-wrap:wrap;gap:var(--space-sm);margin-bottom:var(--space-xl)}
+.result-tag{padding:6px 14px;border-radius:var(--radius-full);font-size:12px;font-weight:500;background:#F8FAFC;color:var(--color-foreground)}
+.dim-section{margin-bottom:var(--space-xl)}
+.dim-section .dim-header{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--color-muted-fg);margin-bottom:var(--space-md)}
+.dim-row{display:flex;align-items:center;gap:var(--space-sm);margin-bottom:10px}
+.dim-row .dim-name{width:80px;font-size:12px;font-weight:500;flex-shrink:0}
+.dim-row .dim-track{flex:1;height:6px;background:var(--color-border);border-radius:3px;overflow:hidden}
+.dim-row .dim-track-fill{height:100%;border-radius:3px;transition:width 1.2s ease}
+.dim-row .dim-pct{width:36px;font-size:12px;font-weight:600;color:var(--color-muted-fg);text-align:right}
+.dim-row .dim-level{width:40px;font-size:11px;font-weight:600;text-align:right}
+.advice-box{background:var(--color-muted);border-radius:var(--radius-md);padding:var(--space-lg);margin-bottom:var(--space-md);border-left:4px solid var(--color-primary)}
+.advice-box .advice-title{font-family:var(--font-heading);font-weight:600;font-size:16px;margin-bottom:var(--space-sm)}
+.advice-box .advice-text{font-size:13px;line-height:1.7;color:var(--color-foreground)}
+.advice-box .advice-relations{margin-top:var(--space-md);padding-top:var(--space-md);border-top:1px solid var(--color-border)}
+.advice-box .rel-item{font-size:12px;line-height:1.6;color:var(--color-muted-fg);margin-bottom:4px}
+.result-type-desc{font-size:13px;line-height:1.8;color:var(--color-foreground);margin-bottom:var(--space-lg)}
+.dim-footnote{font-size:10px;color:var(--color-muted-fg);text-align:center;margin-bottom:var(--space-xl)}
+.btn-share{display:flex;align-items:center;justify-content:center;width:100%;padding:16px;margin-bottom:var(--space-sm);background:var(--color-accent);color:var(--color-foreground);border:none;border-radius:var(--radius-sm);font-size:16px;font-weight:600;cursor:pointer;transition:all .2s;box-shadow:0 4px 12px rgba(245,158,11,.25)}
+.btn-share:hover{opacity:.92}
+.btn-share:active{transform:scale(.98)}
+.btn-outline{display:flex;align-items:center;justify-content:center;width:100%;padding:16px;background:transparent;color:var(--color-muted-fg);border:2px solid var(--color-border);border-radius:var(--radius-sm);font-size:15px;font-weight:500;cursor:pointer;transition:all .2s}
+.btn-outline:hover{border-color:var(--color-primary);color:var(--color-primary)}
+.result-footer{margin-top:var(--space-lg);padding-top:var(--space-lg);border-top:1px solid var(--color-border);font-size:11px;color:var(--color-muted-fg);text-align:center;line-height:1.8}
+
+/* Share overlay */
+.share-overlay{display:none;position:fixed;inset:0;background:rgba(30,27,75,.5);z-index:999;justify-content:center;align-items:center;padding:var(--space-lg)}
+.share-overlay.show{display:flex}
+.share-modal{background:#FFF;border-radius:var(--radius-md);padding:var(--space-xl) var(--space-lg);text-align:center;width:100%;max-width:320px;animation:fadeUp .3s ease}
+.share-modal h3{font-family:var(--font-heading);font-size:18px;margin-bottom:var(--space-sm)}
+.share-modal .share-url{background:var(--color-muted);padding:var(--space-md);border-radius:var(--radius-sm);font-size:11px;color:var(--color-muted-fg);word-break:break-all;margin:var(--space-md) 0}
+.btn-copy{padding:12px 32px;background:var(--color-primary);color:#FFF;border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:600;cursor:pointer}
+.btn-modal-close{display:block;margin:var(--space-sm) auto 0;padding:8px 16px;background:none;border:none;color:var(--color-muted-fg);font-size:13px;cursor:pointer}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media(min-width:768px){.container{max-width:520px}.cover{padding:56px 40px 40px}.cover h1{font-size:30px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- COVER -->
+<div class="cover" id="coverPage">
+  <p class="eyebrow">Bowlby · Ainsworth · Hazan & Shaver</p>
+  <h1>你是哪种依恋类型？</h1>
+  <p class="lede">
+    你有没有想过——为什么有的人在恋爱中<em>从容笃定</em>，有的人总是<em>患得患失</em>，有的人一靠近就想跑，还有的人在渴望和恐惧之间反复拉扯？
+  </p>
+  <p class="lede">
+    这些不是性格问题，而是<span class="highlight">依恋类型</span>在起作用。它形成于你最早的亲密关系，却决定了你成年后所有关系的底色。
+  </p>
+  <p class="lede" style="margin-bottom:var(--space-xl)">
+    本测试改编自 Brennan, Clark & Shaver (1998) 编制的<span class="highlight">亲密关系体验量表 (ECR)</span>，是目前学术界最广泛使用的成人依恋测量工具。12道题，测出你在关系中的真实模样。
+  </p>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">12</div><div class="stat-label">道题目</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">种类型</div></div>
+    <div class="stat"><div class="stat-num" id="coverTime">2min</div><div class="stat-label">预计时间</div></div>
+  </div>
+  <button class="btn-primary" onclick="startQuiz()">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    开始测试
+  </button>
+</div>
+
+<!-- QUIZ -->
+<div class="quiz" id="quizPage">
+  <div class="quiz-progress">
+    <div class="prog-text"><span id="progressLabel">1 / 12</span></div>
+    <div class="prog-bar"><div class="prog-fill" id="progressFill" style="width:0%"></div></div>
+  </div>
+  <div class="question-card">
+    <div class="q-num" id="questionNum">第 1 题</div>
+    <div class="q-text" id="questionText"></div>
+    <div class="q-options" id="optionsWrap"></div>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div class="loading" id="loadingPage">
+  <div class="spinner-ring"></div>
+  <p>正在分析你的依恋模式&hellip;</p>
+</div>
+
+<!-- RESULT -->
+<div class="result" id="resultPage">
+  <div class="result-main">
+    <div class="result-badge" id="resultBadge"></div>
+    <h2 id="resultTitle"></h2>
+    <div class="result-tags" id="resultTraits"></div>
+    <div class="dim-section" id="resultDimensions"></div>
+    <p class="dim-footnote">分数越高 = 该维度的倾向越强</p>
+    <div class="result-type-desc" id="resultReport"></div>
+    <div class="advice-box" id="adviceBox"></div>
+    <button class="btn-share" onclick="showShare()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/></svg>
+      分享给朋友
+    </button>
+    <button class="btn-outline" onclick="restartQuiz()">重新测试</button>
+    <div class="result-footer">基于 Bowlby 依恋理论 & Brennan, Clark & Shaver (1998) ECR 量表<br>本测试仅供自我探索参考，不构成临床诊断</div>
+  </div>
+</div>
+
+<!-- SHARE MODAL -->
+<div class="share-overlay" id="shareOverlay" onclick="hideShare(event)">
+  <div class="share-modal" onclick="event.stopPropagation()">
+    <h3>分享测试</h3>
+    <p style="font-size:13px;color:#6B7280">复制链接发给朋友，一起探索依恋类型</p>
+    <div class="share-url" id="shareUrl"></div>
+    <button class="btn-copy" onclick="copyUrl()">复制链接</button>
+    <button class="btn-modal-close" onclick="document.getElementById('shareOverlay').classList.remove('show')">关闭</button>
+  </div>
+</div>
+
+</div>
+
+<script>
+const TEST_CONFIG = {
+  "title": "你是哪种依恋类型？",
+  "icon": "💞",
+  "questions": [
+    {"id":1,"text":"我担心恋人不会像我关心TA那样关心我","dimension":"anxiety"},
+    {"id":2,"text":"当恋人跟我太亲近时，我会不自觉地想拉开距离","dimension":"avoidance"},
+    {"id":3,"text":"如果发现联系不到对方，我会感到非常焦虑","dimension":"anxiety"},
+    {"id":4,"text":"我不太习惯向对方袒露内心深处的感受","dimension":"avoidance"},
+    {"id":5,"text":"我经常担心对方不是真的爱我","dimension":"anxiety"},
+    {"id":6,"text":"保持独立比拥有一段亲密关系更重要","dimension":"avoidance"},
+    {"id":7,"text":"当对方不回复消息时，我会反复想是不是自己说错了什么","dimension":"anxiety"},
+    {"id":8,"text":"对方想了解我的全部时，我会感到压力","dimension":"avoidance"},
+    {"id":9,"text":"在亲密关系中，我总觉得自己付出得更多","dimension":"anxiety"},
+    {"id":10,"text":"分手后我通常很快就能调整过来，几乎不受影响","dimension":"avoidance"},
+    {"id":11,"text":"我需要对方反复确认对我的感情，才能感到安心","dimension":"anxiety"},
+    {"id":12,"text":"即使在一段关系中，我也需要保留属于自己的空间","dimension":"avoidance"}
+  ],
+  "scoring": {
+    "type": "attachment",
+    "dimensions": [
+      {"key":"anxiety","label":"依恋焦虑","questions":[1,3,5,7,9,11],"highThreshold":18},
+      {"key":"avoidance","label":"依恋回避","questions":[2,4,6,8,10,12],"highThreshold":18}
+    ],
+    "resultMatrix": {
+      "secure": {
+        "condition":"lowAnxiety_lowAvoidance","type":"安全型","emoji":"💚",
+        "traits":["信任他人","舒服地依赖","不担心被抛弃","亲密与独立平衡"],
+        "report":"你是人群中的「安全基地」。在亲密关系中，你既能享受亲密，也能保持独立。你不会因为对方几个小时没回消息就惶恐不安，也不会在关系变得认真时想要逃跑。\n\n你相信自己是值得被爱的，也相信对方不会无缘无故离开。这份笃定让你在感情中情绪稳定、沟通坦诚。\n\n💡 你是伴侣最好的「安全港湾」，但也要留意——并不是每个人都有和你一样的安全感。焦虑型需要你多一些确认，回避型需要你多一些空间。",
+        "percentage":"约50-55%的人群",
+        "relations":{"安全型":"最佳匹配，彼此支撑不消耗","焦虑型":"你的稳定能安抚TA，但TA可能需要更多确认","疏离型":"TA的独立可能让你感到不被需要","恐惧型":"需要很大耐心，TA在靠近和逃避之间摇摆"}
+      },
+      "anxious": {
+        "condition":"highAnxiety_lowAvoidance","type":"焦虑型","emoji":"💛",
+        "traits":["渴望亲密","害怕被抛弃","高度敏感","需要反复确认"],
+        "report":"你是爱情里最投入的那个人。你能爱得很深，但也常常让自己在关系里受伤。你的大脑里有一部精密的「被抛弃探测器」——对方语气冷淡了一点、回复慢了一点，你的内心就开始上演灾难片。\n\n这种高度敏感有时候不是坏事：你比安全型的人更早察觉到关系的裂痕。但问题在于，你会把很多不是裂痕的东西也当成裂痕。\n\n💡 你需要的不只是对方的确认——你需要学会自己确认自己。你的价值不取决于对方回消息的速度。当你开始信任自己值得被爱，关系中的焦虑自然会下降。",
+        "percentage":"约20%的人群",
+        "relations":{"安全型":"最能安抚你，给你渴望的稳定感","焦虑型":"两个焦虑在一起容易互相吸食能量","疏离型":"最辛苦的组合——你追TA逃","恐惧型":"两人都在害怕，难以建立稳定"}
+      },
+      "avoidant": {
+        "condition":"lowAnxiety_highAvoidance","type":"疏离型","emoji":"🩶",
+        "traits":["重视独立","不轻易依赖","保持距离","理性大于感性"],
+        "report":"你是那个看起来很酷的人。分手不哭不闹，一个人过得有声有色，对甜言蜜语有一定的免疫力。在别人眼里你从容淡定，但只有你自己知道——你不是不需要亲密，你是害怕亲密之后失去对自己生活的掌控权。\n\n你太擅长把所有事自己扛，以至于忘了依赖别人也是一种能力。不是每一次靠近都会受伤，也不是每一次脆弱都会被利用。\n\n💡 试着让一个人真正走进你的生活，不是放弃独立，而是让独立有了安全感。可以从小事开始——试着告诉对方一件让你脆弱的事，看看会发生什么。",
+        "percentage":"约20-25%的人群",
+        "relations":{"安全型":"你的最佳组合，TA尊重你的空间","焦虑型":"最辛苦的组合——TA需要靠近你需要远离","疏离型":"两个疏离在一起各过各的，缺乏温度","恐惧型":"双方都在回避，关系难以深入"}
+      },
+      "fearful": {
+        "condition":"highAnxiety_highAvoidance","type":"恐惧型","emoji":"🖤",
+        "traits":["渴望亲密又害怕受伤","对已对人都缺信任","在靠近与远离间反复","内心矛盾最深"],
+        "report":"你是四种类型中最复杂的一种。你渴望亲密，但当对方真的靠近时，你又本能地推开。就像站在岸上看水里的鱼——你也想下水，但每次脚碰到水面就缩回来。\n\n这种矛盾让你在感情中特别疲惫。你既不像焦虑型那样能痛快地表达需求，也不像疏离型那样能彻底地放弃期待。你卡在中间，进也不是，退也不是。\n\n💡 你的矛盾不是缺陷——是你曾经在依靠别人的时候受过伤。现在你需要重新学习一件事：相信一个人，不等于把伤害自己的刀递给TA。你可以从一段让自己感到完全安全的关系开始，慢慢练习靠近。",
+        "percentage":"约5-10%的人群",
+        "relations":{"安全型":"最能治愈你，但你需要允许自己被治愈","焦虑型":"你的反复会加剧TA的焦虑","疏离型":"两个回避者，关系几乎没有温度","恐惧型":"非常困难，双方都需要对方先迈出第一步"}
+      }
+    }
+  }
+};
+
+let currentQuestion=0, answers={}, selectedScore=null;
+
+function showPage(id){
+  ['coverPage','quizPage','loadingPage','resultPage'].forEach(x=>{
+    const el=document.getElementById(x);
+    if(x==='coverPage'||x==='resultPage') el.style.display=x===id?'block':'none';
+    else el.classList.toggle('active',x===id);
+  });
+}
+
+function startQuiz(){
+  currentQuestion=0; answers={}; showPage('quizPage'); renderQuestion();
+}
+
+function renderQuestion(){
+  const q=TEST_CONFIG.questions[currentQuestion];
+  selectedScore=null;
+  const total=TEST_CONFIG.questions.length;
+  document.getElementById('progressLabel').textContent=`${currentQuestion+1} / ${total}`;
+  document.getElementById('progressFill').style.width=`${(currentQuestion/total)*100}%`;
+  document.getElementById('questionNum').textContent=`第 ${currentQuestion+1} 题`;
+  document.getElementById('questionText').textContent=q.text;
+
+  const options=[
+    {label:'非常不同意',score:1},
+    {label:'不同意',score:2},
+    {label:'中立',score:3},
+    {label:'同意',score:4},
+    {label:'非常同意',score:5}
+  ];
+
+  const wrap=document.getElementById('optionsWrap');
+  wrap.innerHTML=options.map((o,i)=>`<button class="q-opt" data-index="${i}" onclick="selectOpt(${i},${o.score},this)">${o.label}</button>`).join('');
+}
+
+function selectOpt(i,score,btn){
+  document.querySelectorAll('.q-opt').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedScore=score;
+  setTimeout(()=>nextQuestion(),200);
+}
+
+function nextQuestion(){
+  if(selectedScore===null)return;
+  const q=TEST_CONFIG.questions[currentQuestion];
+  answers[q.id]=selectedScore;
+  if(currentQuestion<TEST_CONFIG.questions.length-1){currentQuestion++;renderQuestion();}
+  else{showResults();}
+}
+
+function showResults(){
+  showPage('loadingPage');
+  setTimeout(()=>{
+    const dims=TEST_CONFIG.scoring.dimensions;
+    const scores={};
+    for(const d of dims){
+      let total=0;
+      for(const qid of d.questions){
+        if(answers[qid]!==undefined) total+=answers[qid];
+      }
+      scores[d.key]=total;
+    }
+
+    const anxiety=scores.anxiety;
+    const avoidance=scores.avoidance;
+    const highAnx=anxiety>=18;
+    const highAvd=avoidance>=18;
+
+    let resultKey;
+    if(!highAnx && !highAvd) resultKey='secure';
+    else if(highAnx && !highAvd) resultKey='anxious';
+    else if(!highAnx && highAvd) resultKey='avoidant';
+    else resultKey='fearful';
+
+    const r=TEST_CONFIG.scoring.resultMatrix[resultKey];
+
+    // Badge
+    const badge=document.getElementById('resultBadge');
+    const colors={secure:'#059669',anxious:'#D97706',avoidant:'#6B7280',fearful:'#7C3AED'};
+    const bgs={secure:'#ECFDF5',anxious:'#FFFBEB',avoidant:'#F3F4F6',fearful:'#F5F3FF'};
+    const emojis={secure:'💚',anxious:'💛',avoidant:'🩶',fearful:'🖤'};
+    badge.textContent=emojis[resultKey]+' '+r.type;
+    badge.style.background=bgs[resultKey];badge.style.color=colors[resultKey];
+
+    document.getElementById('resultTitle').textContent=r.type+' — '+r.traits[0]+'，'+r.traits[1];
+    document.getElementById('resultTraits').innerHTML=r.traits.map(t=>`<span class="result-tag">${t}</span>`).join('');
+
+    // Dimension bars
+    const maxS=30;
+    const anxPct=Math.round(anxiety/maxS*100);
+    const avdPct=Math.round(avoidance/maxS*100);
+    const anxLevel=anxiety>=24?'高':anxiety>=18?'偏高':anxiety>=12?'中等':'低';
+    const avdLevel=avoidance>=24?'高':avoidance>=18?'偏高':avoidance>=12?'中等':'低';
+    const anxColor=anxiety>=18?'#DC2626':anxiety>=12?'#D97706':'#059669';
+    const avdColor=avoidance>=18?'#DC2626':avoidance>=12?'#D97706':'#059669';
+
+    document.getElementById('resultDimensions').innerHTML=`
+      <p class="dim-header">依恋维度评估</p>
+      <div class="dim-row"><span class="dim-name">依恋焦虑</span><div class="dim-track"><div class="dim-track-fill" style="width:${anxPct}%;background:${anxColor}"></div></div><span class="dim-pct">${anxPct}%</span><span class="dim-level" style="color:${anxColor}">${anxLevel}</span></div>
+      <div class="dim-row"><span class="dim-name">依恋回避</span><div class="dim-track"><div class="dim-track-fill" style="width:${avdPct}%;background:${avdColor}"></div></div><span class="dim-pct">${avdPct}%</span><span class="dim-level" style="color:${avdColor}">${avdLevel}</span></div>
+    `;
+
+    document.getElementById('resultReport').innerHTML=r.report.replace(/\n/g,'<br>')+
+      `<br><br><span style="font-size:11px;color:var(--color-muted-fg)">📊 人群占比：${r.percentage}</span>`;
+
+    // Relations advice
+    let relHTML='<div class="advice-title">🔗 TA可能是什么型？你们在一起会怎样</div>';
+    for(const [type,desc] of Object.entries(r.relations)){
+      const tEmoji={安全型:'💚',焦虑型:'💛',疏离型:'🩶',恐惧型:'🖤'}[type]||'';
+      relHTML+=`<div class="rel-item">${tEmoji} ${type}：${desc}</div>`;
+    }
+    document.getElementById('adviceBox').innerHTML=relHTML;
+    document.getElementById('adviceBox').style.display='block';
+
+    showPage('resultPage');
+  },1500);
+}
+
+function restartQuiz(){startQuiz();}
+function showShare(){document.getElementById('shareUrl').textContent=window.location.href;document.getElementById('shareOverlay').classList.add('show');}
+function hideShare(e){if(e.target===document.getElementById('shareOverlay'))document.getElementById('shareOverlay').classList.remove('show');}
+function copyUrl(){navigator.clipboard.writeText(window.location.href).then(()=>{const b=document.querySelector('.btn-copy');b.textContent='已复制';setTimeout(()=>b.textContent='复制链接',2000);});}
+</script>
+</body>
+</html>

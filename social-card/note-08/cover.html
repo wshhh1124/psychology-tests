@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="ink-classic">
+<head>
+<meta charset="utf-8">
+<title>你的消极念头</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:#1a1a1a;font-family:Georgia,"Noto Serif SC","Songti SC","PingFang SC",serif;-webkit-font-smoothing:antialiased;padding:48px 24px}
+.sheet{display:flex;flex-direction:column;align-items:center;gap:48px}
+:root,[data-theme="ink-classic"]{
+  --paper:#f3f0e8;--paper-2:#ebe6da;--ink:#0a0a0b;--muted:#68625a;
+  --line:rgba(10,10,11,.22);--accent:#111111;--accent-soft:#d8d2c6;
+}
+.poster{position:relative;width:1080px;height:1440px;background:var(--paper);color:var(--ink);overflow:hidden;isolation:isolate}
+.poster.xhs{width:1080px;height:1440px}
+.poster.xhs .content{padding:96px 88px;position:relative;width:100%;height:100%;z-index:2;display:flex;flex-direction:column}
+.grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.35;mix-blend-mode:multiply;background-image:radial-gradient(rgba(0,0,0,.045) 1px,transparent 1px);background-size:3px 3px}
+.paper-wash{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(10,10,11,.02),rgba(10,10,11,.05) 60%,rgba(10,10,11,.08))}
+.kicker{font-family:"IBM Plex Mono",monospace;font-size:20px;letter-spacing:.22em;text-transform:uppercase;color:rgba(10,10,11,.50);margin:0 0 16px}
+.h-hero{font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-weight:700;font-size:134px;line-height:1.06;letter-spacing:-.01em;color:var(--ink);margin:0}
+.h-display{font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-weight:700;font-size:106px;line-height:1.08;letter-spacing:-.01em;color:var(--ink);margin:0}
+.h-xl{font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-weight:700;font-size:78px;line-height:1.10;letter-spacing:-.01em;color:var(--ink);margin:0}
+.h-md{font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-weight:700;font-size:54px;line-height:1.16;letter-spacing:-.01em;color:var(--ink);margin:0}
+.h-sub{font-family:Georgia,serif;font-style:italic;font-weight:400;font-size:34px;color:var(--muted);margin:0}
+.lead{font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-weight:400;font-size:28px;line-height:1.6;color:rgba(10,10,11,.82);margin:0}
+.body-text{font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-weight:400;font-size:26px;line-height:1.7;color:rgba(10,10,11,.80);margin:0}
+.meta{font-family:"IBM Plex Mono",monospace;font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:rgba(10,10,11,.50);margin:0}
+.pull-quote{font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-weight:700;font-size:68px;line-height:1.22;color:var(--ink);margin:0;padding-left:48px;border-left:6px solid var(--accent)}
+.stack{display:flex;flex-direction:column}.gap-2{gap:24px}.gap-3{gap:36px}.gap-4{gap:48px}.grow{flex:1}.center{text-align:center}
+.rule{height:1px;background:var(--line);border:0;margin:24px 0}
+.rule-accent{height:3px;background:var(--accent);border:0;margin:28px 0;width:120px}
+.w-60{width:60px}
+.issue-row{display:flex;align-items:center;gap:14px;font-family:"IBM Plex Mono",monospace;font-size:18px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.issue-row .dot{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.issue-strip{position:absolute;left:88px;right:88px;bottom:56px;display:flex;justify-content:space-between;align-items:center;gap:24px;font-family:"IBM Plex Mono",monospace;font-size:16px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;z-index:2}
+.issue-strip span{white-space:nowrap}
+.info-card{background:var(--paper-2);padding:28px 32px;margin-bottom:18px}
+.info-card .card-label{font-family:"IBM Plex Mono",monospace;font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.info-card .card-title{font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-weight:700;font-size:30px;line-height:1.3;margin-bottom:6px}
+.info-card .card-desc{font-family:Georgia,"Noto Serif SC","Songti SC",serif;font-size:21px;line-height:1.5;color:var(--muted)}
+.illus{position:absolute;z-index:0;pointer-events:none}
+.illus-circle{position:absolute;border-radius:50%}
+.dot-grid{position:absolute;background-image:radial-gradient(circle,var(--line) 1.5px,transparent 1.5px);background-size:24px 24px;opacity:.25}
+</style>
+</head>
+<body><main class="sheet">
+
+<section class="poster xhs">
+  <div class="grain"></div><div class="paper-wash"></div>
+  <div class="illus" style="top:-80px;right:-120px">
+    <div class="illus-circle" style="width:500px;height:500px;background:var(--accent);opacity:.08;top:0;left:0"></div>
+    <div class="illus-circle" style="width:320px;height:320px;background:var(--accent-soft);opacity:.12;top:200px;left:-80px"></div>
+    <div class="illus-circle" style="width:180px;height:180px;background:var(--line);opacity:.15;top:60px;left:280px"></div>
+  </div>
+  <div class="dot-grid" style="left:60px;bottom:200px;width:240px;height:240px"></div>
+  <div class="content stack" style="justify-content:space-between">
+    <div class="issue-row"><span>身心科普</span><span class="dot"></span><span></span></div>
+    <div class="stack gap-3 grow" style="justify-content:center">
+      <h1 class="h-hero">你的消极念头<br>正在变成身体症状</h1>
+      <div class="rule-accent w-60"></div>
+      <p class="h-sub" style="font-size:30px">四种自我破坏的信念，如何一步步蚕食你的健康</p>
+    </div>
+    <div class="issue-strip"><span>露易丝·海 × 蒙娜·丽莎·舒尔茨</span><span>—</span><span>《一切都会好的》</span></div>
+  </div>
+</section>
+
+<section class="poster xhs">
+  <div class="grain"></div><div class="paper-wash"></div>
+  <div class="illus" style="top:120px;right:80px">
+    <div style="width:180px;height:180px;border:2px solid var(--line);position:absolute;top:0;left:0"></div>
+    <div style="width:180px;height:180px;border:2px solid var(--line);position:absolute;top:36px;left:36px"></div>
+  </div>
+  <div class="content stack gap-4" style="justify-content:center">
+    <div class="issue-row"><span>关于作者与本书</span></div>
+    <div class="stack gap-3">
+      <div class="info-card">
+        <p class="card-label">Author</p>
+        <p class="card-title">露易丝·海</p>
+        <p class="card-desc">国际心理治疗专家，自我肯定理论开创者。《生命的重建》全球销量超 5000 万册，被誉为"身心疗愈之母"。</p>
+      </div>
+      <div class="info-card">
+        <p class="card-label">Co-Author</p>
+        <p class="card-title">蒙娜·丽莎·舒尔茨 博士</p>
+        <p class="card-desc">神经精神病学家，30 年临床经验。从脑科学和免疫学角度为身心连接提供了坚实的科学证据。</p>
+      </div>
+      <div class="info-card">
+        <p class="card-label">The Book · 2025 中信出版社</p>
+        <p class="card-title">《一切都会好的》</p>
+        <p class="card-desc">7 情绪中心理论 · 85 道身心评估 · 200+ 症状对照表 · 医学+营养+正念+直觉引导综合疗法</p>
+      </div>
+    </div>
+    <div class="issue-strip"><span>New York Times Bestselling Author</span><span>—</span><span>Heal Your Life</span></div>
+  </div>
+</section>
+
+<section class="poster xhs">
+  <div class="grain"></div><div class="paper-wash"></div>
+  <div class="illus" style="top:50%;left:50%;transform:translate(-50%,-50%)">
+    <div class="illus-circle" style="width:500px;height:500px;background:var(--accent);opacity:.03;top:-250px;left:-250px"></div>
+    <div class="illus-circle" style="width:300px;height:300px;background:var(--accent-soft);opacity:.06;top:-150px;left:-150px"></div>
+  </div>
+  <div class="content stack gap-4" style="justify-content:center">
+    <div class="issue-row"><span>颠覆认知的研究</span><span class="dot"></span><span>Counterintuitive</span></div>
+    <div class="pull-quote" style="font-size:64px;line-height:1.22">
+      "如果你从根本上不相信自己有能力或值得拥有情感支持与安全感，那么仅仅依靠药物将无法根治你的疾病。"
+    </div>
+    <div class="rule-accent w-60"></div>
+    <p class="lead" style="font-size:28px">这是露易丝·海最核心的观点：导致健康问题的潜在信念如果不改变，疾病就会反复。不是意志力不够——是你的大脑一直在给身体发送「危险」信号。</p>
+    <div class="issue-strip"><span>Source: 《一切都会好的》</span><span>—</span><span>Peer-reviewed</span></div>
+  </div>
+</section>
+
+<section class="poster xhs">
+  <div class="grain"></div><div class="paper-wash"></div>
+  <div class="illus" style="bottom:-60px;right:-40px">
+    <div class="illus-circle" style="width:300px;height:300px;background:var(--accent-soft);opacity:.20;top:0;left:0"></div>
+    <div class="illus-circle" style="width:160px;height:160px;background:var(--accent);opacity:.08;top:100px;left:100px"></div>
+  </div>
+  <div class="content stack gap-4" style="justify-content:center">
+    <div class="issue-row"><span>身体在替情绪说话</span></div>
+    <h2 class="h-md" style="font-size:52px">换一个信念，会发生什么</h2>
+    <div class="rule-accent w-60"></div>
+    <div class="stack gap-1"><p class="body-text" style="font-size:26px">→ 关节炎患者说「我是被爱着的，我选择爱自己」→ 关节疼痛减轻</p><p class="body-text" style="font-size:26px">→ 骨质疏松者说「我能够自我决定，我爱自己也认可自己」→ 骨密度改善</p><p class="body-text" style="font-size:26px">→ 慢性疲劳者说「生活是美好的，此刻我的内心一切安好」→ 能量回升</p><p class="body-text" style="font-size:26px">→ 背痛者说「我带着爱与过去和解，我是自由的」→ 背部肌肉松开</p></div>
+    <div class="rule-accent w-60"></div>
+    <p class="lead" style="font-size:30px">这不是鸡汤。当你改变一个信念，大脑释放的神经递质会随之改变，内分泌系统、免疫系统都会跟着响应。肯定语不是安慰剂——它是给身体换了一套操作系统。</p>
+    <p class="body-text" style="font-size:21px;color:var(--muted)">"每天选择一句，对着镜子念。不需要相信，只需要念。身体会先相信，然后大脑跟上。"</p>
+    <div class="issue-strip"><span>Listen to your body</span><span>—</span><span>Emotional Center</span></div>
+  </div>
+</section>
+
+<section class="poster xhs">
+  <div class="grain"></div><div class="paper-wash"></div>
+  <div class="illus" style="top:50%;left:50%;transform:translate(-50%,-50%)">
+    <div class="illus-circle" style="width:450px;height:450px;background:var(--accent);opacity:.03;top:-225px;left:-225px"></div>
+  </div>
+  <div class="content stack center" style="justify-content:center;align-items:center;text-align:center">
+    <p class="kicker" style="text-align:center">85 Questions · 7 Dimensions</p>
+    <h2 class="h-xl" style="font-size:72px;text-align:center">你的身体在替哪个信念受苦？</h2>
+    <div class="rule-accent w-60" style="margin:28px auto"></div>
+    <p class="lead" style="text-align:center;font-size:26px">85 道题 · 7 个维度 · 找到你身心失衡的根源</p>
+    <div style="margin:36px 0">
+      <div style="display:inline-block;padding:24px 48px;border:3px solid var(--accent)">
+        <p class="meta" style="font-size:17px;text-align:center;color:var(--ink)">点击下方商品链接 · 获取完整评估</p>
+      </div>
+    </div>
+    <div class="rule-accent w-60" style="margin:28px auto"></div>
+    <p class="body-text" style="text-align:center;font-size:24px;color:var(--muted);font-style:italic">每天对自己说：</p>
+    <p class="lead" style="text-align:center;font-size:30px;font-weight:700">"一切都会好的。"</p>
+    <p class="meta" style="font-size:13px;text-align:center;margin-top:8px">— 露易丝·海</p>
+  </div>
+  <div class="issue-strip"><span>Louise Hay</span><span>—</span><span>All Is Well</span><span>—</span><span>Begin Your Journey</span></div>
+</section>
+
+<section class="poster xhs">
+  <div class="grain"></div><div class="paper-wash"></div>
+  <div class="illus" style="top:50%;left:50%;transform:translate(-50%,-50%)">
+    <div class="illus-circle" style="width:500px;height:500px;background:var(--accent);opacity:.03;top:-250px;left:-250px"></div>
+    <div class="illus-circle" style="width:300px;height:300px;background:var(--accent-soft);opacity:.06;top:-150px;left:-150px"></div>
+  </div>
+  <div class="content stack gap-4" style="justify-content:center">
+    <div class="issue-row"><span>身心联结</span><span class="dot"></span><span>真实故事</span></div>
+    <h2 class="h-md" style="font-size:52px">四个一直在伤害你的念头</h2>
+    <div class="rule-accent w-60"></div>
+    <div class="stack gap-2">
+      <p class="body-text" style="font-size:26px;margin-bottom:16px">书里列出了四种典型的消极信念，每一种都对应着第一情绪中心的疾病风险：</p><p class="body-text" style="font-size:26px;margin-bottom:16px">「我无法独立自主」——对应骨骼脆弱、关节无力，生活结构缺乏支撑</p><p class="body-text" style="font-size:26px;margin-bottom:16px">「我得不到他人的支持」——对应背痛、脊柱问题，觉得一切都要自己扛</p><p class="body-text" style="font-size:26px;margin-bottom:16px">「我感到沮丧、绝望与无助」——对应免疫抑制、慢性疲劳，身体放弃了抵抗</p><p class="body-text" style="font-size:26px;margin-bottom:16px">「我孤身一人，没有人爱我」——对应皮肤病、脱发，身体边界崩塌</p>
+    </div>
+    <p class="body-text" style="font-size:21px;color:var(--muted);margin-top:24px">药物可以治疗症状，但如果你脑子里一直重复这些句子，身体会一次又一次地回到原点。</p>
+    <div class="issue-strip"><span>《一切都会好的》第一情绪中心</span><span>—</span><span>《一切都会好的》</span></div>
+  </div>
+</section>
+
+</main></body></html>
