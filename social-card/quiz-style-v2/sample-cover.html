@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>速测封面</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff;display:flex;justify-content:center;padding:48px}
+.card{
+  position:relative;width:1080px;height:1440px;overflow:hidden;
+  background:linear-gradient(175deg, #faf8ff 0%, #f3eeff 30%, #ece4ff 65%, #f5f0ff 100%);
+  color:#1e1040;
+  display:flex;flex-direction:column;
+  padding:90px 70px;
+}
+
+/* Soft decorative circles */
+.bg-shape1{
+  position:absolute;top:-100px;right:-60px;
+  width:380px;height:380px;border-radius:50%;
+  background:linear-gradient(135deg, rgba(109,40,217,.06), rgba(139,92,246,.03));
+}
+.bg-shape2{
+  position:absolute;bottom:120px;left:-40px;
+  width:200px;height:200px;border-radius:50%;
+  background:linear-gradient(135deg, rgba(109,40,217,.04), rgba(167,139,250,.02));
+}
+
+/* Number */
+.num{
+  position:absolute;top:50px;left:60px;z-index:1;
+  font-size:180px;font-weight:900;line-height:1;
+  color:rgba(109,40,217,.05);
+}
+
+/* Title */
+.title{
+  position:relative;z-index:1;
+  font-size:200px;font-weight:900;line-height:1.0;
+  letter-spacing:-.03em;margin-bottom:20px;margin-top:-40px;
+}
+.title .mark{
+  background:linear-gradient(180deg,transparent 60%, rgba(124,58,237,.25) 60%);
+  padding:0 6px;
+}
+
+/* Tags */
+.tags{
+  position:relative;z-index:1;
+  display:flex;gap:14px;
+}
+.tag{
+  font-size:20px;font-weight:600;color:rgba(30,16,64,.45);
+  background:rgba(124,58,237,.06);padding:8px 18px;border-radius:20px;
+  letter-spacing:.04em;
+}
+
+/* Character illustration */
+.illust-area{
+  position:absolute;bottom:60px;right:60px;z-index:1;
+}
+.illust-area img{max-height:200px;width:auto}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="bg-shape1"></div>
+  <div class="bg-shape2"></div>
+
+  <div class="num">01</div>
+
+  <h1 class="title">
+    你的问题<br>
+    <span class="mark">真的是</span><br>
+    工作吗？
+  </h1>
+
+  <div class="tags">
+    <span class="tag">5道题</span>
+    <span class="tag">2选1</span>
+    <span class="tag">2分钟</span>
+  </div>
+
+  <!-- Character illustration -->
+  <div class="illust-area">
+    <img src="/Users/wusihang/镜子测试局/social-card/quiz-style-v2/人物.png" alt="thinking" style="max-height:420px;width:auto">
+  </div>
+
+</div>
+
+</body>
+</html>

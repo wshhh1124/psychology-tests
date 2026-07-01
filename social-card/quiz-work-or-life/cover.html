@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="rose-pink">
+<head>
+<meta charset="utf-8">
+<title>你的问题，真的是工作吗？</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:#fff;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,sans-serif;-webkit-font-smoothing:antialiased;padding:48px 24px}
+.sheet{display:flex;flex-direction:column;align-items:center;gap:48px}
+[data-theme="rose-pink"]{
+  --paper:#fdf2f5;--paper-2:#fce7ed;--ink:#3d1a2a;--muted:#9b6b7a;
+  --line:rgba(61,26,42,.14);--accent:#c45b7a;--accent-soft:#f0d0da;
+}
+.poster{position:relative;width:1080px;height:1440px;background:var(--paper);color:var(--ink);overflow:hidden;isolation:isolate}
+.grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.28;background-image:radial-gradient(rgba(61,26,42,.03) 1px,transparent 1px);background-size:3px 3px}
+.content{padding:96px 80px;position:relative;width:100%;height:100%;z-index:2;display:flex;flex-direction:column}
+.stack{display:flex;flex-direction:column}.gap-3{gap:36px}.gap-4{gap:48px}.grow{flex:1}.center{text-align:center;align-items:center}
+.rule{height:1px;background:var(--line);border:0;margin:24px 0}
+.rule-accent{height:3px;background:var(--accent);border:0;margin:28px 0;width:80px}
+.illus{position:absolute;z-index:0;pointer-events:none}
+.illus-circle{position:absolute;border-radius:50%}
+
+/* Cover */
+.kicker{font-size:14px;letter-spacing:.18em;font-weight:500;color:var(--muted);text-transform:uppercase}
+.h-hero{font-size:96px;font-weight:700;line-height:1.12;letter-spacing:.02em;color:var(--ink)}
+.h-sub{font-size:28px;color:var(--muted);font-weight:400;line-height:1.5}
+.meta-strip{display:flex;gap:32px;font-size:13px;color:var(--muted);letter-spacing:.06em}
+
+/* Question pages */
+.q-num{font-size:64px;font-weight:700;color:var(--accent);line-height:1;margin-bottom:8px}
+.q-text{font-size:42px;font-weight:600;line-height:1.45;color:var(--ink);margin-bottom:60px}
+.choice-box{display:flex;gap:24px;width:100%}
+.choice{flex:1;padding:40px 30px;background:var(--paper-2);border:2px solid var(--line);border-radius:20px;text-align:center}
+.choice .choice-label{font-size:48px;font-weight:700;color:var(--accent);margin-bottom:16px}
+.choice .choice-text{font-size:26px;font-weight:500;color:var(--ink);line-height:1.5}
+
+/* CTA page */
+.cta-box{background:var(--paper-2);border-radius:24px;padding:48px 40px;text-align:center;border:2px solid var(--line)}
+.cta-box .cta-title{font-size:36px;font-weight:700;color:var(--ink);margin-bottom:16px}
+.cta-box .cta-desc{font-size:22px;color:var(--muted);line-height:1.6}
+</style>
+</head>
+<body><main class="sheet">
+
+<!-- PAGE 1: COVER -->
+<section class="poster">
+  <div class="grain"></div>
+  <div class="illus" style="top:-80px;right:-100px">
+    <div class="illus-circle" style="width:400px;height:400px;background:var(--accent);opacity:.06"></div>
+    <div class="illus-circle" style="width:260px;height:260px;background:var(--accent-soft);opacity:.12;top:180px;left:-60px"></div>
+  </div>
+  <div class="content stack gap-4" style="justify-content:center">
+    <p class="kicker">5 Questions · 2 Choices Each</p>
+    <h1 class="h-hero">你的问题<br>真的是<br>工作吗？</h1>
+    <hr class="rule-accent" style="margin-left:0">
+    <p class="h-sub">5道二选一 · 评论区写下答案<br>私信获取完整解析</p>
+    <div class="meta-strip" style="margin-top:48px">
+      <span>镜子测试局</span><span>·</span><span>心理速测</span>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 2: Q1 -->
+<section class="poster">
+  <div class="grain"></div>
+  <div class="content stack gap-4 grow" style="justify-content:center">
+    <p class="q-num">01</p>
+    <p class="q-text">周日晚上，<br>想到明天要上班</p>
+    <div class="choice-box">
+      <div class="choice"><p class="choice-label">A</p><p class="choice-text">心情明显变差</p></div>
+      <div class="choice"><p class="choice-label">B</p><p class="choice-text">还行，没什么特别的感觉</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 3: Q2 -->
+<section class="poster">
+  <div class="grain"></div>
+  <div class="content stack gap-4 grow" style="justify-content:center">
+    <p class="q-num">02</p>
+    <p class="q-text">工作里<br>最消耗你的是</p>
+    <div class="choice-box">
+      <div class="choice"><p class="choice-label">A</p><p class="choice-text">做的事本身<br>没意义</p></div>
+      <div class="choice"><p class="choice-label">B</p><p class="choice-text">周围的人和氛围<br>让我累</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 4: Q3 -->
+<section class="poster">
+  <div class="grain"></div>
+  <div class="content stack gap-4 grow" style="justify-content:center">
+    <p class="q-num">03</p>
+    <p class="q-text">如果突然<br>财富自由了</p>
+    <div class="choice-box">
+      <div class="choice"><p class="choice-label">A</p><p class="choice-text">立刻辞职<br>一天都不多待</p></div>
+      <div class="choice"><p class="choice-label">B</p><p class="choice-text">还是会做点什么<br>只是节奏不同</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 5: Q4 -->
+<section class="poster">
+  <div class="grain"></div>
+  <div class="content stack gap-4 grow" style="justify-content:center">
+    <p class="q-num">04</p>
+    <p class="q-text">你羡慕的人</p>
+    <div class="choice-box">
+      <div class="choice"><p class="choice-label">A</p><p class="choice-text">在做完全不同<br>的行业</p></div>
+      <div class="choice"><p class="choice-label">B</p><p class="choice-text">做的事差不多<br>但状态比你自在</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 6: Q5 -->
+<section class="poster">
+  <div class="grain"></div>
+  <div class="content stack gap-4 grow" style="justify-content:center">
+    <p class="q-num">05</p>
+    <p class="q-text">一句话描述<br>你的现状</p>
+    <div class="choice-box">
+      <div class="choice"><p class="choice-label">A</p><p class="choice-text">我只是太累了<br>需要休息</p></div>
+      <div class="choice"><p class="choice-label">B</p><p class="choice-text">我是真的不想<br>再这样活下去了</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 7: CTA -->
+<section class="poster">
+  <div class="grain"></div>
+  <div class="illus" style="top:50%;left:50%;transform:translate(-50%,-50%)">
+    <div class="illus-circle" style="width:450px;height:450px;background:var(--accent);opacity:.04;top:-225px;left:-225px"></div>
+  </div>
+  <div class="content stack gap-4 center grow" style="justify-content:center">
+    <p class="q-num" style="font-size:36px;color:var(--ink)">✉️</p>
+    <p class="q-text" style="text-align:center;font-size:44px">评论区写下<br>你的 5 个答案<br>（如：AABAB）</p>
+    <hr class="rule-accent">
+    <div class="cta-box">
+      <p class="cta-title">私信发送「解析」</p>
+      <p class="cta-desc">获取你的专属结果解读<br>+ 完整身心情绪评估链接</p>
+    </div>
+    <p style="font-size:18px;color:var(--muted);margin-top:24px">镜子测试局 · 你的问题，真的是工作吗？</p>
+  </div>
+</section>
+
+</main></body></html>

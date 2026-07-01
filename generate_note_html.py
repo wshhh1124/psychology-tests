@@ -10,7 +10,7 @@ PROJECT = os.path.dirname(os.path.abspath(__file__))
 OUTPUT = os.path.join(PROJECT, 'social-card')
 
 HTML_TEMPLATE = '''<!doctype html>
-<html lang="zh-CN" data-theme="ink-classic">
+<html lang="zh-CN" data-theme="{theme_name}">
 <head>
 <meta charset="utf-8">
 <title>{cover_hook}</title>
@@ -22,6 +22,10 @@ body{{background:#1a1a1a;font-family:Georgia,"Noto Serif SC","Songti SC","PingFa
 :root,[data-theme="ink-classic"]{{
   --paper:#f3f0e8;--paper-2:#ebe6da;--ink:#0a0a0b;--muted:#68625a;
   --line:rgba(10,10,11,.22);--accent:#111111;--accent-soft:#d8d2c6;
+}}
+[data-theme="rose-pink"]{{
+  --paper:#fdf2f5;--paper-2:#fce7ed;--ink:#3d1a2a;--muted:#9b6b7a;
+  --line:rgba(61,26,42,.18);--accent:#c45b7a;--accent-soft:#f0d0da;
 }}
 .poster{{position:relative;width:1080px;height:1440px;background:var(--paper);color:var(--ink);overflow:hidden;isolation:isolate}}
 .poster.xhs{{width:1080px;height:1440px}}
@@ -220,6 +224,7 @@ def generate(config_path):
 
     html = HTML_TEMPLATE.format(
         cover_hook=cfg['cover']['hookLine1'],
+        theme_name=cfg.get('theme', 'ink-classic'),
         page1=page_cover(cfg),
         page2=page_credibility(cfg),
         page3=page_bombshell(cfg),

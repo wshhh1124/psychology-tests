@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>焦虑型依恋 · 笔记02</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff;display:flex;flex-direction:column;align-items:center;gap:48px;padding:48px 24px}
+
+.card{
+  position:relative;width:1080px;height:1440px;overflow:hidden;
+  background:linear-gradient(160deg,#fef9f4 0%,#fdf2f5 30%,#fce7ed 60%,#fdf5f7 100%);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,sans-serif;color:#2d1020;
+}
+.orb-1{position:absolute;top:-180px;right:-120px;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle at 40% 40%,rgba(196,91,122,.10) 0%,rgba(196,91,122,.02) 60%,transparent 100%)}
+.orb-2{position:absolute;bottom:-100px;left:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle at 60% 60%,rgba(240,130,100,.07) 0%,rgba(240,130,100,.01) 50%,transparent 100%)}
+
+.content{padding:90px 80px;position:relative;z-index:2;height:100%;display:flex;flex-direction:column}
+.flex-between{justify-content:space-between}
+.flex-center{justify-content:center}
+.tag-row{display:flex;gap:10px}
+.tag{font-size:14px;font-weight:600;padding:7px 16px;border-radius:16px;letter-spacing:.05em}
+.tag-fill{background:rgba(196,91,122,.10);color:rgba(196,91,122,.70)}
+.tag-outline{color:#c45b7a;border:1.5px solid rgba(196,91,122,.3)}
+.num-deco{font-size:160px;font-weight:900;color:rgba(196,91,122,.04);line-height:1;letter-spacing:-.04em}
+.title-area{margin-top:-30px}
+.title-big{font-size:120px;font-weight:900;line-height:1.06;letter-spacing:-.02em}
+.title-big .em{color:#c45b7a}
+.title-big .hl{background:linear-gradient(180deg,transparent 62%,rgba(196,91,122,.18) 62%);padding:0 6px}
+.desc{font-size:26px;color:rgba(45,16,32,.45);line-height:1.6;max-width:600px;margin-top:24px}
+.info-card{background:rgba(255,255,255,.55);border-radius:20px;padding:28px 32px;display:flex;align-items:center;gap:24px;border:1px solid rgba(196,91,122,.10)}
+.info-card .stat{text-align:center}
+.info-card .stat-num{font-size:36px;font-weight:900;color:#c45b7a;line-height:1}
+.info-card .stat-label{font-size:13px;color:rgba(45,16,32,.40);margin-top:4px}
+.info-div{width:1px;height:36px;background:rgba(196,91,122,.12)}
+
+/* Page 2: Credibility */
+.cred-card{background:rgba(255,255,255,.50);border-radius:18px;padding:24px 28px;margin-bottom:16px;border:1px solid rgba(196,91,122,.08)}
+.cred-card .cred-label{font-size:13px;font-weight:600;color:rgba(196,91,122,.50);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.cred-card .cred-title{font-size:26px;font-weight:700;line-height:1.3;margin-bottom:4px}
+.cred-card .cred-desc{font-size:18px;line-height:1.5;color:rgba(45,16,32,.45)}
+.section-label{font-size:14px;font-weight:600;color:rgba(196,91,122,.50);letter-spacing:.08em;margin-bottom:24px}
+
+/* Page 3: Case study */
+.case-quote{font-size:30px;line-height:1.7;color:rgba(45,16,32,.75);padding-left:32px;border-left:4px solid rgba(196,91,122,.3);margin-bottom:20px}
+.case-note{font-size:20px;color:rgba(45,16,32,.40);margin-top:24px;padding:24px;background:rgba(255,255,255,.40);border-radius:14px}
+
+/* Page 4: Bombshell */
+.pull-quote{font-size:64px;font-weight:700;line-height:1.18;padding-left:40px;border-left:6px solid #c45b7a;margin-bottom:28px}
+.quote-source{font-size:20px;color:rgba(45,16,32,.35);margin-top:16px}
+
+/* Page 5: Signals */
+.signal-list{display:flex;flex-direction:column;gap:18px}
+.signal-item{font-size:26px;line-height:1.5;color:rgba(45,16,32,.75)}
+.signal-item .arrow{color:#c45b7a;font-weight:700}
+.signal-insight{font-size:24px;line-height:1.6;color:rgba(45,16,32,.55);margin-top:32px;padding:24px;background:rgba(255,255,255,.40);border-radius:14px}
+</style>
+</head>
+<body>
+
+<!-- ====== PAGE 1: COVER ====== -->
+<div class="card">
+  <div class="orb-1"></div><div class="orb-2"></div>
+  <div class="content flex-between">
+    <div class="top-row"><div class="tag-row">
+      <span class="tag tag-fill">成人依恋</span>
+      <span class="tag tag-outline">焦虑型</span>
+    </div></div>
+    <div>
+      <div class="num-deco">02</div>
+      <div class="title-area">
+        <h1 class="title-big">对方三小时<br>没回消息<br>你已经<span class="hl">演完了</span><br><span class="em">一整部电影</span></h1>
+      </div>
+      <p class="desc">焦虑型依恋：不是太作，是太怕被抛弃</p>
+    </div>
+    <div class="info-card">
+      <div class="stat"><div class="stat-num">~20%</div><div class="stat-label">人群占比</div></div>
+      <div class="info-div"></div>
+      <div class="stat"><div class="stat-num">Bowlby</div><div class="stat-label">依恋理论</div></div>
+      <div class="info-div"></div>
+      <div style="flex:1;text-align:right;font-size:16px;color:rgba(45,16,32,.35)">镜子测试局 · 成人依恋系列</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== PAGE 2: CREDIBILITY ====== -->
+<div class="card">
+  <div class="orb-1"></div><div class="orb-2"></div>
+  <div class="content flex-center" style="gap:32px">
+    <div class="section-label">关于依恋理论</div>
+    <div class="cred-card">
+      <div class="cred-label">Founder</div>
+      <div class="cred-title">John Bowlby · 依恋理论创始人</div>
+      <div class="cred-desc">英国发展心理学家，1950年代提出依恋理论：婴儿与照顾者之间的互动模式，会内化为持续一生的「内部工作模型」，影响成年后所有亲密关系。</div>
+    </div>
+    <div class="cred-card">
+      <div class="cred-label">Research</div>
+      <div class="cred-title">Brennan, Clark & Shaver (1998)</div>
+      <div class="cred-desc">编制亲密关系体验量表（ECR），将成人依恋划分为依恋焦虑×依恋回避两个维度、四种类型。至今仍是依恋研究领域使用最广泛的测量工具。</div>
+    </div>
+    <div class="cred-card">
+      <div class="cred-label">Key Finding</div>
+      <div class="cred-title">婴儿期的依恋模式可预测成年亲密关系质量</div>
+      <div class="cred-desc">50年追踪研究证实：依恋类型不是「性格」，是从最早的亲密关系中习得的策略。既然是习得的，就可以重新学习。</div>
+    </div>
+    <div class="info-card">
+      <div style="flex:1;font-size:16px;color:rgba(45,16,32,.40)">Bowlby · Ainsworth · Hazan & Shaver · Brennan</div>
+      <div style="font-size:16px;color:rgba(45,16,32,.25)">Attachment Theory</div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== PAGE 3: CASE STUDY ====== -->
+<div class="card">
+  <div class="orb-1"></div><div class="orb-2"></div>
+  <div class="content flex-center" style="gap:28px">
+    <div class="section-label">焦虑型依恋的一天</div>
+    <div style="font-size:44px;font-weight:700;line-height:1.3;margin-bottom:8px">被抛弃预警系统</div>
+    <div class="case-quote">早上发了一条消息，对方没回。告诉自己：TA在忙。但心里已经开始算上次TA秒回是什么时候了。</div>
+    <div class="case-quote">中午还是没回。打开TA的朋友圈——半小时前给共同好友点了赞。为什么给别人点赞却不回消息？</div>
+    <div class="case-quote">下午三点已经脑补完分手后的生活。下午五点，TA回了：「刚在开会。」你秒回：「没事。」</div>
+    <div class="case-note">不是作。是焦虑型依恋的大脑在自动运行「被抛弃预警系统」。不是你想太多——你的依恋系统被调得太敏感了。它曾经在你小时候保护过你。但现在，你可以学会调低它的灵敏度。</div>
+  </div>
+</div>
+
+<!-- ====== PAGE 4: BOMBSHELL ====== -->
+<div class="card">
+  <div class="orb-1"></div><div class="orb-2"></div>
+  <div class="content flex-center" style="gap:24px">
+    <div class="section-label">核心洞察</div>
+    <div class="pull-quote">焦虑型依恋的人<br>不是在爱里太敏感<br>——他们只是把童年<br>对照顾者的不确定感<br>复制到了成年后的<br>每一段关系里。</div>
+    <div class="quote-source">Bowlby · 依恋理论</div>
+    <div style="font-size:26px;line-height:1.6;color:rgba(45,16,32,.55);margin-top:20px">如果婴儿时期的照顾者是忽冷忽热、时而在时而不在的，婴儿就会发展出一种「过度激活策略」——不停地发信号、不停地确认对方还在不在。这个策略在婴儿期是生存必需，在成年后的恋爱里却让你筋疲力尽。</div>
+  </div>
+</div>
+
+<!-- ====== PAGE 5: BODY SIGNALS ====== -->
+<div class="card">
+  <div class="orb-1"></div><div class="orb-2"></div>
+  <div class="content flex-center" style="gap:20px">
+    <div class="section-label">焦虑型自查清单</div>
+    <div style="font-size:46px;font-weight:700;line-height:1.2;margin-bottom:16px">你有这些<br>信号吗？</div>
+    <div class="signal-list">
+      <div class="signal-item"><span class="arrow">→</span> 对方回消息慢一点，你会越想越多</div>
+      <div class="signal-item"><span class="arrow">→</span> 总觉得自己付出更多、爱得更深</div>
+      <div class="signal-item"><span class="arrow">→</span> 吵架后总是你先低头</div>
+      <div class="signal-item"><span class="arrow">→</span> 一个人待着总觉得空虚</div>
+      <div class="signal-item"><span class="arrow">→</span> 会对「忽冷忽热」的人上头</div>
+    </div>
+    <div class="signal-insight">焦虑型不是病。你的敏感和投入是爱的天赋——你只是需要学会把这份敏感用对地方。<br>一段安全的关系 + 有意识的自我觉察，是走向安全型的两个最重要条件。</div>
+  </div>
+</div>
+
+<!-- ====== PAGE 6: CTA ====== -->
+<div class="card">
+  <div class="orb-1"></div><div class="orb-2"></div>
+  <div class="content flex-center" style="text-align:center;align-items:center">
+    <div style="font-size:60px;margin-bottom:20px">💞</div>
+    <div style="font-size:80px;font-weight:900;line-height:1.10;margin-bottom:24px;text-align:center">你是哪种<br>依恋类型？</div>
+    <div style="font-size:28px;color:rgba(45,16,32,.50);line-height:1.6;text-align:center;margin-bottom:40px">12道题 · 2分钟 · 改编自ECR量表<br>含四种类型完整解读 + 匹配分析</div>
+    <div style="background:rgba(255,255,255,.55);border-radius:20px;padding:32px 48px;border:2px solid rgba(196,91,122,.15);text-align:center">
+      <div style="font-size:32px;font-weight:700;color:#c45b7a">点击下方链接 · 开始测试</div>
+    </div>
+    <div style="font-size:18px;color:rgba(45,16,32,.30);margin-top:32px">镜子测试局 · 成人依恋类型测试</div>
+  </div>
+</div>
+
+</body>
+</html>

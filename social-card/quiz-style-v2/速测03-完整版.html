@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>速测03 · 该修复还是该离开</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff;display:flex;flex-direction:column;align-items:center;gap:48px;padding:48px 24px}
+.card{
+  position:relative;width:1080px;height:1440px;overflow:hidden;
+  background:linear-gradient(175deg, #faf8ff 0%, #f3eeff 30%, #ece4ff 65%, #f5f0ff 100%);
+  color:#1e1040;display:flex;flex-direction:column;padding:70px 70px 90px;
+}
+.bg-shape1{position:absolute;top:-100px;right:-60px;width:380px;height:380px;border-radius:50%;background:linear-gradient(135deg,rgba(109,40,217,.06),rgba(139,92,246,.03))}
+.bg-shape2{position:absolute;bottom:120px;left:-40px;width:200px;height:200px;border-radius:50%;background:linear-gradient(135deg,rgba(109,40,217,.04),rgba(167,139,250,.02))}
+.num-watermark{position:absolute;top:50px;left:60px;z-index:1;font-size:180px;font-weight:900;line-height:1;color:rgba(109,40,217,.05)}
+.title-big{position:relative;z-index:1;font-size:160px;font-weight:900;line-height:1.04;letter-spacing:-.03em;margin-bottom:24px;margin-top:0}
+.title-big .mark{background:linear-gradient(180deg,transparent 60%,rgba(124,58,237,.25) 60%);padding:0 6px}
+.char-bottom{position:absolute;bottom:40px;right:0;left:0;display:flex;justify-content:center;z-index:1}
+.char-bottom img{max-height:550px;width:auto}
+.q-page{
+  position:relative;width:1080px;height:1440px;overflow:hidden;
+  background:linear-gradient(175deg,#faf8ff 0%,#f3eeff 30%,#ece4ff 65%,#f5f0ff 100%);
+  color:#1e1040;display:flex;flex-direction:column;padding:80px 70px;
+}
+.q-num-big{font-size:180px;font-weight:900;line-height:.9;color:rgba(109,40,217,.06);margin-bottom:-50px;margin-left:-6px}
+.q-text-big{font-size:110px;font-weight:900;line-height:1.12;letter-spacing:-.02em;margin-bottom:50px}
+.choice-wrap{display:flex;gap:28px;flex:1;align-items:stretch}
+.choice-card{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:28px;padding:40px 30px;text-align:center}
+.choice-card.c-a{background:rgba(245,158,11,.08);border:3px solid rgba(245,158,11,.30)}
+.choice-card.c-b{background:rgba(59,130,246,.06);border:3px solid rgba(59,130,246,.25)}
+.choice-card .letter{font-size:120px;font-weight:900;line-height:1;color:rgba(30,16,64,.40);margin-bottom:16px}
+.choice-card.c-a .letter{color:#d97706}
+.choice-card.c-b .letter{color:#2563eb}
+.choice-card .label{font-size:48px;font-weight:700;line-height:1.3;color:rgba(30,16,64,.65)}
+.q-tag{position:absolute;top:70px;right:70px;z-index:1;font-size:18px;font-weight:600;color:rgba(109,40,217,.40);background:rgba(124,58,237,.06);padding:8px 18px;border-radius:18px;letter-spacing:.06em}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="card">
+  <div class="bg-shape1"></div><div class="bg-shape2"></div>
+  <div class="num-watermark">03</div>
+  <div style="position:relative;z-index:1;display:flex;align-items:center;gap:16px;margin-bottom:48px">
+    <div style="background:#7c3aed;color:#fff;font-size:26px;font-weight:700;padding:14px 34px;border-radius:30px;letter-spacing:.06em">📋 心理速测</div>
+    <div style="font-size:24px;font-weight:600;color:rgba(30,16,64,.40)">5道题 · 2选1 · 2分钟</div>
+  </div>
+  <h1 class="title-big">这段关系<br>是在<span style="color:#7c3aed">滋养</span>你<br>还是<span class="mark">消耗</span>你？</h1>
+  <div style="position:relative;z-index:1;display:flex;gap:16px;margin-top:40px">
+    <div style="flex:1;background:rgba(245,158,11,.10);border:2px solid rgba(245,158,11,.30);border-radius:20px;padding:20px 24px;text-align:center">
+      <div style="font-size:48px;font-weight:900;color:#d97706;margin-bottom:6px">A</div>
+      <div style="font-size:20px;font-weight:600;color:rgba(30,16,64,.50)">二选一</div>
+    </div>
+    <div style="flex:1;background:rgba(59,130,246,.08);border:2px solid rgba(59,130,246,.25);border-radius:20px;padding:20px 24px;text-align:center">
+      <div style="font-size:48px;font-weight:900;color:#2563eb;margin-bottom:6px">B</div>
+      <div style="font-size:20px;font-weight:600;color:rgba(30,16,64,.50)">评论区答</div>
+    </div>
+  </div>
+  <div class="char-bottom"><img src="/Users/wusihang/镜子测试局/social-card/quiz-style-v2/人物.png"></div>
+</div>
+
+<!-- Q1 -->
+<div class="q-page">
+  <div class="bg-shape1"></div><div class="q-tag">1 / 5</div>
+  <div class="q-num-big">01</div>
+  <p class="q-text-big">想到要和TA<br>在一起一辈子</p>
+  <div class="choice-wrap">
+    <div class="choice-card c-a"><div class="letter">A</div><div class="label">有压力</div></div>
+    <div class="choice-card c-b"><div class="letter">B</div><div class="label">挺安心的</div></div>
+  </div>
+</div>
+
+<!-- Q2 -->
+<div class="q-page">
+  <div class="bg-shape1"></div><div class="q-tag">2 / 5</div>
+  <div class="q-num-big">02</div>
+  <p class="q-text-big">你们之间<br>的争吵</p>
+  <div class="choice-wrap">
+    <div class="choice-card c-a"><div class="letter">A</div><div class="label">永远是同一个<br>话题，解决不了</div></div>
+    <div class="choice-card c-b"><div class="letter">B</div><div class="label">吵完能找到<br>办法</div></div>
+  </div>
+</div>
+
+<!-- Q3 -->
+<div class="q-page">
+  <div class="bg-shape1"></div><div class="q-tag">3 / 5</div>
+  <div class="q-num-big">03</div>
+  <p class="q-text-big">在TA身边<br>你的状态</p>
+  <div class="choice-wrap">
+    <div class="choice-card c-a"><div class="letter">A</div><div class="label">更焦虑、<br>更自我怀疑</div></div>
+    <div class="choice-card c-b"><div class="letter">B</div><div class="label">更放松、<br>更有力量</div></div>
+  </div>
+</div>
+
+<!-- Q4 -->
+<div class="q-page">
+  <div class="bg-shape1"></div><div class="q-tag">4 / 5</div>
+  <div class="q-num-big">04</div>
+  <p class="q-text-big">如果TA说<br>「我们结婚吧」</p>
+  <div class="choice-wrap">
+    <div class="choice-card c-a"><div class="letter">A</div><div class="label">犹豫<br>想拖一拖</div></div>
+    <div class="choice-card c-b"><div class="letter">B</div><div class="label">开心<br>愿意</div></div>
+  </div>
+</div>
+
+<!-- Q5 -->
+<div class="q-page">
+  <div class="bg-shape1"></div><div class="q-tag">5 / 5</div>
+  <div class="q-num-big">05</div>
+  <p class="q-text-big">分开一天<br>试试</p>
+  <div class="choice-wrap">
+    <div class="choice-card c-a"><div class="letter">A</div><div class="label">觉得轻松<br>了很多</div></div>
+    <div class="choice-card c-b"><div class="letter">B</div><div class="label">会想念TA</div></div>
+  </div>
+</div>
+
+<!-- PAGE 7: CTA -->
+<div class="card" style="justify-content:center;text-align:center">
+  <div class="bg-shape1"></div><div class="bg-shape2"></div>
+  <div style="position:relative;z-index:1">
+    <div style="font-size:80px;margin-bottom:24px">👇</div>
+    <h2 style="font-size:110px;font-weight:900;line-height:1.10;letter-spacing:-.02em;margin-bottom:32px;text-align:center">评论区<br>写下你的答案</h2>
+    <div style="background:rgba(255,255,255,.55);border-radius:24px;padding:44px 36px;text-align:center;border:2px solid rgba(124,58,237,.10)">
+      <p style="font-size:44px;font-weight:800;color:#1e1040">格式如 AABAB</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
