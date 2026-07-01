@@ -6,12 +6,14 @@
 <title>你的隐藏天赋是什么？</title>
 <style>
 :root {
-  --primary:#7C3AED;--on-primary:#FFF;--accent:#F59E0B;--bg:#FAF5FF;--fg:#1E1B4B;
-  --muted:#F5F3FF;--muted-fg:#6B7280;--border:#EDE9FE;--radius-sm:8px;--radius-md:16px;--radius-lg:24px;
+  --primary:#7C3AED;--accent:#F59E0B;--bg:#FAF5FF;--fg:#1E1B4B;--muted:#F5F3FF;--muted-fg:#6B7280;--border:#EDE9FE;
+  --radius-sm:8px;--radius-md:16px;--radius-lg:24px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;display:flex;justify-content:center;padding:24px 16px 64px;-webkit-font-smoothing:antialiased}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;display:flex;justify-content:center;padding:24px 16px 64px;-webkit-font-smoothing:antialiased}
 .container{width:100%;max-width:448px}
+
+/* Cover */
 .cover{background:#FFF;border-radius:var(--radius-lg);padding:40px 28px 32px;box-shadow:0 4px 24px rgba(124,58,237,.08);animation:fadeUp .5s ease}
 .cover .eyebrow{font-size:11px;font-weight:600;letter-spacing:.15em;color:var(--primary);margin-bottom:16px}
 .cover h1{font-family:Georgia,"Noto Serif SC",serif;font-size:26px;font-weight:700;line-height:1.4;margin-bottom:20px}
@@ -21,13 +23,15 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei","Hiragino Sans GB
 .cover .stat{text-align:center}
 .cover .stat-num{font-size:26px;font-weight:700;color:var(--primary);line-height:1}
 .cover .stat-label{font-size:11px;color:var(--muted-fg);margin-top:4px}
-.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:15px;background:var(--primary);color:var(--on-primary);border:none;border-radius:var(--radius-sm);font-size:16px;font-weight:600;cursor:pointer;transition:all .2s;box-shadow:0 4px 12px rgba(124,58,237,.25)}
-.btn:hover{opacity:.92;transform:translateY(-1px)}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:15px;background:var(--primary);color:#FFF;border:none;border-radius:var(--radius-sm);font-size:16px;font-weight:600;cursor:pointer;transition:all .2s;box-shadow:0 4px 12px rgba(124,58,237,.25)}
+.btn:hover{opacity:.92}
+
+/* Quiz */
 .quiz{display:none;animation:fadeUp .4s ease}.quiz.active{display:block}
-.quiz-progress{background:#FFF;border-radius:var(--radius-md);padding:12px 16px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
-.quiz-progress .prog-text{font-size:12px;color:var(--muted-fg);margin-bottom:8px;display:flex;justify-content:space-between}
-.quiz-progress .prog-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
-.quiz-progress .prog-fill{height:100%;background:var(--primary);border-radius:2px;transition:width .4s ease}
+.q-progress{background:#FFF;border-radius:var(--radius-md);padding:12px 16px;margin-bottom:12px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.q-progress .prog-text{font-size:12px;color:var(--muted-fg);margin-bottom:8px;display:flex;justify-content:space-between}
+.q-progress .prog-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.q-progress .prog-fill{height:100%;background:var(--primary);border-radius:2px;transition:width .4s ease}
 .q-card{background:#FFF;border-radius:var(--radius-md);padding:28px 24px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .q-card .q-num{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--primary);margin-bottom:12px}
 .q-card .q-text{font-size:17px;font-weight:600;line-height:1.5;margin-bottom:20px}
@@ -36,36 +40,62 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei","Hiragino Sans GB
 .q-opt:hover{background:#EDE9FE}
 .q-opt.sel{border-color:var(--primary);background:#EDE9FE;color:var(--primary);font-weight:600}
 
+/* Loading */
 .loading{display:none;text-align:center;padding:80px 32px;animation:fadeUp .4s ease}.loading.active{display:block}
 .spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 24px}
 .loading p{font-size:14px;color:var(--muted-fg);font-style:italic}
 
+/* ===== PREMIUM RESULT ===== */
 .result{display:none;animation:fadeUp .5s ease}.result.active{display:block}
-.result-main{background:#FFF;border-radius:var(--radius-lg);padding:36px 28px;box-shadow:0 4px 24px rgba(124,58,237,.08)}
-.result-emoji{font-size:64px;text-align:center;margin-bottom:8px}
-.result-badge{display:inline-flex;align-items:center;gap:4px;padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:16px}
-.result-type{font-size:22px;font-weight:700;text-align:center;margin-bottom:4px}
-.result-tagline{font-size:14px;color:var(--muted-fg);text-align:center;margin-bottom:24px}
-.result-section{margin-bottom:20px}
-.result-section .s-title{font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--muted-fg);margin-bottom:8px;text-transform:uppercase}
-.result-section .s-text{font-size:13px;line-height:1.8;color:var(--fg)}
 
-/* Rank list for all dimensions */
-.rank-list{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
-.rank-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--muted);border-radius:var(--radius-sm)}
-.rank-item .r-emoji{font-size:24px;width:32px;text-align:center}
-.rank-item .r-name{font-size:13px;font-weight:600;width:56px;flex-shrink:0}
-.rank-item .r-bar{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
-.rank-item .r-fill{height:100%;border-radius:3px;transition:width 1.2s ease}
-.rank-item .r-pct{font-size:12px;font-weight:600;color:var(--muted-fg);width:36px;text-align:right}
+/* Hero header */
+.r-hero{background:linear-gradient(135deg,#7C3AED,#5B21B6);border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding:36px 28px 28px;text-align:center;color:#FFF;position:relative;overflow:hidden}
+.r-hero::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06)}
+.r-hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.04)}
+.r-hero .r-emoji{font-size:72px;line-height:1;margin-bottom:8px;position:relative;z-index:1}
+.r-hero .r-rank{font-size:13px;font-weight:600;letter-spacing:.08em;opacity:.7;margin-bottom:4px;position:relative;z-index:1}
+.r-hero .r-type{font-size:30px;font-weight:900;margin-bottom:6px;position:relative;z-index:1}
+.r-hero .r-tagline{font-size:15px;opacity:.8;line-height:1.5;position:relative;z-index:1}
 
-.advice-box{background:var(--muted);border-radius:var(--radius-md);padding:20px;margin-top:20px;border-left:4px solid var(--primary)}
-.advice-box .a-title{font-weight:600;font-size:14px;margin-bottom:6px}
-.advice-box .a-text{font-size:12px;line-height:1.7;color:var(--muted-fg)}
+/* Main body */
+.r-body{background:#FFF;border-radius:0 0 var(--radius-lg) var(--radius-lg);padding:24px 28px 32px;box-shadow:0 4px 24px rgba(124,58,237,.08)}
 
+/* Rank chart - all 10 dimensions */
+.rank-section{margin-bottom:24px}
+.rank-section .rank-title{font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--muted-fg);margin-bottom:12px;text-transform:uppercase}
+.rank-item{display:flex;align-items:center;gap:8px;padding:7px 0}
+.rank-item .ri-rank{width:20px;font-size:11px;font-weight:700;color:var(--muted-fg);text-align:center}
+.rank-item.top1 .ri-rank{color:#7C3AED;font-size:14px}
+.rank-item.top2 .ri-rank{color:#7C3AED;font-size:13px}
+.rank-item.top3 .ri-rank{color:#7C3AED;font-size:12px}
+.rank-item .ri-emoji{font-size:18px;width:28px;text-align:center}
+.rank-item .ri-name{font-size:12px;font-weight:600;width:52px;flex-shrink:0}
+.rank-item .ri-bar-wrap{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.rank-item .ri-bar{height:100%;border-radius:3px;transition:width 1.5s ease}
+.rank-item .ri-pct{font-size:11px;font-weight:700;color:var(--muted-fg);width:34px;text-align:right}
+.rank-item.top1 .ri-name,.rank-item.top1 .ri-pct{color:var(--fg)}
+
+/* Divider */
+.r-divider{height:1px;background:var(--border);margin:24px 0}
+
+/* Detail cards */
+.detail-card{background:var(--muted);border-radius:var(--radius-md);padding:20px;margin-bottom:12px;border-left:4px solid #7C3AED}
+.detail-card .dc-title{font-size:13px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.detail-card .dc-text{font-size:12px;line-height:1.8;color:var(--muted-fg)}
+.detail-card.dc-gold{border-left-color:#F59E0B;background:linear-gradient(135deg,rgba(245,158,11,.06),rgba(245,158,11,.02))}
+.detail-card.dc-rose{border-left-color:#EC4899;background:linear-gradient(135deg,rgba(236,72,153,.06),rgba(236,72,153,.02))}
+
+/* TOP 3 tabs */
+.top3-tabs{display:flex;gap:8px;margin-bottom:16px}
+.top3-tab{flex:1;padding:10px 8px;border-radius:var(--radius-sm);text-align:center;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;background:var(--muted);color:var(--muted-fg);border:2px solid transparent}
+.top3-tab.active{background:#FFF;border-color:#7C3AED;color:#7C3AED}
+.top3-tab .tab-emoji{font-size:20px;display:block;margin-bottom:2px}
+
+/* Buttons */
+.btn-share{margin-top:20px;background:var(--accent);color:var(--fg);box-shadow:0 4px 12px rgba(245,158,11,.25)}
 .btn-outline{display:flex;align-items:center;justify-content:center;width:100%;padding:15px;margin-top:12px;background:transparent;border:2px solid var(--border);border-radius:var(--radius-sm);font-size:15px;font-weight:500;color:var(--muted-fg);cursor:pointer;transition:all .2s}
 .btn-outline:hover{border-color:var(--primary);color:var(--primary)}
-.result-footer{margin-top:24px;padding-top:20px;border-top:1px solid var(--border);font-size:10px;color:var(--muted-fg);text-align:center;line-height:1.6}
+.r-footer{margin-top:24px;padding-top:20px;border-top:1px solid var(--border);font-size:10px;color:var(--muted-fg);text-align:center;line-height:1.6}
 
 .share-overlay{display:none;position:fixed;inset:0;background:rgba(30,27,75,.5);z-index:999;justify-content:center;align-items:center;padding:24px}
 .share-overlay.show{display:flex}
@@ -84,13 +114,13 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei","Hiragino Sans GB
 
 <!-- COVER -->
 <div class="cover" id="coverPage">
-  <p class="eyebrow">Gallup Strengths · Gardner · Positive Psychology</p>
+  <p class="eyebrow">Gallup · Gardner · Positive Psychology</p>
   <h1>你的隐藏天赋<br>是什么？</h1>
-  <p class="lede">有些事情你做起来<span class="hl">得心应手</span>，有些事情你怎么做都不如意。你以为是偶然——其实那些得心应手的瞬间，是你天生的天赋在说话。</p>
-  <p class="lede">就像你的第六感，一直在给你暗示。只是你从来没认真听过。</p>
+  <p class="lede">有些事情你做起来<span class="hl">得心应手</span>，有些事情你怎么做都不如意。你以为是偶然——其实那些得心应手的瞬间，是老天爷一直在给你的暗示。</p>
+  <p class="lede">就像你的第六感，一直在暗示你。只是你从来没认真听过。</p>
   <div class="stats">
-    <div class="stat"><div class="stat-num">18</div><div class="stat-label">道题目</div></div>
-    <div class="stat"><div class="stat-num">6</div><div class="stat-label">种天赋类型</div></div>
+    <div class="stat"><div class="stat-num">20</div><div class="stat-label">道题目</div></div>
+    <div class="stat"><div class="stat-num">10</div><div class="stat-label">种天赋类型</div></div>
     <div class="stat"><div class="stat-num">3min</div><div class="stat-label">预计时间</div></div>
   </div>
   <button class="btn" onclick="startQuiz()">开始测试 →</button>
@@ -98,58 +128,48 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei","Hiragino Sans GB
 
 <!-- QUIZ -->
 <div class="quiz" id="quizPage">
-  <div class="quiz-progress">
-    <div class="prog-text"><span id="progLabel">1 / 18</span></div>
+  <div class="q-progress">
+    <div class="prog-text"><span id="progLabel">1 / 20</span></div>
     <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
   </div>
   <div class="q-card">
-    <div class="q-num" id="qNum">第 1 题</div>
+    <div class="q-num" id="qNum"></div>
     <div class="q-text" id="qText"></div>
     <div class="q-opts" id="qOpts"></div>
   </div>
 </div>
 
-<!-- LOADING -->
 <div class="loading" id="loadingPage"><div class="spinner"></div><p>正在分析你的天赋密码…</p></div>
 
-<!-- RESULT -->
+<!-- ===== RESULT ===== -->
 <div class="result" id="resultPage">
-  <div class="result-main">
-    <div class="result-emoji" id="rEmoji"></div>
-    <div class="result-badge" id="rBadge"></div>
-    <div class="result-type" id="rType"></div>
-    <div class="result-tagline" id="rTagline"></div>
-
-    <div class="rank-list" id="rankList"></div>
-
-    <div class="result-section">
-      <div class="s-title">你的天赋优势</div>
-      <div class="s-text" id="rStrength"></div>
+  <div class="r-hero">
+    <div class="r-emoji" id="rEmoji"></div>
+    <div class="r-rank" id="rRank"></div>
+    <div class="r-type" id="rType"></div>
+    <div class="r-tagline" id="rTagline"></div>
+  </div>
+  <div class="r-body">
+    <!-- Top 3 tabs -->
+    <div class="top3-tabs" id="top3Tabs"></div>
+    <!-- Detail for selected -->
+    <div id="top3Detail"></div>
+    <!-- Rank chart -->
+    <div class="r-divider"></div>
+    <div class="rank-section">
+      <div class="rank-title">你的 10 大天赋排名</div>
+      <div id="rankList"></div>
     </div>
-    <div class="result-section">
-      <div class="s-title">你以为的'缺点'</div>
-      <div class="s-text" id="rPain"></div>
-    </div>
-    <div class="result-section">
-      <div class="s-title">天赋使用指南</div>
-      <div class="s-text" id="rGuide"></div>
-    </div>
-    <div class="advice-box">
-      <div class="a-title">💡 你可能犯过最大的错误</div>
-      <div class="a-text" id="rMistake"></div>
-    </div>
-
-    <button class="btn" onclick="showShare()" style="margin-top:20px;background:var(--accent);color:var(--fg)">分享给朋友</button>
+    <button class="btn btn-share" onclick="showShare()">分享给朋友</button>
     <button class="btn-outline" onclick="restartQuiz()">重新测试</button>
-    <div class="result-footer">基于 Gallup 优势识别理论 & Gardner 多元智能理论<br>本测试仅供自我探索参考</div>
+    <div class="r-footer">基于 Gallup 优势识别 & Gardner 多元智能 & Seligman 积极心理学<br>本测试仅供自我探索参考</div>
   </div>
 </div>
 
 <!-- SHARE -->
 <div class="share-overlay" id="shareOverlay" onclick="hideShare(event)">
   <div class="share-modal" onclick="event.stopPropagation()">
-    <h3>分享测试</h3>
-    <p style="font-size:13px;color:var(--muted-fg)">复制链接发给朋友，一起发现天赋</p>
+    <h3>分享测试</h3><p style="font-size:13px;color:var(--muted-fg)">复制链接发给朋友，一起发现天赋</p>
     <div class="share-url" id="shareUrl"></div>
     <button class="btn-copy" onclick="copyUrl()">复制链接</button>
     <button class="btn-modal-close" onclick="document.getElementById('shareOverlay').classList.remove('show')" style="display:block;margin:8px auto 0;padding:8px 16px;background:none;border:none;color:var(--muted-fg);font-size:13px;cursor:pointer">关闭</button>
@@ -159,71 +179,94 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei","Hiragino Sans GB
 </div>
 
 <script>
-const C = {
-  title:"你的隐藏天赋是什么？",icon:"⭐",
-  questions:[
-    {id:1,text:"朋友遇到困惑时，总喜欢来找我聊",dim:"connector"},
-    {id:2,text:"我看待问题的角度，经常和别人不太一样",dim:"observer"},
-    {id:3,text:"脑海中有很多想法，总想做出点新的东西",dim:"creator"},
-    {id:4,text:"定了计划不做完，心里就不舒服",dim:"executor"},
-    {id:5,text:"一群人不知道该怎么办的时候，我往往是第一个站出来拿主意的人",dim:"leader"},
-    {id:6,text:"我很擅长维持一段长期稳定的关系",dim:"guardian"},
-    {id:7,text:"我能察觉到别人情绪的细微变化，即使TA什么都没说",dim:"connector"},
-    {id:8,text:"我喜欢一个人深入思考一个问题，不找到根源不罢休",dim:"observer"},
-    {id:9,text:"我做梦都想做出一个属于自己的作品",dim:"creator"},
-    {id:10,text:"别人觉得复杂的事，我能快速拆成一步步去完成",dim:"executor"},
-    {id:11,text:"我说的话，别人容易听进去",dim:"leader"},
-    {id:12,text:"我喜欢有秩序的生活，对突然的变化会感到不安",dim:"guardian"},
-    {id:13,text:"别人愿意跟我讲秘密，因为觉得我安全",dim:"connector"},
-    {id:14,text:"别人觉得理所当然的事，我总想多问一句为什么",dim:"observer"},
-    {id:15,text:"需要创意的时候，我脑子转得比别人快",dim:"creator"},
-    {id:16,text:"答应的事情，无论如何都会做到",dim:"executor"},
-    {id:17,text:"我享受站在舞台中央、被人看到的感觉",dim:"leader"},
-    {id:18,text:"比起冒险，我更愿意把已有的东西经营好",dim:"guardian"}
-  ],
-  scoring:{
-    type:"sum",
-    dims:[
-      {key:"observer",label:"洞察者",emoji:"🔍",qs:[2,8,14],max:15,color:"#7C3AED"},
-      {key:"connector",label:"联结者",emoji:"🤝",qs:[1,7,13],max:15,color:"#EC4899"},
-      {key:"creator",label:"创造者",emoji:"🎨",qs:[3,9,15],max:15,color:"#F59E0B"},
-      {key:"executor",label:"执行者",emoji:"⚡",qs:[4,10,16],max:15,color:"#10B981"},
-      {key:"leader",label:"引领者",emoji:"🔥",qs:[5,11,17],max:15,color:"#EF4444"},
-      {key:"guardian",label:"守护者",emoji:"🛡",qs:[6,12,18],max:15,color:"#3B82F6"}
-    ],
-    results:{
-      observer:{name:"洞察者",emoji:"🔍",tagline:"你天生就能看见别人看不见的东西",
-        strength:"你不满足于表面答案，总能追问到本质。在别人还在讨论现象的时候，你已经看到了规律。你的大脑处理信息的方式和别人不一样——更深入、更系统、更不满足于'大家都这么说'。",
-        pain:"你曾经觉得自己太内向、不合群。你可能被说过想太多、太安静。但你的安静不是在发呆——是你的大脑在处理比表面聊天更复杂的信息。别人在社交中充电，你在思考中充电。",
-        guide:"你需要一个能让你深度思考的环境。心理学、数据分析、战略咨询、学术研究、写作、编程——任何需要穿透表象看本质的领域。不要强迫自己变成'会说话的人'。你的价值不在于话说得多，在于你说出来的每一句都经过了别人没做过的思考。",
-        mistake:"不要把'想太多'当成缺点。大多数改变世界的想法，都来自那个比别人多问了一句'为什么'的人。"},
-      connector:{name:"联结者",emoji:"🤝",tagline:"你天生就能让对方感到被理解",
-        strength:"你能在第一时间感受到对方的情绪状态。别人需要刻意学习的共情技巧，你天生就会。你是那种朋友深夜会打电话给你的人——因为你听了不会急着给建议，你会先让对方觉得自己被看到了。",
-        pain:"你曾经因为太在意别人的感受而让自己很累。你可能觉得自己太敏感、太好说话、太不会拒绝。但这不是讨好——是你天生就比别人多了一套情绪感知系统。问题不是你太在乎别人，是你忘了也在乎自己。",
-        guide:"你需要一个能让你的共情力发光的地方：心理咨询、教育、销售、用户研究、社区运营、HR。你最大的天赋不在于处理任务——在于让人感到安全。在一个冷漠的世界里，这是一项被严重低估的超能力。",
-        mistake:"不要把共情力用在讨好所有人上。你的天赋是连接，不是自我牺牲。学会把这份天赋对准值得的人，而不是洒向每一个路人。"},
-      creator:{name:"创造者",emoji:"🎨",tagline:"你天生就能从无到有造出新东西",
-        strength:"你的脑子里一直有一个平行宇宙。那里有你想要做的项目、想写的文字、想设计的作品。别人看到现状，你看到可能性。别人接受规则，你问为什么不能换一种方式。",
-        pain:"你可能被说过不切实际、不够踏实。你做着重复性工作的时候会觉得窒息、无聊、灵魂出窍。你怀疑过自己的那些想法是不是太多了。不是太多——是你处在了一个不允许创造的环境里。",
-        guide:"设计、内容创作、产品、艺术、创业。即使现在的工作不让你创造，也请在业余时间给自己一个小项目。创造不是你的职业——是你的呼吸方式。你不需要很大的舞台，你需要一个可以不停垒砖的地方。",
-        mistake:"不要等灵感来找你。创造的天赋需要纪律来喂养——定一个最小的创作节奏，每天做一点点。完成比完美重要一百倍。"},
-      executor:{name:"执行者",emoji:"⚡",tagline:"你天生就能让事情真正落地",
-        strength:"别人还在犹豫要不要开始的时候，你已经做完了。你不怕细节、不怕重复、不怕枯燥——你享受把一团混乱整理成秩序。你答应的事情一定做到，沉默但极其可靠。",
-        pain:"你可能觉得自己不够惊艳、不够有创意。但任何伟大的想法都需要有人把它做出来。那个人就是你。别人在头脑里构建世界，你在现实里一砖一瓦地盖。这个世界在赞美创意，但真正让世界运转的，是像你这样的人。",
-        guide:"项目管理、运营、财务、工程、医疗——任何需要精确、秩序和可靠性的领域。给你一个清晰的目标和足够的自主权，你能让一切高效运转。你不需要是人群中最耀眼的那一个——你是在所有人都慌乱的时候依然能把事情做完的那一个。",
-        mistake:"不要贬低你的执行力。创意千万种，但能把一个想法执行出来的人万里挑一。"},
-      leader:{name:"引领者",emoji:"🔥",tagline:"你天生就能带着别人往前走",
-        strength:"你身上有一种能量——即使你没有刻意在领导，别人也会自然地看你眼色行事。你说的话别人容易听进去，你做的决定别人愿意跟随。你不是因为职位而领导——你是天生就有感召力。",
-        pain:"你可能被说过太强势、太爱出风头、太有控制欲。或者你为了不显得'自大'，一直压抑自己的表达欲。但你不是在抢话筒——你是真的能比别人更快看到方向，并且有一种让别人也想去的能量。",
-        guide:"创业、管理、演讲、培训、销售、政治——任何需要决策力和影响力的领域。你最大的天赋不是你一个人做了什么，是你让一群人因为你而一起做到了什么。你不需要让所有人都喜欢你，你需要让跟着你的人走对方向。",
-        mistake:"不要因为怕被人说强势就熄灭你的火把。真正的引领不是让人服从——是让人因为你而成为更好的自己。"},
-      guardian:{name:"守护者",emoji:"🛡",tagline:"你天生就能让一切稳稳当当",
-        strength:"风暴来的时候，你是那个不动的人。你追求的不是刺激和变化——是秩序、安全感和可预测性。在所有人都焦虑慌张的时候，你是按部就班的那一个。你让身边的人觉得：有你在，不会乱。",
-        pain:"你可能被说过太保守、太不变通、太守旧。你习惯了默默支撑一切，却很少被舞台灯光照到。你不是不敢尝试新东西——你只是太清楚稳定比新鲜更重要。",
-        guide:"教育、护理、行政、客服、家庭经营——任何需要稳定、耐心和忠诚的领域。你不一定站在舞台中央，但你让舞台上的人不倒下。你没有那么多戏剧性——但你给身边人的安全感，比一万句情话都重。",
-        mistake:"不要因为别人说你保守就质疑自己。风浪来的时候，不是最能创新的人活下来了——是最能稳住的人。你就是那股不慌不乱的力量。"}
-    }
-  }
+// === DATA ===
+const Q=[
+  {id:1,text:"朋友遇到困惑时，总喜欢来找我聊",dim:"connector"},
+  {id:2,text:"我看待问题的角度，经常和别人不太一样",dim:"observer"},
+  {id:3,text:"脑海中有很多想法，总想做出点新的东西",dim:"creator"},
+  {id:4,text:"定了计划不做完，心里就不舒服",dim:"executor"},
+  {id:5,text:"一群人不知道该怎么办的时候，我往往是第一个站出来拿主意的人",dim:"leader"},
+  {id:6,text:"我很擅长维持一段长期稳定的关系",dim:"guardian"},
+  {id:7,text:"我对不了解的领域充满好奇心，总想学点新的",dim:"explorer"},
+  {id:8,text:"一旦进入状态，我能连续几个小时不受打扰地沉浸在一件事里",dim:"focuser"},
+  {id:9,text:"换了新环境，我比别人适应得更快",dim:"adaptor"},
+  {id:10,text:"别人说我讲话有感染力，听完会有动力",dim:"inspirer"},
+  {id:11,text:"我能察觉到别人情绪的细微变化，即使TA什么都没说",dim:"connector"},
+  {id:12,text:"别人觉得理所当然的事，我总想多问一句为什么",dim:"observer"},
+  {id:13,text:"需要创意的时候，我脑子转得比别人快",dim:"creator"},
+  {id:14,text:"答应的事情，无论如何都会做到",dim:"executor"},
+  {id:15,text:"我享受站在舞台中央、被人看到的感觉",dim:"leader"},
+  {id:16,text:"比起冒险，我更愿意把已有的东西经营好",dim:"guardian"},
+  {id:17,text:"我一个兴趣没学完，又发现了下一个感兴趣的",dim:"explorer"},
+  {id:18,text:"周围很吵的时候，我还是能专注于手头的事",dim:"focuser"},
+  {id:19,text:"遇到突发状况，我很少慌，反而觉得是挑战",dim:"adaptor"},
+  {id:20,text:"帮助别人发现自己的闪光点，是我最有成就感的事",dim:"inspirer"}
+];
+
+const DIMS=[
+  {key:"observer",label:"洞察者",emoji:"🔍",tag:"一眼看穿本质",qs:[2,12],max:10,color:"#7C3AED"},
+  {key:"connector",label:"联结者",emoji:"🤝",tag:"让人感到被理解",qs:[1,11],max:10,color:"#EC4899"},
+  {key:"creator",label:"创造者",emoji:"🎨",tag:"从无到有造东西",qs:[3,13],max:10,color:"#F59E0B"},
+  {key:"executor",label:"执行者",emoji:"⚡",tag:"说做就做不拖延",qs:[4,14],max:10,color:"#10B981"},
+  {key:"leader",label:"引领者",emoji:"🔥",tag:"带人往前冲",qs:[5,15],max:10,color:"#EF4444"},
+  {key:"guardian",label:"守护者",emoji:"🛡",tag:"稳如磐石",qs:[6,16],max:10,color:"#6366F1"},
+  {key:"explorer",label:"探索者",emoji:"💡",tag:"永远好奇",qs:[7,17],max:10,color:"#06B6D4"},
+  {key:"focuser",label:"聚焦者",emoji:"🎯",tag:"专注到极致",qs:[8,18],max:10,color:"#8B5CF6"},
+  {key:"adaptor",label:"适应者",emoji:"🌊",tag:"什么环境都能活",qs:[9,19],max:10,color:"#14B8A6"},
+  {key:"inspirer",label:"启发者",emoji:"✨",tag:"点亮别人",qs:[10,20],max:10,color:"#F97316"}
+];
+
+const RESULTS={
+  observer:{name:"洞察者",emoji:"🔍",tagline:"你天生就能一眼看穿事物的本质",
+    strength:"你的大脑处理信息和别人不一样——更深、更系统、更不满足于表面答案。在别人还在讨论现象时，你已经看到了背后的规律。你曾经被说过'想太多'，但这不是缺点，是你的大脑在处理更复杂的信息。",
+    talent:"洞察力是一种罕见的天赋。大多数人在答案上停留，你在问题上深挖。你不需要很多信息就能做出准确判断——因为你看的是结构，不是表象。你的直觉往往比别人分析半天还准。",
+    guide:"心理学、数据分析、战略咨询、学术研究、写作、编程——任何需要穿透表象看本质的领域。你需要一个允许你深度思考的环境，而不是催你快速给答案。给自己留出独处时间，你的灵感不会在会议里诞生。",
+    mistake:"不要把'想太多'当成缺点。大多数改变世界的发现，都来自那个比别人多问了一句'为什么'的人。"},
+  connector:{name:"联结者",emoji:"🤝",tagline:"你天生就能让对方感到被深深理解",
+    strength:"你有一种让人卸下防备的能力。别人在你面前会说出对其他人不会说的话——因为你不会急着给建议，你会先让对方觉得被看到了。这份共情力是你最宝贵的资产。",
+    talent:"你能在第一时间感知到对方的情绪状态。别人需要刻意学习的社交技巧，你天生就会。你是那个朋友深夜会打电话的人，是团队里最能化解冲突的人。在一个大家都不太会倾听的世界里，你的存在本身就是治愈。",
+    guide:"心理咨询、教育、用户研究、销售、社区运营、HR。不需要强迫自己在冷冰冰的任务里证明自己——你的价值在人与人之间的连接里。但要学会把这份天赋用在对的人身上，而不是洒向每一个路过的人。",
+    mistake:"不要用你的共情力来讨好所有人。你的天赋是连接，不是自我牺牲。学会设置边界——能被你共情的人，是幸运；但不值得的人，不必透支自己。"},
+  creator:{name:"创造者",emoji:"🎨",tagline:"你天生就能从无到有造出这个世界上不存在的东西",
+    strength:"你的脑子里一直有一个平行宇宙。那里有你想要做的项目、写的文字、设计的作品。别人看到现状，你看到的是'还能怎样'。别人接受规则，你问'为什么不能换一种方式'。",
+    talent:"创造力不只是表现在艺术上。你能用新的方式解决旧的问题，能在看似无关的事物之间建立联结。你做着重复工作时会觉得窒息——不是因为你懒，是因为你的大脑需要创造性输出来维持运转。",
+    guide:"设计、内容创作、产品、艺术、创业。如果现在的工作不让你创造，请在业余时间给自己一个小项目。创造不是你的职业，是你的呼吸方式。定一个最小的创作节奏——每天做一点，完成比完美重要一百倍。",
+    mistake:"不要等灵感来了才动手。天赋需要纪律来喂养。你不需要一个完美的开始，只需要一个开始。"},
+  executor:{name:"执行者",emoji:"⚡",tagline:"你天生就能让事情真正落地，从想法到现实的那一公里",
+    strength:"别人还在纠结要不要开始的时候，你已经做完了。你不怕细节、不怕重复、不怕枯燥——你享受把一团混乱整理成秩序。你答应的事情一定做到，沉默但极其可靠。",
+    talent:"这个社会总在赞美创意，但从创意到现实的那一公里——才是最难的路。而这条路，是你的主场。你能把别人觉得复杂的事拆成一步步完成，能在所有人都在讨论时已经默默做完了。",
+    guide:"项目管理、运营、财务、工程、医疗。给你一个清晰的目标和足够的自主权，你能让一切高效运转。你不需要是人群中最耀眼的那一个——你是在所有人都慌乱的时候依然能把事情做完的那一个。",
+    mistake:"不要觉得自己的执行能力'不够高级'。创意千万种，但能把一个想法执行出来的人万里挑一。"},
+  leader:{name:"引领者",emoji:"🔥",tagline:"你天生就能带着别人一起往前走，别人会自然地追随你",
+    strength:"你身上有一种让人信服的能量。即使你不在领导岗位，别人也会自然地看你的眼色行事。你说的话别人容易听进去，你做的决定别人愿意跟随——不是因为职位，是因为你身上天然带着方向感。",
+    talent:"你能在混乱中快速做出决策。大多数人需要信息足够充分才敢动，而你在信息不完全的时候就能看到方向。你不怕为决定负责——这正是领导力的核心。",
+    guide:"创业、管理、演讲、培训、销售。你的天赋不在于你一个人做了什么，在于你让一群人因为你而一起做到了什么。要警惕的不是强势——是忘了倾听。最好的引领者永远是能听能看的人。",
+    mistake:"不要因为怕被人说强势就把火把掐灭。真正的引领不是让人服从——是让人因为你而成为更好的自己。"},
+  guardian:{name:"守护者",emoji:"🛡",tagline:"你天生就能让一切稳稳当当，是风暴中的那块不动磐石",
+    strength:"所有人都慌乱的时候，你是那个按部就班的人。你不追求刺激和变化——你追求的是秩序、安全感和可预测性。在职场你是最可靠的，在爱情里你是最长情的。你让身边的人感到：有你在，不会乱。",
+    talent:"稳定的力量被严重低估了。一个团队里，最抢眼的不一定是最重要的。你也许不站在舞台中央，但你在后台保障一切不崩。没有你，所有的闪耀都是空中楼阁。",
+    guide:"教育、护理、行政、客服、家庭经营。你不一定要做最刺激的工作——你的天赋在那些需要持之以恒的领域里发光。你不是不敢冒险，是太清楚稳定比新鲜更重要。",
+    mistake:"不要因为别人说你保守就动摇。风浪来的时候，不是最能创新的人活下来了——是最能稳住的人。你就是那股不慌不乱的力量。"},
+  explorer:{name:"探索者",emoji:"💡",tagline:"你天生就有一颗永不满足的好奇心，总是在追寻更大的世界",
+    strength:"你对新鲜事物有一种本能的兴奋。别人害怕未知，你被未知吸引。你的知识面很广——不一定深，但什么都能聊。在需要跨领域思考的时候，你的涉猎范围是最大的优势。",
+    talent:"探索力是创新的燃料。你一个人兴趣没学完就发现了下一个——不是三分钟热度，是你的大脑需要多样化的刺激才能满血。你适合那些需要不断接触新信息、新领域的工作。",
+    guide:"媒体、旅行、教育培训、科技创新、跨界项目。你不需要把自己限定在一个狭窄的领域里——你的天赋恰恰在于把不同领域的知识缝合在一起。但要警惕贪多嚼不烂——找到一个主线把所有探索串起来。",
+    mistake:"不要觉得自己'三分钟热度'是缺点。你的价值不在于把一件事做到100分——在于你能把100件事都做到60分，然后找到其中的联系。"},
+  focuser:{name:"聚焦者",emoji:"🎯",tagline:"你天生就能进入别人无法企及的深度专注状态",
+    strength:"一旦进入状态，整个世界都消失了，只有你和手头的事。你能连续几个小时不被打扰地沉浸在一件事里——这是一种被心理学家称为'心流'的天赋状态。很多人都想拥有这种能力，但你的大脑天生就能切换进去。",
+    talent:"在这个注意力被无限分散的时代，你的专注力是超级武器。你能在别人花十小时还做不好的事情上，用两小时做到极致。不是因为勤奋——是因为你能进入一个别人无法跟上的深度。",
+    guide:"编程、写作、设计、研究、手工艺——任何需要长时间深度专注才能出成果的领域。你需要保护你的专注时间，不要让别人随时打断你。你的效率不是来自技巧——是来自那份别人没有的沉浸能力。",
+    mistake:"不要觉得你沉浸在自己的世界里是'孤僻'。历史上最伟大的作品，大多数都是在一个人独处的深海里完成的。"},
+  adaptor:{name:"适应者",emoji:"🌊",tagline:"你天生就能在任何环境里活下来，并且活得很好",
+    strength:"换了新城市、新工作、新圈子——别人还在迷茫，你已经找到了自己的位置。你有一种像水一样的能力：倒在什么容器里就变成什么形状。你不跟环境对抗，你弯曲自己——然后反弹。",
+    talent:"韧性是你最大的天赋。生活给你的任何一个曲线球，你都能接到。你被击倒过很多次，但每次都能站起来。不是因为坚强——是因为你有一种别人没有的弹性。你经历过的事没有摧毁你，反而让你更柔软也更有力。",
+    guide:"创业、销售、危机管理、跨文化工作——任何需要快速适应变化的环境。你不需要一个稳定的环境才能发挥——你恰恰在一个变化的时代里最有优势。你就是那种大浪淘沙之后留下来的人。",
+    mistake:"不要觉得自己的韧性是'习惯了被伤害'。你的柔韧不是软弱——是刚强到不需要跟世界硬碰硬。"},
+  inspirer:{name:"启发者",emoji:"✨",tagline:"你天生就能点亮别人，让他们看到自己身上的光",
+    strength:"你能看到别人身上他们自己都没发现的部分。你说的话有分量——不是因为你用了什么技巧，而是因为你是真心的。别人听完你的话会觉得有动力、有希望、有一种'原来我也可以'的感觉。",
+    talent:"启发不是演讲技巧——是你能真正看见一个人，然后把你看到的反射回去。你有一种推动别人走向更好的能量。你可能不知道自己影响了多少人——但你随口的一句话，可能在某个人的心里种下了一颗种子。",
+    guide:"教育、教练、写作、演讲、内容创作、公益。你的天赋不在于你说了多漂亮的话——在于你说的话让别人愿意行动。你需要一个能让你接触人的角色。没有什么比看见一个人因为你的话而改变更让你有成就感的事了。",
+    mistake:"不要因为怕说错话就闭口不言。你可能低估了自己对别人的影响。有时候你的一句话，就是别人黑暗里等了很久的那盏灯。"}
 };
 
 let cur=0,answers={},selected=null;
@@ -235,62 +278,101 @@ function showPage(id){
     else el.classList.toggle('active',x===id);
   });
 }
-
 function startQuiz(){cur=0;answers={};showPage('quizPage');renderQ();}
 function renderQ(){
-  const q=C.questions[cur];selected=null;
-  document.getElementById('progLabel').textContent=`${cur+1} / ${C.questions.length}`;
-  document.getElementById('progFill').style.width=`${(cur/C.questions.length)*100}%`;
+  const q=Q[cur];selected=null;
+  document.getElementById('progLabel').textContent=`${cur+1} / ${Q.length}`;
+  document.getElementById('progFill').style.width=`${(cur/Q.length)*100}%`;
   document.getElementById('qNum').textContent=`第 ${cur+1} 题`;
   document.getElementById('qText').textContent=q.text;
   const opts=[{label:'非常不同意',score:1},{label:'不同意',score:2},{label:'中立',score:3},{label:'同意',score:4},{label:'非常同意',score:5}];
-  document.getElementById('qOpts').innerHTML=opts.map((o,i)=>`<button class="q-opt" data-i="${i}" data-s="${o.score}" onclick="sel(${i},${o.score},this)">${o.label}</button>`).join('');
+  document.getElementById('qOpts').innerHTML=opts.map((o,i)=>`<button class="q-opt" onclick="sel(${o.score},this)">${o.label}</button>`).join('');
 }
-function sel(i,s,btn){
+function sel(s,btn){
   document.querySelectorAll('.q-opt').forEach(b=>b.classList.remove('sel'));
   btn.classList.add('sel');selected=s;
   setTimeout(()=>nextQ(),180);
 }
 function nextQ(){
   if(selected===null)return;
-  answers[C.questions[cur].id]=selected;
-  if(cur<C.questions.length-1){cur++;renderQ();}else{showResults();}
+  answers[Q[cur].id]=selected;
+  if(cur<Q.length-1){cur++;renderQ();}else{showResults();}
 }
+
+let allScores=[],currentTab=0;
 function showResults(){
   showPage('loadingPage');
   setTimeout(()=>{
-    const scores={};
-    for(const d of C.scoring.dims){
+    allScores=[];
+    for(const d of DIMS){
       let t=0;
       for(const qid of d.qs){if(answers[qid]!==undefined)t+=answers[qid];}
-      scores[d.key]={raw:t,pct:Math.round(t/d.max*100),...d};
+      allScores.push({...d,raw:t,pct:Math.round(t/d.max*100)});
     }
-    const sorted=Object.values(scores).sort((a,b)=>b.raw-a.raw);
-    const top=sorted[0],second=sorted[1],third=sorted[2];
-    const r=C.scoring.results[top.key];
-
-    document.getElementById('rEmoji').textContent=r.emoji;
-    const badge=document.getElementById('rBadge');
-    badge.textContent=`TOP 1 天赋`;
-    badge.style.background=top.color+'18';badge.style.color=top.color;
-    document.getElementById('rType').textContent=r.name;
-    document.getElementById('rTagline').textContent=r.tagline;
-
-    document.getElementById('rankList').innerHTML=sorted.map((d,i)=>`<div class="rank-item">
-      <span class="r-emoji">${d.emoji}</span>
-      <span class="r-name">${d.label}</span>
-      <div class="r-bar"><div class="r-fill" style="width:${d.pct}%;background:${d.color}"></div></div>
-      <span class="r-pct">${d.pct}%</span>
-    </div>`).join('');
-
-    document.getElementById('rStrength').textContent=r.strength;
-    document.getElementById('rPain').textContent=r.pain;
-    document.getElementById('rGuide').textContent=r.guide;
-    document.getElementById('rMistake').textContent=r.mistake;
-
+    allScores.sort((a,b)=>b.raw-a.raw);
+    currentTab=0;
+    renderTopResult();
     showPage('resultPage');
   },1500);
 }
+
+function renderTopResult(){
+  const top=allScores[0],second=allScores[1],third=allScores[2];
+  const r=RESULTS[top.key];
+  document.getElementById('rEmoji').textContent=r.emoji;
+  document.getElementById('rRank').textContent=`🏆 你的首要天赋`;
+  document.getElementById('rType').textContent=r.name;
+  document.getElementById('rTagline').textContent=r.tagline;
+
+  // Top 3 tabs
+  const tabs=[top,second,third];
+  document.getElementById('top3Tabs').innerHTML=tabs.map((d,i)=>`<div class="top3-tab${i===currentTab?' active':''}" onclick="switchTab(${i})"><span class="tab-emoji">${d.emoji}</span>${d.label}</div>`).join('');
+
+  renderTabDetail(currentTab);
+  renderRankChart();
+}
+
+function switchTab(i){
+  currentTab=i;
+  document.querySelectorAll('.top3-tab').forEach((t,j)=>t.classList.toggle('active',j===i));
+  renderTabDetail(i);
+}
+
+function renderTabDetail(i){
+  const d=allScores[i],r=RESULTS[d.key];
+  const rankLabels=['🥇 首要天赋','🥈 第二天赋','🥉 第三天赋'];
+  document.getElementById('top3Detail').innerHTML=`
+    <div class="detail-card dc-gold" style="margin-bottom:12px">
+      <div class="dc-title">${d.emoji} ${rankLabels[i]} · ${d.label} <span style="font-weight:400;color:var(--muted-fg);margin-left:auto">${d.pct}%</span></div>
+      <div class="dc-text">${r.strength}</div>
+    </div>
+    <div class="detail-card">
+      <div class="dc-title">💎 核心天赋</div>
+      <div class="dc-text">${r.talent}</div>
+    </div>
+    <div class="detail-card dc-rose">
+      <div class="dc-title">🧭 天赋使用指南</div>
+      <div class="dc-text">${r.guide}</div>
+    </div>
+    <div class="detail-card">
+      <div class="dc-title">⚠️ 你可能犯过最大的错误</div>
+      <div class="dc-text">${r.mistake}</div>
+    </div>`;
+}
+
+function renderRankChart(){
+  document.getElementById('rankList').innerHTML=allScores.map((d,i)=>{
+    const cls=i===0?'top1':i===1?'top2':i===2?'top3':'';
+    return`<div class="rank-item ${cls}">
+      <span class="ri-rank">${i+1}</span>
+      <span class="ri-emoji">${d.emoji}</span>
+      <span class="ri-name">${d.label}</span>
+      <div class="ri-bar-wrap"><div class="ri-bar" style="width:${d.pct}%;background:${d.color}"></div></div>
+      <span class="ri-pct">${d.pct}%</span>
+    </div>`;
+  }).join('');
+}
+
 function restartQuiz(){startQuiz();}
 function showShare(){document.getElementById('shareUrl').textContent=window.location.href;document.getElementById('shareOverlay').classList.add('show');}
 function hideShare(e){if(e.target===document.getElementById('shareOverlay'))document.getElementById('shareOverlay').classList.remove('show');}
