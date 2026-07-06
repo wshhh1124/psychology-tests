@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>速测05答案：你是哪种奇怪的动物</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f6;color:#1c1916;padding:28px 20px 60px;min-height:100vh;-webkit-font-smoothing:antialiased}
+.container{max-width:420px;margin:0 auto}
+
+h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
+.sub{font-size:13px;color:#8a8278;text-align:center;margin-bottom:28px}
+
+/* Quick lookup */
+.lookup{background:#fff;border-radius:16px;padding:20px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.lookup-title{font-size:13px;font-weight:700;color:#8a8278;margin-bottom:14px;text-align:center}
+.lookup-grid{display:flex;flex-direction:column;gap:6px}
+.lookup-row{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#f7f4f0;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s}
+.lookup-row:active{background:#efe8e0}
+.lookup-row .emoji{font-size:24px;width:36px;text-align:center}
+.lookup-row .tag{flex:1}
+.lookup-row .range{font-size:12px;color:#8a8278;font-weight:500}
+
+/* Result card */
+.result{background:#fff;border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:none}
+.result.open{display:block}
+.result-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.result-emoji{font-size:48px}
+.result-info{flex:1}
+.result-name{font-size:20px;font-weight:800}
+.result-label{font-size:13px;color:#8a8278;margin-top:2px;font-style:italic}
+.result-divider{height:1px;background:#f0ede6;margin:16px 0}
+.result-section{margin-bottom:14px}
+.result-section .s-title{font-size:12px;font-weight:700;color:#8a8278;margin-bottom:6px;letter-spacing:.04em}
+.result-section .s-text{font-size:14px;line-height:1.7;color:#3d3830}
+.result-highlight{background:#fdf6f0;border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.6;color:#b85a2a;border-left:3px solid #e07b5a}
+
+/* Footer */
+.footer{text-align:center;margin-top:32px;padding:24px 0;border-top:1px solid #f0ede6}
+.footer p{font-size:13px;color:#8a8278;line-height:1.8}
+.footer a{color:#e07b5a;text-decoration:none;font-weight:600}
+
+/* Back to top */
+.back-top{display:block;text-align:center;padding:12px;margin-top:8px;font-size:12px;color:#8a8278;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🐕 🦉 🦝 🐰 🦊</h1>
+<h1>你在朋友眼里是哪种奇怪的动物？</h1>
+<p class="sub">速测05 · 答案揭晓 · 看看你的答案对应哪只</p>
+
+<!-- Quick Lookup -->
+<div class="lookup">
+  <p class="lookup-title">👇 数一数你选了几个 A，点对应结果</p>
+  <div class="lookup-grid">
+    <div class="lookup-row" onclick="showResult('golden')">
+      <span class="emoji">🐕</span><span class="tag">快乐金毛 · 人间充电宝</span><span class="range">A ≥ 5</span>
+    </div>
+    <div class="lookup-row" onclick="showResult('owl')">
+      <span class="emoji">🦉</span><span class="tag">静默猫头鹰 · 暗中洞察者</span><span class="range">A ≤ 2</span>
+    </div>
+    <div class="lookup-row" onclick="showResult('raccoon')">
+      <span class="emoji">🦝</span><span class="tag">创意浣熊 · 脑内风暴中心</span><span class="range">前半A多 后半B多</span>
+    </div>
+    <div class="lookup-row" onclick="showResult('rabbit')">
+      <span class="emoji">🐰</span><span class="tag">雷达兔子 · 情绪扫描仪</span><span class="range">A/B 参半，Q3+Q4 都A</span>
+    </div>
+    <div class="lookup-row" onclick="showResult('fox')">
+      <span class="emoji">🦊</span><span class="tag">千面狐狸 · 社交变色龙</span><span class="range">无明确模式</span>
+    </div>
+  </div>
+</div>
+
+<!-- Results -->
+<div class="result" id="golden">
+  <div class="result-header">
+    <div class="result-emoji">🐕</div>
+    <div class="result-info">
+      <div class="result-name">快乐金毛 · 人间充电宝</div>
+      <div class="result-label">「我的电量100%，但那是给别人用的」</div>
+    </div>
+  </div>
+  <div class="result-divider"></div>
+  <div class="result-section">
+    <p class="s-title">你是什么样的人</p>
+    <p class="s-text">走到哪儿就把气氛带到哪儿。在朋友眼里，你是一台行走的充电桩——见人就摇尾巴、永远有热情、永远有话说。社交对你来说不是消耗，是燃料。</p>
+  </div>
+  <div class="result-section">
+    <p class="s-title">朋友看你的三个瞬间</p>
+    <p class="s-text">认识新朋友 → 「这人怎么三分钟就跟所有人都熟了」<br>群聊冷场 → 「金毛还没说话，不慌」<br>离开你后 → 「刚才好开心，被莫名充电了」</p>
+  </div>
+  <div class="result-highlight">⚠️ 别把电量全给别人，留一点给自己。</div>
+</div>
+
+<div class="result" id="owl">
+  <div class="result-header">
+    <div class="result-emoji">🦉</div>
+    <div class="result-info">
+      <div class="result-name">静默猫头鹰 · 暗中洞察者</div>
+      <div class="result-label">「我不是高冷，我只是对人类过敏」</div>
+    </div>
+  </div>
+  <div class="result-divider"></div>
+  <div class="result-section">
+    <p class="s-title">你是什么样的人</p>
+    <p class="s-text">话不多，但什么都知道。别人在饭局上吹牛的时候，你在角落里已经把所有人的关系网画完了。朋友对你的评价往往是：「刚开始以为你高冷，后来发现你只是懒得社交。」</p>
+  </div>
+  <div class="result-section">
+    <p class="s-title">朋友看你的三个瞬间</p>
+    <p class="s-text">你说了一句话 → 「他怎么什么都知道」<br>你消失了几天 → 「正常，回巢了」<br>你突然出现 → 「出关了，赶紧问重要的事」</p>
+  </div>
+  <div class="result-highlight">⚠️ 偶尔出来透透气，外面的人比你想象中更欢迎你。</div>
+</div>
+
+<div class="result" id="raccoon">
+  <div class="result-header">
+    <div class="result-emoji">🦝</div>
+    <div class="result-info">
+      <div class="result-name">创意浣熊 · 脑内风暴中心</div>
+      <div class="result-label">「做完了50%的项目，拥有200%的快乐」</div>
+    </div>
+  </div>
+  <div class="result-divider"></div>
+  <div class="result-section">
+    <p class="s-title">你是什么样的人</p>
+    <p class="s-text">脑子里永远在翻新东西，对世界充满好奇，对人类保持距离。你发起了一个兴趣小组、发了一篇长文、开启了一个项目——然后就发现下一个有趣的东西了。</p>
+  </div>
+  <div class="result-section">
+    <p class="s-title">朋友看你的三个瞬间</p>
+    <p class="s-text">你甩一个链接进来 → 「他又发现什么好东西了」<br>问起上次说的计划 → 「哦那个啊……嘿嘿」<br>你说「我有个想法」→ 「来了来了，这次是什么」</p>
+  </div>
+  <div class="result-highlight">⚠️ 你是发动机，不是司机。找一个负责执行的人做搭档。</div>
+</div>
+
+<div class="result" id="rabbit">
+  <div class="result-header">
+    <div class="result-emoji">🐰</div>
+    <div class="result-info">
+      <div class="result-name">雷达兔子 · 情绪扫描仪</div>
+      <div class="result-label">「你什么都没说，但我已经替你难过完了」</div>
+    </div>
+  </div>
+  <div class="result-divider"></div>
+  <div class="result-section">
+    <p class="s-title">你是什么样的人</p>
+    <p class="s-text">你的雷达扫得到所有人身上最细小的情绪波动。别人一句话没说，你已经感觉到了气氛不对。朋友深夜会给你打电话——不是因为你有答案，因为你在。</p>
+  </div>
+  <div class="result-section">
+    <p class="s-title">朋友看你的三个瞬间</p>
+    <p class="s-text">刚坐下 → 「你是不是心情不好」—「你怎么知道」<br>你消失了 → 「她注意到了」<br>你说了一句话 → 「就是我最需要听到的那句」</p>
+  </div>
+  <div class="result-highlight">⚠️ 你对情绪敏感，但不该替所有人兜底。学会在别人求助之前先给自己设边界。</div>
+</div>
+
+<div class="result" id="fox">
+  <div class="result-header">
+    <div class="result-emoji">🦊</div>
+    <div class="result-info">
+      <div class="result-name">千面狐狸 · 社交变色龙</div>
+      <div class="result-label">「人格切换太快，忘了原厂设置是什么」</div>
+    </div>
+  </div>
+  <div class="result-divider"></div>
+  <div class="result-section">
+    <p class="s-title">你是什么样的人</p>
+    <p class="s-text">哪个局都能混，什么人都不深交。上班一个模式，回家一个模式，在闺蜜面前又一个模式。不是装的——你天生会根据场景调整自己的「社交皮肤」。</p>
+  </div>
+  <div class="result-section">
+    <p class="s-title">朋友看你的三个瞬间</p>
+    <p class="s-text">和新朋友聊得很嗨 → 「他不是说他社恐吗」<br>突然沉默 → 「刚才还好好的」<br>问「他到底是什么样的人」→ 「说不清楚」</p>
+  </div>
+  <div class="result-highlight">⚠️ 不是所有场合都需要切换模式。让一些人看到真实的你，才是最深的连接。</div>
+</div>
+
+<div class="footer">
+  <p>🔍 想知道你的真实天赋排名？<br>主页搜 <strong>「你的隐藏天赋是什么」</strong></p>
+  <p style="margin-top:8px">📱 关注 <strong>@镜子测试局</strong><br>每周两个新速测，答案都在私信里</p>
+</div>
+
+<a class="back-top" href="#" onclick="document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));window.scrollTo(0,200);return false">收起 ↑</a>
+
+</div>
+
+<script>
+function showResult(id) {
+  document.querySelectorAll('.result.open').forEach(r => r.classList.remove('open'));
+  document.getElementById(id).classList.add('open');
+  document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'});
+}
+</script>
+</body>
+</html>
