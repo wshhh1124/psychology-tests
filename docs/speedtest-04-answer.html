@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>速测04答案：你的隐形压力有多大</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f6;color:#1c1916;padding:28px 20px 60px;min-height:100vh}
+.container{max-width:420px;margin:0 auto}
+h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
+.sub{font-size:13px;color:#8a8278;text-align:center;margin-bottom:28px}
+.lookup{background:#fff;border-radius:16px;padding:20px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.lookup-title{font-size:13px;font-weight:700;color:#8a8278;margin-bottom:14px;text-align:center}
+.lookup-grid{display:flex;flex-direction:column;gap:6px}
+.lookup-row{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#f7f4f0;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
+.lookup-row:active{background:#efe8e0}
+.lookup-row .tag{flex:1}
+.lookup-row .range{font-size:12px;color:#8a8278;font-weight:500}
+.result{background:#fff;border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:none}
+.result.open{display:block}
+.result-name{font-size:20px;font-weight:800;margin-bottom:4px}
+.result-desc{font-size:13px;color:#8a8278;margin-bottom:16px;font-style:italic}
+.result-divider{height:1px;background:#f0ede6;margin:16px 0}
+.result-section{margin-bottom:12px}
+.result-section .s-label{font-size:12px;font-weight:700;color:#8a8278;margin-bottom:4px}
+.result-section .s-text{font-size:14px;line-height:1.7;color:#3d3830}
+.result-highlight{background:#fdf6f0;border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.6;color:#b85a2a;border-left:3px solid #e07b5a;margin-top:12px}
+.footer{text-align:center;margin-top:32px;padding:24px 0;border-top:1px solid #f0ede6}
+.footer p{font-size:13px;color:#8a8278;line-height:1.8}
+.back-top{display:block;text-align:center;padding:12px;margin-top:8px;font-size:12px;color:#8a8278;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>你现在的隐形压力有多大？</h1>
+<p class="sub">速测04 · 答案揭晓</p>
+<div class="lookup">
+  <p class="lookup-title">👇 点你的答案类型</p>
+  <div class="lookup-grid">
+    <div class="lookup-row" onclick="show('r1')"><span class="tag">警报级——身体在喊停</span><span class="range">A ≥ 4</span></div>
+    <div class="lookup-row" onclick="show('r2')"><span class="tag">积压型——扛太久了</span><span class="range">A 2-3</span></div>
+    <div class="lookup-row" onclick="show('r3')"><span class="tag">适应型——已麻木</span><span class="range">A 1-2</span></div>
+    <div class="lookup-row" onclick="show('r4')"><span class="tag">管理得当——正常范围</span><span class="range">A ≤ 1</span></div>
+  </div>
+</div>
+
+<div class="result" id="r1">
+  <div class="result-name">警报级压力</div>
+  <div class="result-desc">你是那个「看起来没事」的人，但身体不是这么说的。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">没来由的头疼、怎么睡都累、脑子像蒙了一层雾——这些都是身体在用最后的方式抗议。隐形压力已经变成了身体症状。</p></div>
+  <div class="result-section"><p class="s-label">关键信号</p><p class="s-text">Q1+A：情绪渗透到了生理层面<br>Q3+A：认知功能已受影响<br>Q4+A：靠肾上腺素和意志力在撑<br>Q5+A：人际消耗已是压力主要来源</p></div>
+  <div class="result-highlight">不是「休息一下就好了」的程度。检查三个方面：工作强度、关系消耗、自我期待。至少有一项已经失控。</div>
+</div>
+
+<div class="result" id="r2">
+  <div class="result-name">积压型压力</div>
+  <div class="result-desc">你不是没感觉到。你是习惯了。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">每次压力过后你觉得「过去了」，但身体还留着。下次压力来的时候你从80%电开始跑。Q2+A（睡前大脑关不掉）、Q3+A（脑雾）、Q4+A（周末断电）——恢复速度赶不上消耗速度。</p></div>
+  <div class="result-highlight">区别「娱乐」和「恢复」：刷手机是娱乐不是恢复。每天给自己20分钟什么都不做——散步不出汗、发呆不焦虑，那才是恢复。</div>
+</div>
+
+<div class="result" id="r3">
+  <div class="result-name">适应型压力</div>
+  <div class="result-desc">你的压力和你的生活已经融合在了一起。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">问你「压力大不大」，你会说「还好」「正常」「大家不都这样」。但这恰恰是最危险的——你已经失去了对压力的感知，不知道自己的基线在哪里。你以为的「正常」，可能一直在5分徘徊，真正的「好」应该比这高得多。</p></div>
+  <div class="result-highlight">你最需要的不是「减压技巧」，是先意识到：我现在确实有压力。</div>
+</div>
+
+<div class="result" id="r4">
+  <div class="result-name">压力管理得当</div>
+  <div class="result-desc">你的压力感知和调节能力还在正常运作。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">压力来了你能感觉到，压力走了你能恢复。这是一项被严重低估的能力——很多人已经丧失了这种弹性。保持现在的方式，唯一要注意：如果某段时间状态突然下滑，别忽略。</p></div>
+</div>
+
+<div class="footer">
+  <p>🧘 想做85题深度身心评估？<br>主页搜 <strong>「你的身心情绪中心健康吗」</strong></p>
+  <p style="margin-top:8px">📱 关注 <strong>@镜子测试局</strong><br>每周两个新速测，答案都在私信里</p>
+</div>
+<a class="back-top" href="#" onclick="document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));window.scrollTo(0,200);return false">收起 ↑</a>
+</div>
+<script>function show(id){document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));document.getElementById(id).classList.add('open');document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'})}</script>
+</body>
+</html>

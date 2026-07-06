@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>速测03答案：该修复还是该离开</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f6;color:#1c1916;padding:28px 20px 60px;min-height:100vh}
+.container{max-width:420px;margin:0 auto}
+h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
+.sub{font-size:13px;color:#8a8278;text-align:center;margin-bottom:28px}
+.lookup{background:#fff;border-radius:16px;padding:20px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.lookup-title{font-size:13px;font-weight:700;color:#8a8278;margin-bottom:14px;text-align:center}
+.lookup-grid{display:flex;flex-direction:column;gap:6px}
+.lookup-row{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#f7f4f0;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
+.lookup-row:active{background:#efe8e0}
+.lookup-row .tag{flex:1}
+.lookup-row .range{font-size:12px;color:#8a8278;font-weight:500}
+.result{background:#fff;border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:none}
+.result.open{display:block}
+.result-name{font-size:20px;font-weight:800;margin-bottom:4px}
+.result-desc{font-size:13px;color:#8a8278;margin-bottom:16px;font-style:italic}
+.result-divider{height:1px;background:#f0ede6;margin:16px 0}
+.result-section .s-text{font-size:14px;line-height:1.7;color:#3d3830}
+.result-highlight{background:#fdf6f0;border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.6;color:#b85a2a;border-left:3px solid #e07b5a;margin-top:12px}
+.footer{text-align:center;margin-top:32px;padding:24px 0;border-top:1px solid #f0ede6}
+.footer p{font-size:13px;color:#8a8278;line-height:1.8}
+.back-top{display:block;text-align:center;padding:12px;margin-top:8px;font-size:12px;color:#8a8278;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>该修复还是该离开？</h1>
+<p class="sub">速测03 · 答案揭晓</p>
+<div class="lookup">
+  <p class="lookup-title">👇 点你的答案类型</p>
+  <div class="lookup-grid">
+    <div class="lookup-row" onclick="show('r1')"><span class="tag">你该离开了</span><span class="range">A ≥ 4</span></div>
+    <div class="lookup-row" onclick="show('r2')"><span class="tag">还可以修复</span><span class="range">B ≥ 4</span></div>
+    <div class="lookup-row" onclick="show('r3')"><span class="tag">你该先停下来</span><span class="range">A/B 参半</span></div>
+    <div class="lookup-row" onclick="show('r4')"><span class="tag">换一种方式谈</span><span class="range">参半且冷静</span></div>
+  </div>
+</div>
+
+<div class="result" id="r1">
+  <div class="result-name">你该离开了</div>
+  <div class="result-desc">你已经在内心深处知道答案了——只是还没准备好承认。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">它可能曾经是一段好的关系、一份值得的工作、一个让你兴奋的承诺。但现在它持续消耗你已经很久了——而且你试过修复，没有用。离开不是因为不够努力，是因为你已经做得够多了。有些关系的终点不是背叛，是自然结束。</p></div>
+</div>
+
+<div class="result" id="r2">
+  <div class="result-name">还可以修复</div>
+  <div class="result-desc">还有东西值得留下来。不是幻觉——是真实的、还没用尽的可能。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">你在乎这段关系/这份工作/这个决定。它只是最近走了岔路。问题不在于「要不要离开」——在于「我们能不能换一种方式来相处」。说一些你还没说的话——不是说指责，是说你的真实感受。</p></div>
+  <div class="result-highlight">如果你说了之后对方无动于衷——那才是离开的理由。</div>
+</div>
+
+<div class="result" id="r3">
+  <div class="result-name">你该先停下来</div>
+  <div class="result-desc">你现在看不清。不是不想做决定——是太累了、太近了、太在里面了。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">人在风暴中心的时候，看不到风有多大。你需要拉开距离——不是为了逃避，而是为了看清楚：我想要留下是因为真的想要，还是因为害怕离开？给自己一个期限，时间到了就决定。不动也是一种决定——而且往往是最差的那种。</p></div>
+</div>
+
+<div class="result" id="r4">
+  <div class="result-name">换一种方式谈</div>
+  <div class="result-desc">不是谁对谁错——是你们一直在用同一种无效沟通方式。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">不是他不改——是你说的话没进他的耳朵。不是你无理取闹——是他一直没听懂你在说什么。换一种方式：不是更大声、不是更委屈、不是冷战。是换一个句式、换一个时间、换一个场合。有时候，换个说法比换个对象更有用。</p></div>
+</div>
+
+<div class="footer">
+  <p>💞 想了解你在关系中的模式？<br>主页搜 <strong>「你是哪种依恋类型」</strong></p>
+  <p style="margin-top:8px">📱 关注 <strong>@镜子测试局</strong><br>每周两个新速测，答案都在私信里</p>
+</div>
+<a class="back-top" href="#" onclick="document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));window.scrollTo(0,200);return false">收起 ↑</a>
+</div>
+<script>function show(id){document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));document.getElementById(id).classList.add('open');document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'})}</script>
+</body>
+</html>

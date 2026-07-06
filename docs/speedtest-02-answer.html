@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>速测02答案：你的疲惫是哪一种</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f6;color:#1c1916;padding:28px 20px 60px;min-height:100vh}
+.container{max-width:420px;margin:0 auto}
+h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
+.sub{font-size:13px;color:#8a8278;text-align:center;margin-bottom:28px}
+.lookup{background:#fff;border-radius:16px;padding:20px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.lookup-title{font-size:13px;font-weight:700;color:#8a8278;margin-bottom:14px;text-align:center}
+.lookup-grid{display:flex;flex-direction:column;gap:6px}
+.lookup-row{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#f7f4f0;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
+.lookup-row:active{background:#efe8e0}
+.lookup-row .tag{flex:1}
+.lookup-row .range{font-size:12px;color:#8a8278;font-weight:500}
+.result{background:#fff;border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:none}
+.result.open{display:block}
+.result-name{font-size:20px;font-weight:800;margin-bottom:4px}
+.result-desc{font-size:13px;color:#8a8278;margin-bottom:16px;font-style:italic}
+.result-divider{height:1px;background:#f0ede6;margin:16px 0}
+.result-section .s-text{font-size:14px;line-height:1.7;color:#3d3830}
+.result-highlight{background:#fdf6f0;border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.6;color:#b85a2a;border-left:3px solid #e07b5a;margin-top:12px}
+.footer{text-align:center;margin-top:32px;padding:24px 0;border-top:1px solid #f0ede6}
+.footer p{font-size:13px;color:#8a8278;line-height:1.8}
+.back-top{display:block;text-align:center;padding:12px;margin-top:8px;font-size:12px;color:#8a8278;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>你的疲惫，是哪一种？</h1>
+<p class="sub">速测02 · 答案揭晓</p>
+<div class="lookup">
+  <p class="lookup-title">👇 点你的答案类型</p>
+  <div class="lookup-grid">
+    <div class="lookup-row" onclick="show('r1')"><span class="tag">警报级疲惫——身体在喊停</span><span class="range">A ≥ 4</span></div>
+    <div class="lookup-row" onclick="show('r2')"><span class="tag">积压型疲惫——扛太久了</span><span class="range">A 2-3</span></div>
+    <div class="lookup-row" onclick="show('r3')"><span class="tag">心理性疲惫——心累了</span><span class="range">Q4+A + Q5+A</span></div>
+    <div class="lookup-row" onclick="show('r4')"><span class="tag">正常恢复型——身体还听你的</span><span class="range">A ≤ 1</span></div>
+  </div>
+</div>
+
+<div class="result" id="r1">
+  <div class="result-name">警报级疲惫</div>
+  <div class="result-desc">身体已经在替你喊停了。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">你不是懒，你的神经系统资源耗尽了。Q2选了A（对以前喜欢的事没兴趣）是最需要警惕的信号——这已经不是累了，是接近burnout的快感丧失。早上不想起床不是意志力问题，是身体在求救。</p></div>
+  <div class="result-highlight">给自己一个真正的暂停——不是躺着刷手机，是换环境、断节奏的那种。然后看看：工作、关系、自我期待，哪一块在持续吸你的能量。</div>
+</div>
+
+<div class="result" id="r2">
+  <div class="result-name">积压型疲惫</div>
+  <div class="result-desc">你不是没感觉到。你是习惯了。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">每次累过之后你觉得「过去了」，但身体还留着它。下一次压力来的时候，你从80%的电开始跑，而不是100%。</p></div>
+  <div class="result-highlight">区别「娱乐」和「恢复」：刷手机是娱乐，不是恢复。每天给自己20分钟什么都不做——你可能会更焦虑，这恰恰说明你多久没真正停下来了。</div>
+</div>
+
+<div class="result" id="r3">
+  <div class="result-name">心理性疲惫</div>
+  <div class="result-desc">你的累不在肌肉里——在心里。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">你可能说不清楚具体为什么，但就是觉得「什么都有点没劲」。周末断电、想有人替自己活一天——这不是身体需要睡眠，是心需要重新找到让它跳动的东西。</p></div>
+  <div class="result-highlight">去区分「不想做这件事」和「不想做任何事」。前者换件事，后者需要重新找到让你眼睛亮起来的东西。</div>
+</div>
+
+<div class="result" id="r4">
+  <div class="result-name">正常恢复型</div>
+  <div class="result-desc">你的身体还在听你的话。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">你的压力调节系统还在正常工作。睡一觉能恢复，对生活还有兴趣——这是一项被严重低估的能力。保持现在的节奏，唯一要注意的是：如果某段时间状态突然下滑，别忽略。</p></div>
+</div>
+
+<div class="footer">
+  <p>🧘 想做更深入的身心评估？<br>主页搜 <strong>「你的身心情绪中心健康吗」</strong></p>
+  <p style="margin-top:8px">📱 关注 <strong>@镜子测试局</strong><br>每周两个新速测，答案都在私信里</p>
+</div>
+<a class="back-top" href="#" onclick="document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));window.scrollTo(0,200);return false">收起 ↑</a>
+</div>
+<script>function show(id){document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));document.getElementById(id).classList.add('open');document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'})}</script>
+</body>
+</html>

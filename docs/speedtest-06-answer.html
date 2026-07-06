@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>速测06答案：你是哪种职场动物</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f6;color:#1c1916;padding:28px 20px 60px;min-height:100vh}
+.container{max-width:420px;margin:0 auto}
+h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
+.sub{font-size:13px;color:#8a8278;text-align:center;margin-bottom:28px}
+.lookup{background:#fff;border-radius:16px;padding:20px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.lookup-title{font-size:13px;font-weight:700;color:#8a8278;margin-bottom:14px;text-align:center}
+.lookup-grid{display:flex;flex-direction:column;gap:6px}
+.lookup-row{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#f7f4f0;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
+.lookup-row:active{background:#efe8e0}
+.lookup-row .emoji{font-size:24px;width:36px;text-align:center}
+.lookup-row .tag{flex:1}
+.lookup-row .range{font-size:12px;color:#8a8278;font-weight:500}
+.result{background:#fff;border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:none}
+.result.open{display:block}
+.result-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.result-emoji{font-size:48px}
+.result-name{font-size:20px;font-weight:800}
+.result-label{font-size:13px;color:#8a8278;margin-top:2px;font-style:italic}
+.result-divider{height:1px;background:#f0ede6;margin:16px 0}
+.result-section{margin-bottom:12px}
+.result-section .s-title{font-size:12px;font-weight:700;color:#8a8278;margin-bottom:4px}
+.result-section .s-text{font-size:14px;line-height:1.7;color:#3d3830}
+.result-highlight{background:#fdf6f0;border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.6;color:#b85a2a;border-left:3px solid #4f8bc9;margin-top:12px}
+.footer{text-align:center;margin-top:32px;padding:24px 0;border-top:1px solid #f0ede6}
+.footer p{font-size:13px;color:#8a8278;line-height:1.8}
+.back-top{display:block;text-align:center;padding:12px;margin-top:8px;font-size:12px;color:#8a8278;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🐝 🦥 🦊 🦉 🐢</h1>
+<h1>你在工作中是哪一种奇怪的同事？</h1>
+<p class="sub">速测06 · 答案揭晓</p>
+<div class="lookup">
+  <p class="lookup-title">👇 数A数量，点对应动物</p>
+  <div class="lookup-grid">
+    <div class="lookup-row" onclick="show('bee')"><span class="emoji">🐝</span><span class="tag">永动机蜜蜂 · 不加班浑身难受</span><span class="range">A ≥ 6</span></div>
+    <div class="lookup-row" onclick="show('turtle')"><span class="emoji">🐢</span><span class="tag">边界神龟 · 准时下班是人权</span><span class="range">A ≤ 2</span></div>
+    <div class="lookup-row" onclick="show('fox')"><span class="emoji">🦊</span><span class="tag">社交狐狸 · 汇报五分钟干活两小时</span><span class="range">Q2+A Q5+A</span></div>
+    <div class="lookup-row" onclick="show('owl')"><span class="emoji">🦉</span><span class="tag">静默猫头鹰 · 别管我看结果</span><span class="range">Q2+B Q5+B</span></div>
+    <div class="lookup-row" onclick="show('sloth')"><span class="emoji">🦥</span><span class="tag">节能树懒 · 拿多少钱做多少事</span><span class="range">Q6+B Q7+B</span></div>
+  </div>
+</div>
+
+<div class="result" id="bee"><div class="result-header"><div class="result-emoji">🐝</div><div><div class="result-name">永动机蜜蜂</div><div class="result-label">「休息是什么？能吃吗？」</div></div></div><div class="result-divider"></div><div class="result-section"><p class="s-text">你就是那种周日晚上还在群里发消息的人。在你的价值体系里，工作是核心身份。同事眼里你靠谱、负责，但有点可怕。「你怎么又在加班？」这句话你每周听三遍。</p></div><div class="result-highlight">你是最容易burnout的类型。如果Q4（周日晚上）也选了B——你嘴上说期待，心里其实在逃避。那个B是身体在说话。</div></div>
+
+<div class="result" id="turtle"><div class="result-header"><div class="result-emoji">🐢</div><div><div class="result-name">边界神龟</div><div class="result-label">「别想用情怀换我的加班费」</div></div></div><div class="result-divider"></div><div class="result-section"><p class="s-text">你有一种让同事羡慕的能力——说关电脑就关电脑。你不是不认真，你是太清楚：工作是生活的子集，不是反过来。同事眼里你稳、边界感强、「他怎么做到那么坦然？」</p></div><div class="result-highlight">如果Q4（周日晚上）也选了B——那不是边界，是煎熬的信号。</div></div>
+
+<div class="result" id="fox"><div class="result-header"><div class="result-emoji">🦊</div><div><div class="result-name">社交狐狸</div><div class="result-label">「活儿不一定是我干的，但话一定是我说的」</div></div></div><div class="result-divider"></div><div class="result-section"><p class="s-text">开会时存在感极强，被抢功时不会硬刚但会巧妙拿回来。你其实不太加班——你知道职场不只看你做了什么，还看你被看到了什么。同事觉得你聪明、会来事、「汇报太精准了」。</p></div><div class="result-highlight">你的能见度是武器，但别忘了把真本事跟上。别把自己变成只有高度没有深度的气球。</div></div>
+
+<div class="result" id="owl"><div class="result-header"><div class="result-emoji">🦉</div><div><div class="result-name">静默猫头鹰</div><div class="result-label">「请勿投喂，请勿打扰。有事留言。」</div></div></div><div class="result-divider"></div><div class="result-section"><p class="s-text">开会不说话，被抢功直接怼回去，但你并不是摆烂——你很可能事情要做好、想升职做大事。你只是不喜欢表演。月底一看数据，你一个人干了半个组的活儿。</p></div><div class="result-highlight">你是最容易被低估的类型。偶尔让重要的人知道你在做什么——不是表演，是保护自己。</div></div>
+
+<div class="result" id="sloth"><div class="result-header"><div class="result-emoji">🦥</div><div><div class="result-name">节能树懒</div><div class="result-label">「我是来打工的，不是来卖命的」</div></div></div><div class="result-divider"></div><div class="result-section"><p class="s-text">你不是不干活——你是不干合同以外的活。你对工作的投入有一个精确的刻度：不多不少，刚好对得起这份工资。同事眼里你是人间清醒、「他活得好轻松」。</p></div><div class="result-highlight">如果Q4（周日晚上）也选了B——你不是节能，是正在被消耗。真树懒舒服地不动，假树懒是累到不想动。</div></div>
+
+<div class="footer">
+  <p>🔍 想知道你的天赋排名？<br>主页搜 <strong>「你的隐藏天赋是什么」</strong></p>
+  <p style="margin-top:8px">📱 关注 <strong>@镜子测试局</strong><br>每周两个新速测，答案都在私信里</p>
+</div>
+<a class="back-top" href="#" onclick="document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));window.scrollTo(0,200);return false">收起 ↑</a>
+</div>
+<script>function show(id){document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));document.getElementById(id).classList.add('open');document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'})}</script>
+</body>
+</html>

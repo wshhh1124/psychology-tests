@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>速测08答案：你是真佛系还是假躺平</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f6;color:#1c1916;padding:28px 20px 60px;min-height:100vh}
+.container{max-width:420px;margin:0 auto}
+h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
+.sub{font-size:13px;color:#8a8278;text-align:center;margin-bottom:28px}
+.lookup{background:#fff;border-radius:16px;padding:20px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.lookup-title{font-size:13px;font-weight:700;color:#8a8278;margin-bottom:14px;text-align:center}
+.lookup-grid{display:flex;flex-direction:column;gap:6px}
+.lookup-row{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#f7f4f0;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
+.lookup-row:active{background:#efe8e0}
+.lookup-row .emoji{font-size:24px;width:36px;text-align:center}
+.lookup-row .tag{flex:1}
+.lookup-row .range{font-size:12px;color:#8a8278;font-weight:500}
+.result{background:#fff;border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:none}
+.result.open{display:block}
+.result-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.result-emoji{font-size:48px}
+.result-name{font-size:20px;font-weight:800}
+.result-label{font-size:13px;color:#8a8278;margin-top:2px;font-style:italic}
+.result-divider{height:1px;background:#f0ede6;margin:16px 0}
+.result-section .s-text{font-size:14px;line-height:1.7;color:#3d3830;margin-bottom:12px}
+.result-highlight{background:#fdf6f0;border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.6;color:#b85a2a;border-left:3px solid #5b8c5a;margin-top:12px}
+.footer{text-align:center;margin-top:32px;padding:24px 0;border-top:1px solid #f0ede6}
+.footer p{font-size:13px;color:#8a8278;line-height:1.8}
+.back-top{display:block;text-align:center;padding:12px;margin-top:8px;font-size:12px;color:#8a8278;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🌱 😴 🔥 💤 🌿 🫥</h1>
+<h1>你是真佛系还是假躺平？</h1>
+<p class="sub">速测08 · 答案揭晓</p>
+<div class="lookup">
+  <p class="lookup-title">👇 数A数量，点对应模式</p>
+  <div class="lookup-grid">
+    <div class="lookup-row" onclick="show('r1')"><span class="emoji">🔥</span><span class="tag">心中有火型 · 没找到跑道</span><span class="range">A ≥ 6</span></div>
+    <div class="lookup-row" onclick="show('r2')"><span class="emoji">🌱</span><span class="tag">稳健前行型 · 真人间清醒</span><span class="range">A 4-5，Q2+A Q7+B</span></div>
+    <div class="lookup-row" onclick="show('r3')"><span class="emoji">💤</span><span class="tag">熄火保护型 · 没油了不是懒</span><span class="range">A 3-4，Q4+A</span></div>
+    <div class="lookup-row" onclick="show('r4')"><span class="emoji">🌿</span><span class="tag">真佛系 · 内心安宁</span><span class="range">A ≤ 3，Q5+A Q7+B</span></div>
+    <div class="lookup-row" onclick="show('r5')"><span class="emoji">🫥</span><span class="tag">悬浮型 · 不上不下</span><span class="range">参半，Q7+A</span></div>
+  </div>
+</div>
+
+<div class="result" id="r1"><div class="result-header"><div class="result-emoji">🔥</div><div><div class="result-name">心中有火型</div><div class="result-label">「表面在躺，心里在跑」</div></div></div><div class="result-divider"></div><div class="result-section"><p class="s-text">你嘴上说「无所谓」，但Q1（不用工作会兴奋）、Q3（羡慕努力的人）、Q6（想抓住机会）全选了A。你不是佛系——你是能量没找到出口。就像一个满格的充电宝，一直没找到需要充电的设备。</p></div><div class="result-highlight">你不缺动力——你缺的是一个让你觉得「值得」的方向。写下过去一个月你做的时候忘了时间的三件事，你的方向在那里。</div></div>
+
+<div class="result" id="r2"><div class="result-header"><div class="result-emoji">🌱</div><div><div class="result-name">稳健前行型</div><div class="result-label">「慢，但我清楚自己在往哪儿走」</div></div></div><div class="result-divider"></div><div class="result-section"><p class="s-text">Q2（觉得自己在往前走）选了A，Q7（深夜不焦虑）选了B。你不是躺平——你是以自己的节奏在走。你知道自己要去哪儿，不急，但也没停。这是最健康的状态。你不是「没有野心」——你是不会被别人的时间线绑架。</p></div></div>
+
+<div class="result" id="r3"><div class="result-header"><div class="result-emoji">💤</div><div><div class="result-name">熄火保护型</div><div class="result-label">「我嘴上说不在乎，是因为在乎也没用」</div></div></div><div class="result-divider"></div><div class="result-section"><p class="s-text">你选了Q4+A（被人说没进步时心里一紧）和Q5+B（说「都行」其实是在意但懒得说）。你不是真的无所谓——你是曾经在乎过太久，现在进入了断电保护模式。这是burnout的前兆。</p></div><div class="result-highlight">别给自己定「重新支棱起来」的大目标。接下来一周，每天做一件你自己真的想做的小事——不是应该做的，是想做的。</div></div>
+
+<div class="result" id="r4"><div class="result-header"><div class="result-emoji">🌿</div><div><div class="result-name">真佛系 · 内心安宁</div><div class="result-label">「我不是躺平，我就是喜欢躺着」</div></div></div><div class="result-divider"></div><div class="result-section"><p class="s-text">你选A不多——但不是因为逃避，是真的不太在意那些事。Q5（说都行是真的不在意）、Q7（深夜不焦虑）。你不是「不动弹」——你是「不需要靠动来证明自己在活着」。生活不是竞赛。</p></div><div class="result-highlight">偶尔问问自己：如果三年后还是这样——我会开心吗？开心就继续。犹豫了就去看看速测08的「心中有火型」。</div></div>
+
+<div class="result" id="r5"><div class="result-header"><div class="result-emoji">🫥</div><div><div class="result-name">悬浮型</div><div class="result-label">「我没方向，但我也懒得找方向」</div></div></div><div class="result-divider"></div><div class="result-section"><p class="s-text">Q2（觉得原地踏步）选了B，Q7（深夜会有「这辈子就这样了吗」的想法）选了A。你的佛系既不是真的平静——也不是假装的。你是悬在半空，什么都有点没劲。不是痛苦，也不是快乐。</p></div><div class="result-highlight">不要想「人生方向」这么大的词。这周做一件没做过的小事——一条没走过的路、一种没吃过的菜。你的感受系统需要重新被激活。</div></div>
+
+<div class="footer">
+  <p>⭐ 想找到让你眼睛亮起来的方向？<br>主页搜 <strong>「你的隐藏天赋是什么」</strong></p>
+  <p style="margin-top:8px">📱 关注 <strong>@镜子测试局</strong><br>每周两个新速测，答案都在私信里</p>
+</div>
+<a class="back-top" href="#" onclick="document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));window.scrollTo(0,200);return false">收起 ↑</a>
+</div>
+<script>function show(id){document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));document.getElementById(id).classList.add('open');document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'})}</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>速测01答案：你的问题真的是工作吗</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f6;color:#1c1916;padding:28px 20px 60px;min-height:100vh;-webkit-font-smoothing:antialiased}
+.container{max-width:420px;margin:0 auto}
+h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
+.sub{font-size:13px;color:#8a8278;text-align:center;margin-bottom:28px}
+.lookup{background:#fff;border-radius:16px;padding:20px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.lookup-title{font-size:13px;font-weight:700;color:#8a8278;margin-bottom:14px;text-align:center}
+.lookup-grid{display:flex;flex-direction:column;gap:6px}
+.lookup-row{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#f7f4f0;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
+.lookup-row:active{background:#efe8e0}
+.lookup-row .tag{flex:1}
+.lookup-row .range{font-size:12px;color:#8a8278;font-weight:500}
+.result{background:#fff;border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:none}
+.result.open{display:block}
+.result-name{font-size:20px;font-weight:800;margin-bottom:4px}
+.result-desc{font-size:13px;color:#8a8278;margin-bottom:16px;font-style:italic}
+.result-divider{height:1px;background:#f0ede6;margin:16px 0}
+.result-section{margin-bottom:14px}
+.result-section .s-title{font-size:12px;font-weight:700;color:#8a8278;margin-bottom:6px}
+.result-section .s-text{font-size:14px;line-height:1.7;color:#3d3830}
+.result-highlight{background:#fdf6f0;border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.6;color:#b85a2a;border-left:3px solid #e07b5a}
+.footer{text-align:center;margin-top:32px;padding:24px 0;border-top:1px solid #f0ede6}
+.footer p{font-size:13px;color:#8a8278;line-height:1.8}
+.footer a{color:#e07b5a;text-decoration:none;font-weight:600}
+.back-top{display:block;text-align:center;padding:12px;margin-top:8px;font-size:12px;color:#8a8278;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>你的问题，真的是工作吗？</h1>
+<p class="sub">速测01 · 答案揭晓</p>
+<div class="lookup">
+  <p class="lookup-title">👇 点你的答案类型</p>
+  <div class="lookup-grid">
+    <div class="lookup-row" onclick="show('r1')"><span class="tag">你该换个环境</span><span class="range">A ≥ 4</span></div>
+    <div class="lookup-row" onclick="show('r2')"><span class="tag">你该换个节奏</span><span class="range">B ≥ 4</span></div>
+    <div class="lookup-row" onclick="show('r3')"><span class="tag">你该换个活法</span><span class="range">A/B 参半，Q3+A</span></div>
+    <div class="lookup-row" onclick="show('r4')"><span class="tag">换对自己的看法</span><span class="range">Q4+B 且 Q5+A</span></div>
+  </div>
+</div>
+
+<div class="result" id="r1">
+  <div class="result-name">你该换个环境</div>
+  <div class="result-desc">问题不在工作本身，在和谁一起做、在什么氛围里做。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">你是容易被环境塑造的人。周围人消耗你的时候，再好的工作也撑不住。你可能并不讨厌自己的专业或行业，但现在的团队、老板、公司文化让你每天都很煎熬。</p></div>
+  <div class="result-highlight">先换环境，再判断要不要转行。环境变了，你对同一份工作的感受会完全不同。</div>
+</div>
+
+<div class="result" id="r2">
+  <div class="result-name">你该换个节奏</div>
+  <div class="result-desc">你不是想辞职。你只是太累了。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">你的工作本身可能还行，但你一直在以一种不可持续的节奏在跑。你没有给自己真正的休息——不是周末躺着刷手机那种，是停下来问问自己「我现在到底想要什么」的那种。</p></div>
+  <div class="result-highlight">不要在看不清楚的时候做重大决定。休整之后，很多焦虑会自然消散。</div>
+</div>
+
+<div class="result" id="r3">
+  <div class="result-name">你该换个活法</div>
+  <div class="result-desc">你做的每一个选择单独看都很合理，加在一起却不对劲。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">这不是某一个工作的问题，是你对自己「应该怎么活」这件事产生了根本性的怀疑。这种时刻不是职业规划能解决的——需要更深层的自我探索。</p></div>
+  <div class="result-highlight">先别急着换工作。你需要做的是重新理解自己——你的价值观、你的恐惧、你身体在替你说什么。</div>
+</div>
+
+<div class="result" id="r4">
+  <div class="result-name">你该换对自己的看法</div>
+  <div class="result-desc">你的工作其实没那么差。你对自己太苛刻了。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">你羡慕的人状态比你好，不是因为他们拥有更多——是因为他们没你这么擅长自我攻击。你看自己的眼光，比任何一份工作都更需要调整。</p></div>
+  <div class="result-highlight">停下来看看你对自己说了什么。「不够好」「不够努力」「不够成功」——这些声音比你工作中的任何困难都更消耗你。</div>
+</div>
+
+<div class="footer">
+  <p>🔍 想知道你的天赋排名？<br>主页搜 <strong>「你的隐藏天赋是什么」</strong></p>
+  <p style="margin-top:8px">📱 关注 <strong>@镜子测试局</strong><br>每周两个新速测，答案都在私信里</p>
+</div>
+<a class="back-top" href="#" onclick="document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));window.scrollTo(0,200);return false">收起 ↑</a>
+</div>
+<script>function show(id){document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));document.getElementById(id).classList.add('open');document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'})}</script>
+</body>
+</html>

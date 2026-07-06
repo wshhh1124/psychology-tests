@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>速测07答案：你对自己有多狠</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f6;color:#1c1916;padding:28px 20px 60px;min-height:100vh}
+.container{max-width:420px;margin:0 auto}
+h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
+.sub{font-size:13px;color:#8a8278;text-align:center;margin-bottom:28px}
+.lookup{background:#fff;border-radius:16px;padding:20px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.lookup-title{font-size:13px;font-weight:700;color:#8a8278;margin-bottom:14px;text-align:center}
+.lookup-grid{display:flex;flex-direction:column;gap:6px}
+.lookup-row{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#f7f4f0;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
+.lookup-row:active{background:#efe8e0}
+.lookup-row .emoji{font-size:24px;width:36px;text-align:center}
+.lookup-row .tag{flex:1}
+.lookup-row .range{font-size:12px;color:#8a8278;font-weight:500}
+.result{background:#fff;border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:none}
+.result.open{display:block}
+.result-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.result-emoji{font-size:48px}
+.result-name{font-size:20px;font-weight:800}
+.result-label{font-size:13px;color:#8a8278;margin-top:2px;font-style:italic}
+.result-divider{height:1px;background:#f0ede6;margin:16px 0}
+.result-section .s-text{font-size:14px;line-height:1.7;color:#3d3830;margin-bottom:12px}
+.result-highlight{background:#fdf6f0;border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.6;color:#b85a2a;border-left:3px solid #8b5e83;margin-top:12px}
+.footer{text-align:center;margin-top:32px;padding:24px 0;border-top:1px solid #f0ede6}
+.footer p{font-size:13px;color:#8a8278;line-height:1.8}
+.back-top{display:block;text-align:center;padding:12px;margin-top:8px;font-size:12px;color:#8a8278;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>😤 🥺 😶 🫠 💪</h1>
+<h1>你对自己有多狠？</h1>
+<p class="sub">速测07 · 答案揭晓</p>
+<div class="lookup">
+  <p class="lookup-title">👇 数A数量，点对应批评家</p>
+  <div class="lookup-grid">
+    <div class="lookup-row" onclick="show('r1')"><span class="emoji">😤</span><span class="tag">暴君型 · 360度自我攻击</span><span class="range">A ≥ 6</span></div>
+    <div class="lookup-row" onclick="show('r2')"><span class="emoji">🥺</span><span class="tag">对比型 · 永远在看别人</span><span class="range">A 4-5，Q3+A</span></div>
+    <div class="lookup-row" onclick="show('r3')"><span class="emoji">😶</span><span class="tag">忽视型 · 对别人好忘了自己</span><span class="range">A 3-4，Q6/A2+A</span></div>
+    <div class="lookup-row" onclick="show('r4')"><span class="emoji">🫠</span><span class="tag">忙碌逃避型 · 不敢停下来</span><span class="range">A 2-3，Q5+A</span></div>
+    <div class="lookup-row" onclick="show('r5')"><span class="emoji">💪</span><span class="tag">自我关怀型 · 你对自己还不错</span><span class="range">A ≤ 1</span></div>
+  </div>
+</div>
+
+<div class="result" id="r1"><div class="result-header"><div class="result-emoji">😤</div><div><div class="result-name">暴君型批评家</div><div class="result-label">「别人还没开口，我已经把自己骂完了」</div></div></div><div class="result-divider"></div><div class="result-section"><p class="s-text">你给自己定的标准，可能连你最佩服的人也达不到。你对别人温柔，对自己像审讯官。Q1（失败重播）、Q4（内心辱骂）、Q5（休息有罪恶感）全选了A——你不是在努力，你是在自我惩罚。这是最消耗的类型。</p></div><div class="result-highlight">下次搞砸的时候，想象是你最好的朋友搞砸了同一件事——你会对他说什么？然后把这句话对自己说一遍。</div></div>
+
+<div class="result" id="r2"><div class="result-header"><div class="result-emoji">🥺</div><div><div class="result-name">对比型批评家</div><div class="result-label">「朋友圈每刷一次，就觉得自己失败一次」</div></div></div><div class="result-divider"></div><div class="result-section"><p class="s-text">你不一定对自己多狠——但你对「别人比我好」这件事特别敏感。Q3（同龄人对比）铁A，打开朋友圈就像打开了自我审判的法庭。你不跟过去的自己比——你跟全世界比。</p></div><div class="result-highlight">取关三个让你看完心情变差的账号。不是逃避——是保护自己不被不相关的人消耗。</div></div>
+
+<div class="result" id="r3"><div class="result-header"><div class="result-emoji">😶</div><div><div class="result-name">忽视型</div><div class="result-label">「所有人的感受我都记得，除了我自己的」</div></div></div><div class="result-divider"></div><div class="result-section"><p class="s-text">别人批评你→立刻检讨。别人夸你→觉得是客气。你对情绪特别敏感——但只对别人的情绪。你可能是朋友眼里最温暖的人，但你是自己眼里最不值得被温暖的人。</p></div><div class="result-highlight">每天睡前问自己：今天我为自己做的一件事是什么？不是别人为你做的——是你为自己做的。</div></div>
+
+<div class="result" id="r4"><div class="result-header"><div class="result-emoji">🫠</div><div><div class="result-name">忙碌逃避型</div><div class="result-label">「只要我一直在做事，就没空审判自己」</div></div></div><div class="result-divider"></div><div class="result-section"><p class="s-text">你不是典型的完美主义者，但你有一个底层信念：「我必须一直在进步，不然就是在退步。」Q5（休息有罪恶感）+ Q7（给自己打低分）——你让自己忙，不一定是为了完成什么，可能只是为了没空面对自己。</p></div><div class="result-highlight">下次有罪恶感时问自己：如果我不做这件事，最坏的结果是什么？那个结果真的会发生吗？</div></div>
+
+<div class="result" id="r5"><div class="result-header"><div class="result-emoji">💪</div><div><div class="result-name">自我关怀型</div><div class="result-label">「搞砸了就搞砸了，又不是世界末日」</div></div></div><div class="result-divider"></div><div class="result-section"><p class="s-text">你能接受自己的不完美。你脑子里的声音不是审判官，是啦啦队。这不是「不上进」——这是心理学家Kristin Neff说的「自我关怀」：对自己像对好朋友一样。这是所有人努力的方向。</p></div></div>
+
+<div class="footer">
+  <p>⭐ 想知道你的天赋结构？<br>主页搜 <strong>「你的隐藏天赋是什么」</strong></p>
+  <p style="margin-top:8px">📱 关注 <strong>@镜子测试局</strong><br>每周两个新速测，答案都在私信里</p>
+</div>
+<a class="back-top" href="#" onclick="document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));window.scrollTo(0,200);return false">收起 ↑</a>
+</div>
+<script>function show(id){document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));document.getElementById(id).classList.add('open');document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'})}</script>
+</body>
+</html>
