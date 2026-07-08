@@ -32,17 +32,6 @@ h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
 .result-highlight{background:#fdf6f0;border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.6;color:#b85a2a;border-left:3px solid #e07b5a;margin-top:12px}
 .result-goods{background:#f5f9f5;border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.6;color:#3d6b3d;border-left:3px solid #5a9e5a;margin-top:8px}
 
-/* 投票 */
-.vote-block{background:#fff;border-radius:16px;padding:20px 24px;margin-top:20px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.vote-block .v-title{font-size:13px;font-weight:700;margin-bottom:10px}
-.vote-options{display:flex;flex-direction:column;gap:6px}
-.vote-opt{padding:10px 14px;background:#f7f4f0;border-radius:10px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:8px}
-.vote-opt:active,.vote-opt.picked{background:#efe8e0}
-.vote-opt .v-dot{width:16px;height:16px;border-radius:50%;border:2px solid #d0cbc4;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.vote-opt.picked .v-dot{border-color:#e07b5a;background:#e07b5a}
-.vote-opt.picked .v-dot::after{content:'\2713';color:#fff;font-size:10px}
-.vote-thanks{display:none;font-size:13px;color:#5a9e5a;text-align:center;padding:10px;margin-top:4px}
-
 /* 底部 */
 .footer{text-align:center;margin-top:32px;padding:24px 0;border-top:1px solid #f0ede6}
 .footer p{font-size:13px;color:#8a8278;line-height:1.8}
@@ -100,17 +89,6 @@ h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
   <div class="result-highlight"><strong>利用这个窗口做一次人生盘点：</strong>现在的生活里，哪三件事是你确定不想变的？哪一件事是「还行但可以更好」的？稳定期不是用来躺平的——是给下一个转折储备燃料的。下一次转折来的时候，你希望自己准备好了什么？</div>
 </div>
 
-<div class="vote-block">
-  <div class="v-title">你还想测什么话题？（点选告诉镜子）</div>
-  <div class="vote-options">
-    <div class="vote-opt" onclick="vote(this)"><span class="v-dot"></span>职业转折——我该辞职还是该留下？</div>
-    <div class="vote-opt" onclick="vote(this)"><span class="v-dot"></span>关系选择——ta是对的人吗？</div>
-    <div class="vote-opt" onclick="vote(this)"><span class="v-dot"></span>家庭期待——父母对我的影响有多大？</div>
-    <div class="vote-opt" onclick="vote(this)"><span class="v-dot"></span>自我认同——我到底想要什么？</div>
-  </div>
-  <div class="vote-thanks" id="vote-done">收到！你的投票决定了下一个深挖方向</div>
-</div>
-
 <div class="footer">
   <p class="cta-strong">关注 @镜子测试局</p>
   <p>人生转折系列持续更新中<br>关注账号，下一篇不错过</p>
@@ -127,16 +105,6 @@ function show(id){
   document.getElementById(id).classList.add('open');
   document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'});
 }
-function vote(el){
-  document.querySelectorAll('.vote-opt.picked').forEach(function(o){o.classList.remove('picked')});
-  el.classList.add('picked');
-  document.getElementById('vote-done').style.display='block';
-  try{localStorage.setItem('transition-vote',el.innerText.trim());}catch(e){}
-}
-(function(){
-  try{var s=localStorage.getItem('transition-vote');}catch(e){return}
-  if(s){document.querySelectorAll('.vote-opt').forEach(function(o){if(o.innerText.trim()===s){o.classList.add('picked');}});document.getElementById('vote-done').style.display='block';}
-})();
 </script>
 </body>
 </html>
