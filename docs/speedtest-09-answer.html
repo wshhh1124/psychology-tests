@@ -32,10 +32,14 @@ h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
 .result-highlight{background:#fdf6f0;border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.6;color:#b85a2a;border-left:3px solid #e07b5a;margin-top:12px}
 .result-goods{background:#f5f9f5;border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.6;color:#3d6b3d;border-left:3px solid #5a9e5a;margin-top:8px}
 
+/* 按钮 */
+.follow-btn{display:block;text-align:center;padding:14px;margin:24px 0 12px;background:#ff5a4c;color:#fff;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none}
+.follow-btn:active{background:#e04a3c}
+.share-btn{display:block;width:100%;text-align:center;padding:12px;margin-bottom:24px;background:#fff;color:#1c1916;border:1px solid #e8e4de;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer}
+
 /* 底部 */
-.footer{text-align:center;margin-top:32px;padding:24px 0;border-top:1px solid #f0ede6}
+.footer{text-align:center;margin-top:8px;padding:24px 0;border-top:1px solid #f0ede6}
 .footer p{font-size:13px;color:#8a8278;line-height:1.8}
-.footer .cta-strong{font-size:15px;font-weight:700;color:#1c1916;margin-bottom:4px}
 .back-top{display:block;text-align:center;padding:12px;margin-top:8px;font-size:12px;color:#8a8278;text-decoration:none}
 </style>
 </head>
@@ -89,14 +93,17 @@ h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
   <div class="result-highlight"><strong>利用这个窗口做一次人生盘点：</strong>现在的生活里，哪三件事是你确定不想变的？哪一件事是「还行但可以更好」的？稳定期不是用来躺平的——是给下一个转折储备燃料的。下一次转折来的时候，你希望自己准备好了什么？</div>
 </div>
 
+<a class="follow-btn" href="https://xhslink.com/m/771znHLbJD6" target="_blank">打开小红书，关注 @镜子测试局</a>
+
+<button class="share-btn" onclick="shareResult()">发给一个也在经历转折的朋友</button>
+
 <div class="footer">
-  <p class="cta-strong">关注 @镜子测试局</p>
-  <p>人生转折系列持续更新中<br>关注账号，下一篇不错过</p>
+  <p>人生转折系列 · 每周准时更新</p>
   <p style="margin-top:12px">想和大家聊聊你的转折阶段？<br>主页群聊入口，转角遇到和你一样的人</p>
   <p style="margin-top:12px">还想深入一点？<br><strong>「你的身心情绪中心健康吗」</strong> · 85题深度评估<br><strong>「你是哪种依恋类型」</strong> · 了解你的关系模式</p>
 </div>
 
-<a class="back-top" href="#" onclick="document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));window.scrollTo(0,200);return false">收起结果</a>
+<a class="back-top" href="#" onclick="document.querySelectorAll('.result.open').forEach(function(r){r.classList.remove('open')});window.scrollTo(0,200);return false">收起结果</a>
 </div>
 
 <script>
@@ -104,6 +111,16 @@ function show(id){
   document.querySelectorAll('.result.open').forEach(function(r){r.classList.remove('open')});
   document.getElementById(id).classList.add('open');
   document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'});
+}
+function shareResult(){
+  var name = '';
+  var open = document.querySelector('.result.open');
+  if(open) name = open.querySelector('.result-name').innerText;
+  if(navigator.share){
+    navigator.share({title:'我的人生转折阶段',text:'刚测了「你的人生转折，卡在哪一关？」，结果是：'+name+'。你也来测测？'});
+  }else{
+    prompt('复制这段话发给朋友：', '刚在镜子测试局测了「你的人生转折，卡在哪一关？」，我的结果是：'+name+'。你也来测测？关注 @镜子测试局，私信「答案」就能测。');
+  }
 }
 </script>
 </body>
