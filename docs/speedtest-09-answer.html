@@ -10,6 +10,8 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;backgr
 .container{max-width:420px;margin:0 auto}
 h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
 .sub{font-size:13px;color:#8a8278;text-align:center;margin-bottom:28px}
+
+/* 答案选择区 */
 .lookup{background:#fff;border-radius:16px;padding:20px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .lookup-title{font-size:13px;font-weight:700;color:#8a8278;margin-bottom:14px;text-align:center}
 .lookup-grid{display:flex;flex-direction:column;gap:6px}
@@ -17,6 +19,8 @@ h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
 .lookup-row:active{background:#efe8e0}
 .lookup-row .tag{flex:1}
 .lookup-row .range{font-size:12px;color:#8a8278;font-weight:500}
+
+/* 结果卡片 */
 .result{background:#fff;border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:none}
 .result.open{display:block}
 .result-name{font-size:20px;font-weight:800;margin-bottom:4px}
@@ -28,49 +32,22 @@ h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
 .result-highlight{background:#fdf6f0;border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.6;color:#b85a2a;border-left:3px solid #e07b5a;margin-top:12px}
 .result-goods{background:#f5f9f5;border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.6;color:#3d6b3d;border-left:3px solid #5a9e5a;margin-top:8px}
 
-/* 新增：系列区块 */
-.series-block{background:#fff;border-radius:16px;padding:20px 24px;margin-top:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.series-block h3{font-size:16px;font-weight:800;margin-bottom:4px}
-.series-block .series-sub{font-size:12px;color:#8a8278;margin-bottom:16px}
-
-/* 预告卡片 */
-.teaser{background:linear-gradient(135deg,#fdf6f0,#faf3ed);border-radius:12px;padding:16px 18px;margin-bottom:16px;border:1px solid #f0e6dc}
-.teaser .badge{display:inline-block;background:#e07b5a;color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;margin-bottom:8px}
-.teaser .t-title{font-size:15px;font-weight:700;margin-bottom:4px}
-.teaser .t-desc{font-size:12px;color:#8a8278;line-height:1.5;margin-bottom:10px}
-.teaser .t-cta{font-size:12px;color:#e07b5a;font-weight:600}
-
 /* 投票 */
-.vote-block{margin-top:16px}
+.vote-block{background:#fff;border-radius:16px;padding:20px 24px;margin-top:20px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .vote-block .v-title{font-size:13px;font-weight:700;margin-bottom:10px}
 .vote-options{display:flex;flex-direction:column;gap:6px}
-.vote-opt{padding:10px 14px;background:#f7f4f0;border-radius:10px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .15s}
+.vote-opt{padding:10px 14px;background:#f7f4f0;border-radius:10px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:8px}
 .vote-opt:active,.vote-opt.picked{background:#efe8e0}
 .vote-opt .v-dot{width:16px;height:16px;border-radius:50%;border:2px solid #d0cbc4;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .vote-opt.picked .v-dot{border-color:#e07b5a;background:#e07b5a}
-.vote-opt.picked .v-dot::after{content:'✓';color:#fff;font-size:10px}
+.vote-opt.picked .v-dot::after{content:'\2713';color:#fff;font-size:10px}
 .vote-thanks{display:none;font-size:13px;color:#5a9e5a;text-align:center;padding:10px;margin-top:4px}
-
-/* 地图 */
-.map-block{margin-top:16px}
-.map-block .m-title{font-size:13px;font-weight:700;margin-bottom:10px}
-.map-phase{margin-bottom:12px}
-.map-phase .mp-label{font-size:12px;font-weight:700;color:#8a8278;margin-bottom:4px}
-.map-phase .mp-item{font-size:12px;padding:5px 0 5px 16px;color:#8a8278;position:relative}
-.map-phase .mp-item::before{content:'';position:absolute;left:0;top:12px;width:6px;height:6px;border-radius:50%;background:#d0cbc4}
-.map-phase .mp-item.done{color:#1c1916}
-.map-phase .mp-item.done::before{background:#5a9e5a}
-.map-phase .mp-item.current{color:#e07b5a;font-weight:700}
-.map-phase .mp-item.current::before{background:#e07b5a;box-shadow:0 0 0 3px rgba(224,123,90,.2)}
-.map-phase .mp-item.locked{color:#c0b8b0}
-.map-phase .mp-item.locked::before{background:#e8e4de}
 
 /* 底部 */
 .footer{text-align:center;margin-top:32px;padding:24px 0;border-top:1px solid #f0ede6}
 .footer p{font-size:13px;color:#8a8278;line-height:1.8}
 .footer .cta-strong{font-size:15px;font-weight:700;color:#1c1916;margin-bottom:4px}
 .back-top{display:block;text-align:center;padding:12px;margin-top:8px;font-size:12px;color:#8a8278;text-decoration:none}
-.share-btn{display:block;text-align:center;padding:14px;margin:20px 0;background:#1c1916;color:#fff;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none}
 </style>
 </head>
 <body>
@@ -79,16 +56,15 @@ h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
 <p class="sub">速测09 · 答案揭晓</p>
 
 <div class="lookup">
-  <p class="lookup-title">👇 数一数你选了几个 A，点对应结果</p>
+  <p class="lookup-title">数一数你选了几个 A，点对应结果</p>
   <div class="lookup-grid">
-    <div class="lookup-row" onclick="show('r1')"><span class="tag">转折迷茫期——旧的瓦解了，新的还没来</span><span class="range">A ≥ 4</span></div>
+    <div class="lookup-row" onclick="show('r1')"><span class="tag">转折迷茫期——旧的瓦解了，新的还没来</span><span class="range">A &ge; 4</span></div>
     <div class="lookup-row" onclick="show('r2')"><span class="tag">转折进行中——在摸索，还没站稳</span><span class="range">A 2-3</span></div>
     <div class="lookup-row" onclick="show('r3')"><span class="tag">重建期——你已经上路了</span><span class="range">A 1</span></div>
     <div class="lookup-row" onclick="show('r4')"><span class="tag">积累期——不在转折中</span><span class="range">A 0</span></div>
   </div>
 </div>
 
-<!-- 结果一：迷茫期 -->
 <div class="result" id="r1">
   <div class="result-name">转折迷茫期</div>
   <div class="result-desc">你正站在两段人生之间。旧的你已经不太认识自己了，新的你还没有形状。</div>
@@ -99,7 +75,6 @@ h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
   <div class="result-goods"><strong>迷茫期不是浪费。</strong>你在这个阶段做的事——反思、试探、停下来——会在下一个阶段全部兑现。别催自己。</div>
 </div>
 
-<!-- 结果二：转折进行中 -->
 <div class="result" id="r2">
   <div class="result-name">转折进行中</div>
   <div class="result-desc">你不是卡住了。你是在过渡。只是过渡的时间比想象的长。</div>
@@ -109,7 +84,6 @@ h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
   <div class="result-highlight"><strong>给自己一个里程碑：</strong>不是「找到完美答案」——那太难了。换一个：这周做一件让三个月后的自己感谢你的事。就一件。约一个人聊、报名一个课、写完那封一直没写的信。</div>
 </div>
 
-<!-- 结果三：重建期 -->
 <div class="result" id="r3">
   <div class="result-name">重建期</div>
   <div class="result-desc">你已经过了最难的坎。可能你自己都没注意到——你已经在新的轨道上了。</div>
@@ -118,7 +92,6 @@ h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
   <div class="result-highlight"><strong>做一次两年对比：</strong>写下两年前的你——住哪、做什么、和谁在一起、最担心什么、最想要什么。然后写现在的你。你会发现变化比你以为的大得多。你正在重建，而且速度不慢。</div>
 </div>
 
-<!-- 结果四：积累期 -->
 <div class="result" id="r4">
   <div class="result-name">积累期</div>
   <div class="result-desc">你现在的状态是难得的。你不是没有困惑，但你对自己的方向有基本的确信。</div>
@@ -127,103 +100,43 @@ h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
   <div class="result-highlight"><strong>利用这个窗口做一次人生盘点：</strong>现在的生活里，哪三件事是你确定不想变的？哪一件事是「还行但可以更好」的？稳定期不是用来躺平的——是给下一个转折储备燃料的。下一次转折来的时候，你希望自己准备好了什么？</div>
 </div>
 
-<!-- ====== 系列区块 ====== -->
-<div class="series-block">
-
-  <!-- 预告下一篇 -->
-  <div class="teaser">
-    <span class="badge">明天发布</span>
-    <div class="t-title">速测10：你该放下的，到底是什么？</div>
-    <div class="t-desc">测测卡住你的，是旧身份、旧关系、旧环境，还是旧信念。知道该放下什么，你才知道下一步往哪走。</div>
-    <div class="t-cta">📌 关注 @镜子测试局，明天醒来就能看到 →</div>
+<div class="vote-block">
+  <div class="v-title">你还想测什么话题？（点选告诉镜子）</div>
+  <div class="vote-options">
+    <div class="vote-opt" onclick="vote(this)"><span class="v-dot"></span>职业转折——我该辞职还是该留下？</div>
+    <div class="vote-opt" onclick="vote(this)"><span class="v-dot"></span>关系选择——ta是对的人吗？</div>
+    <div class="vote-opt" onclick="vote(this)"><span class="v-dot"></span>家庭期待——父母对我的影响有多大？</div>
+    <div class="vote-opt" onclick="vote(this)"><span class="v-dot"></span>自我认同——我到底想要什么？</div>
   </div>
-
-  <!-- 需求投票 -->
-  <div class="vote-block">
-    <div class="v-title">🗳️ 做完这个测试，你还想测什么话题？（点选投票）</div>
-    <div class="vote-options">
-      <div class="vote-opt" onclick="vote(this)"><span class="v-dot"></span>职业转折——我该辞职还是该留下？</div>
-      <div class="vote-opt" onclick="vote(this)"><span class="v-dot"></span>关系选择——ta是对的人吗？</div>
-      <div class="vote-opt" onclick="vote(this)"><span class="v-dot"></span>家庭期待——父母对我的影响有多大？</div>
-      <div class="vote-opt" onclick="vote(this)"><span class="v-dot"></span>自我认同——我到底想要什么？</div>
-    </div>
-    <div class="vote-thanks" id="vote-done">收到！你的投票决定了我们下一篇深挖的方向 🤎</div>
-  </div>
-
-  <!-- 系列地图 -->
-  <div class="map-block">
-    <div class="m-title">🗺️ 人生转折系列 · 完整地图</div>
-
-    <div class="map-phase">
-      <div class="mp-label">阶段一：定位</div>
-      <div class="mp-item done">✅ 速测09：你卡在哪一关？</div>
-    </div>
-
-    <div class="map-phase">
-      <div class="mp-label">阶段二：深挖（关注解锁）</div>
-      <div class="mp-item current">🔓 速测10：你该放下什么？—— 明天发布</div>
-      <div class="mp-item locked">🔒 速测11：哪个领域在报警？</div>
-      <div class="mp-item locked">🔒 速测12：你不敢做的选择是什么？</div>
-      <div class="mp-item locked">🔒 速测13：你是哪种转折型人格？</div>
-    </div>
-
-    <div class="map-phase">
-      <div class="mp-label">阶段三：行动</div>
-      <div class="mp-item locked">🔒 速测14：你的决策模式在帮你还是害你？</div>
-      <div class="mp-item locked">🔒 速测15：你准备好改变了吗？</div>
-      <div class="mp-item locked">🔒 速测16：你最不想后悔没做什么？</div>
-    </div>
-  </div>
+  <div class="vote-thanks" id="vote-done">收到！你的投票决定了下一个深挖方向</div>
 </div>
 
-<!-- 分享按钮 -->
-<a class="share-btn" href="javascript:void(0)" onclick="shareResult()">📤 分享我的结果给朋友</a>
-
-<!-- 底部 -->
 <div class="footer">
-  <p class="cta-strong">📌 关注 @镜子测试局</p>
-  <p>这个系列一共10篇，帮你从「卡住」到「走出去」<br>别让自己停在半路</p>
-  <p style="margin-top:12px">💬 想和大家聊聊你的转折阶段？<br>主页群聊入口，转角遇到和你一样的人</p>
-  <p style="margin-top:12px">🧘 还想深入一点？<br><strong>「你的身心情绪中心健康吗」</strong>· 85题深度评估<br><strong>「你是哪种依恋类型」</strong>· 了解你的关系模式</p>
+  <p class="cta-strong">关注 @镜子测试局</p>
+  <p>人生转折系列持续更新中<br>关注账号，下一篇不错过</p>
+  <p style="margin-top:12px">想和大家聊聊你的转折阶段？<br>主页群聊入口，转角遇到和你一样的人</p>
+  <p style="margin-top:12px">还想深入一点？<br><strong>「你的身心情绪中心健康吗」</strong> · 85题深度评估<br><strong>「你是哪种依恋类型」</strong> · 了解你的关系模式</p>
 </div>
 
-<a class="back-top" href="#" onclick="document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));window.scrollTo(0,200);return false">收起结果 ↑</a>
+<a class="back-top" href="#" onclick="document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));window.scrollTo(0,200);return false">收起结果</a>
 </div>
 
 <script>
 function show(id){
-  document.querySelectorAll('.result.open').forEach(r=>r.classList.remove('open'));
+  document.querySelectorAll('.result.open').forEach(function(r){r.classList.remove('open')});
   document.getElementById(id).classList.add('open');
   document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'});
 }
-
 function vote(el){
-  document.querySelectorAll('.vote-opt.picked').forEach(o=>o.classList.remove('picked'));
+  document.querySelectorAll('.vote-opt.picked').forEach(function(o){o.classList.remove('picked')});
   el.classList.add('picked');
   document.getElementById('vote-done').style.display='block';
-  localStorage.setItem('transition-vote',el.innerText.trim());
+  try{localStorage.setItem('transition-vote',el.innerText.trim());}catch(e){}
 }
-
-// 恢复之前的投票状态
 (function(){
-  var saved = localStorage.getItem('transition-vote');
-  if(saved){
-    document.querySelectorAll('.vote-opt').forEach(function(o){
-      if(o.innerText.trim() === saved){ o.classList.add('picked'); }
-    });
-    document.getElementById('vote-done').style.display='block';
-  }
+  try{var s=localStorage.getItem('transition-vote');}catch(e){return}
+  if(s){document.querySelectorAll('.vote-opt').forEach(function(o){if(o.innerText.trim()===s){o.classList.add('picked');}});document.getElementById('vote-done').style.display='block';}
 })();
-
-function shareResult(){
-  var resultEl = document.querySelector('.result.open');
-  var name = resultEl ? resultEl.querySelector('.result-name').innerText : '我的转折阶段';
-  if(navigator.share){
-    navigator.share({title:'我的人生转折阶段',text:'我在镜子测试局测了「你的人生转折，卡在哪一关？」，结果是：'+name+'。你也来测测？'});
-  }else{
-    alert('你的结果是：'+name+'。截图分享给朋友吧！');
-  }
-}
 </script>
 </body>
 </html>
