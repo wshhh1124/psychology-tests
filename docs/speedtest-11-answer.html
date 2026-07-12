@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>速测11答案：你的工作耗竭，到第几阶段了？</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f6;color:#1c1916;padding:28px 20px 60px;min-height:100vh}
+.container{max-width:420px;margin:0 auto}
+h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
+.sub{font-size:13px;color:#8a8278;text-align:center;margin-bottom:28px}
+.lookup{background:#fff;border-radius:16px;padding:20px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.lookup-title{font-size:13px;font-weight:700;color:#8a8278;margin-bottom:14px;text-align:center}
+.lookup-grid{display:flex;flex-direction:column;gap:6px}
+.lookup-row{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#f7f4f0;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
+.lookup-row:active{background:#efe8e0}
+.lookup-row .tag{flex:1}
+.lookup-row .range{font-size:12px;color:#8a8278;font-weight:500}
+.result{background:#fff;border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:none}
+.result.open{display:block}
+.result-name{font-size:20px;font-weight:800;margin-bottom:4px}
+.result-desc{font-size:13px;color:#8a8278;margin-bottom:16px;font-style:italic}
+.result-divider{height:1px;background:#f0ede6;margin:16px 0}
+.result-section{margin-bottom:12px}
+.result-section .s-text{font-size:14px;line-height:1.7;color:#3d3830}
+.result-highlight{background:#f2f6f9;border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.6;color:#2c5f7c;border-left:3px solid #4a8ab0;margin-top:12px}
+.follow-btn{display:block;text-align:center;padding:14px;margin:24px 0 12px;background:#2c5f7c;color:#fff;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none}
+.follow-btn:active{background:#1e4a60}
+.share-btn{display:block;width:100%;text-align:center;padding:12px;margin-bottom:24px;background:#fff;color:#1c1916;border:1px solid #e8e4de;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer}
+.footer{text-align:center;margin-top:8px;padding:24px 0;border-top:1px solid #f0ede6}
+.footer p{font-size:13px;color:#8a8278;line-height:1.8}
+.back-top{display:block;text-align:center;padding:12px;margin-top:8px;font-size:12px;color:#8a8278;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>你的工作耗竭，到第几阶段了？</h1>
+<p class="sub">速测11 · 答案揭晓</p>
+
+<div class="lookup">
+  <p class="lookup-title">数一数你选了几个 A，点对应结果</p>
+  <div class="lookup-grid">
+    <div class="lookup-row" onclick="show('r1')"><span class="tag">第四阶段——危机期，身体在替你喊停</span><span class="range">A &ge; 4</span></div>
+    <div class="lookup-row" onclick="show('r2')"><span class="tag">第三阶段——慢性耗竭，在透支的路上</span><span class="range">A 2-3</span></div>
+    <div class="lookup-row" onclick="show('r3')"><span class="tag">第二阶段——压力积累，需要关注</span><span class="range">A 1</span></div>
+    <div class="lookup-row" onclick="show('r4')"><span class="tag">第一阶段——还在正常范围</span><span class="range">A 0</span></div>
+  </div>
+</div>
+
+<div class="result" id="r1">
+  <div class="result-name">第四阶段：危机期</div>
+  <div class="result-desc">你不是「不想上班」。是身体和精神同时到了极限。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">Q1+A（早上心往下沉）+ Q3+A（下班被掏空）+ Q4+A（身体症状）——三个信号同时出现，耗竭已经从心理蔓延到了身体。这不是靠周末睡两天能缓过来的。</p></div>
+  <div class="result-highlight"><strong>你现在需要的不是「再坚持一下」：</strong>请一个真正的假——不是年假在家回消息的那种。去一趟医院做全面检查。认真问自己：这份工作里，是人在消耗你、还是工作量、还是没有意义感？</div>
+</div>
+
+<div class="result" id="r2">
+  <div class="result-name">第三阶段：慢性耗竭</div>
+  <div class="result-desc">你还在撑。但你已经不是以前那个有干劲的自己了。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">Q2+A（越来越无所谓）是最危险的信号——以前你在乎工作好坏，现在只想「熬过去」。这不是成熟，是心理资源快用完了。下班刷手机刷到睡着——不是休息，是逃避。</p></div>
+  <div class="result-highlight"><strong>区别「恢复」和「娱乐」：</strong>刷手机是娱乐。散步不出汗、发呆不焦虑——才是恢复。每天给自己20分钟，什么都不做，不看屏幕。如果这让你很焦虑——说明你的神经系统已经很久没真正休息了。</div>
+</div>
+
+<div class="result" id="r3">
+  <div class="result-name">第二阶段：压力积累</div>
+  <div class="result-desc">你不是没感觉。你只是习惯了。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">可能只有早上有点不想上班，或者身体出现了一些小信号。单独看不严重——但它们从来不会单独存在太久。下一个阶段就在前面。</p></div>
+  <div class="result-highlight"><strong>在失控之前做两件事：</strong>找出工作中一个持续消耗你的东西——人、任务、模式——写下来。设置一个边界：每天下班后做一件和「工作完全无关」的事，不是躺平，是主动选择的。</div>
+</div>
+
+<div class="result" id="r4">
+  <div class="result-name">第一阶段：正常范围</div>
+  <div class="result-desc">工作还没有在吞噬你。这是难得的状态。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">你不是没有压力。但工作还没有伤害你。你对工作还有在乎的事，下班后还有自己的精力和生活。保持住。同时记住：耗竭从来不是一夜之间发生的。如果有一天早上醒来开始觉得心往下沉——不要忽略。</p></div>
+</div>
+
+<a class="follow-btn" href="https://xhslink.com/m/771znHLbJD6" target="_blank">打开小红书，关注 @镜子测试局</a>
+
+<button class="share-btn" onclick="shareResult()">发给一个也觉得累的朋友</button>
+
+<div class="footer">
+  <p>工作耗竭系列 · 每周准时更新</p>
+  <p style="margin-top:12px">想和大家聊聊你的工作状态？主页群聊入口</p>
+  <p style="margin-top:12px">还想深入一点？<br><strong>「你的身心情绪中心健康吗」</strong> · 85题深度评估<br><strong>「你的人生转折，卡在哪一关？」</strong> · 速测09</p>
+</div>
+
+<a class="back-top" href="#" onclick="document.querySelectorAll('.result.open').forEach(function(r){r.classList.remove('open')});window.scrollTo(0,200);return false">收起结果</a>
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.result.open').forEach(function(r){r.classList.remove('open')});
+  document.getElementById(id).classList.add('open');
+  document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'});
+}
+function shareResult(){
+  var name='', open=document.querySelector('.result.open');
+  if(open) name=open.querySelector('.result-name').innerText;
+  if(navigator.share){
+    navigator.share({title:'我的工作耗竭阶段',text:'刚测了「你的工作耗竭，到第几阶段了？」，结果是：'+name+'。你也来测测？'});
+  }else{
+    prompt('复制发给朋友：','刚在镜子测试局测了工作耗竭阶段，我的结果是：'+name+'。关注 @镜子测试局，私信「答案」就能测。');
+  }
+}
+</script>
+</body>
+</html>
