@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>速测12答案：你在为谁而活？</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f6;color:#1c1916;padding:28px 20px 60px;min-height:100vh}
+.container{max-width:420px;margin:0 auto}
+h1{font-size:22px;font-weight:800;text-align:center;margin-bottom:6px}
+.sub{font-size:13px;color:#8a8278;text-align:center;margin-bottom:28px}
+.lookup{background:#fff;border-radius:16px;padding:20px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.lookup-title{font-size:13px;font-weight:700;color:#8a8278;margin-bottom:14px;text-align:center}
+.lookup-grid{display:flex;flex-direction:column;gap:6px}
+.lookup-row{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#f7f4f0;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
+.lookup-row:active{background:#efe8e0}
+.lookup-row .tag{flex:1}
+.lookup-row .range{font-size:12px;color:#8a8278;font-weight:500}
+.result{background:#fff;border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:none}
+.result.open{display:block}
+.result-name{font-size:20px;font-weight:800;margin-bottom:4px}
+.result-desc{font-size:13px;color:#8a8278;margin-bottom:16px;font-style:italic}
+.result-divider{height:1px;background:#f0ede6;margin:16px 0}
+.result-section{margin-bottom:12px}
+.result-section .s-text{font-size:14px;line-height:1.7;color:#3d3830}
+.result-highlight{background:#fdf4f7;border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.6;color:#9b4d6b;border-left:3px solid #c0708a;margin-top:12px}
+.follow-btn{display:block;text-align:center;padding:14px;margin:24px 0 12px;background:#9b4d6b;color:#fff;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none}
+.follow-btn:active{background:#7a3a52}
+.share-btn{display:block;width:100%;text-align:center;padding:12px;margin-bottom:24px;background:#fff;color:#1c1916;border:1px solid #e8e4de;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer}
+.footer{text-align:center;margin-top:8px;padding:24px 0;border-top:1px solid #f0ede6}
+.footer p{font-size:13px;color:#8a8278;line-height:1.8}
+.back-top{display:block;text-align:center;padding:12px;margin-top:8px;font-size:12px;color:#8a8278;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>你在为谁而活？</h1>
+<p class="sub">速测12 · 答案揭晓</p>
+
+<div class="lookup">
+  <p class="lookup-title">数一数你选了几个 A，点对应结果</p>
+  <div class="lookup-grid">
+    <div class="lookup-row" onclick="show('r1')"><span class="tag">在为别人而活——你的人生剧本是别人写的</span><span class="range">A &ge; 4</span></div>
+    <div class="lookup-row" onclick="show('r2')"><span class="tag">在拉扯——想为自己活，但还没完全做到</span><span class="range">A 2-3</span></div>
+    <div class="lookup-row" onclick="show('r3')"><span class="tag">在觉醒中——你已经开始选择了</span><span class="range">A 1</span></div>
+    <div class="lookup-row" onclick="show('r4')"><span class="tag">在为自己而活——你的人生你做主</span><span class="range">A 0</span></div>
+  </div>
+</div>
+
+<div class="result" id="r1">
+  <div class="result-name">你在为别人而活</div>
+  <div class="result-desc">你的人生剧本，是别人写的。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">你做决定时先想「别人会怎么想」、你不会拒绝、你在忍、你取得的成就大部分是「应该做的」——这些信号不是在说你不够好。<strong>它们说的是：你从来没有问过自己想要什么。</strong></p></div>
+  <div class="result-highlight"><strong>这周做一件事：</strong>做一个完全只为了自己的决定。可以很小——今天晚饭吃你自己想吃的，不管别人想吃什么。从小的开始，练习听见自己的声音。</div>
+</div>
+
+<div class="result" id="r2">
+  <div class="result-name">在拉扯中</div>
+  <div class="result-desc">你知道要为自己活。但知道和做到之间，还有一段路。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">你可能在某些方面已经在为自己做选择了——但还有一些领域，你不敢。可能是面对父母的时候、可能是选择伴侣的时候、可能是决定要不要换工作的时候。你在拉扯。</p></div>
+  <div class="result-highlight"><strong>找到那个「最难拒绝的人」：</strong>在你不敢说「不」的人里，有一个是让你最怕失望的。找到他/她。下一次你对他/她说「好」之前，停三秒。</div>
+</div>
+
+<div class="result" id="r3">
+  <div class="result-name">在觉醒中</div>
+  <div class="result-desc">你已经开始为自己做选择了。只是还没完全习惯。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">你做的大部分决定是自己的，你习惯表达边界，你知道自己只对自己负责。你不是没有过拉扯——但你已经走过来了。现在最大的任务不是改变，是<strong>允许自己继续这样活着</strong>。</p></div>
+  <div class="result-highlight"><strong>守住你的边界：</strong>你已经学会了说「不」。继续保持。每一次你说「不」给别人的期待，都是在说「好」给你自己。</div>
+</div>
+
+<div class="result" id="r4">
+  <div class="result-name">你在为自己而活</div>
+  <div class="result-desc">你的人生是你自己的。</div>
+  <div class="result-divider"></div>
+  <div class="result-section"><p class="s-text">你做的决定是自己的，你的成就是因为你想做，你不需要别人告诉你「你不需要对任何人负责」——你早就知道。这是一种被严重低估的自由。守住它。</p></div>
+</div>
+
+<a class="follow-btn" href="https://xhslink.com/m/771znHLbJD6" target="_blank">打开小红书，关注 @镜子测试局</a>
+
+<button class="share-btn" onclick="shareResult()">发给一个也在「为别人而活」的朋友</button>
+
+<div class="footer">
+  <p>家庭期待系列 · 每周准时更新</p>
+  <p style="margin-top:12px">想和大家聊聊？主页群聊入口</p>
+  <p style="margin-top:12px">还想深入一点？<br><strong>「你的身心情绪中心健康吗」</strong> · 85题深度评估<br><strong>「你的人生转折，卡在哪一关？」</strong> · 速测09</p>
+</div>
+
+<a class="back-top" href="#" onclick="document.querySelectorAll('.result.open').forEach(function(r){r.classList.remove('open')});window.scrollTo(0,200);return false">收起结果</a>
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.result.open').forEach(function(r){r.classList.remove('open')});
+  document.getElementById(id).classList.add('open');
+  document.getElementById(id).scrollIntoView({behavior:'smooth',block:'center'});
+}
+function shareResult(){
+  var name='', open=document.querySelector('.result.open');
+  if(open) name=open.querySelector('.result-name').innerText;
+  if(navigator.share){
+    navigator.share({title:'我在为谁而活',text:'刚测了「你在为谁而活？」，结果是：'+name+'。你也来测测？'});
+  }else{
+    prompt('复制发给朋友：','刚在镜子测试局测了「你在为谁而活？」，结果是：'+name+'。关注 @镜子测试局，私信「答案」就能测。');
+  }
+}
+</script>
+</body>
+</html>
