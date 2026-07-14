@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>配得感测试</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f6;color:#1c1916;padding:28px 20px 80px;min-height:100vh}
+.container{max-width:420px;margin:0 auto}
+.cover{text-align:center;padding:60px 20px 40px;display:block}
+.cover.hidden{display:none}
+.cover-icon{font-size:64px;margin-bottom:20px}
+.cover h1{font-size:28px;font-weight:900;margin-bottom:12px}
+.cover .cover-sub{font-size:15px;color:#8a8278;line-height:1.7;margin-bottom:28px}
+.cover .cover-info{display:flex;justify-content:center;gap:32px;margin-bottom:36px;font-size:13px;color:#8a8278}
+.cover .cover-info span{text-align:center}
+.cover .cover-info strong{display:block;font-size:20px;color:#9b5980}
+.btn-start{display:block;width:100%;padding:16px;border-radius:14px;font-size:18px;font-weight:700;cursor:pointer;border:none;background:#9b5980;color:#fff;margin-bottom:24px}
+.btn-start:active{filter:brightness(.85)}
+.main{display:none}
+.main.visible{display:block}
+.progress{display:flex;gap:4px;justify-content:center;margin-bottom:28px;flex-wrap:wrap}
+.progress .dot{width:8px;height:8px;border-radius:50%;background:#e0dcd6}
+.progress .dot.done{background:#9b5980}
+.progress .dot.current{background:#9b5980;box-shadow:0 0 0 3px rgba(155,89,128,.2)}
+.q-card{background:#fff;border-radius:18px;padding:28px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.q-section{font-size:17px;font-weight:700;color:#9b5980;letter-spacing:.06em;margin-bottom:10px}
+.q-num{font-size:17px;font-weight:800;line-height:1.45;margin-bottom:24px}
+.q-opts{display:flex;flex-direction:column;gap:8px}
+.q-opt{padding:16px 18px;background:#f7f4f0;border-radius:12px;font-size:15px;line-height:1.4;cursor:pointer;border:2px solid transparent}
+.q-opt:active{background:#efe8e0}
+.q-opt.selected{border-color:#9b5980;background:#faf2f6}
+.btn{display:block;width:100%;padding:16px;border-radius:14px;font-size:17px;font-weight:700;text-align:center;cursor:pointer;border:none;margin-bottom:12px}
+.btn-primary{background:#9b5980;color:#fff}
+.btn-primary:active{filter:brightness(.85)}
+.btn-primary:disabled{background:#e0d0d8;cursor:default}
+.btn-outline{background:#fff;color:#9b5980;border:2px solid #9b5980}
+.result-card{background:#fff;border-radius:18px;padding:32px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:none}
+.result-card.open{display:block}
+.result-type{font-size:28px;font-weight:900;text-align:center;margin-bottom:8px;color:#9b5980}
+.result-tagline{font-size:15px;color:#8a8278;text-align:center;margin-bottom:24px;font-style:italic;line-height:1.6}
+.result-divider{height:1px;background:#f0ede6;margin:20px 0}
+.result-section{margin-bottom:20px}
+.result-section .r-label{font-size:14px;font-weight:700;color:#9b5980;margin-bottom:8px}
+.result-section .r-text{font-size:15px;line-height:1.75;color:#3d3830}
+.result-highlight{background:#faf2f6;border-radius:14px;padding:18px 20px;font-size:14px;line-height:1.8;color:#9b5980;border-left:4px solid #9b5980;margin:24px 0}
+.result-note{background:#fdf8f0;border-radius:12px;padding:14px 18px;font-size:13px;line-height:1.6;color:#8a6d3b;margin-top:20px}
+.bars{margin:16px 0}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:14px}
+.bar-row .bar-label{width:70px;text-align:right;font-weight:600;flex-shrink:0}
+.bar-row .bar-track{flex:1;height:24px;background:#f0ede8;border-radius:12px;overflow:hidden}
+.bar-row .bar-fill{height:100%;border-radius:12px;background:#9b5980;min-width:20px;display:flex;align-items:center;padding-left:10px;font-size:12px;color:#fff;font-weight:600}
+.footer{text-align:center;margin-top:32px;padding:24px 0;border-top:1px solid #f0ede6}
+.footer p{font-size:13px;color:#8a8278;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="cover" id="cover">
+  <div class="cover-icon">💎</div>
+  <h1>配得感测试</h1>
+  <p class="cover-sub">你被夸的时候第一反应是「没有没有」吗？好事发生的时候你总觉得不真实吗？不是问你有没有自信——是问你，在内心深处，你觉得自己配不配得上好东西。</p>
+  <div class="cover-info">
+    <span><strong>16</strong>个情境</span>
+    <span><strong>4</strong>种结果</span>
+    <span><strong>4</strong>个篇章</span>
+  </div>
+  <button class="btn-start" onclick="startTest()">开始测试</button>
+</div>
+<div class="main" id="main">
+<div class="progress" id="progress"></div>
+<div id="question-area"></div>
+<button class="btn btn-primary" id="btn-next" onclick="nextQuestion()" disabled>下一题</button>
+<button class="btn btn-outline" id="btn-restart" onclick="restart()" style="display:none">重新测试</button>
+<div class="result-card" id="result-card">
+  <div class="result-type" id="result-type"></div>
+  <div class="result-tagline" id="result-tagline"></div>
+  <div class="result-divider"></div>
+  <div class="bars" id="result-bars"></div>
+  <div class="result-divider"></div>
+  <div id="result-detail"></div>
+  <div class="result-note"><strong>使用说明：</strong>本测试用于自我探索，不用于心理诊断。配得感不是固定的人格标签——它是一种可以被改变的信念。</div>
+</div>
+<div class="footer"><p>镜子测试局 · 配得感测试</p><p style="margin-top:4px">哪一段最像你？回到笔记评论区聊聊</p></div>
+</div>
+</div>
+<script>
+var questions = [{"id": 1, "scene": "【接受篇 1/4】有人真诚地夸了你一句——不是客气，是真的觉得你好。", "text": "你心里的第一个反应是什么？", "options": [{"text": "马上找理由否定——「没有没有」「运气好」「大家都会」", "type": "low"}, {"text": "嘴上说谢谢，但心里不太信——觉得对方只是客气", "type": "mid"}, {"text": "开心但有点不好意思——不太习惯被看见", "type": "aware"}, {"text": "坦然接受——「谢谢，我自己也觉得做得不错」", "type": "healthy"}]}, {"id": 2, "scene": "【接受篇 2/4】有人送了你一份意料之外的礼物——不欠你什么，就是单纯想送你。", "text": "你收到的那一刻在想什么？", "options": [{"text": "赶快想怎么还——我不喜欢欠别人的，总觉得要等价回礼才安心", "type": "low"}, {"text": "有点不自在——反复想「ta为什么要送我」", "type": "mid"}, {"text": "开心收下，但也开始想「等我什么时候要还回去」", "type": "aware"}, {"text": "开心，就只是开心——ta送我因为ta想送，我值得被对待好", "type": "healthy"}]}, {"id": 3, "scene": "【接受篇 3/4】有人帮你一个忙——不需要你回报、不需要你解释。", "text": "你接受这个帮助的时候，感受是什么？", "options": [{"text": "不太舒服——我感觉自己欠了什么，就算ta说不用还", "type": "low"}, {"text": "接受是接受了，但在心里默默记下要还", "type": "mid"}, {"text": "会感激，有时候会忍不住多说几句「真的太谢谢你了」", "type": "aware"}, {"text": "坦然接受——帮助是双向的，今天我接受，明天我也可以给予", "type": "healthy"}]}, {"id": 4, "scene": "【接受篇 4/4】你觉得好事发生在你身上——比如工作顺利、关系和谐、身体不错。", "text": "你在享受这些的时候，脑子里会不会飘过一个念头？", "options": [{"text": "经常——「现在太好，可能马上要出事了」", "type": "low"}, {"text": "偶尔——会觉得不太真实，但不会太影响", "type": "mid"}, {"text": "很少有——就算有，也知道这是我的脑子在乱想", "type": "aware"}, {"text": "没有——我值得拥有好事，不需要提前为坏事做心理准备", "type": "healthy"}]}, {"id": 5, "scene": "【自我篇 1/4】你在想——自己是一个「有价值的人」吗？", "text": "你最诚实的回答是什么？", "options": [{"text": "不确定——我的价值好像总取决于我做了什么、别人怎么看我", "type": "low"}, {"text": "我知道我应该觉得自己有价值——但说实话，我不太能感觉到", "type": "mid"}, {"text": "大部分时候知道——但在某些情境下会怀疑", "type": "aware"}, {"text": "是——我的价值不依附于我的成就、也不依附于别人对我的评价", "type": "healthy"}]}, {"id": 6, "scene": "【自我篇 2/4】你觉得自己目前配得上什么水平的幸福？", "text": "不用思考——凭直觉。", "options": [{"text": "我总觉得「最好的」不是我应该拿的——差不多就行了", "type": "low"}, {"text": "有时候觉得自己可以过得更好，但又不太敢真的要", "type": "mid"}, {"text": "我知道自己值得更好的，也正在朝那个方向走", "type": "aware"}, {"text": "我现在拥有的就是我配得上的，不多不少，正好", "type": "healthy"}]}, {"id": 7, "scene": "【自我篇 3/4】你对待自己的方式。", "text": "你对你自己，和你会对好朋友说的话，有没有差别？", "options": [{"text": "差别巨大——我对朋友特别温柔，对自己特别苛刻", "type": "low"}, {"text": "有差别——对自己会不自觉地更严厉", "type": "mid"}, {"text": "以前差别大，现在有意识地在对自己的方式上调整", "type": "aware"}, {"text": "基本一致——我对自己和对在乎的人一样好", "type": "healthy"}]}, {"id": 8, "scene": "【自我篇 4/4】放松。什么都不做。不产生任何价值。", "text": "你觉得这样被允许吗？", "options": [{"text": "不行——我每次停下来了都会焦虑，觉得在浪费时间", "type": "low"}, {"text": "理论上应该可以，但我做的时候总觉得自己在偷懒", "type": "mid"}, {"text": "以前不行，现在慢慢在学了——偶尔给自己放个假", "type": "aware"}, {"text": "休息是必需品，不是奖励——我停下来也不需要理由", "type": "healthy"}]}, {"id": 9, "scene": "【关系篇 1/4】在一段你在乎的关系里——对方对你好。", "text": "你接受这份好的时候，感受是？", "options": [{"text": "总觉得需要做点什么来「赚」这份好——我不配被无条件地对你好", "type": "low"}, {"text": "开心，但忍不住有一点点不安——总觉得要证明自己值得", "type": "mid"}, {"text": "能接受，但仍然在某些时刻会想「ta为什么对我这么好」", "type": "aware"}, {"text": "被爱不需要理由——对方对我是因为我是我", "type": "healthy"}]}, {"id": 10, "scene": "【关系篇 2/4】有人喜欢你。不是喜欢你能提供的价值，就是喜欢你这个人的存在。", "text": "你信吗？", "options": [{"text": "不太信——总觉得别人喜欢我是因为「我能提供什么」", "type": "low"}, {"text": "理智上知道可能，但说实话，我不知道那是种什么感觉", "type": "mid"}, {"text": "在学着相信——有些关系确实不是因为我能做什么", "type": "aware"}, {"text": "信——因为我也喜欢人不是因为他们能给我什么", "type": "healthy"}]}, {"id": 11, "scene": "【关系篇 3/4】你在关系里，更多的时候是给予者还是接受者？", "text": "诚实地回答。", "options": [{"text": "几乎永远是我在给——我不太会开口要，也不太敢要", "type": "low"}, {"text": "给的多、要的少——偶尔需要帮助的时候会犹豫很久才开口", "type": "mid"}, {"text": "大部分时候能平衡——但面对自己在乎的人有时会退回去", "type": "aware"}, {"text": "能自然地给，也能自然地要——关系是双向的", "type": "healthy"}]}, {"id": 12, "scene": "【关系篇 4/4】一段关系结束了——或者从来就没开始。", "text": "你倾向于怎么归因？", "options": [{"text": "第一反应是「是不是我不够好」「是不是我要得太多」", "type": "low"}, {"text": "会想自己哪里没做好——哪怕问题明显不在我", "type": "mid"}, {"text": "会复盘，但也能客观地看到双方的原因", "type": "aware"}, {"text": "一段关系的结束不是因为谁「不够好」——有时就是不合适", "type": "healthy"}]}, {"id": 13, "scene": "【深层篇 1/4】「我配不上好的东西」——这句话。", "text": "它在你的生活里出现了多久了？", "options": [{"text": "从很小的时候就在——久到我以为这是事实", "type": "low"}, {"text": "好多年了——在某个阶段开始出现，然后一直没走", "type": "mid"}, {"text": "有一段时间比较强烈，现在已经好多了", "type": "aware"}, {"text": "这不是我的信念——我值得好的东西，这不需要证明", "type": "healthy"}]}, {"id": 14, "scene": "【深层篇 2/4】想象你得到了一个你一直想要但不敢说想要的东西。", "text": "你脑子里最先出现的是？", "options": [{"text": "焦虑——「我守不住」「可能会失去」「会不会有代价」", "type": "low"}, {"text": "开心但马上伴随不安——总觉得好事不应该轮到我", "type": "mid"}, {"text": "开心——然后会花一点时间去消化这个开心", "type": "aware"}, {"text": "纯粹的开心——这就是我想要的，我值得拥有", "type": "healthy"}]}, {"id": 15, "scene": "【深层篇 3/4】你觉得「配得感」对自己来说是个问题吗？", "text": "不需要美化答案。", "options": [{"text": "是——这是我人生中最大的隐形问题之一", "type": "low"}, {"text": "是——但我一直没有认真面对，因为面对了也不知道怎么办", "type": "mid"}, {"text": "曾经是——现在我在一点一点地改", "type": "aware"}, {"text": "不是——我会时刻注意不让自己落入「不配」的陷阱", "type": "healthy"}]}, {"id": 16, "scene": "【深层篇 4/4】做完这16道题。", "text": "你心里最真实的那句话是什么？", "options": [{"text": "我需要允许自己接受好的东西——但我不知道怎么开始", "type": "low"}, {"text": "我确实对自己太苛刻了——是时候认真看看这件事了", "type": "mid"}, {"text": "我比以前好了很多——但还想更好一点", "type": "aware"}, {"text": "我配得上我拥有的和想要的——不需要打折", "type": "healthy"}]}];
+var names = {"low": "重度不配得", "mid": "中度不配得", "aware": "轻度不配得", "healthy": "配得感健康"};
+var details = {"low": {"tagline": "「我不配」——这三个字，在你人生的大多数选择背后，都不动声色地投了票。", "sections": [{"label": "一、不配得感在你身上怎么运作的", "text": "你不是没有能力得到好东西。你是——东西到了你手里，你觉得烫手。别人夸你，你马上否定。别人对你好，你赶紧还。事情顺利，你开始等坏事。你活得像一个「不能太幸福」的人。好像幸福需要资格证，而你从来没觉得自己通过了考试。"}, {"label": "二、这个信念从哪里来", "text": "不是天生的。是你在某个时候——可能是小时候、可能是某段重要的关系——学到了：好东西是有代价的。被爱要被管教为前提。开心后面总会跟着失望。你不是不想要。你是不敢要。因为你不确定——如果我真的要了、对方没有——那是不是说明我不配？为了避免这个答案，你习惯了「不要」。"}, {"label": "三、它在你生活的哪些角落", "text": "在工作里：你不敢开太高的价，不敢争取该你拿的。在关系里：你更习惯付出而不是接受，别人对你好你会不自在。在日常里：你不知道怎么享受——停下来会有负罪感，开心会有不真实感。这不是谦虚，不是知足。这是你一直在告诉自己：我只能拿这么多。"}, {"label": "四、你值得拥有好的东西——这不是鸡汤", "text": "配得感不需要任何条件。不需要你更瘦、更有钱、更成功、更多人喜欢。你现在这个样子——就值得被好好对待。包括被你自己好好对待。你不相信这句话没关系。先把它放在你能看到的地方。不需要马上信。让它在旁边待着。信不信由你——但给它一个位置。"}, {"label": "五、你可以从哪里开始", "text": "不是从「我相信我值得」开始——那太难了。从一件小事：下次有人夸你，只说「谢谢」，不说「没有没有」。下次有人对你好，只收，不立刻还。下次心里冒出「我配吗」，停下来看着它。不反驳它。就说：「我知道你在那里。但今天我不听你的。」这每一次，都是在投票。投给一个不一样的信念。"}], "highlight": "一个今晚就能做的事：写下你一直在等「变好之后」才允许自己做的一件事。然后——明天就做。不等了。看看会发生什么。"}, "mid": {"tagline": "你在理智上知道自己值得。但在情感上——你还没完全把自己投进去。", "sections": [{"label": "一、你的不配得感——它在选择性出现", "text": "你不是在所有时候都觉得自己不配。你在工作里可能很自信，在朋友面前很坦然——但在某个特定领域：可能是感情、可能是被照顾、可能是「纯粹属于自己」的快乐。在这些地方，你还在后退。你还在等——等一个证明自己配得上的证明。但你不知道那个证明长什么样。"}, {"label": "二、知道自己值得，但还不敢要", "text": "这是最难熬的一段。你看得见「配得感」长什么样，你知道自己不应该这样对自己，但你身体里有一部分还停在旧的模式里：要了可能会失望、说了可能会被拒、信了可能会被打脸。你不是不相信。你是不敢验证——万一验证的结果是「你确实不配」怎么办？这不是真相——这是你最怕的答案。"}, {"label": "三、你已经在做的事，比你想象的多", "text": "你能看出自己和别人的配得感差异。你能在某些时候为自己争取。你能在事后意识到「其实我可以不用那样」。这些时刻——你可能觉得太少了。但它们不是少数，它们是开始。每一次你犹豫之后选了对自己好一点的那个选项，你都在告诉你的大脑：或许那个旧信念不是真的。"}, {"label": "四、把「等」换成「试」", "text": "你现在不是要说服自己「我相信我配」——你还没到那儿。你只需要把一件事做出来。就一件。那个你一直在等「变得更好之后」才能做的事——试一次。不是等配得感够了才行动。是行动了之后，配得感才会跟上。它不是一个前提条件。它是对你行动的回声。"}], "highlight": "列一份清单：那些「等我有资格了再」做的事。选一件最小的——这个月就做。不是因为你已经准备好了，是因为你不需要等到准备好了才值得。"}, "aware": {"tagline": "你以前不会问自己这个问题。现在会了。这个改变，比你意识到的更大。", "sections": [{"label": "一、你已经走出了一大段", "text": "最难的不是「改变信念」。是「发现这个信念存在」。你以前不会问自己「我配得上吗」——你会自动觉得自己不配。现在你至少能在某些时候意识到：诶，刚才那个念头——那是不配得感在说话，不是事实。这个觉察——是你花了真实力气才有的。它不是一步到位的。但它比什么都重要。"}, {"label": "二、你现在卡的不是「不知道」，是「知道了但还会忘记」", "text": "你大部分时候能对自己好、能接受好的东西、能说「谢谢」不心虚。但有些场景——某个特定的人、某件特定的事——你还会退回去。你会说「可能我不适合那个」「要不还是算了吧」。这不是退步。这是在练习区。每一次退回去之后更快地回来——就是进步。下一次可能不退了。"}, {"label": "三、你已经在给别人做榜样了", "text": "你对自己说话的方式在变——你可能没注意到，但你在不知不觉中，也开始对身边人说「你值得」「别那样想自己」。你能给别人的，你慢慢也会给自己。这个过程很慢。但它在发生。"}, {"label": "四、你需要的不是「变得更好」", "text": "你已经在很好的一条路上了。你需要的只是：保持觉察。给自己的「旧模式」一个名字——就叫它「那个不配得的声音」。下次它出来的时候，不要和它吵架。就说：来了啊。知道了。但我这次选另一边。不消灭它。就是不听它的。"}], "highlight": "一个小仪式：每次你接受了一件「让自己感觉值得」的事，记下来。就一句话。不评价，不分析。几周后回看，你会发现你对自己有多大的变化。"}, "healthy": {"tagline": "你的配得感——这是你花了时间才有的。不是天生的。不是轻易得到的。你值得为自己骄傲。", "sections": [{"label": "一、你不是从来不需要证明", "text": "你可能也被质疑过：「你以为你是谁」「你太自以为是了吧」。但配得感和自恋是两回事。自恋是：我只看到我，我需要你看到我。配得感是：我看到我，我也看到你——我值得被好好对待，你也值得。这种平衡不是天生的——是你在不同关系里一步步建立的。"}, {"label": "二、你怎么知道自己配得感是健康的", "text": "几个信号：你能坦然地接受好——不需要马上还、不需要否定、不需要找理由。你能为自己争取——不是因为贪婪，是因为你知道什么是你应得的。你能在别人对你不好的时候看清楚：「这不是我配不配的问题，是对方的问题。」你也能在开心的时候，不怀疑好事会不会马上消失。"}, {"label": "三、保持它的关键", "text": "配得感不是一次拿到就永远有的。它会波动。遇到挫折、被拒绝、或者长时间没有人给你反馈的时候，它可能会摇晃。保护它不需要打仗——只需要记住：你的价值从来不来自外面的认可。那些认可是蛋糕上的草莓，不是蛋糕本身。草莓有时没有——蛋糕一直在。"}, {"label": "四、你可以继续扩大你的配得感", "text": "你现在可能在某些领域配得感很好，但在另一些领域还有成长空间：可能金钱、可能更大的承诺、可能「不需要解释的休息」。你已经知道「我值得」是什么感觉了。接下来就是把这种感觉带到那些你还不太敢的地方。不是「我相信我能」，是「我敢试，不管结果如何」。"}], "highlight": "如果有人因为你不再自我贬低而说你变了——笑得灿烂一点。你确实变了。你变回了一直以来都值得的那个你。"}};
+var typeOrder = ["low", "mid", "aware", "healthy"];
+var cur = 0, answers = {}, sel = null;
+function startTest() {
+  document.getElementById('cover').classList.add('hidden');
+  document.getElementById('main').classList.add('visible');
+  renderQuestion(); window.scrollTo(0, 0);
+}
+function renderProgress() {
+  var h = '';
+  for (var i = 0; i < questions.length; i++) {
+    var c = 'dot';
+    if (answers[questions[i].id]) c += ' done';
+    if (i === cur) c += ' current';
+    h += '<div class="' + c + '"></div>';
+  }
+  document.getElementById('progress').innerHTML = h;
+}
+function renderQuestion() {
+  var q = questions[cur];
+  var h = '<div class="q-card">';
+  h += '<p class="q-section">' + q.scene + '</p>';
+  h += '<p class="q-num">' + q.text + '</p>';
+  h += '<div class="q-opts">';
+  for (var i = 0; i < q.options.length; i++) {
+    var o = q.options[i], l = ['A','B','C','D'], c = 'q-opt';
+    if (sel === i) c += ' selected';
+    h += '<div class="' + c + '" onclick="selectOption(' + i + ')"><strong>' + l[i] + '.</strong> ' + o.text + '</div>';
+  }
+  h += '</div></div>';
+  document.getElementById('question-area').innerHTML = h;
+  var b = document.getElementById('btn-next');
+  b.textContent = cur === questions.length - 1 ? '查看结果' : '下一题';
+  b.disabled = (sel === null);
+  b.style.display = 'block';
+  document.getElementById('btn-restart').style.display = 'none';
+  document.getElementById('result-card').classList.remove('open');
+  renderProgress();
+}
+function selectOption(i) {
+  sel = i;
+  document.getElementById('btn-next').disabled = false;
+  document.querySelectorAll('.q-opt').forEach(function(o, j) { o.classList.toggle('selected', j === i); });
+}
+function nextQuestion() {
+  if (sel === null) return;
+  answers[questions[cur].id] = questions[cur].options[sel].type;
+  if (cur < questions.length - 1) { cur++; sel = null; renderQuestion(); window.scrollTo(0, 0); }
+  else { showResult(); }
+}
+function showResult() {
+  document.getElementById('question-area').innerHTML = '';
+  document.getElementById('progress').innerHTML = '';
+  document.getElementById('btn-next').style.display = 'none';
+  document.getElementById('btn-restart').style.display = 'block';
+  var c = {};
+  for (var i = 0; i < typeOrder.length; i++) c[typeOrder[i]] = 0;
+  for (var id in answers) c[answers[id]]++;
+  var mt = typeOrder[0], mc = 0;
+  for (var t in c) if (c[t] > mc) { mc = c[t]; mt = t; }
+  var d = details[mt], tot = questions.length;
+  document.getElementById('result-type').textContent = names[mt];
+  document.getElementById('result-tagline').textContent = d.tagline;
+  var bh = '';
+  for (var i = 0; i < typeOrder.length; i++) {
+    var t = typeOrder[i], p = Math.round(c[t] / tot * 100);
+    bh += '<div class="bar-row"><span class="bar-label">' + names[t] + '</span><div class="bar-track"><div class="bar-fill" style="width:' + Math.max(p, 8) + '%">' + (p > 15 ? p + '%' : '') + '</div></div></div>';
+  }
+  document.getElementById('result-bars').innerHTML = bh;
+  var dh = '';
+  for (var j = 0; j < d.sections.length; j++) {
+    var s = d.sections[j];
+    dh += '<div class="result-section"><p class="r-label">' + s.label + '</p><p class="r-text">' + s.text + '</p></div>';
+  }
+  dh += '<div class="result-highlight">' + d.highlight + '</div>';
+  document.getElementById('result-detail').innerHTML = dh;
+  document.getElementById('result-card').classList.add('open');
+  document.getElementById('result-card').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function restart() {
+  cur = 0; answers = {}; sel = null;
+  document.getElementById('result-card').classList.remove('open');
+  renderQuestion(); window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
