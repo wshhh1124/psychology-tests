@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>压力应对模式测试</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f6;color:#1c1916;padding:28px 20px 80px;min-height:100vh}
+.container{max-width:420px;margin:0 auto}
+h1{font-size:24px;font-weight:800;text-align:center;margin-bottom:4px}
+.sub{font-size:14px;color:#8a8278;text-align:center;margin-bottom:32px}
+.progress{display:flex;gap:6px;justify-content:center;margin-bottom:28px}
+.progress .dot{width:10px;height:10px;border-radius:50%;background:#e0dcd6}
+.progress .dot.done{background:#4a6a8a}
+.progress .dot.current{background:#4a6a8a;box-shadow:0 0 0 4px rgba(74,106,138,.2)}
+.q-card{background:#fff;border-radius:18px;padding:28px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.q-num{font-size:13px;font-weight:700;color:#4a6a8a;letter-spacing:.1em;margin-bottom:8px}
+.q-scene{font-size:15px;color:#8a8278;line-height:1.6;margin-bottom:16px;padding:14px 18px;background:#faf8f5;border-radius:12px}
+.q-text{font-size:18px;font-weight:700;line-height:1.5;margin-bottom:20px}
+.q-opts{display:flex;flex-direction:column;gap:8px}
+.q-opt{padding:16px 18px;background:#f7f4f0;border-radius:12px;font-size:15px;line-height:1.4;cursor:pointer;border:2px solid transparent}
+.q-opt:active{background:#efe8e0}
+.q-opt.selected{border-color:#4a6a8a;background:#f2f6f9}
+.btn{display:block;width:100%;padding:16px;border-radius:14px;font-size:17px;font-weight:700;text-align:center;cursor:pointer;border:none;margin-bottom:12px}
+.btn-primary{background:#4a6a8a;color:#fff}
+.btn-primary:active{filter:brightness(.85)}
+.btn-primary:disabled{background:#c0b8cc;cursor:default}
+.btn-outline{background:#fff;color:#4a6a8a;border:2px solid #4a6a8a}
+.result-card{background:#fff;border-radius:18px;padding:32px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:none}
+.result-card.open{display:block}
+.result-type{font-size:28px;font-weight:900;text-align:center;margin-bottom:8px;color:#4a6a8a}
+.result-tagline{font-size:15px;color:#8a8278;text-align:center;margin-bottom:24px;font-style:italic}
+.result-divider{height:1px;background:#f0ede6;margin:20px 0}
+.result-section{margin-bottom:16px}
+.result-section .r-label{font-size:13px;font-weight:700;color:#8a8278;margin-bottom:6px}
+.result-section .r-text{font-size:15px;line-height:1.7;color:#3d3830}
+.result-highlight{background:#f2f6f9;border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.7;color:#4a6a8a;border-left:3px solid #4a6a8a;margin-top:12px}
+.result-note{background:#fdf8f0;border-radius:12px;padding:14px 18px;font-size:13px;line-height:1.6;color:#8a6d3b;margin-top:16px}
+.bars{margin:16px 0}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:14px}
+.bar-row .bar-label{width:60px;text-align:right;font-weight:600;flex-shrink:0}
+.bar-row .bar-track{flex:1;height:22px;background:#f0ede8;border-radius:11px;overflow:hidden}
+.bar-row .bar-fill{height:100%;border-radius:11px;background:#4a6a8a;min-width:20px;display:flex;align-items:center;padding-left:10px;font-size:12px;color:#fff;font-weight:600}
+.footer{text-align:center;margin-top:32px;padding:24px 0;border-top:1px solid #f0ede6}
+.footer p{font-size:13px;color:#8a8278;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>压力应对模式测试</h1>
+<p class="sub">6个情境，找到你的本能压力反应</p>
+<div class="progress" id="progress"></div>
+<div id="question-area"></div>
+<button class="btn btn-primary" id="btn-next" onclick="nextQuestion()" disabled>下一题</button>
+<button class="btn btn-outline" id="btn-restart" onclick="restart()" style="display:none">重新测试</button>
+<div class="result-card" id="result-card">
+  <div class="result-type" id="result-type"></div>
+  <div class="result-tagline" id="result-tagline"></div>
+  <div class="result-divider"></div>
+  <div class="bars" id="result-bars"></div>
+  <div class="result-divider"></div>
+  <div id="result-detail"></div>
+  <div class="result-note"><strong>使用说明：</strong>本测试用于自我探索，不用于心理诊断或职业定论。每个人都是多维的，测试结果反映的是你在这个工具中的倾向，不是对你的完整定义。</div>
+</div>
+<div class="footer"><p>镜子测试局 · 压力应对模式测试</p><p style="margin-top:4px">哪一段最像你？回到笔记评论区分享你的感受</p></div>
+</div>
+<script>
+var questions = [{"id": 1, "scene": "周五下午突然收到紧急任务，周一交，不熟悉的领域。", "text": "你的本能第一反应是？", "options": [{"text": "马上动起来——先做再说，边做边想", "type": "fighter"}, {"text": "先退一步——我需要一个人安静地想清楚", "type": "reflector"}, {"text": "先找人——给信任的人打电话聊聊", "type": "connector"}, {"text": "先观察——不急着反应，看看这个事到底多严重", "type": "observer"}]}, {"id": 2, "scene": "你和一个人发生了冲突，对方语气很冲。", "text": "你那瞬间的本能是？", "options": [{"text": "怼回去——你有你的道理，我有我的", "type": "fighter"}, {"text": "先沉默——我需要时间消化刚才发生了什么", "type": "reflector"}, {"text": "先缓和——别让气氛继续恶化", "type": "connector"}, {"text": "先退一步——看对方的情绪来源是什么", "type": "observer"}]}, {"id": 3, "scene": "你在做一个重要的事，突然出现了意外——计划全乱了。", "text": "你最真实的反应是？", "options": [{"text": "立刻进入应急模式——问题是什么？怎么解决？", "type": "fighter"}, {"text": "先停下来——深呼吸，重新评估整个情况", "type": "reflector"}, {"text": "马上联系能帮忙的人——我不需要一个人扛", "type": "connector"}, {"text": "先别急——看看哪些是真的紧急、哪些可以等", "type": "observer"}]}, {"id": 4, "scene": "连续几周高强度工作/学习后，你感觉自己快到极限了。", "text": "你最能恢复精力的方式是？", "options": [{"text": "去运动、去做一件能让我爽的事", "type": "fighter"}, {"text": "一个人待着——看书、散步、什么都不做", "type": "reflector"}, {"text": "和朋友待在一起——聊聊、吃顿饭", "type": "connector"}, {"text": "睡一天——什么都不想、什么都不做", "type": "observer"}]}, {"id": 5, "scene": "你面临一个没有标准答案的选择，两种方案各有利弊。", "text": "你的处理方式是？", "options": [{"text": "选一个先干，不行再换", "type": "fighter"}, {"text": "拉一张表，把所有利弊写清楚再做决定", "type": "reflector"}, {"text": "和信任的人讨论，听不同角度的意见", "type": "connector"}, {"text": "给自己几天时间，等感受更清晰了再选", "type": "observer"}]}, {"id": 6, "scene": "有人当着你的面否定你一直在努力做的事。", "text": "那一瞬间你的第一反应是？", "options": [{"text": "直接反驳——你凭什么这么说", "type": "fighter"}, {"text": "先不回应——我需要确认自己的感受是不是对的", "type": "reflector"}, {"text": "难受，想找支持我的人聊聊", "type": "connector"}, {"text": "观察对方的动机——ta为什么这么说", "type": "observer"}]}];
+var names = {"fighter": "战斗型", "reflector": "沉淀型", "connector": "求助型", "observer": "观察型"};
+var details = {"fighter": {"tagline": "压力来了，你的本能是：冲上去。", "sections": [{"label": "你的核心模式", "text": "面对压力，你的第一反应是行动。不是想——是做。这种「直面」的姿态让你在危机时刻成为最可靠的人。别人还在愣着，你已经开干了。"}, {"label": "这种模式的隐藏优势", "text": "行动力强、不拖延、遇到紧急情况时保持冷静和高效。你是别人慌乱时最想待在身边的人——因为你在，事情就在被解决。"}, {"label": "什么时候它反而加剧压力", "text": "当问题不是「做」能解决的——比如关系冲突、需要等待结果、或者根本不在你控制范围内时。战斗型的盲区是：把所有压力当成「敌人」来打，但有些压力需要的是接受、而不是战胜。"}], "highlight": "一个可以尝试的行动：下次感受到压力时，在「冲上去」之前，先停三秒。问自己：这件事是我能控制的吗？如果是——冲。如果不是——你需要的不是战斗，是给自己一点空间。"}, "reflector": {"tagline": "压力来了，你的本能是：先退一步，看清楚再说。", "sections": [{"label": "你的核心模式", "text": "你不喜欢在压力下做决定。你需要空间——一个人安静下来、消化信息、让头脑清醒。你不是逃避。你是在用自己的方式整理这个世界——而这种方式往往能得出更准确的判断。"}, {"label": "这种模式的隐藏优势", "text": "你不容易在压力下犯错。你的决策质量高于平均值——因为你给了自己足够的思考时间。当别人已经冲动地做了决定然后后悔的时候，你的选择经得起时间考验。"}, {"label": "什么时候它反而加剧压力", "text": "当你需要太长时间处理、而外部环境要求快速反应的时候。沉淀型的盲区是：独处变成了「回避」。你不找人说、不找人帮，一个人在脑子里绕圈——压力反而越绕越大。"}], "highlight": "一个可以尝试的行动：当你开始「一个人的分析循环」超过一小时还没进展时，打断自己——找一个人说。不是让对方给你答案，是把你说给自己听的过程，让另一个人在场。"}, "connector": {"tagline": "压力来了，你的本能是：找人。", "sections": [{"label": "你的核心模式", "text": "你在压力下不会一个人扛。你会寻找连接——和朋友聊聊、和信任的人说说、让别人帮你一起想。这不是「依赖」——这是你对人类关系网络的天然信任。你知道一个人解决不了所有事。"}, {"label": "这种模式的隐藏优势", "text": "你拥有强大的支持网络。你的压力恢复速度通常比独行者快——因为在你还很焦虑的时候，已经有人帮你把问题重新框了一遍。你天然懂得「分担」的价值。"}, {"label": "什么时候它反而加剧压力", "text": "当身边的人给不了有效支持、或者反馈让你更困惑的时候。求助型的盲区是：过度依赖外部确认。你需要培养「即使没有人可以聊，我也能安抚自己」的能力。"}], "highlight": "一个可以尝试的行动：下次在找人说之前，先给自己五分钟。写下：「我现在真正的感受是什么？」不需要分析，不需要解决方案——就只是写。你可能会发现，有些答案在你自己心里。"}, "observer": {"tagline": "压力来了，你的本能是：先看看。", "sections": [{"label": "你的核心模式", "text": "你不会被压力推着走。你的第一反应是观察——这个事情到底有多严重？哪些是真问题、哪些是情绪放大？你在别人被情绪淹没的时候保持冷静。你的存在让事情不会被过度反应放大。"}, {"label": "这种模式的隐藏优势", "text": "你拥有出色的压力评估能力。你很少因为小事而应激过度——因为你看得出「大事」和「感觉像大事」的区别。你是团队中的稳定器。"}, {"label": "什么时候它反而加剧压力", "text": "当观察变成了「不行动」——你等了太久才反应。观察型的盲区是：你以为自己还在「评估」，但其实是害怕做出错误的反应。有时候，先动一步比完美的评估重要。"}], "highlight": "一个可以尝试的行动：给观察设一个时间限制。你可以观察——但十分钟后，不管你看没看清楚，做一个最小行动。就一个。向你证明：行动不会因为你没看全而变得危险。"}};
+var typeOrder = ["fighter", "reflector", "connector", "observer"];
+var cur = 0, answers = {}, sel = null;
+function ip() {
+  var h = '';
+  for (var i = 0; i < questions.length; i++) {
+    var c = 'dot';
+    if (answers[questions[i].id]) c += ' done';
+    if (i === cur) c += ' current';
+    h += '<div class="' + c + '"></div>';
+  }
+  document.getElementById('progress').innerHTML = h;
+}
+function rq() {
+  var q = questions[cur];
+  var h = '<div class="q-card">';
+  h += '<p class="q-num">情境 ' + q.id + ' / ' + questions.length + '</p>';
+  h += '<p class="q-scene">' + q.scene + '</p>';
+  h += '<p class="q-text">' + q.text + '</p>';
+  h += '<div class="q-opts">';
+  for (var i = 0; i < q.options.length; i++) {
+    var o = q.options[i], l = ['A','B','C','D'], c = 'q-opt';
+    if (sel === i) c += ' selected';
+    h += '<div class="' + c + '" onclick="so(' + i + ')"><strong>' + l[i] + '.</strong> ' + o.text + '</div>';
+  }
+  h += '</div></div>';
+  document.getElementById('question-area').innerHTML = h;
+  var b = document.getElementById('btn-next');
+  b.textContent = cur === questions.length - 1 ? '查看结果' : '下一题';
+  b.disabled = (sel === null);
+  b.style.display = 'block';
+  document.getElementById('btn-restart').style.display = 'none';
+  document.getElementById('result-card').classList.remove('open');
+  ip();
+}
+function so(i) {
+  sel = i;
+  document.getElementById('btn-next').disabled = false;
+  document.querySelectorAll('.q-opt').forEach(function(o, j) { o.classList.toggle('selected', j === i); });
+}
+function nq() {
+  if (sel === null) return;
+  answers[questions[cur].id] = questions[cur].options[sel].type;
+  if (cur < questions.length - 1) { cur++; sel = null; rq(); window.scrollTo(0, 0); }
+  else { sr(); }
+}
+function sr() {
+  document.getElementById('question-area').innerHTML = '';
+  document.getElementById('progress').innerHTML = '';
+  document.getElementById('btn-next').style.display = 'none';
+  document.getElementById('btn-restart').style.display = 'block';
+  var c = {};
+  for (var i = 0; i < typeOrder.length; i++) c[typeOrder[i]] = 0;
+  for (var id in answers) c[answers[id]]++;
+  var mt = typeOrder[0], mc = 0;
+  for (var t in c) if (c[t] > mc) { mc = c[t]; mt = t; }
+  var d = details[mt], tot = questions.length;
+  document.getElementById('result-type').textContent = names[mt];
+  document.getElementById('result-tagline').textContent = d.tagline;
+  var bh = '';
+  for (var i = 0; i < typeOrder.length; i++) {
+    var t = typeOrder[i], p = Math.round(c[t] / tot * 100);
+    bh += '<div class="bar-row"><span class="bar-label">' + names[t] + '</span><div class="bar-track"><div class="bar-fill" style="width:' + Math.max(p, 8) + '%">' + (p > 15 ? p + '%' : '') + '</div></div></div>';
+  }
+  document.getElementById('result-bars').innerHTML = bh;
+  var dh = '';
+  for (var j = 0; j < d.sections.length; j++) {
+    var s = d.sections[j];
+    dh += '<div class="result-section"><p class="r-label">' + s.label + '</p><p class="r-text">' + s.text + '</p></div>';
+  }
+  dh += '<div class="result-highlight">' + d.highlight + '</div>';
+  document.getElementById('result-detail').innerHTML = dh;
+  document.getElementById('result-card').classList.add('open');
+  document.getElementById('result-card').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function restart() {
+  cur = 0; answers = {}; sel = null;
+  document.getElementById('result-card').classList.remove('open');
+  rq(); window.scrollTo(0, 0);
+}
+ip(); rq();
+</script>
+</body>
+</html>

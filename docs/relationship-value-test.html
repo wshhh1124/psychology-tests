@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>关系价值测试</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f6;color:#1c1916;padding:28px 20px 80px;min-height:100vh}
+.container{max-width:420px;margin:0 auto}
+h1{font-size:24px;font-weight:800;text-align:center;margin-bottom:4px}
+.sub{font-size:14px;color:#8a8278;text-align:center;margin-bottom:32px}
+.progress{display:flex;gap:6px;justify-content:center;margin-bottom:28px}
+.progress .dot{width:10px;height:10px;border-radius:50%;background:#e0dcd6}
+.progress .dot.done{background:#c06040}
+.progress .dot.current{background:#c06040;box-shadow:0 0 0 4px rgba(192,96,64,.2)}
+.q-card{background:#fff;border-radius:18px;padding:28px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.q-num{font-size:13px;font-weight:700;color:#c06040;letter-spacing:.1em;margin-bottom:8px}
+.q-scene{font-size:15px;color:#8a8278;line-height:1.6;margin-bottom:16px;padding:14px 18px;background:#faf8f5;border-radius:12px}
+.q-text{font-size:18px;font-weight:700;line-height:1.5;margin-bottom:20px}
+.q-opts{display:flex;flex-direction:column;gap:8px}
+.q-opt{padding:16px 18px;background:#f7f4f0;border-radius:12px;font-size:15px;line-height:1.4;cursor:pointer;border:2px solid transparent}
+.q-opt:active{background:#efe8e0}
+.q-opt.selected{border-color:#c06040;background:#fdf4f0}
+.btn{display:block;width:100%;padding:16px;border-radius:14px;font-size:17px;font-weight:700;text-align:center;cursor:pointer;border:none;margin-bottom:12px}
+.btn-primary{background:#c06040;color:#fff}
+.btn-primary:active{filter:brightness(.85)}
+.btn-primary:disabled{background:#c0b8cc;cursor:default}
+.btn-outline{background:#fff;color:#c06040;border:2px solid #c06040}
+.result-card{background:#fff;border-radius:18px;padding:32px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:none}
+.result-card.open{display:block}
+.result-type{font-size:28px;font-weight:900;text-align:center;margin-bottom:8px;color:#c06040}
+.result-tagline{font-size:15px;color:#8a8278;text-align:center;margin-bottom:24px;font-style:italic}
+.result-divider{height:1px;background:#f0ede6;margin:20px 0}
+.result-section{margin-bottom:16px}
+.result-section .r-label{font-size:13px;font-weight:700;color:#8a8278;margin-bottom:6px}
+.result-section .r-text{font-size:15px;line-height:1.7;color:#3d3830}
+.result-highlight{background:#fdf4f0;border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.7;color:#c06040;border-left:3px solid #c06040;margin-top:12px}
+.result-note{background:#fdf8f0;border-radius:12px;padding:14px 18px;font-size:13px;line-height:1.6;color:#8a6d3b;margin-top:16px}
+.bars{margin:16px 0}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:14px}
+.bar-row .bar-label{width:60px;text-align:right;font-weight:600;flex-shrink:0}
+.bar-row .bar-track{flex:1;height:22px;background:#f0ede8;border-radius:11px;overflow:hidden}
+.bar-row .bar-fill{height:100%;border-radius:11px;background:#c06040;min-width:20px;display:flex;align-items:center;padding-left:10px;font-size:12px;color:#fff;font-weight:600}
+.footer{text-align:center;margin-top:32px;padding:24px 0;border-top:1px solid #f0ede6}
+.footer p{font-size:13px;color:#8a8278;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>关系价值测试</h1>
+<p class="sub">6个情境，找到你在关系中最自然的价值</p>
+<div class="progress" id="progress"></div>
+<div id="question-area"></div>
+<button class="btn btn-primary" id="btn-next" onclick="nextQuestion()" disabled>下一题</button>
+<button class="btn btn-outline" id="btn-restart" onclick="restart()" style="display:none">重新测试</button>
+<div class="result-card" id="result-card">
+  <div class="result-type" id="result-type"></div>
+  <div class="result-tagline" id="result-tagline"></div>
+  <div class="result-divider"></div>
+  <div class="bars" id="result-bars"></div>
+  <div class="result-divider"></div>
+  <div id="result-detail"></div>
+  <div class="result-note"><strong>使用说明：</strong>本测试用于自我探索，不用于心理诊断或职业定论。每个人都是多维的，测试结果反映的是你在这个工具中的倾向，不是对你的完整定义。</div>
+</div>
+<div class="footer"><p>镜子测试局 · 关系价值测试</p><p style="margin-top:4px">哪一段最像你？回到笔记评论区分享你的感受</p></div>
+</div>
+<script>
+var questions = [{"id": 1, "scene": "深夜，好朋友发消息说「我今天太难了」。", "text": "你的第一反应是？", "options": [{"text": "先听——「我在，你想说什么就说什么」", "type": "listener"}, {"text": "先稳——「别急，我们一起来看发生了什么」", "type": "stabilizer"}, {"text": "先暖——「不管你经历了什么，你不是一个人」", "type": "warmer"}, {"text": "先做——「你在哪？我现在过来」或者帮ta想一个办法", "type": "doer"}]}, {"id": 2, "scene": "伴侣和你在讨论一个容易吵架的话题。气氛开始紧张了。", "text": "你最自然的做法是？", "options": [{"text": "安静下来，认真听ta说完心里话", "type": "listener"}, {"text": "试着把问题拆开——「我们到底在吵什么」", "type": "stabilizer"}, {"text": "先缓和气氛——「我们先不吵了好不好」", "type": "warmer"}, {"text": "暂停一下——「我们各自冷静十分钟再聊」", "type": "doer"}]}, {"id": 3, "scene": "家人对你的生活选择有意见，一直在说。", "text": "你最真实的反应是？", "options": [{"text": "让他们说完——我知道他们是因为关心", "type": "listener"}, {"text": "心平气和地解释我的想法和理由", "type": "stabilizer"}, {"text": "理解他们的担心，但温柔地坚持自己", "type": "warmer"}, {"text": "不争论，用行动证明我的选择是对的", "type": "doer"}]}, {"id": 4, "scene": "一个新认识的人，你们聊了几次，关系还没确定。", "text": "你在这个阶段最自然的状态是？", "options": [{"text": "多听对方说，慢慢了解这个人", "type": "listener"}, {"text": "观察互动模式——我们合不合得来", "type": "stabilizer"}, {"text": "主动分享一些自己的事，试探连接", "type": "warmer"}, {"text": "约一次具体的活动，在实践中感受", "type": "doer"}]}, {"id": 5, "scene": "朋友群里有人发生了冲突，气氛很僵。", "text": "你倾向于怎么做？", "options": [{"text": "私下找当事人聊聊，听他们说", "type": "listener"}, {"text": "帮大家把误解的地方理清楚", "type": "stabilizer"}, {"text": "说点什么缓解气氛，让群别冷下去", "type": "warmer"}, {"text": "建议暂停讨论，过两天再说", "type": "doer"}]}, {"id": 6, "scene": "你在想，自己在这段关系里到底得到了什么。", "text": "你判断一段关系「值得」的依据是？", "options": [{"text": "我能不能在这段关系里真实地做自己", "type": "listener"}, {"text": "这段关系是否稳定、健康、可持续", "type": "stabilizer"}, {"text": "对方是否让我感到被在意和被看见", "type": "warmer"}, {"text": "这段关系是否在推动我成为更好的人", "type": "doer"}]}];
+var names = {"listener": "倾听者", "stabilizer": "稳定者", "warmer": "温暖者", "doer": "行动者"};
+var details = {"listener": {"tagline": "你在关系中最自然的价值是：让对方感觉被真正听见。", "sections": [{"label": "你的核心价值", "text": "你不需要急着给建议、不需要急着解决问题。你只是安静地在那里，认真地听。这种能力极其稀缺——大多数人听的时候已经在想「我下一句要说什么」。你不是。你在真正接收。"}, {"label": "为什么这是天赋", "text": "被倾听是一种深刻的疗愈。很多人花一辈子都找不到一个真正听他们说话的人。你就是那个人。你的存在本身，对身边的人就是一种安全感。"}, {"label": "在不同关系中的表现", "text": "朋友中：你是那个深夜可以打电话的人。伴侣中：你是对方觉得「终于有人懂我」的那个人。但要注意——你可能会吸引大量需要倾诉的人，而忘了自己也需要被倾听。"}, {"label": "什么时候它反而让你累", "text": "当你一直在听、一直在承接，却忘了表达自己的需求。倾听者的盲区是：以为「听」就是全部。但关系需要双向流动。你也需要被听见。"}], "highlight": "一个可以尝试的行动：这周找一次机会，在听完对方之后，说一句关于你自己的感受。不是建议、不是回应——是关于你。练习双向的「被听见」。"}, "stabilizer": {"tagline": "你在关系中最自然的价值是：在混乱中成为那块稳定的石头。", "sections": [{"label": "你的核心价值", "text": "当周围的人在情绪里打转、在冲突中迷失的时候，你是那个能看清「到底发生了什么」的人。你不会被情绪裹挟——你本能地想理清楚。这种稳定性对身边的人来说是一种难得的依靠。"}, {"label": "为什么这是天赋", "text": "很多人面对冲突时要么逃避、要么爆炸。你两者都不选——你选择面对、然后拆解。这种能力让你在关系里成为一个「安全基地」：别人知道，把问题交给你，你不会让它更乱。"}, {"label": "在不同关系中的表现", "text": "工作关系中：你是冲突调解者。亲密关系中：你是能让争吵停下来的人。但要小心——你可能会无意中把「理清楚」当成「不表达情绪」的借口。你也有情绪，也需要表达。"}, {"label": "什么时候它反而让你累", "text": "当对方需要的不是分析、而是共情的时候。稳定者的盲区是：以为理清楚就等于解决了。有时候对方只需要你抱一下，不需要你分析。"}], "highlight": "一个可以尝试的行动：下次伴侣或朋友情绪激动时，先别急着分析。先说一句「我能理解你为什么这么生气/难受」。把稳定用在共情之后，而不是之前。"}, "warmer": {"tagline": "你在关系中最自然的价值是：让周围变暖。", "sections": [{"label": "你的核心价值", "text": "你不需要刻意做什么——你走进一个房间，温度就不同了。你的存在让关系不再只是交易和信息交换；你让关系变成人和人之间真的连接。你本能地知道什么时候该说一句暖心的话、什么时候该给一个眼神。"}, {"label": "为什么这是天赋", "text": "情感温度是关系的润滑剂。没有它，再高效的沟通也是冷的。你提供的不是解决方案——是「你不是一个人」的感觉。这种感觉对很多人来说，比解决方案更珍贵。"}, {"label": "在不同关系中的表现", "text": "你是那种朋友一见到你就想笑的人。伴侣会觉得和你在一起很安心。但要注意——你可能习惯了做「那个温暖的人」，忘了自己也有需要被温暖的时候。"}, {"label": "什么时候它反而让你累", "text": "当你习惯性地照顾所有人的感受，开始忽略自己的。温暖者的盲区是：你把温暖当成责任，而不是礼物。你不是太阳——你不需要照亮所有人。"}], "highlight": "一个可以尝试的行动：这周有一天，允许自己「不那么暖」。不用照顾气氛、不用照顾别人的感受。感受一下：当你不再输出温度时，你还能不能舒服地待在关系里？"}, "doer": {"tagline": "你在关系中最自然的价值是：用行动说「我在乎」。", "sections": [{"label": "你的核心价值", "text": "别人说「你需要什么随时找我」——你说「我已经在路上了」。你的关心不是语言，是行动。这种直接的、落地的爱，是你给关系最珍贵的东西。"}, {"label": "为什么这是天赋", "text": "很多人在关系里说很多、做很少。你是反过来的——你可能不擅长说漂亮话，但你做的事让身边的人真实地感受到了在乎。这种爱是有重量的。"}, {"label": "在不同关系中的表现", "text": "朋友搬家你是第一个到的。伴侣生病你不需要被提醒就知道该做什么。但要注意——你可能用「做事」代替了「表达」，而有些人需要听到你说出来。"}, {"label": "什么时候它反而让你累", "text": "当你一直在为别人做、一直在解决，却从不停下来问：对方真的需要我做这些吗？行动者的盲区是：以为解决问题就等于关心。有时候对方只是想被听见，不需要被拯救。"}], "highlight": "一个可以尝试的行动：下次你冲过去帮一个人之前，先问ta一句：「你现在是需要我帮忙，还是需要我听着？」有时候，你停下来问的这一句，就是你最有力的行动。"}};
+var typeOrder = ["listener", "stabilizer", "warmer", "doer"];
+var cur = 0, answers = {}, sel = null;
+function ip() {
+  var h = '';
+  for (var i = 0; i < questions.length; i++) {
+    var c = 'dot';
+    if (answers[questions[i].id]) c += ' done';
+    if (i === cur) c += ' current';
+    h += '<div class="' + c + '"></div>';
+  }
+  document.getElementById('progress').innerHTML = h;
+}
+function rq() {
+  var q = questions[cur];
+  var h = '<div class="q-card">';
+  h += '<p class="q-num">情境 ' + q.id + ' / ' + questions.length + '</p>';
+  h += '<p class="q-scene">' + q.scene + '</p>';
+  h += '<p class="q-text">' + q.text + '</p>';
+  h += '<div class="q-opts">';
+  for (var i = 0; i < q.options.length; i++) {
+    var o = q.options[i], l = ['A','B','C','D'], c = 'q-opt';
+    if (sel === i) c += ' selected';
+    h += '<div class="' + c + '" onclick="so(' + i + ')"><strong>' + l[i] + '.</strong> ' + o.text + '</div>';
+  }
+  h += '</div></div>';
+  document.getElementById('question-area').innerHTML = h;
+  var b = document.getElementById('btn-next');
+  b.textContent = cur === questions.length - 1 ? '查看结果' : '下一题';
+  b.disabled = (sel === null);
+  b.style.display = 'block';
+  document.getElementById('btn-restart').style.display = 'none';
+  document.getElementById('result-card').classList.remove('open');
+  ip();
+}
+function so(i) {
+  sel = i;
+  document.getElementById('btn-next').disabled = false;
+  document.querySelectorAll('.q-opt').forEach(function(o, j) { o.classList.toggle('selected', j === i); });
+}
+function nq() {
+  if (sel === null) return;
+  answers[questions[cur].id] = questions[cur].options[sel].type;
+  if (cur < questions.length - 1) { cur++; sel = null; rq(); window.scrollTo(0, 0); }
+  else { sr(); }
+}
+function sr() {
+  document.getElementById('question-area').innerHTML = '';
+  document.getElementById('progress').innerHTML = '';
+  document.getElementById('btn-next').style.display = 'none';
+  document.getElementById('btn-restart').style.display = 'block';
+  var c = {};
+  for (var i = 0; i < typeOrder.length; i++) c[typeOrder[i]] = 0;
+  for (var id in answers) c[answers[id]]++;
+  var mt = typeOrder[0], mc = 0;
+  for (var t in c) if (c[t] > mc) { mc = c[t]; mt = t; }
+  var d = details[mt], tot = questions.length;
+  document.getElementById('result-type').textContent = names[mt];
+  document.getElementById('result-tagline').textContent = d.tagline;
+  var bh = '';
+  for (var i = 0; i < typeOrder.length; i++) {
+    var t = typeOrder[i], p = Math.round(c[t] / tot * 100);
+    bh += '<div class="bar-row"><span class="bar-label">' + names[t] + '</span><div class="bar-track"><div class="bar-fill" style="width:' + Math.max(p, 8) + '%">' + (p > 15 ? p + '%' : '') + '</div></div></div>';
+  }
+  document.getElementById('result-bars').innerHTML = bh;
+  var dh = '';
+  for (var j = 0; j < d.sections.length; j++) {
+    var s = d.sections[j];
+    dh += '<div class="result-section"><p class="r-label">' + s.label + '</p><p class="r-text">' + s.text + '</p></div>';
+  }
+  dh += '<div class="result-highlight">' + d.highlight + '</div>';
+  document.getElementById('result-detail').innerHTML = dh;
+  document.getElementById('result-card').classList.add('open');
+  document.getElementById('result-card').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function restart() {
+  cur = 0; answers = {}; sel = null;
+  document.getElementById('result-card').classList.remove('open');
+  rq(); window.scrollTo(0, 0);
+}
+ip(); rq();
+</script>
+</body>
+</html>
