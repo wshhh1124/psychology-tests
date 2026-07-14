@@ -8,6 +8,23 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f6;color:#1c1916;padding:28px 20px 80px;min-height:100vh}
 .container{max-width:420px;margin:0 auto}
+
+/* Cover */
+.cover{text-align:center;padding:60px 20px 40px;display:block}
+.cover.hidden{display:none}
+.cover-icon{font-size:64px;margin-bottom:20px}
+.cover h1{font-size:28px;font-weight:900;margin-bottom:12px}
+.cover .cover-sub{font-size:15px;color:#8a8278;line-height:1.7;margin-bottom:28px}
+.cover .cover-info{display:flex;justify-content:center;gap:32px;margin-bottom:36px;font-size:13px;color:#8a8278}
+.cover .cover-info span{text-align:center}
+.cover .cover-info strong{display:block;font-size:20px;color:#d4704a}
+.cover .btn-start{display:block;width:100%;padding:16px;border-radius:14px;font-size:18px;font-weight:700;cursor:pointer;border:none;background:#d4704a;color:#fff}
+.cover .btn-start:active{filter:brightness(.85)}
+
+/* Main test area */
+.main{display:none}
+.main.visible{display:block}
+
 h1{font-size:24px;font-weight:800;text-align:center;margin-bottom:4px}
 .sub{font-size:14px;color:#8a8278;text-align:center;margin-bottom:32px}
 .progress{display:flex;gap:6px;justify-content:center;margin-bottom:28px}
@@ -48,8 +65,22 @@ h1{font-size:24px;font-weight:800;text-align:center;margin-bottom:4px}
 </head>
 <body>
 <div class="container">
-<h1>讨好型人格测试</h1>
-<p class="sub">6个情境，看清你讨好别人的程度</p>
+
+<!-- COVER -->
+<div class="cover" id="cover">
+  <div class="cover-icon">🤲</div>
+  <h1>讨好型人格测试</h1>
+  <p class="cover-sub">你不会拒绝、你怕让人失望、你习惯说「没事」。不是问你有没有——是问这个习惯有多深。6个情境，测测你的讨好倾向到底有多重。</p>
+  <div class="cover-info">
+    <span><strong>6</strong>个情境</span>
+    <span><strong>4</strong>种结果</span>
+    <span><strong>2</strong>分钟</span>
+  </div>
+  <button class="btn-start" onclick="startTest()">开始测试</button>
+</div>
+
+<!-- MAIN TEST -->
+<div class="main" id="main">
 <div class="progress" id="progress"></div>
 <div id="question-area"></div>
 <button class="btn btn-primary" id="btn-next" onclick="nextQuestion()" disabled>下一题</button>
@@ -65,13 +96,24 @@ h1{font-size:24px;font-weight:800;text-align:center;margin-bottom:4px}
 </div>
 <div class="footer"><p>镜子测试局 · 讨好型人格测试</p><p style="margin-top:4px">你测完的结果是哪一种？回到笔记评论区聊聊</p></div>
 </div>
+
+</div>
+
 <script>
-var questions = [{"id": 1, "scene": "你已经很累了，同事/朋友来找你帮忙——不是小事，要花不少精力。", "text": "你最真实的反应是？", "options": [{"text": "马上答应——虽然累但不忍心拒绝", "type": "heavy"}, {"text": "犹豫后还是帮了——不帮会自责", "type": "moderate"}, {"text": "先问清楚要帮什么——不是无条件帮", "type": "mild"}, {"text": "直接说「我今天真的不行」——我的状态也很重要", "type": "healthy"}]}, {"id": 2, "scene": "有人当面批评你，但你觉得自己没做错。", "text": "你第一反应是？", "options": [{"text": "先道歉——「对不起，可能是我没做好」", "type": "heavy"}, {"text": "心里不舒服但没说什么——不想起冲突", "type": "moderate"}, {"text": "解释一下自己的做法，但不道歉", "type": "mild"}, {"text": "平静地说「我不这么认为」——不道歉，不解释", "type": "healthy"}]}, {"id": 3, "scene": "一群人在讨论去哪吃饭，你想吃什么但大家选了别的。", "text": "你通常怎么做？", "options": [{"text": "什么都不说——大家开心就好", "type": "heavy"}, {"text": "犹豫要不要说，最后还是算了", "type": "moderate"}, {"text": "偶尔会说，取决于和这些人熟不熟", "type": "mild"}, {"text": "直接说「我更想吃XX，要不轮流决定」", "type": "healthy"}]}, {"id": 4, "scene": "有人让你不舒服了——可能是语气不好、可能是忽略了你。", "text": "你最可能的反应是？", "options": [{"text": "反省自己——是我哪里做得不对吗", "type": "heavy"}, {"text": "默默难过但不说什么——说出来怕被说「你太敏感了」", "type": "moderate"}, {"text": "过一会儿委婉地提醒对方", "type": "mild"}, {"text": "当时就说「你刚才那句话我不太舒服」", "type": "healthy"}]}, {"id": 5, "scene": "你帮了别人一个大忙，但对方连句谢都没有。", "text": "你的反应是？", "options": [{"text": "算了——人家可能太忙了，不说了", "type": "heavy"}, {"text": "心里不舒服但不想显得很小气", "type": "moderate"}, {"text": "会暗示一下——「没事，我也不容易的」", "type": "mild"}, {"text": "直接说——「我花了不少时间，希望被看见」", "type": "healthy"}]}, {"id": 6, "scene": "你在想，自己是不是太在意别人的感受了。", "text": "这个念头出现的时候，你通常：", "options": [{"text": "每次都觉得是——但不知道怎么改", "type": "heavy"}, {"text": "经常有这个感觉——但也会安慰自己这是善良", "type": "moderate"}, {"text": "偶尔有——知道自己在某些关系里会这样", "type": "mild"}, {"text": "很少——我知道在意别人和讨好别人是两回事", "type": "healthy"}]}];
+var questions = [{"id": 1, "scene": "你已经很累了，同事/朋友来找你帮忙——不是小事，要花不少精力。", "text": "你最真实的反应是？", "options": [{"text": "马上答应——虽然累但不忍心拒绝", "type": "heavy"}, {"text": "犹豫后还是帮了——不帮会自责", "type": "moderate"}, {"text": "先问清楚要帮什么——不是无条件帮", "type": "mild"}, {"text": "直接说「我今天真的不行」——我的状态也很重要", "type": "healthy"}]}, {"id": 2, "scene": "有人当面批评你，但你觉得自己没做错。", "text": "你第一反应是？", "options": [{"text": "先道歉——「对不起，可能是我没做好」", "type": "heavy"}, {"text": "心里不舒服但没说什么——不想起冲突", "type": "moderate"}, {"text": "解释一下自己的做法，但不道歉", "type": "mild"}, {"text": "平静地说「我不这么认为」——不道歉，不解释", "type": "healthy"}]}, {"id": 3, "scene": "一群人在讨论去哪吃饭，你想吃什么但大家选了别的。", "text": "你通常怎么做？", "options": [{"text": "什么都不说——大家开心就好", "type": "heavy"}, {"text": "犹豫要不要说，最后还是算了", "type": "moderate"}, {"text": "偶尔会说，取决于和这些人熟不熟", "type": "mild"}, {"text": "直接说「我更想吃XX」——我的偏好也值得被听到", "type": "healthy"}]}, {"id": 4, "scene": "有人让你不舒服了——可能是语气不好、可能是忽略了你。", "text": "你最可能的反应是？", "options": [{"text": "反省自己——是我哪里做得不对吗", "type": "heavy"}, {"text": "默默难过但不说什么——说出来怕被说太敏感", "type": "moderate"}, {"text": "过一会儿委婉地提醒对方", "type": "mild"}, {"text": "当时就说「你刚才那句话我不太舒服」", "type": "healthy"}]}, {"id": 5, "scene": "你帮了别人一个大忙，但对方连句谢都没有。", "text": "你的反应是？", "options": [{"text": "算了——人家可能太忙了，不说了", "type": "heavy"}, {"text": "心里不舒服但不想显得很小气", "type": "moderate"}, {"text": "会暗示一下——「没事，我也不容易的」", "type": "mild"}, {"text": "直接说——「我花了不少时间，希望被看见」", "type": "healthy"}]}, {"id": 6, "scene": "你在想，自己是不是太在意别人的感受了。", "text": "这个念头出现的时候，你通常：", "options": [{"text": "每次都觉得是——但不知道怎么改", "type": "heavy"}, {"text": "经常有这个感觉——安慰自己这是善良", "type": "moderate"}, {"text": "偶尔有——知道自己在某些关系里会这样", "type": "mild"}, {"text": "很少——我知道在意和讨好是两回事", "type": "healthy"}]}];
 var names = {"heavy": "重度讨好", "moderate": "中度讨好", "mild": "轻度讨好", "healthy": "边界清晰"};
-var details = {"heavy": {"tagline": "别人的需求，几乎总是排在你自己前面。", "sections": [{"label": "你的讨好模式", "text": "你不是不知道自己在讨好。你是不知道——除此之外还能怎么做。从小到大，你可能无意中学到了一件事：「让别人满意 = 安全」。拒绝别人会让你产生真实的焦虑——不是「不好意思」那种轻飘飘的感觉，是一种深层的恐惧：我拒绝ta了，ta还会喜欢我吗？"}, {"label": "讨好真正消耗你的是什么", "text": "不是付出的时间和精力。而是——你永远不知道别人对你的好感，到底是因为你这个人，还是因为你一直在满足他们。你在关系里很累，因为你从来不考验一段关系：如果我做不到、如果我说不、如果我需要帮助——这段关系还在吗？"}, {"label": "它什么时候在保护你", "text": "讨好不是你的错。它可能在你小时候保护过你——在一个需要察言观色的环境里，讨好是一种生存策略。但你现在不在那个环境了。你可以开始试着不用这个策略了。"}, {"label": "你可以从哪里开始松绑", "text": "从最小的「不」开始。从拒绝一件事开始——一件你拒绝了之后，后果可以承受的事。然后观察：天没塌。对方没有讨厌你。你甚至感觉还不错。这不是一次拒绝。这是你在告诉自己：「我的需求也可以被排在第一排。」"}], "highlight": "这周尝试做一件事：拒绝一个不太重要的请求。不需要解释太多——「我今天不方便」就够了。感受一下拒绝之后的自己。不是负罪感——是自由的重量。"}, "moderate": {"tagline": "你意识到了讨好，但还在和它拉扯。", "sections": [{"label": "你的讨好模式", "text": "你不是在所有关系里都讨好。你可能是「选择性讨好」——在某些人面前、某些场景下，你的讨好模式自动启动。通常是面对让你觉得「需要被喜欢」的人：权威、伴侣、或者你单方面在乎的朋友。"}, {"label": "它什么时候在消耗你", "text": "你知道自己在讨好，但你说服自己「这是善良」「我性格就是这样」「不帮我也睡不着」。你在给讨好找理由——因为你还没准备好承认：有些讨好不是善良，是控制不了。"}, {"label": "讨好和善良的真正区别", "text": "善良是——我想帮你，因为我在乎。讨好是——我怕不帮，你就会不喜欢我。这两件事的动机完全不同。善良让你感觉温暖；讨好让你感觉疲惫加一点怨气。你可以继续善良。但你可以不继续讨好。"}, {"label": "你可以从哪里开始松绑", "text": "找到那个「最让你讨好的人」。不是所有人都让你讨好——有那么一个人，你在ta面前最不敢说「不」。从ta开始，从一件小事开始。不说「不」，先说「我想想」。给自己24小时。24小时后如果你还是想帮——那就是善良，不是讨好。"}], "highlight": "这周做一件事：「延迟答应」。有人请你帮忙的时候，不说「好」，先说「我看看我的时间，晚点回复你」。就这一句话，就是你夺回的第一个主动权。"}, "mild": {"tagline": "你有讨好倾向，但你已经在觉察了。", "sections": [{"label": "你的讨好模式", "text": "你在大多数关系里能保持健康的边界，但在某些特定情境下——特别是面对你特别在意的人、或者涉及你在乎的群体归属感时——你的讨好模式会被触发。你知道自己在什么时候容易「退让」，你只是还没完全找到替代方式。"}, {"label": "你已经在做对了什么", "text": "你能在不同关系里调整自己的边界。你知道「有时候可以不说、有时候必须说」。这个能力不是每个人都有的——它意味着你已经不是无意识的讨好，你是在做选择。继续练习这个选择。「有时候」变成「更多时候」需要时间，但你在路上。"}, {"label": "接下来只需要做一件事", "text": "你已经能意识到自己在讨好——那你缺少的不是觉察，是行动。下次你意识到「这个场景我可能会讨好」的时候，停一下，问自己：如果我完全不需要在意这个人怎么看我，我会怎么做？然后朝那个方向走一小步。就一小步。"}], "highlight": "你已经走过最难的一段了——从「不知道自己在讨好」到「知道自己在讨好」。接下来不是「完全不讨好」——是每一周，比上周少讨好一次。这个进步，值得庆祝。"}, "healthy": {"tagline": "你的边界清晰。你知道在意别人和讨好别人是两回事。", "sections": [{"label": "你的模式", "text": "你不需要通过满足别人来获得安全感。你可以善良——你确实也帮过很多人——但你的善良是选择，不是被迫。你能说不、能表达不舒服、能在不伤害别人的前提下保护自己。这是一种很多人花了很大力气才有的能力。"}, {"label": "你不是「不在乎别人」", "text": "你可能被误解过——「你太直接了」「你不够体贴」。但真相是：你不是不在乎，你是用另一种方式在乎。你在乎一段关系的真实性——你不希望自己在这段关系里是靠讨好来维持的。你希望被喜欢是因为你这个人，而不是因为你能提供什么。"}, {"label": "这个边界值得被保护", "text": "保持你的边界。有人可能会因为你不再讨好而离开——那是他们的选择。留下来的人，是喜欢你本人。那些关系，值得你珍惜。你就是你。够好了。"}], "highlight": "如果有人因为你设立边界而生气——那不是你的问题。那是你的边界在工作。你的边界不是墙。是你的皮肤。你只是不允许别人随随便便穿过你。"}};
+var details = {"heavy": {"tagline": "别人的需求，几乎总是排在你自己前面。", "sections": [{"label": "你的讨好模式", "text": "你不是不知道自己在讨好。你是不知道——除此之外还能怎么做。从小到大，你可能无意中学到了一件事：「让别人满意 = 安全」。拒绝别人会让你产生真实的焦虑——是一种深层的恐惧：我拒绝ta了，ta还会喜欢我吗？"}, {"label": "讨好真正消耗你的是什么", "text": "不是付出的时间和精力。而是你永远不知道别人对你的好感，到底是因为你这个人，还是因为你一直在满足他们。你在关系里很累，因为你从来不考验一段关系：如果我做不到、如果我说不、如果我需要帮助——这段关系还在吗？"}, {"label": "它什么时候在保护你", "text": "讨好不是你的错。它可能在你小时候保护过你——在一个需要察言观色的环境里，讨好是一种生存策略。但你现在不在那个环境了。你可以开始试着不用这个策略了。"}, {"label": "你可以从哪里开始松绑", "text": "从最小的「不」开始。从拒绝一件事开始——一件你拒绝了之后后果可以承受的事。然后观察：天没塌。对方没有讨厌你。你甚至感觉还不错。这不是一次拒绝——这是你在告诉自己：「我的需求也可以被排在第一排。」"}], "highlight": "这周尝试做一件事：拒绝一个不太重要的请求。不需要解释太多——「我今天不方便」就够了。感受一下拒绝之后的自己。不是负罪感——是自由的重量。"}, "moderate": {"tagline": "你意识到了讨好，但还在和它拉扯。", "sections": [{"label": "你的讨好模式", "text": "你不是在所有关系里都讨好。你可能是「选择性讨好」——在某些人面前、某些场景下，讨好模式自动启动。通常是面对让你觉得「需要被喜欢」的人：权威、伴侣、或者你单方面在乎的朋友。"}, {"label": "它什么时候在消耗你", "text": "你知道自己在讨好，但你说服自己「这是善良」「我性格就是这样」「不帮我也睡不着」。你在给讨好找理由——因为你还没准备好承认：有些讨好不是善良，是控制不了。"}, {"label": "讨好和善良的真正区别", "text": "善良是——我想帮你，因为我在乎。讨好是——我怕不帮，你就会不喜欢我。这两件事的动机完全不同。善良让你感觉温暖；讨好让你感觉疲惫加一点怨气。你可以继续善良。但你可以不继续讨好。"}, {"label": "你可以从哪里开始松绑", "text": "找到那个「最让你讨好的人」。不是所有人都让你讨好——有那么一个人，你在ta面前最不敢说「不」。从ta开始，从一件小事开始。不说「不」，先说「我想想」。给自己24小时。24小时后如果你还是想帮——那就是善良，不是讨好。"}], "highlight": "这周做一件事：「延迟答应」。有人请你帮忙的时候，不说「好」，先说「我看看我的时间，晚点回复你」。就这一句话，就是你夺回的第一个主动权。"}, "mild": {"tagline": "你有讨好倾向，但你已经在觉察了。", "sections": [{"label": "你的讨好模式", "text": "你在大多数关系里能保持健康的边界，但在某些特定情境下——特别是面对你特别在意的人、或者涉及你在乎的群体归属感时——讨好模式会被触发。你知道自己在什么时候容易退让，你只是还没完全找到替代方式。"}, {"label": "你已经在做对了什么", "text": "你能在不同关系里调整自己的边界。你知道「有时候可以不说、有时候必须说」。这个能力不是每个人都有的——它意味着你已经不是无意识的讨好，你是在做选择。继续练习这个选择。「有时候」变成「更多时候」需要时间，但你在路上。"}, {"label": "接下来只需要做一件事", "text": "你已经能意识到自己在讨好——那你缺少的不是觉察，是行动。下次你意识到「这个场景我可能会讨好」的时候，停一下，问自己：如果我完全不需要在意这个人怎么看我，我会怎么做？然后朝那个方向走一小步。就一小步。"}], "highlight": "你已经走过最难的一段了——从「不知道自己在讨好」到「知道自己在讨好」。接下来不是「完全不讨好」——是每一周，比上周少讨好一次。这个进步，值得庆祝。"}, "healthy": {"tagline": "你的边界清晰。你知道在意别人和讨好别人是两回事。", "sections": [{"label": "你的模式", "text": "你不需要通过满足别人来获得安全感。你可以善良——你确实也帮过很多人——但你的善良是选择，不是被迫。你能说不、能表达不舒服、能在不伤害别人的前提下保护自己。这是一种很多人花了很大力气才有的能力。"}, {"label": "你不是「不在乎别人」", "text": "你可能被误解过——「你太直接了」「你不够体贴」。但真相是：你不是不在乎，你是用另一种方式在乎。你在乎一段关系的真实性——你不希望自己在这段关系里是靠讨好的。你希望被喜欢是因为你这个人，不是因为你能提供什么。"}, {"label": "这个边界值得被保护", "text": "保持你的边界。有人可能会因为你不再讨好而离开——那是他们的选择。留下来的人，是喜欢你本人。那些关系，值得你珍惜。你就是你。够好了。"}], "highlight": "如果有人因为你设立边界而生气——那不是你的问题。那是你的边界在工作。你的边界不是墙。是你的皮肤。你只是不允许别人随随便便穿过你。"}};
 var typeOrder = ["heavy", "moderate", "mild", "healthy"];
 var cur = 0, answers = {}, sel = null;
-function ip() {
+
+function startTest() {
+  document.getElementById('cover').classList.add('hidden');
+  document.getElementById('main').classList.add('visible');
+  renderQuestion();
+  window.scrollTo(0, 0);
+}
+
+function renderProgress() {
   var h = '';
   for (var i = 0; i < questions.length; i++) {
     var c = 'dot';
@@ -81,7 +123,8 @@ function ip() {
   }
   document.getElementById('progress').innerHTML = h;
 }
-function rq() {
+
+function renderQuestion() {
   var q = questions[cur];
   var h = '<div class="q-card">';
   h += '<p class="q-num">情境 ' + q.id + ' / ' + questions.length + '</p>';
@@ -91,7 +134,7 @@ function rq() {
   for (var i = 0; i < q.options.length; i++) {
     var o = q.options[i], l = ['A','B','C','D'], c = 'q-opt';
     if (sel === i) c += ' selected';
-    h += '<div class="' + c + '" onclick="so(' + i + ')"><strong>' + l[i] + '.</strong> ' + o.text + '</div>';
+    h += '<div class="' + c + '" onclick="selectOption(' + i + ')"><strong>' + l[i] + '.</strong> ' + o.text + '</div>';
   }
   h += '</div></div>';
   document.getElementById('question-area').innerHTML = h;
@@ -101,20 +144,23 @@ function rq() {
   b.style.display = 'block';
   document.getElementById('btn-restart').style.display = 'none';
   document.getElementById('result-card').classList.remove('open');
-  ip();
+  renderProgress();
 }
-function so(i) {
+
+function selectOption(i) {
   sel = i;
   document.getElementById('btn-next').disabled = false;
   document.querySelectorAll('.q-opt').forEach(function(o, j) { o.classList.toggle('selected', j === i); });
 }
-function nq() {
+
+function nextQuestion() {
   if (sel === null) return;
   answers[questions[cur].id] = questions[cur].options[sel].type;
-  if (cur < questions.length - 1) { cur++; sel = null; rq(); window.scrollTo(0, 0); }
-  else { sr(); }
+  if (cur < questions.length - 1) { cur++; sel = null; renderQuestion(); window.scrollTo(0, 0); }
+  else { showResult(); }
 }
-function sr() {
+
+function showResult() {
   document.getElementById('question-area').innerHTML = '';
   document.getElementById('progress').innerHTML = '';
   document.getElementById('btn-next').style.display = 'none';
@@ -143,12 +189,12 @@ function sr() {
   document.getElementById('result-card').classList.add('open');
   document.getElementById('result-card').scrollIntoView({behavior:'smooth',block:'start'});
 }
+
 function restart() {
   cur = 0; answers = {}; sel = null;
   document.getElementById('result-card').classList.remove('open');
-  rq(); window.scrollTo(0, 0);
+  renderQuestion(); window.scrollTo(0, 0);
 }
-ip(); rq();
 </script>
 </body>
 </html>
