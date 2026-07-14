@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>隐藏天赋测试</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f6;color:#1c1916;padding:28px 20px 80px;min-height:100vh}
+.container{max-width:420px;margin:0 auto}
+h1{font-size:24px;font-weight:800;text-align:center;margin-bottom:4px}
+.sub{font-size:14px;color:#8a8278;text-align:center;margin-bottom:32px}
+
+/* progress */
+.progress{display:flex;gap:6px;justify-content:center;margin-bottom:28px}
+.progress .dot{width:10px;height:10px;border-radius:50%;background:#e0dcd6}
+.progress .dot.done{background:#7b5ea7}
+.progress .dot.current{background:#7b5ea7;box-shadow:0 0 0 4px rgba(123,94,167,.2)}
+
+/* question card */
+.q-card{background:#fff;border-radius:18px;padding:28px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.q-num{font-size:13px;font-weight:700;color:#7b5ea7;letter-spacing:.1em;margin-bottom:8px}
+.q-scene{font-size:15px;color:#8a8278;line-height:1.6;margin-bottom:16px;padding:14px 18px;background:#faf8f5;border-radius:12px}
+.q-text{font-size:18px;font-weight:700;line-height:1.5;margin-bottom:20px}
+.q-opts{display:flex;flex-direction:column;gap:8px}
+.q-opt{padding:16px 18px;background:#f7f4f0;border-radius:12px;font-size:15px;line-height:1.4;cursor:pointer;border:2px solid transparent;transition:all .15s}
+.q-opt:active{background:#efe8e0}
+.q-opt.selected{border-color:#7b5ea7;background:#f3eff8}
+
+/* buttons */
+.btn{display:block;width:100%;padding:16px;border-radius:14px;font-size:17px;font-weight:700;text-align:center;cursor:pointer;border:none;margin-bottom:12px}
+.btn-primary{background:#7b5ea7;color:#fff}
+.btn-primary:active{background:#6a4d96}
+.btn-primary:disabled{background:#c0b8cc;cursor:default}
+.btn-outline{background:#fff;color:#7b5ea7;border:2px solid #7b5ea7}
+
+/* result */
+.result-card{background:#fff;border-radius:18px;padding:32px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:none}
+.result-card.open{display:block}
+.result-type{font-size:28px;font-weight:900;text-align:center;margin-bottom:8px;color:#7b5ea7}
+.result-tagline{font-size:15px;color:#8a8278;text-align:center;margin-bottom:24px;font-style:italic}
+.result-divider{height:1px;background:#f0ede6;margin:20px 0}
+.result-section{margin-bottom:16px}
+.result-section .r-label{font-size:13px;font-weight:700;color:#8a8278;margin-bottom:6px}
+.result-section .r-text{font-size:15px;line-height:1.7;color:#3d3830}
+.result-highlight{background:#f7f3fb;border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.7;color:#5a3e7a;border-left:3px solid #7b5ea7;margin-top:12px}
+.result-note{background:#fdf8f0;border-radius:12px;padding:14px 18px;font-size:13px;line-height:1.6;color:#8a6d3b;margin-top:16px}
+
+/* bar chart */
+.bars{margin:16px 0}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:14px}
+.bar-row .bar-label{width:60px;text-align:right;font-weight:600;flex-shrink:0}
+.bar-row .bar-track{flex:1;height:22px;background:#f0ede8;border-radius:11px;overflow:hidden}
+.bar-row .bar-fill{height:100%;border-radius:11px;background:#7b5ea7;min-width:20px;display:flex;align-items:center;padding-left:10px;font-size:12px;color:#fff;font-weight:600}
+
+.footer{text-align:center;margin-top:32px;padding:24px 0;border-top:1px solid #f0ede6}
+.footer p{font-size:13px;color:#8a8278;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>隐藏天赋测试</h1>
+<p class="sub">6个情境，找到你常被低估的优势</p>
+
+<!-- Progress -->
+<div class="progress" id="progress"></div>
+
+<!-- Question area -->
+<div id="question-area"></div>
+
+<!-- Navigation -->
+<button class="btn btn-primary" id="btn-next" onclick="nextQuestion()" disabled>下一题</button>
+<button class="btn btn-outline" id="btn-restart" onclick="restart()" style="display:none">重新测试</button>
+
+<!-- Result area -->
+<div class="result-card" id="result-card">
+  <div class="result-type" id="result-type"></div>
+  <div class="result-tagline" id="result-tagline"></div>
+  <div class="result-divider"></div>
+  <div class="bars" id="result-bars"></div>
+  <div class="result-divider"></div>
+  <div id="result-detail"></div>
+  <div class="result-note" style="margin-top:20px"><strong>使用说明：</strong>本测试用于自我探索和心理教育，不用于心理诊断、能力鉴定或职业定论。天赋是多维的，测试结果反映的是你在这个工具中的倾向，不是对你的完整定义。</div>
+</div>
+
+<div class="footer">
+  <p>镜子测试局 · 隐藏天赋测试</p>
+  <p style="margin-top:4px">哪一段最像你？回到笔记评论区分享你的感受</p>
+</div>
+</div>
+
+<script>
+// Test data
+var questions = [
+  {
+    id: 1,
+    scene: "你刚加入一个陌生小组，大家正在混乱地讨论一个问题。有人提出新想法，有人在整理信息，有人情绪低落，有人沉默。",
+    text: "你第一反应最可能是？",
+    options: [
+      { text: "先想一个新办法，打破现在的僵局", type: "innovator" },
+      { text: "先确认谁不舒服，让大家能继续聊下去", type: "connector" },
+      { text: "先把零散信息整理清楚，找到问题重点", type: "analyzer" },
+      { text: "先观察那个一直没说话的人在想什么", type: "observer" }
+    ]
+  },
+  {
+    id: 2,
+    scene: "你要学一个完全陌生的技能，比如一门新语言或一种乐器。",
+    text: "你最自然的入门方式是？",
+    options: [
+      { text: "先自己动手试，错几次就找到感觉了", type: "innovator" },
+      { text: "找个会的人一起练，有人带着学更快", type: "connector" },
+      { text: "先找一套系统的方法，按步骤来", type: "analyzer" },
+      { text: "先看别人怎么做，观察够了再开始", type: "observer" }
+    ]
+  },
+  {
+    id: 3,
+    scene: "两个朋友因为误会吵起来了，你刚好在场。",
+    text: "你最自然的反应是？",
+    options: [
+      { text: "想一个新角度帮双方重新看这件事", type: "innovator" },
+      { text: "先安抚情绪，让两边都感觉被理解", type: "connector" },
+      { text: "帮他们理清楚事情的前因后果", type: "analyzer" },
+      { text: "不急着说话，先听明白每个人的立场", type: "observer" }
+    ]
+  },
+  {
+    id: 4,
+    scene: "你要规划一次和朋友一起的短途旅行。",
+    text: "你第一个开始做的事是？",
+    options: [
+      { text: "想一些别人没去过的新玩法", type: "innovator" },
+      { text: "先问每个人的偏好，确保大家都开心", type: "connector" },
+      { text: "查路线、比价格、做一份详细行程表", type: "analyzer" },
+      { text: "先不急决定，看看天气和每个人的状态再说", type: "observer" }
+    ]
+  },
+  {
+    id: 5,
+    scene: "工作中遇到一个反复出现的老问题，一直没解决。",
+    text: "你的第一反应是？",
+    options: [
+      { text: "换个角度看看，也许有不一样的办法", type: "innovator" },
+      { text: "找相关的人聊聊，看看是不是沟通出了问题", type: "connector" },
+      { text: "重新梳理流程，找到卡住的那个环节", type: "analyzer" },
+      { text: "先观察一阵，看看问题什么时候出现、什么时候消失", type: "observer" }
+    ]
+  },
+  {
+    id: 6,
+    scene: "你一个人待着，没有任务、没有干扰、完全自由的时间。",
+    text: "你最可能做什么？",
+    options: [
+      { text: "脑子里冒出各种想法，拿笔记下来或者马上试试", type: "innovator" },
+      { text: "想约一个朋友出来，或者给谁发条消息", type: "connector" },
+      { text: "整理点什么——书架、相册、待办清单", type: "analyzer" },
+      { text: "安静待着，观察周围或者想想最近发生的事", type: "observer" }
+    ]
+  }
+];
+
+var talentNames = {
+  innovator: "创新者",
+  connector: "连接者",
+  analyzer: "分析者",
+  observer: "观察者"
+};
+
+var talentDetails = {
+  innovator: {
+    tagline: "你最自然的天赋是：从混乱中看到新的可能性。",
+    sections: [
+      { label: "核心优势", text: "你擅长在别人看到问题的地方看到机会。你的大脑喜欢「如果换一种方式呢」——这个习惯让你在需要破局、需要灵感、需要新方向的时刻，成为团队里最宝贵的人。" },
+      { label: "为什么你常低估它", text: "因为你想到的点子来得太自然了，你以为「大家不都这样想吗」。不，大部分人不这样想。你的创造力不是偶然的灵感——它是你处理信息的默认方式。" },
+      { label: "在学习和工作中的表现", text: "学习中，你不喜欢死记硬背，更喜欢理解原理然后举一反三。工作中，你容易对重复性任务失去耐心，但在需要「想个办法」的时候，你是第一个站出来的人。你适合需要创意、迭代和突破的岗位。" },
+      { label: "在关系中的表现", text: "你可能会被误解为「不切实际」或「太跳跃」。但你的价值在于：你能让困在问题里的人看到另一条路。给朋友建议时，你不是安慰，而是「要不试试这样？」——这是你独有的支持方式。" }
+    ],
+    highlight: "一个可以尝试的行动：这周找一个你一直在用老办法解决的小问题，强迫自己想三个「不可能的方案」。不是真的要执行——是练习听见自己那个「换一种方式」的声音。",
+    note: ""
+  },
+  connector: {
+    tagline: "你最自然的天赋是：让周围的人感到被理解和被承接。",
+    sections: [
+      { label: "核心优势", text: "你的注意力天然偏向「人」——谁不舒服了、谁被忽略了、谁需要被看见。在别人还在处理信息的时候，你已经感知到了情绪的温度。这种能力让你成为团队中不可或缺的「情感中枢」。不是每个人都擅长这个。这是一项真实的、可感知的优势。" },
+      { label: "为什么你常低估它", text: "因为「关心别人」太日常了，日常到你以为这是所有人都有的本能。但不是的。很多人需要刻意练习才能做到你自然而然在做的事。你的共情不是「性格好」——它是一种处理人际关系信息的独特能力。" },
+      { label: "在学习和工作中的表现", text: "学习中，你通过讨论和合作学得最快。工作中，你适合需要沟通、协调、建立信任的角色——团队管理、客户关系、教学、咨询。你的超能力是：走进一个房间，能感觉出「这里的气氛不太对」。这是任何AI都替代不了的。" },
+      { label: "在关系中的表现", text: "你可能是朋友第一个想到要倾诉的人。但你的挑战是：容易把别人的情绪当成自己的责任。记住：你的天赋是感知和陪伴，不是替别人解决问题。照顾好自己不是自私——是你继续使用这个天赋的前提。" }
+    ],
+    highlight: "一个可以尝试的行动：这周当你感到「我需要照顾所有人的感受」时，停一下。问自己：这件事里，谁是第一责任人？那个人不是我。",
+    note: ""
+  },
+  analyzer: {
+    tagline: "你最自然的天赋是：把混乱的信息变成清晰的路径。",
+    sections: [
+      { label: "核心优势", text: "在别人还在被信息淹没的时候，你已经看到了结构。你喜欢「理清楚」——把零散的信息分类、排序、找到逻辑关系。这种能力让你在需要判断、决策、规划的时刻，成为最稳定的人。不是每个人都能从混乱中提取秩序。你天生就会。" },
+      { label: "为什么你常低估它", text: "因为你以为「把东西理清楚」是人人都有的基本能力。不是的。很多人面对复杂信息时是瘫痪的——他们看到的是一团乱麻，而你看到的是「哪里是线头」。你低估它，是因为它对你来说毫不费力。" },
+      { label: "在学习和工作中的表现", text: "学习中，你擅长总结归纳、做体系化的笔记。工作中，你适合需要逻辑分析、流程优化、数据整理的角色。你的存在让团队「不会乱」。当别人说「我不知道从哪开始」的时候，你已经列好了第一步、第二步、第三步。" },
+      { label: "在关系中的表现", text: "你可能会被误解为「太理性」或「不够感性」。但当朋友真正需要有人帮他们「把事情想清楚」的时候，你是他们第一个找到的人。你的倾听方式是——帮对方理清自己到底在想什么。这本身就是一种深刻的关怀。" }
+    ],
+    highlight: "一个可以尝试的行动：这周当你帮别人「理清问题」之前，先问一句：「你现在是需要我帮你分析，还是需要我听着？」有时候，你的分析天赋最有价值的时候，是你选择不用它的时候。",
+    note: ""
+  },
+  observer: {
+    tagline: "你最自然的天赋是：看到别人看不到的东西。",
+    sections: [
+      { label: "核心优势", text: "在别人都在说话和行动的时候，你在观察。你注意到那个没说话的人、那个被跳过的细节、那个「不太对但说不上来」的感觉。这种能力让你成为团队中最有洞察力的人。你不是参与得慢——你是在看到全貌之后才出手。这种深度，是很少见的。" },
+      { label: "为什么你常低估它", text: "因为你可能被说过「太安静了」「不够主动」「为什么不多说话」。你观察到的洞察往往在内心完成了，没有说出来——所以别人不知道你看到了什么，你自己也可能觉得「我只是在发呆」。你不是在发呆。你是在用比别人更深的方式处理信息。" },
+      { label: "在学习和工作中的表现", text: "学习中，你通过深入理解而不是大量重复来掌握知识。工作中，你适合需要深度思考、独立判断的角色——研究、设计、策略、编辑。你不会第一个发言，但你的发言往往让所有人停下来想。你的价值不在速度，在准确度。" },
+      { label: "在关系中的表现", text: "你可能是那种「不常联系但一聊天就能说到点上」的朋友。你观察到的细节——对方换了发型、语气不太对、上次说的那件事后来怎么样了——让人感觉被真正看见。这不是社交技巧。这是你的天赋。" }
+    ],
+    highlight: "一个可以尝试的行动：这周找一个你想说但没说的观察，把它说出来。不是评判，是纯粹的观察——「我注意到……」。你会发现，你看到的东西，别人是真的没看到。你的沉默里藏着很多价值。",
+    note: ""
+  }
+};
+
+var currentQuestion = 0;
+var answers = {}; // question id -> type
+var selectedOption = null;
+
+function initProgress() {
+  var html = '';
+  for (var i = 0; i < questions.length; i++) {
+    var cls = 'dot';
+    if (answers[questions[i].id]) cls += ' done';
+    if (i === currentQuestion) cls += ' current';
+    html += '<div class="' + cls + '"></div>';
+  }
+  document.getElementById('progress').innerHTML = html;
+}
+
+function renderQuestion() {
+  var q = questions[currentQuestion];
+  var html = '<div class="q-card">';
+  html += '<p class="q-num">情境 ' + q.id + ' / ' + questions.length + '</p>';
+  html += '<p class="q-scene">' + q.scene + '</p>';
+  html += '<p class="q-text">' + q.text + '</p>';
+  html += '<div class="q-opts">';
+  for (var i = 0; i < q.options.length; i++) {
+    var opt = q.options[i];
+    var letters = ['A','B','C','D'];
+    var cls = 'q-opt';
+    if (selectedOption === i) cls += ' selected';
+    html += '<div class="' + cls + '" onclick="selectOption(' + i + ', \'' + opt.type + '\')"><strong>' + letters[i] + '.</strong> ' + opt.text + '</div>';
+  }
+  html += '</div></div>';
+  document.getElementById('question-area').innerHTML = html;
+
+  var btn = document.getElementById('btn-next');
+  if (currentQuestion === questions.length - 1) {
+    btn.textContent = '查看结果';
+  } else {
+    btn.textContent = '下一题';
+  }
+  btn.disabled = (selectedOption === null);
+  btn.style.display = 'block';
+  document.getElementById('btn-restart').style.display = 'none';
+  document.getElementById('result-card').classList.remove('open');
+
+  initProgress();
+}
+
+function selectOption(index, type) {
+  selectedOption = index;
+  document.getElementById('btn-next').disabled = false;
+  // Update visual
+  var opts = document.querySelectorAll('.q-opt');
+  opts.forEach(function(o, i) {
+    o.classList.toggle('selected', i === index);
+  });
+}
+
+function nextQuestion() {
+  if (selectedOption === null) return;
+  var q = questions[currentQuestion];
+  answers[q.id] = q.options[selectedOption].type;
+
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    selectedOption = null;
+    renderQuestion();
+    window.scrollTo(0, 0);
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  document.getElementById('question-area').innerHTML = '';
+  document.getElementById('progress').innerHTML = '';
+  document.getElementById('btn-next').style.display = 'none';
+  document.getElementById('btn-restart').style.display = 'block';
+
+  // Count types
+  var counts = { innovator: 0, connector: 0, analyzer: 0, observer: 0 };
+  for (var id in answers) {
+    counts[answers[id]]++;
+  }
+
+  // Find dominant
+  var maxType = 'innovator';
+  var maxCount = 0;
+  for (var t in counts) {
+    if (counts[t] > maxCount) { maxCount = counts[t]; maxType = t; }
+  }
+
+  var detail = talentDetails[maxType];
+  var total = questions.length;
+
+  // Render result
+  document.getElementById('result-type').textContent = talentNames[maxType];
+  document.getElementById('result-tagline').textContent = detail.tagline;
+
+  // Bars
+  var barHtml = '';
+  var order = ['innovator','connector','analyzer','observer'];
+  for (var i = 0; i < order.length; i++) {
+    var t = order[i];
+    var pct = Math.round(counts[t] / total * 100);
+    barHtml += '<div class="bar-row">';
+    barHtml += '<span class="bar-label">' + talentNames[t] + '</span>';
+    barHtml += '<div class="bar-track"><div class="bar-fill" style="width:' + Math.max(pct, 8) + '%">' + (pct > 15 ? pct + '%' : '') + '</div></div>';
+    barHtml += '</div>';
+  }
+  document.getElementById('result-bars').innerHTML = barHtml;
+
+  // Detail sections
+  var detailHtml = '';
+  for (var j = 0; j < detail.sections.length; j++) {
+    var s = detail.sections[j];
+    detailHtml += '<div class="result-section"><p class="r-label">' + s.label + '</p><p class="r-text">' + s.text + '</p></div>';
+  }
+  detailHtml += '<div class="result-highlight">' + detail.highlight + '</div>';
+  document.getElementById('result-detail').innerHTML = detailHtml;
+
+  document.getElementById('result-card').classList.add('open');
+  document.getElementById('result-card').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function restart() {
+  currentQuestion = 0;
+  answers = {};
+  selectedOption = null;
+  document.getElementById('result-card').classList.remove('open');
+  renderQuestion();
+  window.scrollTo(0, 0);
+}
+
+// Init
+initProgress();
+renderQuestion();
+</script>
+</body>
+</html>
