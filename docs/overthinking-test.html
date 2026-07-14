@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>精神内耗测试</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f6;color:#1c1916;padding:28px 20px 80px;min-height:100vh}
+.container{max-width:420px;margin:0 auto}
+.cover{text-align:center;padding:60px 20px 40px;display:block}
+.cover.hidden{display:none}
+.cover-icon{font-size:64px;margin-bottom:20px}
+.cover h1{font-size:28px;font-weight:900;margin-bottom:12px}
+.cover .cover-sub{font-size:15px;color:#8a8278;line-height:1.7;margin-bottom:28px}
+.cover .cover-info{display:flex;justify-content:center;gap:32px;margin-bottom:36px;font-size:13px;color:#8a8278}
+.cover .cover-info span{text-align:center}
+.cover .cover-info strong{display:block;font-size:20px;color:#6b4e8a}
+.btn-start{display:block;width:100%;padding:16px;border-radius:14px;font-size:18px;font-weight:700;cursor:pointer;border:none;background:#6b4e8a;color:#fff}
+.btn-start:active{filter:brightness(.85)}
+.main{display:none}
+.main.visible{display:block}
+.progress{display:flex;gap:6px;justify-content:center;margin-bottom:28px}
+.progress .dot{width:10px;height:10px;border-radius:50%;background:#e0dcd6}
+.progress .dot.done{background:#6b4e8a}
+.progress .dot.current{background:#6b4e8a;box-shadow:0 0 0 4px rgba(107,78,138,.2)}
+.q-card{background:#fff;border-radius:18px;padding:28px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.q-num{font-size:13px;font-weight:700;color:#6b4e8a;letter-spacing:.1em;margin-bottom:8px}
+.q-scene{font-size:15px;color:#8a8278;line-height:1.6;margin-bottom:16px;padding:14px 18px;background:#faf8f5;border-radius:12px}
+.q-text{font-size:18px;font-weight:700;line-height:1.5;margin-bottom:20px}
+.q-opts{display:flex;flex-direction:column;gap:8px}
+.q-opt{padding:16px 18px;background:#f7f4f0;border-radius:12px;font-size:15px;line-height:1.4;cursor:pointer;border:2px solid transparent}
+.q-opt:active{background:#efe8e0}
+.q-opt.selected{border-color:#6b4e8a;background:#f4eff8}
+.btn{display:block;width:100%;padding:16px;border-radius:14px;font-size:17px;font-weight:700;text-align:center;cursor:pointer;border:none;margin-bottom:12px}
+.btn-primary{background:#6b4e8a;color:#fff}
+.btn-primary:active{filter:brightness(.85)}
+.btn-primary:disabled{background:#d0c8d8;cursor:default}
+.btn-outline{background:#fff;color:#6b4e8a;border:2px solid #6b4e8a}
+.result-card{background:#fff;border-radius:18px;padding:32px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:none}
+.result-card.open{display:block}
+.result-type{font-size:28px;font-weight:900;text-align:center;margin-bottom:8px;color:#6b4e8a}
+.result-tagline{font-size:15px;color:#8a8278;text-align:center;margin-bottom:24px;font-style:italic}
+.result-divider{height:1px;background:#f0ede6;margin:20px 0}
+.result-section{margin-bottom:16px}
+.result-section .r-label{font-size:13px;font-weight:700;color:#8a8278;margin-bottom:6px}
+.result-section .r-text{font-size:15px;line-height:1.7;color:#3d3830}
+.result-highlight{background:#f4eff8;border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.7;color:#6b4e8a;border-left:3px solid #6b4e8a;margin-top:12px}
+.result-note{background:#fdf8f0;border-radius:12px;padding:14px 18px;font-size:13px;line-height:1.6;color:#8a6d3b;margin-top:16px}
+.bars{margin:16px 0}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:14px}
+.bar-row .bar-label{width:65px;text-align:right;font-weight:600;flex-shrink:0}
+.bar-row .bar-track{flex:1;height:24px;background:#f0ede8;border-radius:12px;overflow:hidden}
+.bar-row .bar-fill{height:100%;border-radius:12px;background:#6b4e8a;min-width:20px;display:flex;align-items:center;padding-left:10px;font-size:12px;color:#fff;font-weight:600}
+.footer{text-align:center;margin-top:32px;padding:24px 0;border-top:1px solid #f0ede6}
+.footer p{font-size:13px;color:#8a8278;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="cover" id="cover">
+  <div class="cover-icon">🧠</div>
+  <h1>精神内耗测试</h1>
+  <p class="cover-sub">你是不是经常「脑子里在演一部剧」——回放过去、预演未来、反复纠结？最累的不是做了什么，是什么都没做但脑子已经跑了十公里。6个情境，测测你的大脑到底在消耗你多少能量。</p>
+  <div class="cover-info">
+    <span><strong>6</strong>个情境</span>
+    <span><strong>4</strong>种结果</span>
+    <span><strong>2</strong>分钟</span>
+  </div>
+  <button class="btn-start" onclick="startTest()">开始测试</button>
+</div>
+<div class="main" id="main">
+<div class="progress" id="progress"></div>
+<div id="question-area"></div>
+<button class="btn btn-primary" id="btn-next" onclick="nextQuestion()" disabled>下一题</button>
+<button class="btn btn-outline" id="btn-restart" onclick="restart()" style="display:none">重新测试</button>
+<div class="result-card" id="result-card">
+  <div class="result-type" id="result-type"></div>
+  <div class="result-tagline" id="result-tagline"></div>
+  <div class="result-divider"></div>
+  <div class="bars" id="result-bars"></div>
+  <div class="result-divider"></div>
+  <div id="result-detail"></div>
+  <div class="result-note"><strong>使用说明：</strong>本测试用于自我探索，不用于心理诊断。内耗程度不是人格标签——它是一种状态，而状态是可以改变的。</div>
+</div>
+<div class="footer"><p>镜子测试局 · 精神内耗测试</p><p style="margin-top:4px">你的结果是哪一种？回到笔记评论区聊聊</p></div>
+</div>
+</div>
+<script>
+var questions = [{"id": 1, "scene": "深夜。你躺在床上，明天有重要的事。但你脑子里一直在回放今天发生的一件事——一件小事，其实已经过去了。", "text": "你的大脑在做什么？", "options": [{"text": "不停回放——反复分析每个细节、每个人说了什么、我应该说什么", "type": "severe"}, {"text": "越想越清醒——从一件事想到另一件事，最后停不下来", "type": "moderate"}, {"text": "会想一会儿——然后告诉自己「已经过去了，想了也没用」，能慢慢停下来", "type": "mild"}, {"text": "明天的事更重要——过去的改变不了，不值得浪费能量", "type": "resilient"}]}, {"id": 2, "scene": "你要做一个决定。你已经收集了足够的信息。但你还在犹豫。", "text": "你在犹豫什么？", "options": [{"text": "每个选项我都反复想了无数遍——越想越不知道哪个是对的", "type": "severe"}, {"text": "我怕选错——万一选错了呢，这个后果我承担不起", "type": "moderate"}, {"text": "会纠结，但会在一定时间内做决定——纠结归纠结，事情还是要推进", "type": "mild"}, {"text": "信息够了就选——没有什么决定是完美的，不行再调整", "type": "resilient"}]}, {"id": 3, "scene": "你今天做了一件小事——说了一句不太得体的话，或者犯了一个不大的错误。没有人说什么。但你注意到了。", "text": "这件事留在你心里的时间有多长？", "options": [{"text": "好几天之后还在想——时不时冒出来，每次想起来都难受", "type": "severe"}, {"text": "当天晚上会反复想——但第二天早上会淡一些", "type": "moderate"}, {"text": "会想一下，但很快就过去了——我知道谁都会犯错", "type": "mild"}, {"text": "注意到就放下了——不完美是正常的，不影响我继续", "type": "resilient"}]}, {"id": 4, "scene": "你有一段空闲时间。没有任务、没有干扰、完全属于你自己。", "text": "你的大脑在做什么？", "options": [{"text": "停不下来——脑子里自动开始复盘过去、担忧未来，我其实想让它停", "type": "severe"}, {"text": "会闲不下来——总觉得应该做点什么，不然就有负罪感", "type": "moderate"}, {"text": "大部分时候能放松——但偶尔会冒出烦心事", "type": "mild"}, {"text": "能享受空白——发呆也是充电，不需要填满每一秒", "type": "resilient"}]}, {"id": 5, "scene": "有人在你的朋友圈/小红书下面留了一句模糊的话——看不出来是夸你还是贬你。", "text": "你接下来的心理活动是？", "options": [{"text": "反复解读——「ta到底什么意思？」把这句话拆开揉碎分析好几天", "type": "severe"}, {"text": "会不舒服——但忍住了没追问，自己消化", "type": "moderate"}, {"text": "注意到，但不深究——别人的态度不是我的工作", "type": "mild"}, {"text": "看到了，略过——我只需要在意我在意的人怎么想", "type": "resilient"}]}, {"id": 6, "scene": "你在想，自己是不是想太多了。", "text": "这个念头——「我是不是想太多了」——你是怎么处理的？", "options": [{"text": "我连这个念头都会反复想——「我在想我是不是想太多，这是不是也是内耗」——无限循环", "type": "severe"}, {"text": "我知道自己在内耗——但知道了也停不下来，这就更让人焦虑了", "type": "moderate"}, {"text": "我偶尔能打断自己——意识到的时候，会起来走走、做点别的", "type": "mild"}, {"text": "想得多不一定是坏事——我只是需要区分「在想」和「在绕」", "type": "resilient"}]}];
+var names = {"severe": "重度内耗", "moderate": "中度内耗", "mild": "轻度内耗", "resilient": "内耗免疫"};
+var details = {"severe": {"tagline": "你的大脑——它一直在跑，但很少把你带到你想去的地方。", "sections": [{"label": "内耗在你身上是怎么运作的", "text": "你不是「想太多」——你是「停不下来」。一件小事、一句模糊的话、一个还没做的决定——你的大脑能把它变成一整部连续剧。你在脑子里反复重演、反复分析、反复后悔。外人看你什么都没做，但你自己知道：你最累的不是身体，是脑子从来没有真正安静过。"}, {"label": "内耗真正偷走的是什么", "text": "不是时间。是行动力。你花了那么多精力在想「要不要做」「怎么做」「做了会怎样」，等到真正要行动的时候，你已经没电了。内耗最狠的地方在于——它让你以为自己在处理问题，其实你只是在脑子里绕圈。绕完之后，问题还在，但你更累了。"}, {"label": "这不是你天生有缺陷", "text": "能想这么多的人，往往是对自己和世界有很高要求的人。你在乎、你认真、你想做好——这些品质本身是好的。只是「想」变成了「绕」。你的思维方式不是错的，它是一个被过度使用的工具。你需要学的不是停止思考——是在绕圈的时候能把自己拉出来。"}, {"label": "一个起点", "text": "内耗的出口不在脑子里。在行动里。不需要大行动——就一件小事。今天你纠结要不要给谁发消息——发。今天你在想「我这样行不行」——先做，做完再看。内耗怕的是行动。你每做一次「不完美但做了」的事，就在对你的大脑说：我不需要把所有可能性想透，也可以往前走。"}], "highlight": "今晚试一件事：下次你意识到自己在脑子里绕圈的时候，起来做一件物理的事情——洗杯子、走五分钟、整理一个抽屉。不是转移注意力，是让大脑知道：我是身体的主人，不是你。"}, "moderate": {"tagline": "你大部分时候能正常工作生活——但你的大脑在后台一直在跑。", "sections": [{"label": "你的内耗模式", "text": "你看起来正常。工作能做、社交能去、该笑的时候会笑。但你知道——你的大脑在后台没停过。它一直在处理那些「还没发生的事」和「已经发生了的事」。你不是没效率——你是做每一件事的时候，脑子里还挂着另外三件事。"}, {"label": "内耗和焦虑的区别", "text": "焦虑是对未来的恐惧。内耗是——你已经在经历未来了。你在脑子里过了一遍最坏的情况、模拟了所有人的反应、预演了所有可能的对话。你的身体在现在，但你的大脑已经在未来活了好几遍。这不是准备充分。这是在提前消耗。"}, {"label": "你已经在做对的事情了", "text": "你能意识到自己在内耗。这是最难的一步——很多人连这一步都跨不过。你已经知道什么时候在绕圈了。现在只需要一个工具：打断。不是说服自己「别想了」——那不管用。是物理打断。起来、动一下、换个环境。你的大脑需要一个外部信号告诉它：切换模式。"}], "highlight": "试一个「5分钟规则」：下次纠结一件事超过5分钟，就先做一个最小动作。不是解决全部——是第一步。发消息、写第一行、打开文档。一个动作就够了。"}, "mild": {"tagline": "你会内耗，但你已经有了处理它的方法。", "sections": [{"label": "你的内耗和别人的有什么不同", "text": "你也会想多、也会纠结——但你不是失控型的。你已经发展出了一些应对策略：意识到的时候能打断自己、能在一定时间内做决定、能把「已经过去了」这句话听进去。这些能力不是天生的——是你练出来的。你已经走过了最难的一段。"}, {"label": "你现在需要的不是「完全不内耗」", "text": "想得深是一种能力。很多重要的事——做决定、理解自己、理解别人——确实需要深思熟虑。你现在需要的不是停止思考。是区分两种思考：「在解决问题」vs「在绕圈」。前者让你更清晰；后者让你更累。你其实已经能区分了。只是需要更有意识地使用这个区分。"}], "highlight": "练习一件事：每次你想完一个问题之后，问自己——「我现在比5分钟前更清楚要做什么了吗？」如果是，那是思考。如果不是，那是绕圈。站起来。"}, "resilient": {"tagline": "你不是不想——你是想完能放下。这是一种珍贵的能力。", "sections": [{"label": "这是怎么做到的", "text": "你不是没有烦恼。你也有纠结的事、也在意别人的看法、也会为未来担忧。但区别是——你能关上这个开关。你想完该想的，做一个决定，然后把剩下的交给时间。你知道「再想也不会改变结果」——不只是在理智上知道，是你的身体真的能做到。这种能力不是你比别人笨——是你比别人少了很多不必要的消耗。"}, {"label": "怎么保持这种状态", "text": "你的优势是「想完能放下」。但人的状态是会变的——压力大的时候、遇到真正重要选择的时候，你的内耗可能会回来。保持这种状态需要保护自己的边界：知道什么是你能控制的、什么是别人的事、什么是时间的事。保护你的脑子，别让它替别人操不该操的心。"}], "highlight": "你的大脑是你最强大的工具——但不是最耗能的APP。保持现在的习惯：想清楚→做决定→放下→做下一件事。这个循环，是内耗的解药。"}};
+var typeOrder = ["severe", "moderate", "mild", "resilient"];
+var cur = 0, answers = {}, sel = null;
+function startTest() {
+  document.getElementById('cover').classList.add('hidden');
+  document.getElementById('main').classList.add('visible');
+  renderQuestion(); window.scrollTo(0, 0);
+}
+function renderProgress() {
+  var h = '';
+  for (var i = 0; i < questions.length; i++) {
+    var c = 'dot';
+    if (answers[questions[i].id]) c += ' done';
+    if (i === cur) c += ' current';
+    h += '<div class="' + c + '"></div>';
+  }
+  document.getElementById('progress').innerHTML = h;
+}
+function renderQuestion() {
+  var q = questions[cur];
+  var h = '<div class="q-card">';
+  h += '<p class="q-num">情境 ' + q.id + ' / ' + questions.length + '</p>';
+  h += '<p class="q-scene">' + q.scene + '</p>';
+  h += '<p class="q-text">' + q.text + '</p>';
+  h += '<div class="q-opts">';
+  for (var i = 0; i < q.options.length; i++) {
+    var o = q.options[i], l = ['A','B','C','D'], c = 'q-opt';
+    if (sel === i) c += ' selected';
+    h += '<div class="' + c + '" onclick="selectOption(' + i + ')"><strong>' + l[i] + '.</strong> ' + o.text + '</div>';
+  }
+  h += '</div></div>';
+  document.getElementById('question-area').innerHTML = h;
+  var b = document.getElementById('btn-next');
+  b.textContent = cur === questions.length - 1 ? '查看结果' : '下一题';
+  b.disabled = (sel === null);
+  b.style.display = 'block';
+  document.getElementById('btn-restart').style.display = 'none';
+  document.getElementById('result-card').classList.remove('open');
+  renderProgress();
+}
+function selectOption(i) {
+  sel = i;
+  document.getElementById('btn-next').disabled = false;
+  document.querySelectorAll('.q-opt').forEach(function(o, j) { o.classList.toggle('selected', j === i); });
+}
+function nextQuestion() {
+  if (sel === null) return;
+  answers[questions[cur].id] = questions[cur].options[sel].type;
+  if (cur < questions.length - 1) { cur++; sel = null; renderQuestion(); window.scrollTo(0, 0); }
+  else { showResult(); }
+}
+function showResult() {
+  document.getElementById('question-area').innerHTML = '';
+  document.getElementById('progress').innerHTML = '';
+  document.getElementById('btn-next').style.display = 'none';
+  document.getElementById('btn-restart').style.display = 'block';
+  var c = {};
+  for (var i = 0; i < typeOrder.length; i++) c[typeOrder[i]] = 0;
+  for (var id in answers) c[answers[id]]++;
+  var mt = typeOrder[0], mc = 0;
+  for (var t in c) if (c[t] > mc) { mc = c[t]; mt = t; }
+  var d = details[mt], tot = questions.length;
+  document.getElementById('result-type').textContent = names[mt];
+  document.getElementById('result-tagline').textContent = d.tagline;
+  var bh = '';
+  for (var i = 0; i < typeOrder.length; i++) {
+    var t = typeOrder[i], p = Math.round(c[t] / tot * 100);
+    bh += '<div class="bar-row"><span class="bar-label">' + names[t] + '</span><div class="bar-track"><div class="bar-fill" style="width:' + Math.max(p, 8) + '%">' + (p > 15 ? p + '%' : '') + '</div></div></div>';
+  }
+  document.getElementById('result-bars').innerHTML = bh;
+  var dh = '';
+  for (var j = 0; j < d.sections.length; j++) {
+    var s = d.sections[j];
+    dh += '<div class="result-section"><p class="r-label">' + s.label + '</p><p class="r-text">' + s.text + '</p></div>';
+  }
+  dh += '<div class="result-highlight">' + d.highlight + '</div>';
+  document.getElementById('result-detail').innerHTML = dh;
+  document.getElementById('result-card').classList.add('open');
+  document.getElementById('result-card').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function restart() {
+  cur = 0; answers = {}; sel = null;
+  document.getElementById('result-card').classList.remove('open');
+  renderQuestion(); window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
