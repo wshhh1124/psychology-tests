@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>决策风格测试</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#faf9f6;color:#1c1916;padding:28px 20px 80px;min-height:100vh}
+.container{max-width:420px;margin:0 auto}
+h1{font-size:24px;font-weight:800;text-align:center;margin-bottom:4px}
+.sub{font-size:14px;color:#8a8278;text-align:center;margin-bottom:32px}
+.progress{display:flex;gap:6px;justify-content:center;margin-bottom:28px}
+.progress .dot{width:10px;height:10px;border-radius:50%;background:#e0dcd6}
+.progress .dot.done{background:#2d7d6e}
+.progress .dot.current{background:#2d7d6e;box-shadow:0 0 0 4px rgba(45,125,110,.2)}
+.q-card{background:#fff;border-radius:18px;padding:28px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.q-num{font-size:13px;font-weight:700;color:#2d7d6e;letter-spacing:.1em;margin-bottom:8px}
+.q-scene{font-size:15px;color:#8a8278;line-height:1.6;margin-bottom:16px;padding:14px 18px;background:#faf8f5;border-radius:12px}
+.q-text{font-size:18px;font-weight:700;line-height:1.5;margin-bottom:20px}
+.q-opts{display:flex;flex-direction:column;gap:8px}
+.q-opt{padding:16px 18px;background:#f7f4f0;border-radius:12px;font-size:15px;line-height:1.4;cursor:pointer;border:2px solid transparent}
+.q-opt:active{background:#efe8e0}
+.q-opt.selected{border-color:#2d7d6e;background:#eff8f4}
+.btn{display:block;width:100%;padding:16px;border-radius:14px;font-size:17px;font-weight:700;text-align:center;cursor:pointer;border:none;margin-bottom:12px}
+.btn-primary{background:#2d7d6e;color:#fff}
+.btn-primary:active{background:#1e6a5a}
+.btn-primary:disabled{background:#b8ccc4;cursor:default}
+.btn-outline{background:#fff;color:#2d7d6e;border:2px solid #2d7d6e}
+.result-card{background:#fff;border-radius:18px;padding:32px 24px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04);display:none}
+.result-card.open{display:block}
+.result-type{font-size:28px;font-weight:900;text-align:center;margin-bottom:8px;color:#2d7d6e}
+.result-tagline{font-size:15px;color:#8a8278;text-align:center;margin-bottom:24px;font-style:italic}
+.result-divider{height:1px;background:#f0ede6;margin:20px 0}
+.result-section{margin-bottom:16px}
+.result-section .r-label{font-size:13px;font-weight:700;color:#8a8278;margin-bottom:6px}
+.result-section .r-text{font-size:15px;line-height:1.7;color:#3d3830}
+.result-highlight{background:#f2f8f6;border-radius:12px;padding:16px 18px;font-size:14px;line-height:1.7;color:#2a5a4a;border-left:3px solid #2d7d6e;margin-top:12px}
+.result-note{background:#fdf8f0;border-radius:12px;padding:14px 18px;font-size:13px;line-height:1.6;color:#8a6d3b;margin-top:16px}
+.bars{margin:16px 0}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:14px}
+.bar-row .bar-label{width:60px;text-align:right;font-weight:600;flex-shrink:0}
+.bar-row .bar-track{flex:1;height:22px;background:#f0ede8;border-radius:11px;overflow:hidden}
+.bar-row .bar-fill{height:100%;border-radius:11px;background:#2d7d6e;min-width:20px;display:flex;align-items:center;padding-left:10px;font-size:12px;color:#fff;font-weight:600}
+.footer{text-align:center;margin-top:32px;padding:24px 0;border-top:1px solid #f0ede6}
+.footer p{font-size:13px;color:#8a8278;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>决策风格测试</h1>
+<p class="sub">6个情境，找到你的核心决策模式</p>
+<div class="progress" id="progress"></div>
+<div id="question-area"></div>
+<button class="btn btn-primary" id="btn-next" onclick="nextQuestion()" disabled>下一题</button>
+<button class="btn btn-outline" id="btn-restart" onclick="restart()" style="display:none">重新测试</button>
+<div class="result-card" id="result-card">
+  <div class="result-type" id="result-type"></div>
+  <div class="result-tagline" id="result-tagline"></div>
+  <div class="result-divider"></div>
+  <div class="bars" id="result-bars"></div>
+  <div class="result-divider"></div>
+  <div id="result-detail"></div>
+  <div class="result-note"><strong>使用说明：</strong>本测试用于自我探索，不用于心理诊断或职业定论。决策风格没有优劣之分，关键在于「在什么情境下使用」。</div>
+</div>
+<div class="footer"><p>镜子测试局 · 决策风格测试</p><p style="margin-top:4px">哪一段最像你？回到笔记评论区分享你的感受</p></div>
+</div>
+<script>
+var questions=[{id:1,scene:"你要决定要不要换工作。信息都收集了，利弊也列了，但你还在犹豫。",text:"最后一步，你最依赖的是？",options:[{text:"心里的直觉——说不清楚，但感觉对或不对",type:"intuitive"},{text:"逻辑分析——把利弊权重算清楚，选最优解",type:"analytical"},{text:"对身边人的影响——这个决定会影响谁",type:"relational"},{text:"先试一小步——不用马上决定，先做点什么看看",type:"action"}]},{id:2,scene:"朋友在纠结一件事，来问你建议。",text:"你最自然的回应方式是？",options:[{text:"听他讲完，问他「你心里更偏向哪个」",type:"intuitive"},{text:"帮他列个清单，一件事一件事分析",type:"analytical"},{text:"问他「你觉得你最在乎的那个人会怎么想」",type:"relational"},{text:"建议他先做一个小尝试，看看反馈",type:"action"}]},{id:3,scene:"你要买一件比较贵的东西，已经比较了很久。",text:"最后推你下单的是？",options:[{text:"心里突然觉得「就是它了」",type:"intuitive"},{text:"数据对比下来，性价比最高的就是它",type:"analytical"},{text:"朋友/家人说这个适合你",type:"relational"},{text:"先买回来试用，不行就退",type:"action"}]},{id:4,scene:"团队在讨论一个方向，有分歧，时间也紧。",text:"你最可能做的事是？",options:[{text:"说出自己直觉的判断，哪怕不太确定",type:"intuitive"},{text:"把各方论据整理出来，帮大家看清",type:"analytical"},{text:"关注有没有人被忽略，先让所有人都被听到",type:"relational"},{text:"提议先做个小实验，用结果说话",type:"action"}]},{id:5,scene:"你在想，要不要结束一段关系。",text:"你判断的依据最可能是？",options:[{text:"心里有个声音——我到底还快乐吗",type:"intuitive"},{text:"把继续和结束的后果都想过一遍",type:"analytical"},{text:"和信任的人聊过之后，慢慢清楚自己的想法",type:"relational"},{text:"先拉开一点距离看看，感受一下没有对方的状态",type:"action"}]},{id:6,scene:"你决定怎么度过这个周末。",text:"你最终选活动的方式是？",options:[{text:"看看当下想做什么，跟着感觉走",type:"intuitive"},{text:"看天气、时间、预算，选最优方案",type:"analytical"},{text:"看朋友们在干什么，一起比较开心",type:"relational"},{text:"先出门再说，到了再看",type:"action"}]}];
+var names={intuitive:"直觉型",analytical:"分析型",relational:"关系型",action:"行动型"};
+var details={intuitive:{tagline:"你做决定靠的是：内心那盏灯。",sections:[{label:"你的决策模式",text:"你做决定时，很多信息都在潜意识里处理完了，然后以一个「感觉」的形式浮现出来。这不是「拍脑袋」——这是你的大脑在整合了大量经验后给你一个快速判断。你在信息不完整、时间有限的情况下往往表现最好。"},{label:"这种模式最有优势的场景",text:"创意型工作、需要快速反应的情境、人际直觉、选品/审美类决策。你不需要完整的证据链就能做出准确判断。"},{label:"什么时候它可能拖累你",text:"当决策涉及复杂的长期后果、需要向他人证明决策合理性的时候。你的「感觉」对你自己很清楚，但别人可能需要看到你背后的逻辑。"}],highlight:"一个可以尝试的行动：下次做一个重要决定时，先记下你的直觉判断。然后再做分析。完成后对比一下——你的直觉比你以为的准确多少？",note:""},analytical:{tagline:"你做决定靠的是：把世界理清楚的能力。",sections:[{label:"你的决策模式",text:"你会系统性地收集信息、权衡利弊、预判后果。你的大脑在做一个决定时，像是在建一个模型——把所有变量放进去，算出最优路径。你不容易被情绪或外界噪音干扰判断。"},{label:"这种模式最有优势的场景",text:"涉及金钱、长期规划、风险管理、需要向他人解释决策依据的场景。你的决策经得起追问——每一个选择背后都有一条完整的思维链。"},{label:"什么时候它可能拖累你",text:"当信息永远不完整、时间压力大、或决策涉及纯粹的个人偏好时。你可能陷入「分析瘫痪」——一直在收集信息，迟迟不决定。"}],highlight:"一个可以尝试的行动：给重要的决定设一个截止时间。在截止时间前，允许自己分析。到了之后，不管分析完没完，做一个决定。练习「足够好就够了」。",note:""},relational:{tagline:"你做决定靠的是：把人放在中心。",sections:[{label:"你的决策模式",text:"你在做决定时，天然会考虑这个决定对身边人的影响。不是因为你没有自己的判断——而是你觉得一个好的决定，不会让重要的人被排除在外。你通过对话和关系来验证自己的想法。"},{label:"这种模式最有优势的场景",text:"涉及团队合作、家庭决策、需要建立共识和信任的场景。你的决策往往能让更多人接受和执行——因为你不是一个人在做决定，你是带着大家在做决定。"},{label:"什么时候它可能拖累你",text:"当这个决定只关系到你自己、或者需要完全独立判断的时候。你可能会无意识地把「别人会怎么想」放在「我自己想要什么」前面。"}],highlight:"一个可以尝试的行动：做一个只关于自己的小决定时，先不问任何人。做完之后，观察一下自己的感觉——是不是反而更轻松？",note:""},action:{tagline:"你做决定靠的是：走一步看一步的勇气。",sections:[{label:"你的决策模式",text:"你不喜欢停在原地反复想。你的方式是：先试一小步，看看反馈，再决定下一步。对你来说，「不完美的行动」远胜于「完美的犹豫」。这种模式让你在实践中快速学习。"},{label:"这种模式最有优势的场景",text:"创业、新领域探索、信息极度不完整的情境、需要快速迭代的工作。你是第一个把事情做出来的人——别人还在讨论，你已经有了结果。"},{label:"什么时候它可能拖累你",text:"当试错成本较高、或需要一次性做出不可逆决策的时候。你可能太快行动，没有给自己足够时间考虑长远后果。"}],highlight:"一个可以尝试的行动：下次做决定前，区分「可逆的」和「不可逆的」。可逆的决定——大胆试。不可逆的决定——给自己多一天的时间。",note:""}};
+var cur=0,answers={},sel=null;
+function ip(){var h='';for(var i=0;i<questions.length;i++){var c='dot';if(answers[questions[i].id])c+=' done';if(i===cur)c+=' current';h+='<div class="'+c+'"></div>'}document.getElementById('progress').innerHTML=h}
+function rq(){var q=questions[cur],h='<div class="q-card">';h+='<p class="q-num">情境 '+q.id+' / '+questions.length+'</p>';h+='<p class="q-scene">'+q.scene+'</p>';h+='<p class="q-text">'+q.text+'</p>';h+='<div class="q-opts">';for(var i=0;i<q.options.length;i++){var o=q.options[i],l=['A','B','C','D'],c='q-opt';if(sel===i)c+=' selected';h+='<div class="'+c+'" onclick="so('+i+')"><strong>'+l[i]+'.</strong> '+o.text+'</div>'}h+='</div></div>';document.getElementById('question-area').innerHTML=h;var b=document.getElementById('btn-next');b.textContent=cur===questions.length-1?'查看结果':'下一题';b.disabled=sel===null;b.style.display='block';document.getElementById('btn-restart').style.display='none';document.getElementById('result-card').classList.remove('open');ip()}
+function so(i){sel=i;document.getElementById('btn-next').disabled=false;document.querySelectorAll('.q-opt').forEach(function(o,j){o.classList.toggle('selected',j===i)})}
+function nq(){if(sel===null)return;answers[questions[cur].id]=questions[cur].options[sel].type;if(cur<questions.length-1){cur++;sel=null;rq();window.scrollTo(0,0)}else{sr()}}
+function sr(){document.getElementById('question-area').innerHTML='';document.getElementById('progress').innerHTML='';document.getElementById('btn-next').style.display='none';document.getElementById('btn-restart').style.display='block';var c={intuitive:0,analytical:0,relational:0,action:0};for(var id in answers)c[answers[id]]++;var mt='intuitive',mc=0;for(var t in c)if(c[t]>mc){mc=c[t];mt=t}var d=details[mt],tot=questions.length;document.getElementById('result-type').textContent=names[mt];document.getElementById('result-tagline').textContent=d.tagline;var bh='',o=['intuitive','analytical','relational','action'];for(var i=0;i<o.length;i++){var t=o[i],p=Math.round(c[t]/tot*100);bh+='<div class="bar-row"><span class="bar-label">'+names[t]+'</span><div class="bar-track"><div class="bar-fill" style="width:'+Math.max(p,8)+'%">'+(p>15?p+'%':'')+'</div></div></div>'}document.getElementById('result-bars').innerHTML=bh;var dh='';for(var j=0;j<d.sections.length;j++){var s=d.sections[j];dh+='<div class="result-section"><p class="r-label">'+s.label+'</p><p class="r-text">'+s.text+'</p></div>'}dh+='<div class="result-highlight">'+d.highlight+'</div>';document.getElementById('result-detail').innerHTML=dh;document.getElementById('result-card').classList.add('open');document.getElementById('result-card').scrollIntoView({behavior:'smooth',block:'start'})}
+function restart(){cur=0;answers={};sel=null;document.getElementById('result-card').classList.remove('open');rq();window.scrollTo(0,0)}
+ip();rq();
+</script>
+</body>
+</html>
